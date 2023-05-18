@@ -18,6 +18,16 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 defaultConfig.vectorDrawables {
                     useSupportLibrary = true
                 }
+
+                buildTypes {
+                    getByName("release") {
+                        isMinifyEnabled = false
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            "proguard-rules.pro"
+                        )
+                    }
+                }
             }
         }
     }
