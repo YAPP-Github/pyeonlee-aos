@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.getByType
  * Compose 와 관련된 Configuration 설정
  */
 @Suppress("UnstableApiUsage")
-internal fun Project.configurationAndroidCompose(
+internal fun Project.configureAndroidCompose(
     commonExtension: CommonExtension<*, *, *, *>
 ) {
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
