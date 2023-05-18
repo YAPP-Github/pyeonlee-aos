@@ -18,9 +18,7 @@
 plugins {
     id("peonlee.android.library")
     id("peonlee.android.library.compose")
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    id("peonlee.android.hilt")
 }
 
 android {

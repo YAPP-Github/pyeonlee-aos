@@ -35,5 +35,9 @@ gradlePlugin {
             id = "peonlee.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidRoom") {
+            id = "peonlee.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
     }
 }

@@ -19,11 +19,6 @@ plugins {
     id("peonlee.android.application")
     id("peonlee.android.application.compose")
     id("peonlee.android.hilt")
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt.gradle)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -35,9 +30,9 @@ android {
         versionName = "1.0"
 
         // Enable room auto-migrations
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
+//        ksp {
+//            arg("room.schemaLocation", "$projectDir/schemas")
+//        }
     }
 
     buildTypes {
