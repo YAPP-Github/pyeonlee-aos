@@ -23,6 +23,10 @@ gradlePlugin {
             id = "peonlee.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidFeature") {
+            id = "peonlee.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
         register("androidApplicationCompose") {
             id = "peonlee.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
