@@ -19,5 +19,9 @@ gradlePlugin {
             id = "peonlee.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidApplicationCompose") {
+            id = "peonlee.android.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
     }
 }
