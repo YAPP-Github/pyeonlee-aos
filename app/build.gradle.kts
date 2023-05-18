@@ -18,6 +18,7 @@
 plugins {
     id("peonlee.android.application")
     id("peonlee.android.compose")
+    id("peonlee.android.hilt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.gradle)
@@ -59,8 +60,4 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":feature-mymodel"))
-
-    // Hilt Dependency Injection
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 }

@@ -23,5 +23,9 @@ gradlePlugin {
             id = "peonlee.android.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+        register("androidHilt") {
+            id = "peonlee.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
     }
 }
