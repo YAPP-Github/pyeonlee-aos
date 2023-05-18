@@ -16,6 +16,8 @@
 
 @Suppress("DSL_SCOPE_VIOLATION") // Remove when fixed https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
+    id("peonlee.android.library")
+    id("peonlee.android.library.compose")
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
@@ -23,34 +25,9 @@ plugins {
 
 android {
     namespace = "com.peonlee.feature.mymodel"
-    compileSdk = 33
 
     defaultConfig {
-        minSdk = 21
-
-        testInstrumentationRunner = "com.peonlee.core.testing.HiltTestRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildFeatures {
-        compose = true
-        aidl = false
-        buildConfig = false
-        renderScript = false
-        shaders = false
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 }
 
@@ -59,20 +36,6 @@ dependencies {
     implementation(project(":core-ui"))
     androidTestImplementation(project(":core-testing"))
 
-    // Core Android dependencies
-    implementation(libs.androidx.activity.compose)
-
-    // Arch Components
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
-
-    // Compose
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    // Tooling
-    debugImplementation(libs.androidx.compose.ui.tooling)
     // Instrumented tests
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.test.manifest)

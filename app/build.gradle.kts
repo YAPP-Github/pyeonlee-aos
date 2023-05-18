@@ -17,7 +17,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // Remove when fixed https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     id("peonlee.android.application")
-    id("peonlee.android.compose")
+    id("peonlee.android.application.compose")
     id("peonlee.android.hilt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)

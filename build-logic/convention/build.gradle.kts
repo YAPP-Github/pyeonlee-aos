@@ -19,9 +19,17 @@ gradlePlugin {
             id = "peonlee.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "peonlee.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
         register("androidApplicationCompose") {
-            id = "peonlee.android.compose"
+            id = "peonlee.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidLibraryCompose") {
+            id = "peonlee.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidHilt") {
             id = "peonlee.android.hilt"
