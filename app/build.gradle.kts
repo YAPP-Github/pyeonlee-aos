@@ -16,6 +16,7 @@
 
 @Suppress("DSL_SCOPE_VIOLATION") // Remove when fixed https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
+    id("peonlee.android.application")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.gradle)
@@ -25,18 +26,11 @@ plugins {
 
 android {
     namespace = "com.peonlee"
-    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.peonlee"
-        minSdk = 21
-        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
 
         // Enable room auto-migrations
         ksp {
@@ -51,21 +45,8 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         compose = true
-        aidl = false
-        buildConfig = false
-        renderScript = false
-        shaders = false
     }
 
     composeOptions {
@@ -84,8 +65,6 @@ dependencies {
     implementation(project(":feature-mymodel"))
 
     // Core Android dependencies
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
     // Hilt Dependency Injection
