@@ -1,6 +1,7 @@
 package ext
 
 import com.android.build.api.dsl.CommonExtension
+import const.Version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -18,10 +19,10 @@ internal fun Project.configureKotlinAndroid(
 ) {
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
     commonExtension.apply {
-        compileSdk = 33
+        compileSdk = Version.COMPILE_SDK
 
         defaultConfig {
-            minSdk = 21
+            minSdk = Version.MIN_SDK
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 

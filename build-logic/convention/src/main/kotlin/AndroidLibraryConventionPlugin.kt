@@ -1,4 +1,5 @@
 import com.android.build.gradle.LibraryExtension
+import const.Version
 import ext.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,7 +17,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 33
+                defaultConfig.targetSdk = Version.TARGET_SDK
                 defaultConfig.consumerProguardFile("consumer-rules.pro")
             }
 
