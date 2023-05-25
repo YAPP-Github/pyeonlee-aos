@@ -22,4 +22,15 @@ plugins {
     alias(libs.plugins.hilt.gradle) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.ktlint.gradle) apply false
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+        disabledRules.set(
+            setOf("no-wildcard-imports", "import-ordering", "max-line-length")
+        )
+    }
 }
