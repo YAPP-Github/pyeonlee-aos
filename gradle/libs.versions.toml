@@ -13,10 +13,15 @@ androidxTestCore = "1.5.0"
 androidxTestExt = "1.1.5"
 androidxTestRunner = "1.5.2"
 coroutines = "1.6.4"
+firebaseBom = "32.0.0"
+googleService = "4.3.15"
 hilt = "2.46"
 junit = "4.13.2"
+kakaoLogin = "2.13.0"
 kotlin = "1.8.20"
 ksp = "1.8.20-1.0.11"
+playServicesAuth = "20.5.0"
+
 
 [libraries]
 # compose
@@ -65,6 +70,15 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradleTool" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
+# kakao
+android-kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakaoLogin" }
+
+# google
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+google-service = { group = "com.google.gms", name = "google-services", version.ref = "googleService" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
