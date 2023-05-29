@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "358862750420",
+    "project_id": "peonlee-1c40b",
+    "storage_bucket": "peonlee-1c40b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358862750420:android:bfd4442511d0ba861cf141",
+        "android_client_info": {
+          "package_name": "com.peonlee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358862750420-vg9atodttcj6a4f4286fa7qf9qoftc10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peonlee",
+            "certificate_hash": "b2f3e34f8e02d15beb0d10d3d48a05148e943642"
+          }
+        },
+        {
+          "client_id": "358862750420-0ikts1j2jmr32bfuhaj8ne9gdfoo2efl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6JhI8vd8ysM8JxPTKn5uxqTKeURva0Qw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358862750420-0ikts1j2jmr32bfuhaj8ne9gdfoo2efl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,7 +18,6 @@ package com.peonlee
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
-import com.peonlee.feature.mymodel.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

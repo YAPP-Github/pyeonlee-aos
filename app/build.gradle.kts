@@ -2,7 +2,6 @@ plugins {
     id("peonlee.android.application")
     id("peonlee.android.application.compose")
     id("peonlee.android.hilt")
-    id("org.jetbrains.kotlin.android")
     id("peonlee.android.sns.login.application")
 }
 
@@ -16,8 +15,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core-ui"))
-    implementation(project(":feature-mymodel"))
+    implementation(project(":core:ui"))
+    implementation(project(":feature:login"))
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.5.0")
