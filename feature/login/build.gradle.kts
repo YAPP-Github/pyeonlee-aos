@@ -5,10 +5,13 @@ plugins {
 
 android {
     namespace = "com.peonlee.login"
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
-
     implementation(project(":core:ui"))
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

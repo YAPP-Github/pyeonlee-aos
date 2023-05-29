@@ -1,9 +1,12 @@
 package com.peonlee.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -14,59 +17,21 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-
+import com.peonlee.login.databinding.ActivityLoginBinding
+import com.peonlee.login.extensions.isKakaoTalkLoginAvailable
+import com.peonlee.login.extensions.loginWithKakaoAccount
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-            if (error != null) {
-                Log.d("로그인 실패 : ", error.message.toString())
-            }
-            else if (token != null) {
-                Log.i("로그인 성공 : ", "로그인 성공 ${token.accessToken}")
-            }
-        }
-
-
-        // 로그인 조합 예제
-
-        // 카카오계정으로 로그인 공통 callback 구성
-        // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-            if (error != null) {
-                Log.e("카카오 계정으로 로그인 실패", "카카오계정으로 로그인 실패", error)
-            } else if (token != null) {
-                Log.i("카카오 계정으로 로그인 성공", "카카오계정으로 로그인 성공 ${token.accessToken}")
-            }
-        }
-
-        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-                if (error != null) {
-                    Log.e("카카오톡으로 로그인 실패", "카카오톡으로 로그인 실패", error)
-
-                    // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
-                    // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        return@loginWithKakaoTalk
-                    }
-
-                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                    UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-                } else if (token != null) {
-                    Log.i("카카오톡으로 로그인 성공", "카카오톡으로 로그인 성공 ${token.accessToken}")
-                }
-            }
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-        }
+        init()
     }
-
 
     private fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -74,31 +39,74 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, 1001)
+        googleSignInLauncher.launch(signInIntent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode) {
-            1001 -> {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                handleSignInResult(task)
+    private fun googleSignInResult() {
+        googleSignInLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            when(result.resultCode) {
+                Activity.RESULT_OK -> {
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                    handleSignInResult(task)
+                }
+                else -> Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_LONG).show()
             }
-
-            else -> Toast.makeText(this, "fail", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
+            Toast.makeText(this, "구글 로그인 성공", Toast.LENGTH_LONG).show()
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            Log.d("Success : ", account.idToken.toString())
-            Log.d("Success : ", account.id.toString())
-            Log.d("Success : ", account.email.toString())
+            Log.d("구글 Success : ", account.idToken.toString())
+            Log.d("구글 Success : ", account.id.toString())
+            Log.d("구글 Success : ", account.email.toString())
         } catch (e: ApiException) {
-            Log.d("Fail", "signInResult:failed code=" + e.statusCode)
+            Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_LONG).show()
+            Log.d("구글 Fail", "signInResult:failed code=" + e.statusCode)
+        }
+    }
+
+    private fun kakaoLogin() {
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            when {
+                error != null -> Log.e("카카오 계정 로그인 실패", "카카오 계정 로그인 실패", error)
+                token != null -> Log.i("카카오 계정 로그인 성공", "카카오 계정 로그인 성공 ${token.accessToken}")
+            }
+        }
+
+        if (isKakaoTalkLoginAvailable()) {
+            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                when {
+                    error != null -> {
+                        Log.e("카카오톡 로그인 실패", "카카오톡 로그인 실패", error)
+
+                        val userLoginCancel = error is ClientError && error.reason == ClientErrorCause.Cancelled
+                        if (userLoginCancel) {
+                            return@loginWithKakaoTalk
+                        }
+                        loginWithKakaoAccount(callback = callback)
+                    }
+                    token != null -> Log.i("카카오톡 로그인 성공", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                }
+            }
+        } else {
+            loginWithKakaoAccount(callback = callback)
+        }
+    }
+
+    private fun init() {
+        googleSignInResult()
+
+        binding.tvGoogleLogin.setOnClickListener {
+            googleLogin()
+        }
+
+        binding.tvKakaoLogin.setOnClickListener {
+            kakaoLogin()
         }
     }
 }
