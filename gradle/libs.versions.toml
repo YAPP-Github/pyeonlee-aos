@@ -20,8 +20,8 @@ junit = "4.13.2"
 kakaoLogin = "2.13.0"
 kotlin = "1.8.20"
 ksp = "1.8.20-1.0.11"
+ktlintGradlePlugin = "11.3.2"
 playServicesAuth = "20.5.0"
-
 
 [libraries]
 # compose
@@ -88,6 +88,7 @@ hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradlePlugin" }
 
 [bundles]
 compose = [

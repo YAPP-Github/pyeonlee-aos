@@ -1,3 +1,4 @@
+
 package com.peonlee.login
 
 import android.app.Activity
@@ -44,14 +45,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun googleSignInResult() {
-        googleSignInLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            when(result.resultCode) {
+        googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
                 Activity.RESULT_OK -> {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     handleSignInResult(task)
                 }
+
                 else -> {
                     // TODO : 실패로직 수행
                 }
@@ -64,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "구글 로그인 성공", Toast.LENGTH_LONG).show()
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
             // TODO : 성공로직 수행
-
         } catch (e: ApiException) {
             // TODO : 실패로직 수행
         }
