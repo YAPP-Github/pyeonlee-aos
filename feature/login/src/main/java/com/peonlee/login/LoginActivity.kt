@@ -52,7 +52,9 @@ class LoginActivity : AppCompatActivity() {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     handleSignInResult(task)
                 }
-                else -> Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_LONG).show()
+                else -> {
+                    // TODO : 실패로직 수행
+                }
             }
         }
     }
@@ -61,20 +63,24 @@ class LoginActivity : AppCompatActivity() {
         try {
             Toast.makeText(this, "구글 로그인 성공", Toast.LENGTH_LONG).show()
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            Log.d("구글 Success : ", account.idToken.toString())
-            Log.d("구글 Success : ", account.id.toString())
-            Log.d("구글 Success : ", account.email.toString())
+            // TODO : 성공로직 수행
+
         } catch (e: ApiException) {
-            Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_LONG).show()
-            Log.d("구글 Fail", "signInResult:failed code=" + e.statusCode)
+            // TODO : 실패로직 수행
         }
     }
 
     private fun kakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             when {
-                error != null -> Log.e("카카오 계정 로그인 실패", "카카오 계정 로그인 실패", error)
-                token != null -> Log.i("카카오 계정 로그인 성공", "카카오 계정 로그인 성공 ${token.accessToken}")
+                error != null -> {
+                    // TODO : 실패로직 수행
+                    Log.e("카카오 계정 로그인 실패", "카카오 계정 로그인 실패", error)
+                }
+                token != null -> {
+                    // TODO : 성공로직 수행
+                    Log.i("카카오 계정 로그인 성공", "카카오 계정 로그인 성공 ${token.accessToken}")
+                }
             }
         }
 
@@ -82,15 +88,15 @@ class LoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 when {
                     error != null -> {
-                        Log.e("카카오톡 로그인 실패", "카카오톡 로그인 실패", error)
-
                         val userLoginCancel = error is ClientError && error.reason == ClientErrorCause.Cancelled
                         if (userLoginCancel) {
                             return@loginWithKakaoTalk
                         }
                         loginWithKakaoAccount(callback = callback)
                     }
-                    token != null -> Log.i("카카오톡 로그인 성공", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    token != null -> {
+                        // TODO : 성공로직 수행
+                    }
                 }
             }
         } else {
