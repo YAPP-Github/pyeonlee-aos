@@ -2,11 +2,20 @@
 package com.peonlee.core.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 
-class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<T : ViewBinding>(
+    private val bindingFactory: (LayoutInflater) -> T
+) : AppCompatActivity() {
+    private lateinit var _binding: T
+
+    val binding get() = _binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
+        _binding = bindingFactory(layoutInflater)
+        setContentView(binding.root)
     }
 }

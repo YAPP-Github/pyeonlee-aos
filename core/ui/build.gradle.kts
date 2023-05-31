@@ -6,6 +6,10 @@ plugins {
 
 android {
     namespace = "com.peonlee.core.ui"
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
