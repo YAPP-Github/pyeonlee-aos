@@ -26,6 +26,15 @@ internal fun Project.configureSnsLogin(
                 )
             )
 
+            buildConfigField(
+                type = "String",
+                name = "GOOGLE_CLIENT_ID",
+                value = getApiKey(
+                    propertyKey = Keys.GOOGLE_CLIENT_ID,
+                    rootDirectory = rootDir
+                )
+            )
+
             manifestPlaceholders[Keys.KAKAO_KEY] = getApiKey(
                 propertyKey = Keys.KAKAO_NATIVE_APP_KEY,
                 rootDirectory = rootDir

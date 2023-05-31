@@ -1,11 +1,11 @@
-
 package com.peonlee.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -19,49 +19,53 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.peonlee.login.databinding.ActivityLoginBinding
-import com.peonlee.login.extensions.isKakaoTalkLoginAvailable
-import com.peonlee.login.extensions.loginWithKakaoAccount
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
+
+    private val googleSignInLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            googleSignInResult(activityResult)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        init()
+        initViews()
+    }
+
+    private fun initViews() = with(binding) {
+        tvGoogleLogin.setOnClickListener { googleLogin() }
+        tvKakaoLogin.setOnClickListener { kakaoLogin() }
     }
 
     private fun googleLogin() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
+        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
             .build()
 
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        val signInIntent = mGoogleSignInClient.signInIntent
+        val googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+        val signInIntent = googleSignInClient.signInIntent
         googleSignInLauncher.launch(signInIntent)
     }
 
-    private fun googleSignInResult() {
-        googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            when (result.resultCode) {
-                Activity.RESULT_OK -> {
-                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                    handleSignInResult(task)
-                }
+    private fun googleSignInResult(activityResult: ActivityResult) {
+        when (activityResult.resultCode) {
+            Activity.RESULT_OK -> {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
+                googleHandleSignInResult(task)
+            }
 
-                else -> {
-                    // TODO : 실패로직 수행
-                }
+            else -> {
+                // TODO : 실패로직 수행
             }
         }
     }
 
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+    private fun googleHandleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            Toast.makeText(this, "구글 로그인 성공", Toast.LENGTH_LONG).show()
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
             // TODO : 성공로직 수행
         } catch (e: ApiException) {
@@ -76,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
                     // TODO : 실패로직 수행
                     Log.e("카카오 계정 로그인 실패", "카카오 계정 로그인 실패", error)
                 }
+
                 token != null -> {
                     // TODO : 성공로직 수행
                     Log.i("카카오 계정 로그인 성공", "카카오 계정 로그인 성공 ${token.accessToken}")
@@ -87,12 +92,13 @@ class LoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 when {
                     error != null -> {
-                        val userLoginCancel = error is ClientError && error.reason == ClientErrorCause.Cancelled
-                        if (userLoginCancel) {
+                        val isUserLoginCancel = error is ClientError && error.reason == ClientErrorCause.Cancelled
+                        if (isUserLoginCancel) {
                             return@loginWithKakaoTalk
                         }
                         loginWithKakaoAccount(callback = callback)
                     }
+
                     token != null -> {
                         // TODO : 성공로직 수행
                     }
@@ -103,15 +109,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun init() {
-        googleSignInResult()
+    private fun Context.loginWithKakaoAccount(callback: (token: OAuthToken?, error: Throwable?) -> Unit) {
+        return UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+    }
 
-        binding.tvGoogleLogin.setOnClickListener {
-            googleLogin()
-        }
-
-        binding.tvKakaoLogin.setOnClickListener {
-            kakaoLogin()
-        }
+    private fun Context.isKakaoTalkLoginAvailable(): Boolean {
+        return UserApiClient.instance.isKakaoTalkLoginAvailable(this)
     }
 }
