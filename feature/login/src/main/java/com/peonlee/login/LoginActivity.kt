@@ -5,15 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -53,22 +49,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
         when (activityResult.resultCode) {
             Activity.RESULT_OK -> {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
-                googleHandleSignInResult(task)
+                task.addOnCompleteListener { result ->
+                    if (result.isSuccessful) {
+                        val googleIdToken: String = task.result.idToken ?: ""
+                        // TODO : 성공 로직(로그인 성공) : ViewModel 연동
+                    } else {
+                        // TODO : 실패 로직(로그인 실패) 수행
+                    }
+                }
             }
 
             else -> {
                 // TODO : 실패로직 수행
             }
-        }
-    }
-
-    private fun googleHandleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            Toast.makeText(this, "${account.idToken}", Toast.LENGTH_SHORT).show()
-            // TODO : 성공로직 수행
-        } catch (e: ApiException) {
-            // TODO : 실패로직 수행
         }
     }
 
