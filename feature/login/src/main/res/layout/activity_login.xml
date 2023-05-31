@@ -13,7 +13,7 @@
         android:layout_marginBottom="24dp"
         android:background="#123123"
         android:gravity="center"
-        android:text="구글 로그인 버튼"
+        tools:text="테스트 구글 로그인 버튼"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_kakao_login"
@@ -24,12 +24,11 @@
         android:id="@+id/tv_kakao_login"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="14dp"
         android:background="#123123"
         android:gravity="center"
-        android:text="테스트 카카오 버튼"
+        tools:text="테스트 카카오 버튼"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/tv_google_login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +44,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/textView2"
@@ -58,5 +57,5 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
