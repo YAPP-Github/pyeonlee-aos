@@ -25,6 +25,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-         KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_KEY)
+        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_KEY)
     }
 }

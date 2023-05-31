@@ -14,6 +14,10 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+
+    // TODO : 컨벤션 플러그인으로 묶는방법 설계
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

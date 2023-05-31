@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
@@ -15,8 +15,11 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.peonlee.core.ui.BaseActivity
+import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.login.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
     ActivityLoginBinding.inflate(layoutInflater)
 }) {
@@ -24,6 +27,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             googleSignInResult(activityResult)
         }
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,31 +57,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
                 task.addOnCompleteListener { result ->
                     if (result.isSuccessful) {
                         val googleIdToken: String = task.result.idToken ?: ""
-                        // TODO : 성공 로직(로그인 성공) : ViewModel 연동
+                        loginViewModel.snsLogin(googleIdToken)
                     } else {
-                        // TODO : 실패 로직(로그인 실패) 수행
+                        showToast(getString(R.string.login_failed))
                     }
                 }
             }
 
-            else -> {
-                // TODO : 실패로직 수행
-            }
+            else -> showToast(getString(R.string.login_failed))
         }
     }
 
     private fun kakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             when {
-                error != null -> {
-                    // TODO : 실패로직 수행
-                    Log.e("카카오 계정 로그인 실패", "카카오 계정 로그인 실패", error)
-                }
-
-                token != null -> {
-                    // TODO : 성공로직 수행
-                    Log.i("카카오 계정 로그인 성공", "카카오 계정 로그인 성공 ${token.accessToken}")
-                }
+                error != null -> showToast(getString(R.string.login_failed))
+                token != null -> loginViewModel.snsLogin(token.accessToken)
             }
         }
 
@@ -91,9 +87,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
                         loginWithKakaoAccount(callback = callback)
                     }
 
-                    token != null -> {
-                        // TODO : 성공로직 수행
-                    }
+                    token != null -> showToast(getString(R.string.login_failed))
                 }
             }
         } else {
