@@ -33,6 +33,12 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
+    - name: Create Local Properties
+      env:
+        KAKAO_API_KEY: ${{secrets.KAKAO_API_KEY}}
+      run: |
+        echo kakao_native_app_key=\""$KAKAO_API_KEY"\" > ./local.properties
+      
     - name: Run ktlint
       run: ./gradlew ktlintCheck
     
