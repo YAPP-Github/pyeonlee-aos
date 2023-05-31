@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <style name="Theme.PeonLee" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.PeonLee" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
 <!--        <item name="colorPrimary">@color/purple_500</item>-->
 <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
@@ -29,5 +29,11 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.PeonLee</item>
     </style>
 </resources>

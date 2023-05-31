@@ -23,6 +23,7 @@ kotlin = "1.8.20"
 ksp = "1.8.20-1.0.11"
 ktlintGradlePlugin = "11.3.2"
 playServicesAuth = "20.5.0"
+splashScreen = "1.0.0-alpha01"
 
 [libraries]
 # compose
@@ -44,6 +45,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 
 # android
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
 
 # room
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
