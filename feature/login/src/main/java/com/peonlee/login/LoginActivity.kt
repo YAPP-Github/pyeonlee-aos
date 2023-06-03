@@ -36,10 +36,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
         initViews()
     }
 
-    override fun splashLoad() {
-        installSplashScreen()
-    }
-
     private fun initViews() = with(binding) {
         tvGoogleLogin.setOnClickListener { googleLogin() }
         tvKakaoLogin.setOnClickListener { kakaoLogin() }

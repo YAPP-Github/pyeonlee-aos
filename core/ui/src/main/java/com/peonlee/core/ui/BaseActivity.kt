@@ -15,11 +15,7 @@ abstract class BaseActivity<T : ViewBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        splashLoad()
-
         _binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
     }
-
-    abstract fun splashLoad()
 }
