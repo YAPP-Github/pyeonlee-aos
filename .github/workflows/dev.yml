@@ -36,7 +36,7 @@ jobs:
     - name: Set Local Properties
       env:
         KAKAO_API_KEY: ${{secrets.KAKAO_API_KEY}}
-        GOOGLE_CLIENT_KEY: ${secrets.GOOGLE_CLIENT_ID}}
+        GOOGLE_CLIENT_ID: ${secrets.GOOGLE_CLIENT_ID}}
       run: |
         echo kakao_native_app_key=\""$KAKAO_API_KEY"\" > local.properties
         echo google_client_id=\""$GOOGLE_CLIENT_ID"\" > local.properties
