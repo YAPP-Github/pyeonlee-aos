@@ -21,7 +21,7 @@ import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MyApplication : Application() {
+class PeonleeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
