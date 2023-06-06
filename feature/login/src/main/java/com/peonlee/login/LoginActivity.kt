@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
@@ -20,22 +23,21 @@ import com.peonlee.login.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
-    ActivityLoginBinding.inflate(layoutInflater)
-}) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val googleSignInLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             googleSignInResult(activityResult)
         }
 
-    private val loginViewModel: LoginViewModel by viewModels()
+//    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViews()
     }
 
-    private fun initViews() = with(binding) {
+    override fun bindingFactory() = ActivityLoginBinding.inflate(layoutInflater)
+
+    override fun initViews() = with(binding) {
         tvGoogleLogin.setOnClickListener { googleLogin() }
         tvKakaoLogin.setOnClickListener { kakaoLogin() }
     }
@@ -56,27 +58,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
                 val task = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
                 task.addOnCompleteListener { result ->
                     if (result.isSuccessful) {
-                        val googleIdToken: String = task.result.idToken ?: ""
-                        loginViewModel.snsLogin(googleIdToken)
+                        task.result.idToken?.let { googleIdToken ->
+                            Toast.makeText(this, googleIdToken, Toast.LENGTH_SHORT).show()
+//                            loginViewModel.snsLogin(googleIdToken)
+                        } ?: showToast(getString(R.string.login_failed))
                     } else {
                         showToast(getString(R.string.login_failed))
                     }
                 }
             }
-
             else -> showToast(getString(R.string.login_failed))
         }
     }
 
     private fun kakaoLogin() {
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-            when {
-                error != null -> showToast(getString(R.string.login_failed))
-                token != null -> loginViewModel.snsLogin(token.accessToken)
-            }
-        }
-
-        if (isKakaoTalkLoginAvailable()) {
+        val isKakaoTalkLoginAvailable = UserApiClient.instance.isKakaoTalkLoginAvailable(this)
+        if (isKakaoTalkLoginAvailable) {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 when {
                     error != null -> {
@@ -84,22 +81,36 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>({ layoutInflater ->
                         if (isUserLoginCancel) {
                             return@loginWithKakaoTalk
                         }
-                        loginWithKakaoAccount(callback = callback)
+                        loginWithKakaoAccount()
                     }
-
-                    token != null -> showToast(getString(R.string.login_failed))
+                    token != null -> {
+                        Toast.makeText(this, token.accessToken.toString(), Toast.LENGTH_SHORT).show()
+//                        loginViewModel.snsLogin(token.accessToken)
+                    }
                 }
             }
         } else {
-            loginWithKakaoAccount(callback = callback)
+            loginWithKakaoAccount()
         }
     }
 
-    private fun Context.loginWithKakaoAccount(callback: (token: OAuthToken?, error: Throwable?) -> Unit) {
-        return UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
-    }
-
-    private fun Context.isKakaoTalkLoginAvailable(): Boolean {
-        return UserApiClient.instance.isKakaoTalkLoginAvailable(this)
+    private fun loginWithKakaoAccount() {
+        val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            when {
+                error != null -> {
+                    showToast(getString(R.string.login_failed))
+                    Log.d("error!! : ", error.toString())
+                }
+                token != null ->  {
+                    Log.d("token!!! ", token.accessToken)
+                    Toast.makeText(this, token.accessToken.toString(), Toast.LENGTH_SHORT).show()
+//                    loginViewModel.snsLogin(token.accessToken)
+                }
+                else -> {
+                    Log.d("error!! : ", error.toString())
+                }
+            }
+        }
+        return UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoLoginCallback)
     }
 }

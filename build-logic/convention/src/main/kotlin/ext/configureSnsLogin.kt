@@ -38,7 +38,7 @@ internal fun Project.configureSnsLogin(
             manifestPlaceholders[Keys.KAKAO_KEY] = getApiKey(
                 propertyKey = Keys.KAKAO_NATIVE_APP_KEY,
                 rootDirectory = rootDir
-            )
+            ).replace("\"", "")
         }
 
         buildFeatures {
