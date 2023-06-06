@@ -1,13 +1,12 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    id("peonlee.android.library")
+    id("peonlee.android.hilt")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+android {
+    namespace = "com.peonlee.core.data"
 }
 
 dependencies {
-    implementation(libs.javax.inject)
+    implementation(project(":core:data"))
 }

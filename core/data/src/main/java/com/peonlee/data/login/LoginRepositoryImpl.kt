@@ -1,6 +1,5 @@
 package com.peonlee.data.login
 
-import com.peonlee.domain.login.LoginRepository
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor() : LoginRepository {
