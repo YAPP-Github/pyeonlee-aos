@@ -35,7 +35,6 @@ rootProject.name = "PeonLee"
 include(":app")
 include(":test-app")
 include(":feature:login")
-include(":core")
 include(":core:data")
 include(":core:database")
 include(":core:ui")

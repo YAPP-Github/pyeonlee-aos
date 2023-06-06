@@ -13,7 +13,6 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.ktlint.gradle) apply false
-    id("org.jetbrains.kotlin.jvm") version "1.8.20" apply false
 }
 
 subprojects {

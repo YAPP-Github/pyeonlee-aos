@@ -16,7 +16,6 @@ coroutines = "1.6.4"
 firebaseBom = "32.0.0"
 googleService = "4.3.15"
 hilt = "2.46"
-javaxInject = "1"
 junit = "4.13.2"
 kakaoLogin = "2.13.0"
 kotlin = "1.8.20"
@@ -82,9 +81,6 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 google-service = { group = "com.google.gms", name = "google-services", version.ref = "googleService" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth"}
-
-# java
-javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javaxInject"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
