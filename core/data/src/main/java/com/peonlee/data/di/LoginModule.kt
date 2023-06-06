@@ -10,12 +10,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class LoginModule {
+abstract class LoginModule {
     @Binds
     @Singleton
-    fun bindLoginRepository(
+    abstract fun bindLoginRepository(
         loginRepositoryImpl: LoginRepositoryImpl
-    ): LoginRepository {
-        return loginRepositoryImpl
-    }
+    ): LoginRepository
 }
