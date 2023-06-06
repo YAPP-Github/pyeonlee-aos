@@ -47,6 +47,7 @@ internal fun Project.configureSnsLogin(
 
         dependencies {
             "implementation"(libs.findLibrary("android.kakao.login").get())
+            "implementation"(libs.findLibrary("play.services.auth").get())
         }
     }
 }
