@@ -50,5 +50,14 @@ gradlePlugin {
             id = "peonlee.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("snsLoginApplication") {
+            id = "peonlee.android.sns.login.application"
+            implementationClass = "AndroidSnsLoginApplicationConventionPlugin"
+        }
+
+        register("snsLoginFeature") {
+            id = "peonlee.android.sns.login.feature"
+            implementationClass = "AndroidSnsLoginFeatureConventionPlugin"
+        }
     }
 }

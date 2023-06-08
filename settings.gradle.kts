@@ -27,14 +27,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://devrepo.kakao.com/nexus/content/groups/public/")
     }
 }
 rootProject.name = "PeonLee"
 
 include(":app")
-include(":core-data")
-include(":core-database")
-include(":core-testing")
-include(":core-ui")
-include(":feature-mymodel")
 include(":test-app")
+include(":feature:login")
+include(":core:data")
+include(":core:database")
+include(":core:ui")
+include(":core:testing")
+include(":core:domain")

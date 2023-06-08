@@ -2,6 +2,7 @@ plugins {
     id("peonlee.android.application")
     id("peonlee.android.application.compose")
     id("peonlee.android.hilt")
+    id("peonlee.android.sns.login.application")
 }
 
 android {
@@ -11,12 +12,11 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-//    packagingOptions {
-//        resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" }
-//    }
 }
 
 dependencies {
-    implementation(project(":core-ui"))
-    implementation(project(":feature-mymodel"))
+    implementation(project(":core:ui"))
+    implementation(project(":feature:login"))
+
+    implementation(libs.androidx.core.splashscreen)
 }
