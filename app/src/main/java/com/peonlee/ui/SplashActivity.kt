@@ -23,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
                     return if (true) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                        finish()
                         true
                     } else {
                         false
