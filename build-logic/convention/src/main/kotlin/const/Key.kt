@@ -5,4 +5,6 @@ object Keys {
     const val KAKAO_KEY = "kakao_key"
 
     const val GOOGLE_CLIENT_ID = "google_client_id"
+
+    const val BASE_URL = "base_url"
 }

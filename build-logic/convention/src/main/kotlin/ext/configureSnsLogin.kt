@@ -1,13 +1,11 @@
 package ext
 
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import const.Keys
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import java.io.File
 
 internal fun Project.configureSnsLogin(
     commonExtension: CommonExtension<*, *, *, *>
@@ -50,8 +48,4 @@ internal fun Project.configureSnsLogin(
             "implementation"(libs.findLibrary("play.services.auth").get())
         }
     }
-}
-
-private fun getApiKey(propertyKey: String, rootDirectory: File): String {
-    return gradleLocalProperties(rootDirectory).getProperty(propertyKey)
 }
