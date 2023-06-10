@@ -26,7 +26,11 @@ kotlin = "1.8.20"
 ksp = "1.8.20-1.0.11"
 ktlintGradlePlugin = "11.3.2"
 material = "1.9.0"
+okHttp = "4.10.0"
 playServicesAuth = "20.5.0"
+retrofit = "2.9.0"
+serializationConverter = "1.0.0"
+serializationJson = "1.5.1"
 splashScreen = "1.0.0-alpha01"
 
 [libraries]
@@ -92,7 +96,14 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 google-material = { module = "com.google.android.material:material", version.ref = "material" }
 google-service = { group = "com.google.gms", name = "google-services", version.ref = "googleService" }
-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth"}
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+
+# http
+serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "serializationConverter" }
+serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
+squareup-okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
+squareup-okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttp" }
+squareup-retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 
 [plugins]
