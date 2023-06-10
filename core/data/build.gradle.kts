@@ -1,7 +1,7 @@
 plugins {
     id("peonlee.android.library")
     id("peonlee.android.hilt")
-    id("peonlee.android.data")
+    id("peonlee.android.repository")
 }
 
 android {

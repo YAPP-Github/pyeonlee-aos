@@ -7,7 +7,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-internal fun Project.configureData(
+internal fun Project.configureRepository(
     commonExtension: CommonExtension<*, *, *, *>
 ) {
     commonExtension.apply {

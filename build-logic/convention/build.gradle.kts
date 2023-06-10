@@ -60,9 +60,9 @@ gradlePlugin {
             implementationClass = "AndroidSnsLoginFeatureConventionPlugin"
         }
 
-        register("androidData") {
-            id = "peonlee.android.data"
-            implementationClass = "AndroidDataConventionPlugin"
+        register("androidRepository") {
+            id = "peonlee.android.repository"
+            implementationClass = "AndroidRepositoryConventionPlugin"
         }
     }
 }

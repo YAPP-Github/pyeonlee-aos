@@ -1,14 +1,14 @@
 import com.android.build.api.dsl.LibraryExtension
-import ext.configureData
+import ext.configureRepository
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class AndroidDataConventionPlugin : Plugin<Project> {
+class AndroidRepositoryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             extensions.configure<LibraryExtension> {
-                configureData(this)
+                configureRepository(this)
             }
         }
     }
