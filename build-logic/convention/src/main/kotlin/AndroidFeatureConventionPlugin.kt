@@ -29,6 +29,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 "androidTestImplementation"(libs.findLibrary("androidx.test.ext.junit").get())
                 "androidTestImplementation"(libs.findLibrary("androidx.test.runner").get())
                 "androidTestImplementation"(libs.findLibrary("androidx.recyclerview").get())
+                "implementation"(libs.findLibrary("androidx.appcompat").get())
             }
         }
     }
