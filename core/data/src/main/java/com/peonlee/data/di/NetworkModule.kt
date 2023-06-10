@@ -34,7 +34,12 @@ object NetworkModule {
     fun provideOkHttp(): OkHttpClient {
         return OkHttpClient.Builder().apply {
             val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+            if(BuildConfig.DEBUG) {
+                loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            } else {
+                loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+            }
 
             addInterceptor(loggingInterceptor)
             connectTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -43,3 +48,4 @@ object NetworkModule {
         }.build()
     }
 }
+
