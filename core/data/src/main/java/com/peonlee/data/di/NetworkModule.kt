@@ -2,8 +2,8 @@ package com.peonlee.data.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.peonlee.core.data.BuildConfig
-import com.peonlee.data.di.common.ConnectionInfo.APPLICATION_JSON
-import com.peonlee.data.di.common.ConnectionInfo.TIME_OUT
+import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
+import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +35,7 @@ object NetworkModule {
         return OkHttpClient.Builder().apply {
             val loggingInterceptor = HttpLoggingInterceptor()
 
-            if(BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG) {
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             } else {
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
@@ -47,5 +47,10 @@ object NetworkModule {
             writeTimeout(TIME_OUT, TimeUnit.SECONDS)
         }.build()
     }
-}
 
+    private object ConnectInfo {
+        const val APPLICATION_JSON = "application/json"
+
+        const val TIME_OUT = 60L
+    }
+}
