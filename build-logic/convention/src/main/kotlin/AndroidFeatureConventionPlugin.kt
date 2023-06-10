@@ -28,6 +28,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 // Instrumented tests: jUnit rules and runners
                 "androidTestImplementation"(libs.findLibrary("androidx.test.ext.junit").get())
                 "androidTestImplementation"(libs.findLibrary("androidx.test.runner").get())
+                "androidTestImplementation"(libs.findLibrary("androidx.recyclerview").get())
             }
         }
     }
