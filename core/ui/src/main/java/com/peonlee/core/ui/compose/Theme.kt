@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.peonlee.core.ui
+package com.peonlee.core.ui.compose
 
 import android.app.Activity
 import android.os.Build

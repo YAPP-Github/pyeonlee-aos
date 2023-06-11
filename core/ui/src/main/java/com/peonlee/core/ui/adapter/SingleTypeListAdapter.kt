@@ -1,6 +1,7 @@
-package com.peonlee.core.ui
+package com.peonlee.core.ui.adapter
 
 import android.view.ViewGroup
+import com.peonlee.core.ui.viewholder.CommonViewHolder
 
 abstract class SingleTypeListAdapter<T : Any>(checkParameter: (T) -> Any?) : BaseListAdapter<T>(checkParameter) {
     final override fun getItemViewType(position: Int): Int {

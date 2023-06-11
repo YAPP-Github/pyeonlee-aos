@@ -1,8 +1,9 @@
-package com.peonlee.core.ui
+package com.peonlee.core.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
+import com.peonlee.core.ui.viewholder.CommonViewHolder
 
 abstract class BaseListAdapter<T : Any>(checkParameter: (T) -> Any?) : ListAdapter<T, CommonViewHolder<T>>(BaseDiffUtil<T>(checkParameter)) {
     final override fun onBindViewHolder(holder: CommonViewHolder<T>, position: Int) {

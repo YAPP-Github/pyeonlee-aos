@@ -1,5 +1,5 @@
 
-package com.peonlee.core.ui
+package com.peonlee.core.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
