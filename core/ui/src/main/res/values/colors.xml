@@ -49,4 +49,7 @@
     <color name="gs40">#D3F7FF</color>
     <color name="seveneeleven100">#94DECD</color>
     <color name="seveneeleven40">#C7F2E8</color>
+
+    <!-- Font Color -->
+    <color name="default_font">#131316</color>
 </resources>

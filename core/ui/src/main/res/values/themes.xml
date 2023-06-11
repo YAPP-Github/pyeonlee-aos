@@ -18,5 +18,84 @@
 <resources>
     <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar" />
 
+    <style name="PeonLee.Typography" parent="android:TextAppearance">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/default_font</item>
+    </style>
+
     <!-- Titles -->
+    <style name="Text.Title01" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_20dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="fontWeight">700</item>
+    </style>
+
+    <!-- Subtitles -->
+    <style name="Text.Subtitle01" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_18dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Text.Subtitle02" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_16dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <!-- Body -->
+    <style name="Text.Body01" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_14dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Text.Body02" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_14dp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="fontWeight">600</item>
+    </style>
+
+    <style name="Text.Body03" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_14dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="Text.Body04" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_13dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Text.Body05" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_13dp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="fontWeight">600</item>
+    </style>
+
+    <style name="Text.Body06" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_13dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <!-- Captions -->
+    <style name="Text.Caption1" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_11dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="Text.Caption2" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_11dp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="fontWeight">600</item>
+    </style>
+
+    <style name="Text.Caption3" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_10dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
 </resources>
