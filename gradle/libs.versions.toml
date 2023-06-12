@@ -13,6 +13,7 @@ androidxRoom = "2.5.1"
 androidxTestCore = "1.5.0"
 androidxTestExt = "1.1.5"
 androidxTestRunner = "1.5.2"
+appCompat = "1.6.1"
 constraintLayout = "2.1.4"
 coreKtx = "1.10.1"
 coroutines = "1.6.4"
@@ -52,13 +53,14 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 
 # android
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
-androidx-core-core-ktx = { module = "androidx.core:core-ktx", version = "coreKtx" }
+androidx-core-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 
 # androidX
-androidx-recyclerview= { module = "androidx.recyclerview:recyclerview", version.ref = "androidXRecyclerview" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidXRecyclerview" }
 
 # room
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
