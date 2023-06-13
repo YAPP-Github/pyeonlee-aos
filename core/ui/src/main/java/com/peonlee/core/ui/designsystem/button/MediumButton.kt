@@ -54,14 +54,25 @@ class MediumButton constructor(
                 R.drawable.icons_medium_thumbs_up
             )
 
+            val thumbsBackgroundTint = mediumButtonTypedArray.getColor(
+                R.styleable.MediumButton_thumbsBackgroundTint,
+                resources.getColor(
+                    R.color.bg80,
+                    context.theme
+                )
+            )
+
             applyTextAttributes(
                 titleText,
                 titleTextColor
             )
+
             applyImageAttributes(
                 isShowingThumbs,
-                thumbsBackground
+                thumbsBackground,
+                thumbsBackgroundTint
             )
+
             applyBackgroundAttributes(mediumButtonBackground)
 
             recycle()
@@ -87,13 +98,14 @@ class MediumButton constructor(
 
     private fun applyImageAttributes(
         isShowingThumbs: Boolean,
-        thumbsBackground: Int
+        thumbsBackground: Int,
+        thumbsBackgroundTint: Int
     ) {
         if (isShowingThumbs) binding.ivThumbs.visible() else binding.ivThumbs.gone()
 
         binding.ivThumbs.apply {
             setImageResource(thumbsBackground)
-            backgroundTintList = ColorStateList.valueOf(R.styleable.MediumButton_thumbsBackgroundTint)
+            imageTintList = ColorStateList.valueOf(thumbsBackgroundTint)
         }
     }
 }
