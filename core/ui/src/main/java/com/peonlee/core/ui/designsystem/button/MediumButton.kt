@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.PeonleeMediumButtonBinding
-import com.peonlee.core.ui.extensions.gone
-import com.peonlee.core.ui.extensions.visible
 
 class MediumButton constructor(
     context: Context,
@@ -80,12 +80,12 @@ class MediumButton constructor(
     }
 
     private fun applyTextAttributes(
-        text: String?,
-        textColor: Int
+        titleText: String?,
+        titleTextColor: Int
     ) {
         binding.tvTitle.apply {
-            this.text = text
-            this.setTextColor(textColor)
+            text = titleText
+            setTextColor(titleTextColor)
         }
     }
 
@@ -101,11 +101,18 @@ class MediumButton constructor(
         thumbsBackground: Int,
         thumbsBackgroundTint: Int
     ) {
-        if (isShowingThumbs) binding.ivThumbs.visible() else binding.ivThumbs.gone()
-
         binding.ivThumbs.apply {
-            setImageResource(thumbsBackground)
             imageTintList = ColorStateList.valueOf(thumbsBackgroundTint)
+            isVisible = isShowingThumbs
+            setImageResource(thumbsBackground)
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        binding.tvTitle.apply {
+            if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
         }
     }
 }

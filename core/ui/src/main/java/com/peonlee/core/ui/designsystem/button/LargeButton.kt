@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.PeonleeLargeButtonBinding
-import com.peonlee.core.ui.extensions.gone
-import com.peonlee.core.ui.extensions.visible
 
 class LargeButton constructor(
     context: Context,
@@ -61,12 +61,12 @@ class LargeButton constructor(
     }
 
     private fun applyTextAttributes(
-        text: String?,
-        textColor: Int
+        titleText: String?,
+        titleTextColor: Int
     ) {
         binding.tvTitle.apply {
-            this.text = text
-            this.setTextColor(textColor)
+            text = titleText
+            setTextColor(titleTextColor)
         }
     }
 
@@ -78,6 +78,14 @@ class LargeButton constructor(
     }
 
     private fun applyImageAttributes(isShowingChevron: Boolean) {
-        if (isShowingChevron) binding.ivChevronRight.visible() else binding.ivChevronRight.gone()
+        binding.ivChevronRight.isVisible = isShowingChevron
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        binding.tvTitle.apply {
+            if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        }
     }
 }

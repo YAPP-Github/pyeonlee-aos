@@ -7,26 +7,26 @@
     android:layout_height="@dimen/button_height_medium">
 
     <TextView
-        tools:text="test text"
-        android:id="@+id/tv_title"
         style="@style/Text.Body02"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_thumbs"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="test text">
     </TextView>
 
     <ImageView
         android:id="@+id/iv_thumbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_15dp"
         android:layout_marginRight="@dimen/margin_6dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
         app:layout_constraintEnd_toStartOf="@+id/tv_title"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_title">

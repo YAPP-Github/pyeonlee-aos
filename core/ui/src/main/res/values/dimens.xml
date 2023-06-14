@@ -22,4 +22,5 @@
     <!-- Margins -->
     <dimen name="margin_4dp">4dp</dimen>
     <dimen name="margin_6dp">6dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
 </resources>
