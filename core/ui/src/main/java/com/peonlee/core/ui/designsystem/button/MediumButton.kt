@@ -90,7 +90,7 @@ class MediumButton constructor(
     }
 
     private fun applyBackgroundAttributes(mediumButtonBackground: Int) {
-        binding.layoutMediumBtnBackground.apply {
+        binding.layoutMediumButtonBackground.apply {
             setBackgroundResource(mediumButtonBackground)
             backgroundTintList = ColorStateList.valueOf(R.styleable.MediumButton_android_backgroundTint)
         }

@@ -71,7 +71,7 @@ class LargeButton constructor(
     }
 
     private fun applyBackgroundAttributes(largeButtonBackground: Int) {
-        binding.layoutLargeBtnBackground.apply {
+        binding.layoutLargeButtonBackground.apply {
             setBackgroundResource(largeButtonBackground)
             backgroundTintList = ColorStateList.valueOf(R.styleable.LargeButton_android_backgroundTint)
         }
