@@ -1,4 +1,4 @@
-package com.peonlee.core.ui
+package com.peonlee.core.ui.viewholder
 
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView

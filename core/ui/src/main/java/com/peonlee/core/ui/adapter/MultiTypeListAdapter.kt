@@ -1,6 +1,7 @@
-package com.peonlee.core.ui
+package com.peonlee.core.ui.adapter
 
 import android.view.ViewGroup
+import com.peonlee.core.ui.viewholder.CommonViewHolder
 import java.lang.reflect.ParameterizedType
 
 interface ListItem {

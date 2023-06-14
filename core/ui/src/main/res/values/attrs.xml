@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LargeButton">
+        <attr name="android:background" format="reference" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="android:text" format="reference|string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="showChevron" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MediumButton">
+        <attr name="android:background" format="reference" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:text" format="reference|string" />
+        <attr name="thumbsBackground" format="reference" />
+        <attr name="thumbsBackgroundTint" format="color" />
+        <attr name="showThumbs" format="boolean" />
+    </declare-styleable>
+</resources>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.peonlee.core.ui
+package com.peonlee.core.ui.compose
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

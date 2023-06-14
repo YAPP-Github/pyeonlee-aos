@@ -16,5 +16,40 @@
   -->
 
 <resources>
-    <color name="white">#ffffff</color>
+    <!-- Brand Color -->
+    <color name="brand100">#19A5E1</color>
+    <color name="brand60">#74D5FF</color>
+    <color name="brand50">#96DFFF</color>
+    <color name="brand40">#D0F0FE</color>
+    <color name="brand30">#E6F8FF</color>
+
+    <!-- Background Color -->
+    <color name="bg0">#FFFFFF</color>
+    <color name="bg10">#F1F2F6</color>
+    <color name="bg20">#E6EAF3</color>
+    <color name="bg30">#C9D2E5</color>
+    <color name="bg40">#A4ABBE</color>
+    <color name="bg50">#6D7181</color>
+    <color name="bg70">#6D7181</color>
+    <color name="bg80">#363B45</color>
+    <color name="bg100">#26292F</color>
+
+    <!-- System Color -->
+    <color name="system_r100">#F37676</color>
+    <color name="system_r50">#FFBABA</color>
+    <color name="system_r40">#FFDCDC</color>
+    <color name="system_r30">#FFEAEA</color>
+    <color name="system_y100">#E88B01</color>
+    <color name="system_y50">#FFEFD7</color>
+
+    <!-- Store Color -->
+    <color name="cu100">#E4C1FF</color>
+    <color name="cu40">#F0E2FB</color>
+    <color name="gs100">#97E3F4</color>
+    <color name="gs40">#D3F7FF</color>
+    <color name="seveneeleven100">#94DECD</color>
+    <color name="seveneeleven40">#C7F2E8</color>
+
+    <!-- Font Color -->
+    <color name="default_font">#131316</color>
 </resources>
