@@ -51,7 +51,7 @@ class MediumButton constructor(
 
             val thumbsBackground = mediumButtonTypedArray.getResourceId(
                 R.styleable.MediumButton_thumbsBackground,
-                R.drawable.ic_medium_thumbs_up
+                R.drawable.ic_thumbs_up
             )
 
             val thumbsBackgroundTint = mediumButtonTypedArray.getColor(
