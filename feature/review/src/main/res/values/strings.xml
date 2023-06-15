@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 리뷰 작성 -->
+    <string name="edit_review_save_btn_text">등록하기</string>
+    <string name="edit_review_title">리뷰 작성하기</string>
+</resources>
