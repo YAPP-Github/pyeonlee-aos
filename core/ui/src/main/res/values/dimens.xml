@@ -9,18 +9,29 @@
     <dimen name="text_size_11dp">11dp</dimen>
     <dimen name="text_size_10dp">10dp</dimen>
 
-    <!-- Button Radius -->
-    <dimen name="button_radius_10dp">10dp</dimen>
+    <!-- Radius -->
+    <dimen name="radius_4dp">4dp</dimen>
+    <dimen name="radius_10dp">10dp</dimen>
+    <dimen name="radius_20dp">20dp</dimen>
 
-    <!-- Button Height -->
-    <dimen name="button_height_large">56dp</dimen>
-    <dimen name="button_height_medium">46dp</dimen>
+    <!-- Height -->
+    <dimen name="height_56dp">56dp</dimen>
+    <dimen name="height_46dp">46dp</dimen>
+    <dimen name="height_18dp">18dp</dimen>
+    <dimen name="height_12dp">12dp</dimen>
+    <dimen name="height_28dp">28dp</dimen>
+
+    <!-- Width -->
+    <dimen name="width_12dp">12dp</dimen>
 
     <!-- Stroke Width -->
     <dimen name="stroke_width">1dp</dimen>
 
     <!-- Margins -->
+    <dimen name="margin_3dp">3dp</dimen>
     <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
     <dimen name="margin_6dp">6dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
     <dimen name="margin_15dp">15dp</dimen>
 </resources>
