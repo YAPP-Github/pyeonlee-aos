@@ -27,4 +27,7 @@
     <!-- base title -->
     <dimen name="item_base_title_horizontal_padding">18dp</dimen>
     <dimen name="item_base_title_vertical_padding">16dp</dimen>
+    <!-- base divider -->
+    <dimen name="item_base_divider_vertical_padding">32dp</dimen>
+    <dimen name="item_base_divider_height">8dp</dimen>
 </resources>
