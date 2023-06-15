@@ -15,6 +15,10 @@ class EditReviewViewModel : ViewModel() {
         _review.value = newReview
     }
 
+    fun saveReview() {
+        // TODO 리뷰 저장 로직 추가 예정
+    }
+
     companion object {
         const val REVIEW_MAX_LENGTH = 300
     }

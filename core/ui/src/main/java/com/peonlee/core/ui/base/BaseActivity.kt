@@ -1,4 +1,3 @@
-
 package com.peonlee.core.ui.base
 
 import android.os.Bundle
@@ -15,8 +14,10 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         _binding = bindingFactory()
         setContentView(binding.root)
         initViews()
+        bindViews()
     }
 
     abstract fun bindingFactory(): T
-    open fun initViews() { }
+    open fun initViews() {}
+    open fun bindViews() {}
 }
