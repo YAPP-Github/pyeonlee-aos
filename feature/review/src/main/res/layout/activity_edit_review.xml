@@ -6,31 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/edit_review_outlined_padding"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/edit_review_outlined_padding"
+        android:text="@string/edit_review_title"
+        android:textColor="@color/bg100"
+        app:layout_constraintBottom_toTopOf="@id/layout_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/Text.Body02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/edit_review_title"
-            android:textColor="@color/bg100" />
-
-        <ImageView
-            android:id="@+id/btn_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_close" />
-
-    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintEnd_toEndOf="@id/layout_product"
+        app:layout_constraintTop_toTopOf="@id/tv_title" />
 
     <View
         android:id="@+id/layout_product"
@@ -41,13 +39,15 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_productImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <ImageView
         android:id="@+id/iv_productImage"
         android:layout_width="@dimen/edit_review_product_img_size"
         android:layout_height="@dimen/edit_review_product_img_size"
         android:layout_margin="@dimen/edit_review_large_padding"
+        android:background="@drawable/bg_outline_radius_10dp"
+        android:src="@drawable/ic_test_product"
         app:layout_constraintBottom_toBottomOf="@id/layout_product"
         app:layout_constraintStart_toStartOf="@id/layout_product"
         app:layout_constraintTop_toTopOf="@id/layout_product"
@@ -92,9 +92,15 @@
 
     <EditText
         android:id="@+id/edit_review"
+        style="@style/Text.Body06"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/edit_review_large_padding"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="@string/edit_review_hint"
+        android:textColor="@color/bg80"
+        android:textColorHint="@color/bg40"
         app:layout_constraintBottom_toTopOf="@id/tv_textCount"
         app:layout_constraintEnd_toEndOf="@id/layout_edit_review"
         app:layout_constraintStart_toStartOf="@id/layout_edit_review"

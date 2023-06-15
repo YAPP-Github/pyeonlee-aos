@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(project(":core:ui"))
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.kotlinx.coroutines.android)
 }
