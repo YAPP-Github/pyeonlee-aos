@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Button -->
     <declare-styleable name="LargeButton">
         <attr name="android:background" format="reference" />
         <attr name="android:backgroundTint" format="color" />
@@ -16,5 +17,18 @@
         <attr name="thumbsBackground" format="reference" />
         <attr name="thumbsBackgroundTint" format="color" />
         <attr name="showThumbs" format="boolean" />
+    </declare-styleable>
+
+    <!-- Chip -->
+    <declare-styleable name="SmallChip">
+        <attr name="android:text" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="MediumChip">
+        <attr name="android:text" format="reference|string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="chipThumbsBackground" format="reference" />
+        <attr name="chipThumbsBackgroundTint" format="color" />
     </declare-styleable>
 </resources>
