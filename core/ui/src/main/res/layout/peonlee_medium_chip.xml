@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_mediumChipBackground"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/height_28dp"
+    android:background="@drawable/bg_radius_20dp">
+
+    <ImageView
+        android:id="@+id/iv_mediumChipThumbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_mediumChipTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_mediumChipTitle"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_mediumChipTitle">
+    </ImageView>
+
+    <TextView
+        style="@style/Text.Body04"
+        android:id="@+id/tv_mediumChipTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6dp"
+        android:layout_marginEnd="@dimen/margin_12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_mediumChipThumbs"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="또 먹을거에요"></TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>
