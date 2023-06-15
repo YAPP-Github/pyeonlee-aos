@@ -18,7 +18,6 @@
         android:layout_marginTop="@dimen/margin_3dp"
         android:layout_marginEnd="@dimen/margin_5dp"
         android:layout_marginBottom="@dimen/margin_3dp"
-        android:text="행사중"
         android:textColor="@color/system_y100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
