@@ -1,6 +1,6 @@
 package com.peonlee.review.edit
 
-import android.os.Bundle
+import android.text.InputFilter
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,11 +15,6 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
 
     private val editReviewViewModel = EditReviewViewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initState()
-    }
-
     override fun bindingFactory(): ActivityEditReviewBinding {
         return ActivityEditReviewBinding.inflate(layoutInflater)
     }
@@ -28,6 +23,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         with(binding) {
             tvProductName.text = "코카)코카제로레몬캔355ml"
             tvProductPrice.text = "2,000원"
+            editReview.filters = arrayOf(InputFilter.LengthFilter(EditReviewViewModel.REVIEW_MAX_LENGTH))
         }
     }
 
@@ -41,16 +37,16 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
             // 상단 X 버튼 클릭
             btnClose.setOnClickListener { finish() }
         }
+        initState()
     }
 
     private fun initState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                editReviewViewModel.review.collect { review ->
-                    // 리뷰 입력 시, 하단 리뷰 글자 수 변경
+                editReviewViewModel.review.collect {
                     binding.tvTextCount.text = getString(
                         R.string.edit_review_text_count,
-                        review.length,
+                        it.length,
                         EditReviewViewModel.REVIEW_MAX_LENGTH
                     )
                 }
