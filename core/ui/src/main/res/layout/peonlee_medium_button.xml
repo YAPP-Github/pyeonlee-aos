@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_mediumButtonBackground"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/button_height_medium">
+    android:layout_height="@dimen/height_46dp">
 
     <TextView
         style="@style/Text.Body02"
