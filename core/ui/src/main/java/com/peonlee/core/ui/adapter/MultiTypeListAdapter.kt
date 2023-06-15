@@ -2,12 +2,8 @@ package com.peonlee.core.ui.adapter
 
 import android.view.ViewGroup
 import com.peonlee.core.ui.viewholder.CommonViewHolder
+import com.peonlee.model.ListItem
 import java.lang.reflect.ParameterizedType
-
-interface ListItem {
-    val id: Long
-    val viewType: Enum<*>
-}
 
 abstract class MultiTypeListAdapter<T : ListItem, E : Enum<E>> : BaseListAdapter<T>({ it.id }) {
     private val enumValues by lazy { getEnumClass().enumConstants ?: throw Exception() }
