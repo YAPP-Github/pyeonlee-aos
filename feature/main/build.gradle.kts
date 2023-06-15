@@ -8,5 +8,6 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:home"))
     implementation(libs.bundles.fragment)
 }
