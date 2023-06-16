@@ -11,15 +11,11 @@ class EditReviewViewModel : ViewModel() {
     val review: StateFlow<String> = _review.asStateFlow()
 
     fun setReview(newReview: String?) {
-        if (newReview == null || newReview.length > REVIEW_MAX_LENGTH) return
+        if (newReview == null) return
         _review.value = newReview
     }
 
     fun saveReview() {
         // TODO 리뷰 저장 로직 추가 예정
-    }
-
-    companion object {
-        const val REVIEW_MAX_LENGTH = 300
     }
 }
