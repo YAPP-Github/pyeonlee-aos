@@ -18,7 +18,6 @@ import com.peonlee.review.databinding.ActivityEditReviewBinding
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-
 class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
 
     private val editReviewViewModel = EditReviewViewModel()
@@ -54,7 +53,8 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                 val backgroundTint = if (focused) com.peonlee.core.ui.R.color.brand100 else com.peonlee.core.ui.R.color.bg20
                 (layoutEditReview.background as? GradientDrawable)?.apply {
                     setStroke(
-                        1.dpToPx(this@EditReviewActivity), getColor(backgroundTint)
+                        1.dpToPx(this@EditReviewActivity),
+                        getColor(backgroundTint)
                     )
                 }
             }
@@ -82,9 +82,11 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                         it.length,
                         REVIEW_MAX_LENGTH
                     )
-                    val backgroundTint = if (it.length in REVIEW_MIN_LENGTH..Int.MAX_VALUE)
+                    val backgroundTint = if (it.length in REVIEW_MIN_LENGTH..Int.MAX_VALUE) {
                         com.peonlee.core.ui.R.color.brand100
-                    else com.peonlee.core.ui.R.color.brand50
+                    } else {
+                        com.peonlee.core.ui.R.color.brand50
+                    }
                     binding.btnSave.backgroundTintList = ColorStateList.valueOf(getColor(backgroundTint))
                 }
             }
