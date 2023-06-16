@@ -1,8 +1,8 @@
-package com.peonlee.model.divider
+package com.peonlee.home.model.divider
 
 import com.peonlee.model.MainHomeListItem
 
-data class BaseDividerUiModel(
+data class DividerUiModel(
     override val id: Long,
     override val viewType: Enum<*>
 ) : MainHomeListItem
