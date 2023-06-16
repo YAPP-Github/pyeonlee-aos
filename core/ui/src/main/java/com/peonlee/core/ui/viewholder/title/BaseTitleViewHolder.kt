@@ -7,9 +7,7 @@ import com.peonlee.model.title.BaseTitleUiModel
 class BaseTitleViewHolder(
     private val binding: ListItemBaseTitleBinding
 ) : CommonViewHolder<BaseTitleUiModel>(binding) {
-    override fun onBindView(item: BaseTitleUiModel) {
-        binding.apply {
-            tvTitle.text = item.title
-        }
+    override fun onBindView(item: BaseTitleUiModel) = with(binding) {
+        tvTitle.text = item.title
     }
 }
