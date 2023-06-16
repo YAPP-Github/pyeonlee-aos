@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name=".edit.EditReviewActivity" />
+        <activity
+            android:name=".edit.EditReviewActivity"
+            android:windowSoftInputMode="stateVisible" />
     </application>
 </manifest>
