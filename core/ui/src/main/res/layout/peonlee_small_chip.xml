@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_smallChipBackground"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/height_18dp"
+    android:layout_height="@dimen/small_chip_height"
     android:backgroundTint="@color/system_y50"
-    android:background="@drawable/bg_radius_4dp">
+    android:background="@drawable/bg_white_radius_4dp">
 
     <TextView
         style="@style/Text.Caption2"
         android:id="@+id/tv_smallChipTitle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/margin_5dp"
-        android:layout_marginTop="@dimen/margin_3dp"
-        android:layout_marginEnd="@dimen/margin_5dp"
-        android:layout_marginBottom="@dimen/margin_3dp"
+        android:layout_marginStart="@dimen/chip_left_right"
+        android:layout_marginTop="@dimen/chip_top_bottom"
+        android:layout_marginEnd="@dimen/chip_left_right"
+        android:layout_marginBottom="@dimen/chip_top_bottom"
         android:textColor="@color/system_y100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,4 +26,4 @@
         tools:text="1+1">
     </TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

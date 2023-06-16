@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_mediumButtonBackground"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_46dp">
+    android:layout_height="@dimen/medium_button_height">
 
     <TextView
         style="@style/Text.Body02"
         android:id="@+id/tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_15dp"
+        android:layout_marginEnd="@dimen/space_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_thumbs"
@@ -23,8 +23,8 @@
         android:id="@+id/iv_thumbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_15dp"
-        android:layout_marginRight="@dimen/margin_6dp"
+        android:layout_marginStart="@dimen/space_large"
+        android:layout_marginRight="@dimen/space_small"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
         app:layout_constraintEnd_toStartOf="@+id/tv_title"
         app:layout_constraintHorizontal_chainStyle="packed"

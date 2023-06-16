@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Text Size -->
-    <dimen name="text_size_20dp">20dp</dimen>
-    <dimen name="text_size_18dp">18dp</dimen>
-    <dimen name="text_size_16dp">16dp</dimen>
-    <dimen name="text_size_14dp">14dp</dimen>
-    <dimen name="text_size_13dp">13dp</dimen>
-    <dimen name="text_size_11dp">11dp</dimen>
     <dimen name="text_size_10dp">10dp</dimen>
+    <dimen name="text_size_11dp">11dp</dimen>
+    <dimen name="text_size_13dp">13dp</dimen>
+    <dimen name="text_size_14dp">14dp</dimen>
+    <dimen name="text_size_16dp">16dp</dimen>
+    <dimen name="text_size_18dp">18dp</dimen>
+    <dimen name="text_size_20dp">20dp</dimen>
 
     <!-- Radius -->
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="radius_10dp">10dp</dimen>
     <dimen name="radius_20dp">20dp</dimen>
 
-    <!-- Height -->
-    <dimen name="height_56dp">56dp</dimen>
-    <dimen name="height_46dp">46dp</dimen>
-    <dimen name="height_18dp">18dp</dimen>
-    <dimen name="height_12dp">12dp</dimen>
-    <dimen name="height_28dp">28dp</dimen>
+    <!-- Button -->
+    <dimen name="medium_button_height">46dp</dimen>
+    <dimen name="large_button_height">56dp</dimen>
 
-    <!-- Width -->
-    <dimen name="width_12dp">12dp</dimen>
+    <!-- Chip -->
+    <dimen name="chip_top_bottom">3dp</dimen>
+    <dimen name="chip_left_right">5dp</dimen>
+    <dimen name="chip_icon_size">12dp</dimen>
+    <dimen name="small_chip_height">18dp</dimen>
+    <dimen name="medium_chip_height">28dp</dimen>
 
     <!-- Stroke Width -->
-    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="outline_stroke_width">1dp</dimen>
 
-    <!-- Margins -->
-    <dimen name="margin_3dp">3dp</dimen>
-    <dimen name="margin_4dp">4dp</dimen>
-    <dimen name="margin_5dp">5dp</dimen>
-    <dimen name="margin_6dp">6dp</dimen>
-    <dimen name="margin_12dp">12dp</dimen>
-    <dimen name="margin_15dp">15dp</dimen>
+    <!-- 공통 Margins, Paddings -->
+    <dimen name="space_x_small">4dp</dimen>
+    <dimen name="space_small">6dp</dimen>
+    <dimen name="space_median">8dp</dimen>
+    <dimen name="space_s_large">12dp</dimen>
+    <dimen name="space_large">16dp</dimen>
+    <dimen name="space_x_large">20dp</dimen>
 </resources>

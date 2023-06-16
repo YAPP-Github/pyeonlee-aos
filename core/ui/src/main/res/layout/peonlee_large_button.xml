@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_largeButtonBackground"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_56dp">
+    android:layout_height="@dimen/large_button_height">
 
     <TextView
         style="@style/Text.Body02"
         android:id="@+id/tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_15dp"
+        android:layout_marginStart="@dimen/space_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_chevronRight"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -24,8 +24,8 @@
         android:id="@+id/iv_chevronRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_4dp"
-        android:layout_marginEnd="@dimen/margin_15dp"
+        android:layout_marginStart="@dimen/space_x_small"
+        android:layout_marginEnd="@dimen/space_large"
         android:background="@drawable/ic_chevron_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_mediumChipBackground"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/height_28dp"
-    android:background="@drawable/bg_radius_20dp">
+    android:layout_height="@dimen/medium_chip_height"
+    android:background="@drawable/bg_white_radius_20dp">
 
     <ImageView
         android:id="@+id/iv_mediumChipThumbs"
-        android:layout_width="@dimen/width_12dp"
-        android:layout_height="@dimen/height_12dp"
-        android:layout_marginStart="@dimen/margin_12dp"
+        android:layout_width="@dimen/chip_icon_size"
+        android:layout_height="@dimen/chip_icon_size"
+        android:layout_marginStart="@dimen/space_large"
         app:layout_constraintBottom_toBottomOf="@+id/tv_mediumChipTitle"
         app:layout_constraintEnd_toStartOf="@+id/tv_mediumChipTitle"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -21,12 +21,12 @@
     </ImageView>
 
     <TextView
-        style="@style/Text.Body04"
         android:id="@+id/tv_mediumChipTitle"
+        style="@style/Text.Body04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_6dp"
-        android:layout_marginEnd="@dimen/margin_12dp"
+        android:layout_marginStart="@dimen/space_small"
+        android:layout_marginEnd="@dimen/space_s_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_mediumChipThumbs"
