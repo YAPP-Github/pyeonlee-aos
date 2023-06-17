@@ -28,13 +28,6 @@
     <!-- Stroke Width -->
     <dimen name="outline_stroke_width">1dp</dimen>
 
-    <!-- base title -->
-    <dimen name="item_base_title_horizontal_padding">18dp</dimen>
-    <dimen name="item_base_title_vertical_padding">16dp</dimen>
-    <!-- base divider -->
-    <dimen name="item_base_divider_vertical_padding">32dp</dimen>
-    <dimen name="item_base_divider_height">8dp</dimen>
-  
     <!-- 공통 Margins, Paddings -->
     <dimen name="space_x_small">4dp</dimen>
     <dimen name="space_small">6dp</dimen>

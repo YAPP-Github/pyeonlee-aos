@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.home.adapter.viewholder.divider.DividerViewHolder
+import com.peonlee.home.adapter.viewholder.product.ConditionalProductsViewHolder
 import com.peonlee.home.adapter.viewholder.title.TitleViewHolder
+import com.peonlee.home.databinding.ListItemConditionalProductsBinding
 import com.peonlee.home.databinding.ListItemDividerBinding
 import com.peonlee.home.databinding.ListItemTitleBinding
 import com.peonlee.model.MainHomeListItem
@@ -20,6 +22,8 @@ class HomeAdapter : MultiTypeListAdapter<MainHomeListItem, MainHomeViewType>() {
         return when (viewType) {
             MainHomeViewType.TITLE -> TitleViewHolder(ListItemTitleBinding.inflate(inflater, parent, false))
             MainHomeViewType.DIVIDER -> DividerViewHolder(ListItemDividerBinding.inflate(inflater, parent, false))
+            MainHomeViewType.CONDITIONAL_PRODUCTS -> ConditionalProductsViewHolder(ListItemConditionalProductsBinding.inflate(inflater, parent, false))
         }
     }
 }
+

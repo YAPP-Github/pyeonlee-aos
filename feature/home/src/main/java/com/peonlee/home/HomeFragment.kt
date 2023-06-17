@@ -4,6 +4,9 @@ import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
+import com.peonlee.home.model.divider.DividerUiModel
+import com.peonlee.home.model.product.NEW_PRODUCTS
+import com.peonlee.home.model.title.TitleUiModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun bindingFactory(parent: ViewGroup): FragmentHomeBinding {
@@ -13,9 +16,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initViews() {
         val adapter = HomeAdapter()
         binding.layoutHome.adapter = adapter
+        adapter.submitList(DUMMY)
     }
 
     companion object {
         fun getInstance(): HomeFragment = HomeFragment()
     }
 }
+
+private val DUMMY = listOf(
+    TitleUiModel(id = -1, title = "주목할 신상")
+) + NEW_PRODUCTS +
+    listOf(
+        DividerUiModel(id = -2)
+    )
