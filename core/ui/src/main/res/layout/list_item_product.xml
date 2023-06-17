@@ -12,7 +12,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@id/tv_productName"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_reviewCount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,10 +21,9 @@
         style="@style/Text.Body02"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/list_item_product_large_margin"
+        android:layout_marginTop="@dimen/list_item_product_medium_margin"
         android:textColor="@color/bg80"
         app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_productImage"
         tools:text="코카)코카제로레몬캔355ml" />
@@ -37,7 +36,6 @@
         android:layout_marginTop="@dimen/list_item_product_medium_margin"
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toTopOf="@id/tv_productRecommended"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_productName"
         tools:text="2,000원" />
@@ -63,7 +61,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_productRecommended"
         app:layout_constraintTop_toBottomOf="@id/tv_productPrice"
-        app:tintMode="add"
         tools:text="87%" />
 
     <TextView
@@ -75,5 +72,6 @@
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toBottomOf="@id/tv_productRecommended"
         app:layout_constraintStart_toEndOf="@id/tv_productRecommended"
-        app:layout_constraintTop_toTopOf="@id/tv_productRecommended" />
+        app:layout_constraintTop_toTopOf="@id/tv_productRecommended"
+        tools:text="리뷰 24개" />
 </androidx.constraintlayout.widget.ConstraintLayout>
