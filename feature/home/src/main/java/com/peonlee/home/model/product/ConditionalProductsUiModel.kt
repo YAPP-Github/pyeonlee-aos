@@ -19,3 +19,10 @@ val NEW_PRODUCTS = ConditionalProductsUiModel(
     condition = ConditionType.NEW,
     products = PRODUCTS_TEST_DOUBLE
 )
+val POP_PRODUCTS = ConditionalProductsUiModel(
+    id = -24,
+    viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
+    condition = ConditionType.POPULAR,
+    products = PRODUCTS_TEST_DOUBLE
+)
+
