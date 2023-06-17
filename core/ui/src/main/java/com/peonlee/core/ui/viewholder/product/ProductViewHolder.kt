@@ -25,5 +25,3 @@ class ProductViewHolder(
         tvProductEvent.isVisible = item.isEvent
     }
 }
-
-

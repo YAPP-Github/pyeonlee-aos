@@ -25,4 +25,3 @@ val POP_PRODUCTS = ConditionalProductsUiModel(
     condition = ConditionType.POPULAR,
     products = PRODUCTS_TEST_DOUBLE
 )
-

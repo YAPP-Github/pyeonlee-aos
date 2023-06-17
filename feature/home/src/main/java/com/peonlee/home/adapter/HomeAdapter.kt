@@ -26,4 +26,3 @@ class HomeAdapter : MultiTypeListAdapter<MainHomeListItem, MainHomeViewType>() {
         }
     }
 }
-

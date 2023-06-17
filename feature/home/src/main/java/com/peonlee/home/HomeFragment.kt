@@ -26,10 +26,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 private val DUMMY = listOf(
     TitleUiModel(
-        id = -1, title = "주목할 신상"
+        id = -1,
+        title = "주목할 신상"
     )
 ) + NEW_PRODUCTS + listOf(
     TitleUiModel(
-        id = -2, title = "꾸준한 인기상품이에요"
+        id = -2,
+        title = "꾸준한 인기상품이에요"
     )
 ) + POP_PRODUCTS

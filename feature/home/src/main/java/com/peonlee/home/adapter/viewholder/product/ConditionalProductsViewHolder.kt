@@ -29,6 +29,5 @@ class ConditionalProductsViewHolder(
             R.string.item_conditional_products_button_text,
             item.condition.title
         )
-
     }
 }
