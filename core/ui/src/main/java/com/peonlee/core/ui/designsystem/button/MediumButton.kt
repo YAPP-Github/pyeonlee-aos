@@ -41,7 +41,7 @@ class MediumButton constructor(
 
             val mediumButtonBackground = mediumButtonTypedArray.getResourceId(
                 R.styleable.MediumButton_android_background,
-                R.drawable.bg_radius_10dp
+                R.drawable.bg_white_radius_10dp
             )
 
             val isShowingThumbs = mediumButtonTypedArray.getBoolean(
