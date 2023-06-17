@@ -52,7 +52,6 @@ class SmallChip(
         background: Int,
         backgroundTint: Int
     ) {
-
     }
 
     override var text: String = binding.tvSmallChipTitle.text.toString()

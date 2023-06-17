@@ -10,15 +10,14 @@ import com.peonlee.core.ui.R
 import com.peonlee.core.ui.base.BaseCustomView
 import com.peonlee.core.ui.databinding.PeonleeLargeButtonBinding
 
-class LargeButton (
+class LargeButton(
     context: Context,
     attributeSet: AttributeSet
 ) : BaseCustomView<PeonleeLargeButtonBinding>(
     context = context,
     attributeSet = attributeSet,
     styleable = R.styleable.LargeButton
-)
-{
+) {
     init {
         applyAttributes(attributeSet)
     }
