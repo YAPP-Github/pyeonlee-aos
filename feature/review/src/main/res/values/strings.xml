@@ -5,4 +5,6 @@
     <string name="edit_review_title">리뷰 작성하기</string>
     <string name="edit_review_hint">상품에 대한 솔직한 리뷰를 남겨주세요. (10자 이상)</string>
     <string name="edit_review_text_count">%d/%d</string>
+    <string name="edit_review_close_button_description">리뷰 종료</string>
+    <string name="edit_review_product_img_description">상품 이미지</string>
 </resources>

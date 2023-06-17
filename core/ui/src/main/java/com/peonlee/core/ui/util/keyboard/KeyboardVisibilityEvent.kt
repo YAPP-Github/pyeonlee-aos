@@ -1,18 +1,22 @@
-package com.peonlee.core.ui.util
+package com.peonlee.core.ui.util.keyboard
 
 import android.app.Activity
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import java.lang.ref.WeakReference
+import com.peonlee.core.ui.util.keyboard.unregister.SimpleUnregister
+import com.peonlee.core.ui.util.keyboard.unregister.Unregister
 
 private const val KEYBOARD_MIN_HEIGHT_RATIO = 0.15
+
+interface KeyboardVisibilityEventListener {
+    fun onVisibilityChanged(isOpen: Boolean)
+}
 
 /**
  * 키보드 show / hide event listener
@@ -39,7 +43,7 @@ object KeyboardVisibilityEvent {
         })
     }
 
-    fun registerEventListener(
+    private fun registerEventListener(
         activity: Activity,
         listener: KeyboardVisibilityEventListener
     ): Unregister {
@@ -81,34 +85,3 @@ object KeyboardVisibilityEvent {
     }
 }
 
-interface KeyboardVisibilityEventListener {
-    fun onVisibilityChanged(isOpen: Boolean)
-}
-
-interface Unregister {
-    fun unregister()
-}
-
-class SimpleUnregister(
-    activity: Activity,
-    globalLayoutListener: OnGlobalLayoutListener
-) : Unregister {
-    private val activityWeakReference: WeakReference<Activity> = WeakReference(activity)
-
-    private val onGlobalLayoutListenerWeakReference: WeakReference<ViewTreeObserver.OnGlobalLayoutListener> =
-        WeakReference(globalLayoutListener)
-
-    override fun unregister() {
-        val activity = activityWeakReference.get()
-        val globalLayoutListener = onGlobalLayoutListenerWeakReference.get()
-
-        if (null != activity && null != globalLayoutListener) {
-            val activityRoot = KeyboardVisibilityEvent.getActivityRoot(activity)
-            activityRoot.viewTreeObserver
-                .removeGlobalOnLayoutListener(globalLayoutListener)
-        }
-
-        activityWeakReference.clear()
-        onGlobalLayoutListenerWeakReference.clear()
-    }
-}
