@@ -21,29 +21,26 @@ class MediumChip(
         applyAttributes(attributeSet)
     }
 
-    override fun bindingFactory(): PeonleeMediumChipBinding {
-        return PeonleeMediumChipBinding.inflate(
-            LayoutInflater.from(context),
-            this,
-            true
-        )
-    }
-
     override fun applyAttributes(attributeSet: AttributeSet) {
         customTypeArray.apply {
             val chipTitleText = getString(R.styleable.MediumChip_android_text)
             val chipTitleTextColor = getColor(
                 R.styleable.MediumChip_android_textColor,
                 resources.getColor(
-                    R.color.bg80,
+                    R.color.brand100,
                     context.theme
                 )
             )
 
-            val chipBackground = getColor(
+            val chipBackground = getResourceId(
+                R.styleable.MediumChip_android_background,
+                R.drawable.bg_white_radius_20dp
+            )
+
+            val chipBackgroundTint = getColor(
                 R.styleable.MediumChip_android_backgroundTint,
                 resources.getColor(
-                    R.color.bg80,
+                    R.color.brand40,
                     context.theme
                 )
             )
@@ -56,12 +53,15 @@ class MediumChip(
             val chipThumbsBackgroundTint = getColor(
                 R.styleable.MediumChip_chipThumbsBackgroundTint,
                 resources.getColor(
-                    R.color.bg80,
+                    R.color.brand100,
                     context.theme
                 )
             )
 
-            applyBackgroundAttributes(chipBackground)
+            applyBackgroundAttributes(
+                chipBackground,
+                chipBackgroundTint
+            )
 
             applyTextAttributes(
                 titleText = chipTitleText,
@@ -87,9 +87,13 @@ class MediumChip(
         }
     }
 
-    override fun applyBackgroundAttributes(background: Int) {
+    override fun applyBackgroundAttributes(
+        background: Int,
+        backgroundTint: Int
+    ) {
         binding.layoutMediumChipBackground.apply {
-            backgroundTintList = ColorStateList.valueOf(background)
+            setBackgroundResource(background)
+            backgroundTintList = ColorStateList.valueOf(backgroundTint)
         }
     }
 
@@ -101,5 +105,19 @@ class MediumChip(
             imageTintList = ColorStateList.valueOf(chipThumbsBackgroundTint)
             setImageResource(chipThumbsBackground)
         }
+    }
+
+    override var text: String = ""
+        set(value) {
+            binding.tvMediumChipTitle.text = value
+            field = value
+        }
+
+    override fun bindingFactory(): PeonleeMediumChipBinding {
+        return PeonleeMediumChipBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
     }
 }

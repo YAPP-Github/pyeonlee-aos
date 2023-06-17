@@ -20,18 +20,20 @@ class SmallChip(
         applyAttributes(attributeSet)
     }
 
-    override fun bindingFactory(): PeonleeSmallChipBinding {
-        return PeonleeSmallChipBinding.inflate(
-            LayoutInflater.from(context),
-            this,
-            true
-        )
-    }
-
     override fun applyAttributes(attributeSet: AttributeSet) {
         customTypeArray.apply {
             val chipTitleText = getString(R.styleable.SmallChip_android_text)
-            applyTextAttributes(chipTitleText)
+            val chipTitleTextColor = getColor(
+                R.styleable.MediumButton_android_textColor,
+                resources.getColor(
+                    R.color.system_y100,
+                    context.theme
+                )
+            )
+            applyTextAttributes(
+                chipTitleText,
+                chipTitleTextColor
+            )
             recycle()
         }
     }
@@ -40,8 +42,30 @@ class SmallChip(
         titleText: String?,
         titleTextColor: Int
     ) {
-        binding.tvSmallChipTitle.text = titleText
+        binding.tvSmallChipTitle.apply {
+            text = titleText
+            setTextColor(titleTextColor)
+        }
     }
 
-    override fun applyBackgroundAttributes(background: Int) { }
+    override fun applyBackgroundAttributes(
+        background: Int,
+        backgroundTint: Int
+    ) {
+
+    }
+
+    override var text: String = binding.tvSmallChipTitle.text.toString()
+        set(value) {
+            binding.tvSmallChipTitle.text = value
+            field = value
+        }
+
+    override fun bindingFactory(): PeonleeSmallChipBinding {
+        return PeonleeSmallChipBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
+    }
 }
