@@ -81,7 +81,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         override fun onFocusChange(view: View?, focused: Boolean) {
             val backgroundTint = if (focused) {
                 com.peonlee.core.ui.R.color.brand100
-            } else com.peonlee.core.ui.R.color.bg20
+            } else { com.peonlee.core.ui.R.color.bg20 }
             (binding.layoutEditReview.background as? GradientDrawable)?.apply {
                 setStroke(
                     1.dpToPx(this@EditReviewActivity),
@@ -103,7 +103,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                     val btnColor = getColor(
                         if (it.length in REVIEW_MIN_LENGTH..REVIEW_MAX_LENGTH) {
                             com.peonlee.core.ui.R.color.brand100
-                        } else com.peonlee.core.ui.R.color.brand50
+                        } else { com.peonlee.core.ui.R.color.brand50 }
                     )
                     // 작성한 리뷰의 길이가 최소 <= length <= 최대인 경우 버튼 색상 변경
                     binding.btnSave.backgroundTintList = ColorStateList.valueOf(btnColor)

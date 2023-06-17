@@ -18,6 +18,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
     abstract fun bindingFactory(): T
+
     // view 와 model binding
     open fun initViews() {}
 
