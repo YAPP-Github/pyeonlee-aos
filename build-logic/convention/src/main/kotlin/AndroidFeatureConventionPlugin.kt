@@ -15,6 +15,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
+                "implementation"(project(":core:ui"))
+                "implementation"(project(":core:model"))
+                "implementation"(libs.findLibrary("androidx.constraintlayout").get())
+
                 // Instrumented tests
                 "androidTestImplementation"(
                     libs.findLibrary("androidx.compose.ui.test.junit4").get()

@@ -13,6 +13,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:model"))
+
     implementation(libs.androidx.core.core.ktx)
     implementation(libs.google.material)
     implementation(libs.androidx.constraintlayout)
