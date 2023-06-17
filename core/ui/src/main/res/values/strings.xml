@@ -4,6 +4,7 @@
 
     <!-- 상품 -->
     <string name="item_product_img_description">상품 이미지</string>
+    <string name="item_product_event">행사중</string>
     <string name="item_product_recommended_percentage">%.1f%%</string>
     <string name="item_product_review_count">리뷰 %d개</string>
 </resources>

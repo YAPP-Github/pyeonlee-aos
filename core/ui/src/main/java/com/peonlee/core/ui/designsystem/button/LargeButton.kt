@@ -14,6 +14,11 @@ class LargeButton constructor(
     context: Context,
     attributeSet: AttributeSet
 ) : ConstraintLayout(context, attributeSet) {
+    var text: String = ""
+        set(value) {
+            binding.tvTitle.text = value
+            field = value
+        }
 
     private val binding: PeonleeLargeButtonBinding =
         PeonleeLargeButtonBinding.inflate(
@@ -64,6 +69,7 @@ class LargeButton constructor(
         titleText: String?,
         titleTextColor: Int
     ) {
+        text = titleText ?: ""
         binding.tvTitle.apply {
             text = titleText
             setTextColor(titleTextColor)

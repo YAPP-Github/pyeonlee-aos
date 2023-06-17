@@ -1,5 +1,6 @@
 package com.peonlee.core.ui.viewholder.product
 
+import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.extensions.getStringWithArgs
@@ -21,6 +22,8 @@ class ProductViewHolder(
             R.string.item_product_review_count,
             item.reviewCnt
         )
+        tvProductEvent.isVisible = item.isEvent
     }
 }
+
 
