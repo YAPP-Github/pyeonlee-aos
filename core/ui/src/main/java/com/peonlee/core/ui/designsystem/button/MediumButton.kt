@@ -5,59 +5,61 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
+import com.peonlee.core.ui.base.BaseCustomView
 import com.peonlee.core.ui.databinding.PeonleeMediumButtonBinding
 
 class MediumButton constructor(
     context: Context,
     attributeSet: AttributeSet
-) : ConstraintLayout(context, attributeSet) {
-
-    private val binding: PeonleeMediumButtonBinding =
-        PeonleeMediumButtonBinding.inflate(
-            LayoutInflater.from(context),
-            this,
-            true
-        )
-
+) : BaseCustomView<PeonleeMediumButtonBinding>(
+    context = context,
+    attributeSet = attributeSet,
+    styleable = R.styleable.MediumButton
+) {
     init {
         applyAttributes(attributeSet)
     }
 
-    private fun applyAttributes(attributeSet: AttributeSet) {
-        val mediumButtonTypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.MediumButton)
-
-        mediumButtonTypedArray.apply {
-            val titleText = mediumButtonTypedArray.getString(R.styleable.MediumButton_android_text)
-            val titleTextColor = mediumButtonTypedArray.getColor(
+    override fun applyAttributes(attributeSet: AttributeSet) {
+        customTypeArray.apply {
+            val titleText = getString(R.styleable.MediumButton_android_text)
+            val titleTextColor = getColor(
                 R.styleable.MediumButton_android_textColor,
                 resources.getColor(
-                    R.color.bg80,
+                    R.color.bg0,
                     context.theme
                 )
             )
 
-            val mediumButtonBackground = mediumButtonTypedArray.getResourceId(
+            val mediumButtonBackground = getResourceId(
                 R.styleable.MediumButton_android_background,
                 R.drawable.bg_white_radius_10dp
             )
 
-            val isShowingThumbs = mediumButtonTypedArray.getBoolean(
+            val mediumButtonBackgroundTint = getColor(
+                R.styleable.MediumButton_android_backgroundTint,
+                resources.getColor(
+                    R.color.brand100,
+                    context.theme
+                )
+            )
+
+            val isShowingThumbs = getBoolean(
                 R.styleable.MediumButton_showThumbs,
                 false
             )
 
-            val thumbsBackground = mediumButtonTypedArray.getResourceId(
+            val thumbsBackground = getResourceId(
                 R.styleable.MediumButton_thumbsBackground,
                 R.drawable.ic_thumbs_up
             )
 
-            val thumbsBackgroundTint = mediumButtonTypedArray.getColor(
+            val thumbsBackgroundTint = getColor(
                 R.styleable.MediumButton_thumbsBackgroundTint,
                 resources.getColor(
-                    R.color.bg80,
+                    R.color.brand60,
                     context.theme
                 )
             )
@@ -73,13 +75,16 @@ class MediumButton constructor(
                 thumbsBackgroundTint
             )
 
-            applyBackgroundAttributes(mediumButtonBackground)
+            applyBackgroundAttributes(
+                mediumButtonBackground,
+                mediumButtonBackgroundTint
+            )
 
             recycle()
         }
     }
 
-    private fun applyTextAttributes(
+    override fun applyTextAttributes(
         titleText: String?,
         titleTextColor: Int
     ) {
@@ -89,10 +94,13 @@ class MediumButton constructor(
         }
     }
 
-    private fun applyBackgroundAttributes(mediumButtonBackground: Int) {
+    override fun applyBackgroundAttributes(
+        background: Int,
+        backgroundTint: Int
+    ) {
         binding.layoutMediumButtonBackground.apply {
-            setBackgroundResource(mediumButtonBackground)
-            backgroundTintList = ColorStateList.valueOf(R.styleable.MediumButton_android_backgroundTint)
+            setBackgroundResource(background)
+            backgroundTintList = ColorStateList.valueOf(backgroundTint)
         }
     }
 
@@ -108,11 +116,29 @@ class MediumButton constructor(
         }
     }
 
+    fun setThumbsVisible(isShowingThumbs: Boolean) {
+        binding.ivThumbs.isVisible = isShowingThumbs
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         binding.tvTitle.apply {
             if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
         }
+    }
+
+    override var text: String = binding.tvTitle.text.toString()
+        set(value) {
+            binding.tvTitle.text = value
+            field = value
+        }
+
+    override fun bindingFactory(): PeonleeMediumButtonBinding {
+        return PeonleeMediumButtonBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
     }
 }

@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_mediumChipBackground"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/medium_chip_height"
-    android:background="@drawable/bg_white_radius_20dp">
+    android:layout_height="@dimen/medium_chip_height">
 
     <ImageView
         android:id="@+id/iv_mediumChipThumbs"

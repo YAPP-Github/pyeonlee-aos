@@ -24,6 +24,7 @@
     <color name="brand30">#E6F8FF</color>
 
     <!-- Background Color -->
+    <color name="transparent">#00000000</color>
     <color name="bg0">#FFFFFF</color>
     <color name="bg10">#F1F2F6</color>
     <color name="bg20">#E6EAF3</color>

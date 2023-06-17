@@ -22,12 +22,14 @@
     <!-- Chip -->
     <declare-styleable name="SmallChip">
         <attr name="android:text" format="reference|string" />
+        <attr name="android:textColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="MediumChip">
         <attr name="android:text" format="reference|string" />
         <attr name="android:textColor" format="color" />
         <attr name="android:backgroundTint" format="color" />
+        <attr name="android:background" format="reference" />
         <attr name="chipThumbsBackground" format="reference" />
         <attr name="chipThumbsBackgroundTint" format="color" />
     </declare-styleable>
