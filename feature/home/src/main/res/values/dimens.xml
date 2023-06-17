@@ -8,7 +8,8 @@
     <dimen name="item_divider_top_padding">22dp</dimen>
     <dimen name="item_divider_height">8dp</dimen>
     <!-- 조건별 상품 리스트 -->
-    <dimen name="item_conditional_products_height">232dp</dimen>
+    <dimen name="item_conditional_products_list_horizontal_padding">8dp</dimen>
+    <dimen name="item_conditional_products_height">189dp</dimen>
     <dimen name="item_conditional_products_button_top_margin">38dp</dimen>
     <dimen name="item_conditional_products_button_bottom_margin">32dp</dimen>
     <dimen name="item_conditional_products_button_horizontal_margin">18dp</dimen>
