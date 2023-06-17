@@ -6,11 +6,14 @@ import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.product.ProductUiModel
 import com.peonlee.model.type.ConditionType
 
+/**
+ * 조건별 상품 리스트 Ui Model
+ */
 data class ConditionalProductsUiModel(
     override val id: Long,
     override val viewType: Enum<MainHomeViewType>,
     val condition: ConditionType, // 조건 type
-    val products: List<ProductUiModel>
+    val products: List<ProductUiModel> // 해당 조건에 맞는 상품 리스트
 ) : MainHomeListItem
 
 val NEW_PRODUCTS = ConditionalProductsUiModel(

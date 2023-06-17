@@ -14,6 +14,7 @@ class LargeButton constructor(
     context: Context,
     attributeSet: AttributeSet
 ) : ConstraintLayout(context, attributeSet) {
+    // TODO merge 시 dev 와 버전 맞출 때 제거 예정
     var text: String = ""
         set(value) {
             binding.tvTitle.text = value

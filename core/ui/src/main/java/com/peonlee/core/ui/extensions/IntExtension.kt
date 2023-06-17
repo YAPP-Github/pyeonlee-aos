@@ -9,6 +9,9 @@ fun Int.dpToPx(context: Context): Int {
     return (this * density).roundToInt()
 }
 
+/**
+ * 숫자를 000,000 형식의 String 으로 변환
+ */
 private val moneyFormat = DecimalFormat("#,###")
 fun Int.toFormattedMoney(): String {
     return "${moneyFormat.format(this)}원"
