@@ -84,4 +84,3 @@ object KeyboardVisibilityEvent {
         return activity.findViewById(android.R.id.content)
     }
 }
-
