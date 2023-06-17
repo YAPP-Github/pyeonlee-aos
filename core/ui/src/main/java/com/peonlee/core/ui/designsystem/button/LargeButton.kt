@@ -41,7 +41,7 @@ class LargeButton constructor(
 
             val largeButtonBackground = largeButtonTypedArray.getResourceId(
                 R.styleable.LargeButton_android_background,
-                R.drawable.bg_radius_10dp
+                R.drawable.bg_white_radius_10dp
             )
 
             val isShowingChevron = largeButtonTypedArray.getBoolean(
