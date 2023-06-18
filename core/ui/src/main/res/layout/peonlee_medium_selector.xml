@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_mediumSelectorBackground"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/medium_selector_height"
+    tools:background="@drawable/bg_white_outline_radius_17dp">
+
+
+    <ImageView
+        android:id="@+id/iv_mediumSelectorIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_mediumSelectorTitle"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/ic_store_cu">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_mediumSelectorTitle"
+        style="@style/Text.Subtitle02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_x_small"
+        android:layout_marginEnd="@dimen/space_s_large"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_mediumSelectorIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_mediumSelectorIcon"
+        app:layout_constraintTop_toTopOf="@+id/iv_mediumSelectorIcon"
+        tools:text="CU">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
