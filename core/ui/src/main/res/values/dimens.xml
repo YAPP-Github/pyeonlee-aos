@@ -12,6 +12,7 @@
     <!-- Radius -->
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="radius_10dp">10dp</dimen>
+    <dimen name="radius_17dp">17dp</dimen>
     <dimen name="radius_20dp">20dp</dimen>
 
     <!-- Button -->
@@ -25,21 +26,21 @@
     <dimen name="small_chip_height">18dp</dimen>
     <dimen name="medium_chip_height">28dp</dimen>
 
+    <!-- Selector -->
+    <dimen name="selector_left_right">7dp</dimen>
+    <dimen name="small_selector_height">33dp</dimen>
+    <dimen name="medium_selector_height">35dp</dimen>
+
     <!-- Stroke Width -->
     <dimen name="outline_stroke_width">1dp</dimen>
 
-    <!-- base title -->
-    <dimen name="item_base_title_horizontal_padding">18dp</dimen>
-    <dimen name="item_base_title_vertical_padding">16dp</dimen>
-    <!-- base divider -->
-    <dimen name="item_base_divider_vertical_padding">32dp</dimen>
-    <dimen name="item_base_divider_height">8dp</dimen>
-  
     <!-- 공통 Margins, Paddings -->
     <dimen name="space_x_small">4dp</dimen>
     <dimen name="space_small">6dp</dimen>
-    <dimen name="space_median">8dp</dimen>
+    <dimen name="space_x_medium">8dp</dimen>
+    <dimen name="space_medium">10dp</dimen>
     <dimen name="space_s_large">12dp</dimen>
+    <dimen name="space_m_large">14dp</dimen>
     <dimen name="space_large">16dp</dimen>
     <dimen name="space_x_large">20dp</dimen>
 </resources>

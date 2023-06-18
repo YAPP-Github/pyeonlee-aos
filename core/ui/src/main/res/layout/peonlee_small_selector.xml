@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_selectorBackground"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/small_selector_height">
+    android:layout_height="@dimen/small_selector_height"
+    tools:background="@drawable/bg_white_outline_radius_17dp">
 
     <TextView
-        android:id="@+id/tv_selectorTitle"
         style="@style/Text.Body02"
+        android:id="@+id/tv_selectorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_m_large"

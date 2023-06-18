@@ -1,7 +1,6 @@
 package com.peonlee.core.ui.designsystem.selector
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.peonlee.core.ui.R
@@ -16,6 +15,12 @@ class MediumSelector(
     attributeSet = attributeSet,
     styleable = R.styleable.MediumSelector
 ) {
+
+    override var text: String = ""
+        set(value) {
+            binding.tvMediumSelectorTitle.text = value
+            field = value
+        }
 
     init {
         applyAttributes(attributeSet)
@@ -48,12 +53,8 @@ class MediumSelector(
                 selectorTextColor
             )
 
-            applyIconAttributes(selectorIcon)
-
-            applyBackgroundAttributes(
-                selectorBackground,
-                0
-            )
+            setIcon(selectorIcon)
+            applyBackground(selectorBackground)
         }
     }
 
@@ -67,29 +68,20 @@ class MediumSelector(
         }
     }
 
-    override fun applyBackgroundAttributes(
-        background: Int,
-        backgroundTint: Int
-    ) {
-        binding.layoutMediumSelectorBackground.apply {
-            setBackgroundResource(background)
-            backgroundTintList = ColorStateList.valueOf(backgroundTint)
-        }
+    fun applyBackground(background: Int) {
+        binding.layoutMediumSelectorBackground.setBackgroundResource(background)
     }
 
-    fun applyIconAttributes(
-        background: Int,
-    ) {
-        binding.ivMediumSelectorIcon.apply {
-            setImageResource(background)
-        }
+    override fun setIcon(icon: Int) {
+        binding.ivMediumSelectorIcon.setImageResource(icon)
     }
 
-    fun setFillColor(type: String) {
-        when(type) {
-            "CU" -> this@MediumSelector.setBackgroundResource(R.drawable.bg_store_outline_cu_radius_17dp)
-            "GS25" -> this@MediumSelector.setBackgroundResource(R.drawable.bg_store_outline_gs25_radius_17dp)
-            "SEVENELEVEN" -> this@MediumSelector.setBackgroundResource(R.drawable.bg_store_outline_seveneleven_radius_17dp)
+    // TODO : 필요한지 확인 필요 없다면 제거해야해.
+    fun setFillStoreBackground(type: Store) {
+        when (type) {
+            Store.CU -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_cu_radius_17dp)
+            Store.GS25 -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_gs25_radius_17dp)
+            Store.SEVENELEVEN -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_seveneleven_radius_17dp)
         }
     }
 
@@ -98,12 +90,6 @@ class MediumSelector(
         applyAttributes(attributeSet)
     }
 
-    override var text: String = ""
-        set(value) {
-            binding.tvMediumSelectorTitle.text = value
-            field = value
-        }
-
     override fun bindingFactory(): PeonleeMediumSelectorBinding {
         return PeonleeMediumSelectorBinding.inflate(
             LayoutInflater.from(context),
@@ -111,4 +97,8 @@ class MediumSelector(
             true
         )
     }
+}
+
+enum class Store {
+    CU, GS25, SEVENELEVEN
 }

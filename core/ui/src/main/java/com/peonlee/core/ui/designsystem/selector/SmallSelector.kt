@@ -19,6 +19,12 @@ class SmallSelector(
     styleable = R.styleable.SmallSelector
 ) {
 
+    override var text: String = ""
+        set(value) {
+            binding.tvSelectorTitle.text = value
+            field = value
+        }
+
     init {
         applyAttributes(attributeSet)
     }
@@ -39,14 +45,6 @@ class SmallSelector(
                 R.drawable.bg_white_outline_radius_17dp
             )
 
-            val selectorBackgroundTint = getColor(
-                R.styleable.SmallSelector_android_backgroundTint,
-                resources.getColor(
-                    R.color.transparent,
-                    context.theme
-                )
-            )
-
             val isShowingIcon = getBoolean(
                 R.styleable.SmallSelector_showIcon,
                 false
@@ -57,14 +55,11 @@ class SmallSelector(
                 selectorTextColor
             )
 
-            applyBackgroundAttributes(
-                selectorBackground,
-                selectorBackgroundTint
-            )
+            applyBackground(selectorBackground)
 
             showIcon(isShowingIcon)
 
-            if(isShowingIcon) {
+            if (isShowingIcon) {
                 val selectorIconBackground = getResourceId(
                     R.styleable.SmallSelector_iconBackground,
                     R.drawable.ic_chevron_bottom
@@ -95,17 +90,11 @@ class SmallSelector(
         }
     }
 
-    override fun applyBackgroundAttributes(
-        background: Int,
-        backgroundTint: Int
-    ) {
-        binding.layoutSelectorBackground.apply {
-            setBackgroundResource(background)
-            backgroundTintList = ColorStateList.valueOf(backgroundTint)
-        }
+    fun applyBackground(background: Int) {
+        binding.layoutSelectorBackground.setBackgroundResource(background)
     }
 
-    fun applyIconAttributes(
+    private fun applyIconAttributes(
         background: Int,
         backgroundTint: Int
     ) {
@@ -132,12 +121,6 @@ class SmallSelector(
         this@SmallSelector.setBackgroundResource(R.drawable.bg_white_outline_radius_17dp)
         applyAttributes(attributeSet)
     }
-
-    override var text: String = ""
-        set(value) {
-            binding.tvSelectorTitle.text = value
-            field = value
-        }
 
     override fun bindingFactory(): PeonleeSmallSelectorBinding {
         return PeonleeSmallSelectorBinding.inflate(

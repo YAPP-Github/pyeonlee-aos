@@ -22,8 +22,8 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/tv_mediumSelectorTitle"
         style="@style/Text.Subtitle02"
+        android:id="@+id/tv_mediumSelectorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_x_small"
