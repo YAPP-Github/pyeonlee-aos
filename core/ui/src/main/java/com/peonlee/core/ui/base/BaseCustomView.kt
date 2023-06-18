@@ -14,7 +14,7 @@ abstract class BaseCustomView<T : ViewBinding> constructor(
     val binding by lazy { bindingFactory() }
     val customTypeArray = context.obtainStyledAttributes(attributeSet, styleable)
 
-    abstract var text: String
+    open var text: String = ""
 
     abstract fun bindingFactory(): T
     abstract fun applyAttributes(attributeSet: AttributeSet)
@@ -22,8 +22,13 @@ abstract class BaseCustomView<T : ViewBinding> constructor(
         titleText: String?,
         titleTextColor: Int
     )
-    abstract fun applyBackgroundAttributes(
+    open fun applyBackgroundAttributes(
         background: Int,
         backgroundTint: Int
-    )
+    ) {
+    }
+
+    open fun setIcon(icon: Int) {}
+    open fun setIconTint(color: Int) {}
+    open fun setBackgroundTint(color: Int) {}
 }

@@ -48,18 +48,6 @@ class SmallChip(
         }
     }
 
-    override fun applyBackgroundAttributes(
-        background: Int,
-        backgroundTint: Int
-    ) {
-    }
-
-    override var text: String = binding.tvSmallChipTitle.text.toString()
-        set(value) {
-            binding.tvSmallChipTitle.text = value
-            field = value
-        }
-
     override fun bindingFactory(): PeonleeSmallChipBinding {
         return PeonleeSmallChipBinding.inflate(
             LayoutInflater.from(context),

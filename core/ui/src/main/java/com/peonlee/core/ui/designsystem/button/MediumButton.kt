@@ -18,6 +18,12 @@ class MediumButton constructor(
     attributeSet = attributeSet,
     styleable = R.styleable.MediumButton
 ) {
+    override var text: String = ""
+        set(value) {
+            binding.tvTitle.text = value
+            field = value
+        }
+
     init {
         applyAttributes(attributeSet)
     }
@@ -127,12 +133,6 @@ class MediumButton constructor(
             if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
         }
     }
-
-    override var text: String = binding.tvTitle.text.toString()
-        set(value) {
-            binding.tvTitle.text = value
-            field = value
-        }
 
     override fun bindingFactory(): PeonleeMediumButtonBinding {
         return PeonleeMediumButtonBinding.inflate(

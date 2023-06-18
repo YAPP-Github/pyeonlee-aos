@@ -18,6 +18,13 @@ class LargeButton(
     attributeSet = attributeSet,
     styleable = R.styleable.LargeButton
 ) {
+
+    override var text: String = ""
+        set(value) {
+            binding.tvTitle.text = value
+            field = value
+        }
+
     init {
         applyAttributes(attributeSet)
     }
@@ -96,12 +103,6 @@ class LargeButton(
             if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
         }
     }
-
-    override var text: String = ""
-        set(value) {
-            binding.tvTitle.text = value
-            field = value
-        }
 
     override fun bindingFactory(): PeonleeLargeButtonBinding {
         return PeonleeLargeButtonBinding.inflate(

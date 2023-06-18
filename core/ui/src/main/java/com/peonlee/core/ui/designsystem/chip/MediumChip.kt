@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.base.BaseCustomView
 import com.peonlee.core.ui.databinding.PeonleeMediumChipBinding
@@ -16,6 +17,12 @@ class MediumChip(
     attributeSet = attributeSet,
     styleable = R.styleable.MediumChip
 ) {
+
+    override var text: String = ""
+        set(value) {
+            binding.tvMediumChipTitle.text = value
+            field = value
+        }
 
     init {
         applyAttributes(attributeSet)
@@ -107,11 +114,19 @@ class MediumChip(
         }
     }
 
-    override var text: String = ""
-        set(value) {
-            binding.tvMediumChipTitle.text = value
-            field = value
-        }
+    override fun setIcon(icon: Int) {
+        binding.ivMediumChipThumbs.setImageResource(icon)
+    }
+
+    override fun setIconTint(color: Int) {
+        val fillColor = ContextCompat.getColor(context, color)
+        binding.ivMediumChipThumbs.imageTintList = ColorStateList.valueOf(fillColor)
+    }
+
+    override fun setBackgroundTint(color: Int) {
+        val fillColor = ContextCompat.getColor(context, color)
+        binding.layoutMediumChipBackground.backgroundTintList = ColorStateList.valueOf(fillColor)
+    }
 
     override fun bindingFactory(): PeonleeMediumChipBinding {
         return PeonleeMediumChipBinding.inflate(
