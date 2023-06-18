@@ -5,33 +5,34 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
+import com.peonlee.core.ui.base.BaseCustomView
 import com.peonlee.core.ui.databinding.PeonleeLargeButtonBinding
 
-class LargeButton constructor(
+class LargeButton(
     context: Context,
     attributeSet: AttributeSet
-) : ConstraintLayout(context, attributeSet) {
+) : BaseCustomView<PeonleeLargeButtonBinding>(
+    context = context,
+    attributeSet = attributeSet,
+    styleable = R.styleable.LargeButton
+) {
 
-    private val binding: PeonleeLargeButtonBinding =
-        PeonleeLargeButtonBinding.inflate(
-            LayoutInflater.from(context),
-            this,
-            true
-        )
+    override var text: String = ""
+        set(value) {
+            binding.tvTitle.text = value
+            field = value
+        }
 
     init {
         applyAttributes(attributeSet)
     }
 
-    private fun applyAttributes(attributeSet: AttributeSet) {
-        val largeButtonTypedArray = context.obtainStyledAttributes(attributeSet, R.styleable.LargeButton)
-
-        largeButtonTypedArray.apply {
-            val titleText = largeButtonTypedArray.getString(R.styleable.LargeButton_android_text)
-            val titleTextColor = largeButtonTypedArray.getColor(
+    override fun applyAttributes(attributeSet: AttributeSet) {
+        customTypeArray.apply {
+            val titleText = getString(R.styleable.LargeButton_android_text)
+            val titleTextColor = getColor(
                 R.styleable.LargeButton_android_textColor,
                 resources.getColor(
                     R.color.bg80,
@@ -39,12 +40,20 @@ class LargeButton constructor(
                 )
             )
 
-            val largeButtonBackground = largeButtonTypedArray.getResourceId(
+            val largeButtonBackground = getResourceId(
                 R.styleable.LargeButton_android_background,
                 R.drawable.bg_white_radius_10dp
             )
 
-            val isShowingChevron = largeButtonTypedArray.getBoolean(
+            val largeButtonBackgroundTint = getColor(
+                R.styleable.LargeButton_android_backgroundTint,
+                resources.getColor(
+                    R.color.transparent,
+                    context.theme
+                )
+            )
+
+            val isShowingChevron = getBoolean(
                 R.styleable.LargeButton_showChevron,
                 false
             )
@@ -53,14 +62,17 @@ class LargeButton constructor(
                 titleText,
                 titleTextColor
             )
-            applyBackgroundAttributes(largeButtonBackground)
-            applyImageAttributes(isShowingChevron)
+            applyBackgroundAttributes(
+                largeButtonBackground,
+                largeButtonBackgroundTint
+            )
+            setChevronVisible(isShowingChevron)
 
             recycle()
         }
     }
 
-    private fun applyTextAttributes(
+    override fun applyTextAttributes(
         titleText: String?,
         titleTextColor: Int
     ) {
@@ -70,14 +82,17 @@ class LargeButton constructor(
         }
     }
 
-    private fun applyBackgroundAttributes(largeButtonBackground: Int) {
+    override fun applyBackgroundAttributes(
+        background: Int,
+        backgroundTint: Int
+    ) {
         binding.layoutLargeButtonBackground.apply {
-            setBackgroundResource(largeButtonBackground)
-            backgroundTintList = ColorStateList.valueOf(R.styleable.LargeButton_android_backgroundTint)
+            setBackgroundResource(background)
+            backgroundTintList = ColorStateList.valueOf(backgroundTint)
         }
     }
 
-    private fun applyImageAttributes(isShowingChevron: Boolean) {
+    fun setChevronVisible(isShowingChevron: Boolean) {
         binding.ivChevronRight.isVisible = isShowingChevron
     }
 
@@ -87,5 +102,13 @@ class LargeButton constructor(
         binding.tvTitle.apply {
             if (lineCount == 1) layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
         }
+    }
+
+    override fun bindingFactory(): PeonleeLargeButtonBinding {
+        return PeonleeLargeButtonBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
     }
 }
