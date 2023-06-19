@@ -12,19 +12,26 @@ import com.peonlee.model.util.PaddingValues
 class ConditionalProductsViewHolder(
     private val binding: ListItemConditionalProductsBinding
 ) : CommonViewHolder<ConditionalProductsUiModel>(binding) {
-    override fun onBindView(item: ConditionalProductsUiModel) = with(binding) {
-        val productAdapter = ProductAdapter()
-        layoutProducts.adapter = productAdapter
-        productAdapter.submitList(item.products)
+    private var productAdapter = ProductAdapter()
 
-        // 기존에 적용된 itemDecorationCount 가 있다면 제거
-        if (layoutProducts.itemDecorationCount > 0) {
-            layoutProducts.removeItemDecorationAt(0)
+    init {
+        with(binding) {
+            layoutProducts.setHasFixedSize(true)
+            layoutProducts.adapter = productAdapter
+            // 기존에 적용된 itemDecorationCount 가 있다면 제거
+            if (layoutProducts.itemDecorationCount > 0) {
+                layoutProducts.removeItemDecorationAt(0)
+            }
+            layoutProducts.addItemDecoration(
+                ContentPaddingDecoration(PaddingValues(left = 8))
+            )
         }
-        layoutProducts.addItemDecoration(
-            ContentPaddingDecoration(PaddingValues(left = 8))
-        )
+    }
 
+    override fun onBindView(item: ConditionalProductsUiModel) = with(binding) {
+        if (item.products != productAdapter.currentList) {
+            productAdapter.submitList(item.products)
+        }
         btnMoreProducts.text = getStringWithArgs(
             R.string.item_conditional_products_button_text,
             item.condition.title
