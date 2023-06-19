@@ -13,16 +13,18 @@ abstract class CommonViewHolder<out E>(binding: ViewBinding) : RecyclerView.View
     }
 
     @PublishedApi
-    internal fun ListAdapter<*, *>.getItem(position: Int): Any? {
+    internal fun getItem(position: Int): Any? {
+        val adapter =
+            bindingAdapter as? ListAdapter<*, *> ?: throw IllegalAccessException("This function can only be used on ViewHolders inside a ListAdapter.")
         return try {
-            currentList[position]
+            adapter.currentList[position]
         } catch (e: Exception) {
             null
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    inline fun ListAdapter<*, *>.getItem(action: (item: E) -> Unit) {
+    inline fun getItem(action: (item: E) -> Unit) {
         getItemPosition()?.let { index ->
             val item = (getItem(index) as? E) ?: return
             action(item)
@@ -30,7 +32,7 @@ abstract class CommonViewHolder<out E>(binding: ViewBinding) : RecyclerView.View
     }
 
     @Suppress("UNCHECKED_CAST")
-    inline fun ListAdapter<*, *>.getItemIndexed(action: (index: Int, item: E) -> Unit) {
+    inline fun getItemIndexed(action: (index: Int, item: E) -> Unit) {
         getItemPosition()?.let { index ->
             val item = (getItem(index) as? E) ?: return
             action(index, item)
