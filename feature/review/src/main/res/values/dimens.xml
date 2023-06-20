@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 리뷰 작성 -->
+    <dimen name="edit_review_product_img_size">54dp</dimen>
+    <dimen name="edit_review_editor_height">344dp</dimen>
+    <dimen name="edit_review_outlined_padding">18dp</dimen>
+    <dimen name="edit_review_large_padding">12dp</dimen>
+    <dimen name="edit_review_medium_padding">8dp</dimen>
+    <dimen name="edit_review_small_padding">4dp</dimen>
+</resources>

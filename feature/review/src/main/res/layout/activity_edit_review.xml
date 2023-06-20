@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/edit_review_outlined_padding"
+        android:text="@string/edit_review_title"
+        android:textColor="@color/bg100"
+        app:layout_constraintBottom_toTopOf="@id/layout_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:contentDescription="@string/edit_review_close_button_description"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintEnd_toEndOf="@id/layout_product"
+        app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+    <View
+        android:id="@+id/layout_product"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/edit_review_outlined_padding"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_productImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <ImageView
+        android:id="@+id/iv_productImage"
+        android:layout_width="@dimen/edit_review_product_img_size"
+        android:layout_height="@dimen/edit_review_product_img_size"
+        android:layout_margin="@dimen/edit_review_large_padding"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:contentDescription="@string/edit_review_product_img_description"
+        app:layout_constraintBottom_toBottomOf="@id/layout_product"
+        app:layout_constraintStart_toStartOf="@id/layout_product"
+        app:layout_constraintTop_toTopOf="@id/layout_product"
+        tools:src="@drawable/ic_check" />
+
+    <TextView
+        android:id="@+id/tv_productName"
+        style="@style/Text.Body04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/edit_review_medium_padding"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/bg80"
+        app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
+        app:layout_constraintStart_toEndOf="@id/iv_productImage"
+        app:layout_constraintTop_toTopOf="@id/iv_productImage"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="코카)코카제로콜라캔 355ml" />
+
+    <TextView
+        android:id="@+id/tv_productPrice"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/edit_review_small_padding"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/iv_productImage"
+        app:layout_constraintStart_toStartOf="@id/tv_productName"
+        app:layout_constraintTop_toBottomOf="@id/tv_productName"
+        tools:text="2,000원" />
+
+    <View
+        android:id="@+id/layout_edit_review"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edit_review_editor_height"
+        android:layout_marginTop="@dimen/edit_review_large_padding"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        app:layout_constraintEnd_toEndOf="@id/layout_product"
+        app:layout_constraintStart_toStartOf="@id/layout_product"
+        app:layout_constraintTop_toBottomOf="@id/layout_product" />
+
+    <EditText
+        android:id="@+id/edit_review"
+        style="@style/Text.Body06"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/edit_review_large_padding"
+        android:autofillHints="@null"
+        android:background="@null"
+        android:focusable="true"
+        android:gravity="top"
+        android:hint="@string/edit_review_hint"
+        android:inputType="textMultiLine"
+        android:textColor="@color/bg80"
+        android:textColorHint="@color/bg40"
+        app:layout_constraintBottom_toTopOf="@id/tv_textCount"
+        app:layout_constraintEnd_toEndOf="@id/layout_edit_review"
+        app:layout_constraintStart_toStartOf="@id/layout_edit_review"
+        app:layout_constraintTop_toTopOf="@id/layout_edit_review" />
+
+    <TextView
+        android:id="@+id/tv_textCount"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/edit_review_large_padding"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/layout_edit_review"
+        app:layout_constraintEnd_toEndOf="@id/layout_edit_review"
+        tools:text="75/300" />
+
+    <com.peonlee.core.ui.designsystem.button.LargeButton
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/edit_review_outlined_padding"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:text="@string/edit_review_save_btn_text"
+        android:textColor="@color/bg0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/layout_product"
+        app:layout_constraintStart_toStartOf="@id/layout_product" />
+</androidx.constraintlayout.widget.ConstraintLayout>
