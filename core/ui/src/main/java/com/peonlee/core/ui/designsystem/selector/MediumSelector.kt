@@ -68,21 +68,12 @@ class MediumSelector(
         }
     }
 
-    fun applyBackground(background: Int) {
-        binding.layoutMediumSelectorBackground.setBackgroundResource(background)
-    }
-
     override fun setIcon(icon: Int) {
         binding.ivMediumSelectorIcon.setImageResource(icon)
     }
 
-    // TODO : 필요한지 확인 필요 없다면 제거해야해.
-    fun setFillStoreBackground(type: Store) {
-        when (type) {
-            Store.CU -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_cu_radius_17dp)
-            Store.GS25 -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_gs25_radius_17dp)
-            Store.SEVENELEVEN -> binding.layoutMediumSelectorBackground.setBackgroundResource(R.drawable.bg_store_outline_seveneleven_radius_17dp)
-        }
+    fun applyBackground(background: Int) {
+        binding.layoutMediumSelectorBackground.setBackgroundResource(background)
     }
 
     fun setCancelColor() {
@@ -97,8 +88,4 @@ class MediumSelector(
             true
         )
     }
-}
-
-enum class Store {
-    CU, GS25, SEVENELEVEN
 }
