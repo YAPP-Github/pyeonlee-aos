@@ -20,6 +20,7 @@
     </TextView>
 
     <ImageView
+        android:backgroundTint="@color/brand60"
         android:id="@+id/iv_thumbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

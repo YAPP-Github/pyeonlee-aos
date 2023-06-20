@@ -2,11 +2,12 @@ package com.peonlee.core.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.viewbinding.ViewBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
+import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
 
 abstract class BaseListAdapter<T : Any>(checkParameter: (T) -> Any?) : ListAdapter<T, CommonViewHolder<T>>(BaseDiffUtil<T>(checkParameter)) {
     final override fun onBindViewHolder(holder: CommonViewHolder<T>, position: Int) {
+        if (holder is ViewOnlyViewHolder) return
         holder.onBindView(currentList[position])
     }
 
@@ -31,9 +32,5 @@ abstract class BaseListAdapter<T : Any>(checkParameter: (T) -> Any?) : ListAdapt
             if (this::class != other::class) return false
             return parameter(this) == parameter(other)
         }
-    }
-
-    open inner class ViewOnlyViewHolder(binding: ViewBinding) : CommonViewHolder<T>(binding) {
-        final override fun onBindView(item: T) = Unit
     }
 }
