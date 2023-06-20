@@ -33,4 +33,22 @@
         <attr name="chipThumbsBackground" format="reference" />
         <attr name="chipThumbsBackgroundTint" format="color" />
     </declare-styleable>
+
+    <!-- Selector -->
+    <declare-styleable name="SmallSelector">
+        <attr name="android:text" format="reference|string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:backgroundTint" format="color" />
+        <attr name="android:background" format="reference" />
+        <attr name="iconBackground" format="reference" />
+        <attr name="iconBackgroundTint" format="color" />
+        <attr name="showIcon" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MediumSelector">
+        <attr name="android:text" format="reference|string" />
+        <attr name="android:textColor" format="color" />
+        <attr name="android:background" format="reference" />
+        <attr name="iconBackground2" format="reference" />
+    </declare-styleable>
 </resources>
