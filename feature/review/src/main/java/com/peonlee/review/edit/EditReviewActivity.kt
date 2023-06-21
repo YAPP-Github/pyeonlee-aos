@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
@@ -42,11 +43,17 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // 화면에 처음 들어 오면 리뷰 작성 란으로 auto focusing
+        binding.editReview.doOnLayout {
+            (it as? EditText)?.focus()
+        }
+    }
+
     override fun bindViews() {
         with(binding) {
             initState()
-            // 화면에 처음 들어 오면 리뷰 작성 란으로 auto focusing
-            editReview.doOnLayout { editReview.focus() }
             // 리뷰 작성 란 클릭 시, editor 에 focusing
             layoutEditReview.setOnClickListener { editReview.focus() }
             // editor 작성 시 viewModel 의 state update
@@ -81,7 +88,9 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         override fun onFocusChange(view: View?, focused: Boolean) {
             val backgroundTint = if (focused) {
                 com.peonlee.core.ui.R.color.brand100
-            } else { com.peonlee.core.ui.R.color.bg20 }
+            } else {
+                com.peonlee.core.ui.R.color.bg20
+            }
             (binding.layoutEditReview.background as? GradientDrawable)?.apply {
                 setStroke(
                     1.dpToPx(this@EditReviewActivity),
@@ -103,7 +112,9 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                     val btnColor = getColor(
                         if (it.length in REVIEW_MIN_LENGTH..REVIEW_MAX_LENGTH) {
                             com.peonlee.core.ui.R.color.brand100
-                        } else { com.peonlee.core.ui.R.color.brand50 }
+                        } else {
+                            com.peonlee.core.ui.R.color.brand50
+                        }
                     )
                     // 작성한 리뷰의 길이가 최소 <= length <= 최대인 경우 버튼 색상 변경
                     binding.btnSave.backgroundTintList = ColorStateList.valueOf(btnColor)
