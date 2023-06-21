@@ -34,7 +34,7 @@
         android:id="@+id/tv_productEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/space_median"
+        android:layout_margin="@dimen/space_medium"
         android:text="@string/item_product_event"
         app:layout_constraintEnd_toEndOf="@id/iv_productImage"
         app:layout_constraintTop_toTopOf="@id/iv_productImage" />
