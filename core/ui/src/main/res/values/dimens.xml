@@ -43,4 +43,11 @@
     <dimen name="space_m_large">14dp</dimen>
     <dimen name="space_large">16dp</dimen>
     <dimen name="space_x_large">20dp</dimen>
+
+    <!-- Product -->
+    <dimen name="list_item_product_thumb_size">16dp</dimen>
+    <dimen name="list_item_product_small_margin">2dp</dimen>
+    <dimen name="list_item_product_medium_margin">4dp</dimen>
+    <dimen name="list_item_product_large_margin">8dp</dimen>
+    <dimen name="list_item_product_grande_margin">12dp</dimen>
 </resources>

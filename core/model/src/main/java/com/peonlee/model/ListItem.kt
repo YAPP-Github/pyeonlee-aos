@@ -11,5 +11,6 @@ interface ListItem {
 interface MainHomeListItem : ListItem
 enum class MainHomeViewType {
     TITLE, // 제목
-    DIVIDER // 구분선
+    DIVIDER, // 구분선
+    CONDITIONAL_PRODUCTS // 조건별 상품 리스트
 }

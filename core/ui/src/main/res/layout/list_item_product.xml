@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_productImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/item_product_img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_test_product"
+        app:layout_constraintBottom_toTopOf="@id/tv_productName"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/tv_reviewCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_productName"
+        style="@style/Text.Body02"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_product_medium_margin"
+        android:textColor="@color/bg80"
+        app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_productImage"
+        tools:text="코카)코카제로레몬캔355ml" />
+
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:id="@+id/tv_productEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_medium"
+        android:text="@string/item_product_event"
+        app:layout_constraintEnd_toEndOf="@id/iv_productImage"
+        app:layout_constraintTop_toTopOf="@id/iv_productImage" />
+
+    <TextView
+        android:id="@+id/tv_productPrice"
+        style="@style/Text.Caption1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_product_medium_margin"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toTopOf="@id/tv_productRecommended"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_productName"
+        tools:text="2,000원" />
+
+    <ImageView
+        android:id="@+id/iv_productRecommended"
+        android:layout_width="@dimen/list_item_product_thumb_size"
+        android:layout_height="@dimen/list_item_product_thumb_size"
+        android:contentDescription="@string/item_product_recommended_description"
+        android:src="@drawable/ic_thumbs_up"
+        app:layout_constraintBottom_toBottomOf="@id/tv_productRecommended"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_productRecommended"
+        app:tint="@color/brand100" />
+
+    <TextView
+        android:id="@+id/tv_productRecommended"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_item_product_medium_margin"
+        android:layout_marginTop="@dimen/list_item_product_grande_margin"
+        android:textColor="@color/bg100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_productRecommended"
+        app:layout_constraintTop_toBottomOf="@id/tv_productPrice"
+        tools:text="87%" />
+
+    <TextView
+        android:id="@+id/tv_reviewCount"
+        style="@style/Text.Caption3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_item_product_medium_margin"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tv_productRecommended"
+        app:layout_constraintStart_toEndOf="@id/tv_productRecommended"
+        app:layout_constraintTop_toTopOf="@id/tv_productRecommended"
+        tools:text="리뷰 24개" />
+</androidx.constraintlayout.widget.ConstraintLayout>

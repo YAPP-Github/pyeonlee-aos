@@ -76,6 +76,7 @@ class LargeButton(
         titleText: String?,
         titleTextColor: Int
     ) {
+        text = titleText ?: ""
         binding.tvTitle.apply {
             text = titleText
             setTextColor(titleTextColor)
