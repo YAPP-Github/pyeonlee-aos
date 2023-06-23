@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="item_conditional_products_button_text">더 많은 %s 보기</string>
+    <!-- 최근 리뷰 item -->
+    <string name="item_recent_review_img_desc">Recent Review Product Image</string>
+    <string name="item_recent_review_user_and_date">%s · %d분 전</string>
+    <string name="item_recent_review_recommended">또 먹을거에요</string>
+    <string name="item_recent_review_none_recommended">또 안사먹어요</string>
 </resources>

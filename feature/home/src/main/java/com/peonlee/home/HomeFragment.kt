@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
+import com.peonlee.home.model.divider.DividerUiModel
 import com.peonlee.home.model.product.NEW_PRODUCTS
 import com.peonlee.home.model.product.POP_PRODUCTS
 import com.peonlee.home.model.title.TitleUiModel
@@ -34,4 +35,7 @@ private val DUMMY = listOf(
         id = -2,
         title = "꾸준한 인기상품이에요"
     )
-) + POP_PRODUCTS
+) + POP_PRODUCTS + listOf(
+    DividerUiModel(id = -3),
+    TitleUiModel(id = -4, title = "최근 리뷰")
+)
