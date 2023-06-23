@@ -1,7 +1,7 @@
 package com.peonlee.home.adapter.viewholder.review
 
+import com.peonlee.common.util.TimeUtil
 import com.peonlee.core.ui.designsystem.chip.MediumChip
-import com.peonlee.core.ui.extensions.getColor
 import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -25,7 +25,7 @@ class RecentReviewViewHolder(
             // 리뷰 작성자 & 작성 날짜
             tvUserNameAndDate.text = getStringWithArgs(
                 homeResource.string.item_recent_review_user_and_date,
-                item.userName, item.updateDate.monthValue
+                item.userName, TimeUtil.getDuration(item.updateDate)
             )
             // 추천/비추천 chip
             if (item.recommended)
