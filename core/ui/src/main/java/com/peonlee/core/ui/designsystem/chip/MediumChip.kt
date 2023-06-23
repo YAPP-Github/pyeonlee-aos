@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.base.BaseCustomView
@@ -118,14 +119,29 @@ class MediumChip(
         binding.ivMediumChipThumbs.setImageResource(icon)
     }
 
-    override fun setIconTint(color: Int) {
+    override fun setIconTint(
+        @ColorRes color: Int
+    ) {
         val fillColor = ContextCompat.getColor(context, color)
         binding.ivMediumChipThumbs.imageTintList = ColorStateList.valueOf(fillColor)
     }
 
-    override fun setBackgroundTint(color: Int) {
+    override fun setBackgroundTint(
+        @ColorRes color: Int
+    ) {
         val fillColor = ContextCompat.getColor(context, color)
         binding.layoutMediumChipBackground.backgroundTintList = ColorStateList.valueOf(fillColor)
+    }
+
+    /**
+     * text color 변경
+     * @param colorId 색상의 Resource Id
+     */
+    fun setTextColor(
+        @ColorRes colorId: Int
+    ) {
+        val textColor = ContextCompat.getColor(context, colorId)
+        binding.tvMediumChipTitle.setTextColor(textColor)
     }
 
     override fun bindingFactory(): PeonleeMediumChipBinding {

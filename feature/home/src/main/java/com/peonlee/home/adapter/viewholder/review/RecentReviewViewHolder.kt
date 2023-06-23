@@ -1,5 +1,8 @@
 package com.peonlee.home.adapter.viewholder.review
 
+import com.peonlee.core.ui.designsystem.chip.MediumChip
+import com.peonlee.core.ui.extensions.getColor
+import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.home.R as homeResource
@@ -24,5 +27,27 @@ class RecentReviewViewHolder(
                 homeResource.string.item_recent_review_user_and_date,
                 item.userName, item.updateDate.monthValue
             )
+            // 추천/비추천 chip
+            if (item.recommended)
+                setRecommendedChip(binding.chipRecommended)
+            else setNoneRecommendedChip(binding.chipRecommended)
         }
+}
+
+// 추천 chip
+private fun RecentReviewViewHolder.setRecommendedChip(
+    chip: MediumChip
+) {
+    chip.text = getString(homeResource.string.item_recent_review_recommended)
+}
+
+// 비추천 chip
+private fun RecentReviewViewHolder.setNoneRecommendedChip(
+    chip: MediumChip
+) {
+    chip.text = getString(homeResource.string.item_recent_review_none_recommended)
+    chip.setBackgroundTint(UiResource.color.system_r40)
+    chip.setIcon(UiResource.drawable.ic_thumbs_down)
+    chip.setIconTint(UiResource.color.system_r100)
+    chip.setTextColor(UiResource.color.system_r100)
 }
