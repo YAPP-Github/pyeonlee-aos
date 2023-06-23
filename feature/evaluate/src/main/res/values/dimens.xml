@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_evaluate_top">16dp</dimen>
+    <dimen name="layout_evaluate_left_right">18dp</dimen>
+    <dimen name="text_evaluate_next_right">28dp</dimen>
+    <dimen name="text_evaluate_title_top">25dp</dimen>
+    <dimen name="text_evaluate_product_top">8dp</dimen>
+    <dimen name="list_item_evaluate_product_img_size">54dp</dimen>
+    <dimen name="list_item_evaluate_product_height">78dp</dimen>
+    <dimen name="list_item_evaluate_product_top_bottom">12dp</dimen>
+    <dimen name="list_item_evaluate_title_left">8dp</dimen>
+    <dimen name="list_item_evaluate_subtitle_top">4dp</dimen>
+</resources>
