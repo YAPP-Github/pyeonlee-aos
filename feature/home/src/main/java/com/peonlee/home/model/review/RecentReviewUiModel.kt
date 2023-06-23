@@ -29,4 +29,3 @@ val RECENT_REVIEW = (1..10).map {
         updateDate = LocalDateTime.now()
     )
 }
-

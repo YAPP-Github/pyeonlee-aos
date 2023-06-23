@@ -5,10 +5,10 @@ import com.peonlee.core.ui.designsystem.chip.MediumChip
 import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
-import com.peonlee.home.R as homeResource
-import com.peonlee.core.ui.R as UiResource
 import com.peonlee.home.databinding.ListItemRecentReviewBinding
 import com.peonlee.home.model.review.RecentReviewUiModel
+import com.peonlee.core.ui.R as UiResource
+import com.peonlee.home.R as homeResource
 
 /**
  * 최근 리뷰 View Holder
@@ -25,12 +25,15 @@ class RecentReviewViewHolder(
             // 리뷰 작성자 & 작성 날짜
             tvUserNameAndDate.text = getStringWithArgs(
                 homeResource.string.item_recent_review_user_and_date,
-                item.userName, TimeUtil.getDuration(item.updateDate)
+                item.userName,
+                TimeUtil.getDuration(item.updateDate)
             )
             // 추천/비추천 chip
-            if (item.recommended)
+            if (item.recommended) {
                 setRecommendedChip(binding.chipRecommended)
-            else setNoneRecommendedChip(binding.chipRecommended)
+            } else {
+                setNoneRecommendedChip(binding.chipRecommended)
+            }
         }
 }
 
