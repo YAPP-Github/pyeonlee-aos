@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/item_recent_review_horizontal_outlined"
+    android:layout_marginBottom="@dimen/item_recent_review_bottom_outlined"
     android:background="@drawable/bg_white_outline_radius_10dp"
     android:padding="@dimen/item_recent_review_padding_large">
 

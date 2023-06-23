@@ -17,4 +17,6 @@
     <dimen name="item_recent_review_img_size">54dp</dimen>
     <dimen name="item_recent_review_padding_medium">8dp</dimen>
     <dimen name="item_recent_review_padding_large">12dp</dimen>
+    <dimen name="item_recent_review_horizontal_outlined">18dp</dimen>
+    <dimen name="item_recent_review_bottom_outlined">8dp</dimen>
 </resources>
