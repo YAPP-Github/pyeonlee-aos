@@ -10,6 +10,5 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>() {
     }
 
     override fun initViews() {
-
     }
 }
