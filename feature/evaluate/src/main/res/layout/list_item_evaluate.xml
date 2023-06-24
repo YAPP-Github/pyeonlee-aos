@@ -6,7 +6,7 @@
     android:layout_height="@dimen/list_item_evaluate_product_height">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_evaluateProductImage"
         android:layout_width="@dimen/list_item_evaluate_product_img_size"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/list_item_evaluate_product_top_bottom"
@@ -19,29 +19,30 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_evaluateProductTitle"
         style="@style/Text.Body01"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/list_item_evaluate_title_left"
         android:layout_marginEnd="@dimen/layout_evaluate_left_right"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/tv_evaluateProductPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/iv_evaluateProductImage"
+        app:layout_constraintTop_toTopOf="@+id/iv_evaluateProductImage"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="코카)코카제로레몬캔355ml"></TextView>
+        tools:text="코카)코카제로레몬캔355ml">
+    </TextView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_evaluateProductPrice"
         style="@style/Text.Body06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/list_item_evaluate_subtitle_top"
         android:textColor="@color/bg40"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:text="2,000원"></TextView>
-
+        app:layout_constraintBottom_toBottomOf="@+id/iv_evaluateProductImage"
+        app:layout_constraintStart_toStartOf="@+id/tv_evaluateProductTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_evaluateProductTitle"
+        tools:text="2,000원">
+    </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
