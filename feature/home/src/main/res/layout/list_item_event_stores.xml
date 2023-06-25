@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/layout_store_tab"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_event__store_tab_margin_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorHeight="@dimen/item_event__store_tab_indicator_height"
+        app:tabMode="scrollable"
+        app:tabPaddingEnd="@dimen/item_event__store_tab_padding_end"
+        app:tabPaddingStart="@dimen/item_event__store_tab_padding_start"
+        app:tabRippleColor="@null" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_products"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btn_more_products"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_store_tab" />
+
+    <com.peonlee.core.ui.designsystem.button.LargeButton
+        android:id="@+id/btn_more_products"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bg10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pager_products" />
+</androidx.constraintlayout.widget.ConstraintLayout>

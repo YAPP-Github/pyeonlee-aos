@@ -9,5 +9,6 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
 }

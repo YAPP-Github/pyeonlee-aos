@@ -5,6 +5,7 @@ import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
 import com.peonlee.home.model.divider.DividerUiModel
+import com.peonlee.home.model.product.EVENT_PRODUCTS_DUMMY
 import com.peonlee.home.model.product.NEW_PRODUCTS
 import com.peonlee.home.model.product.POP_PRODUCTS
 import com.peonlee.home.model.review.RECENT_REVIEW
@@ -38,5 +39,8 @@ private val DUMMY = listOf(
     )
 ) + POP_PRODUCTS + listOf(
     DividerUiModel(id = -3),
-    TitleUiModel(id = -4, title = "최근 리뷰")
+    TitleUiModel(id = -4, title = "지금 행사 중!")
+) + EVENT_PRODUCTS_DUMMY + listOf(
+    DividerUiModel(id = -5),
+    TitleUiModel(id = -6, title = "최근 리뷰")
 ) + RECENT_REVIEW
