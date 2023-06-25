@@ -15,7 +15,6 @@
         android:layout_height="@dimen/item_recent_review_img_size"
         android:contentDescription="@string/item_product_recommended_description"
         android:src="@drawable/ic_test_product"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_productName" />
 
