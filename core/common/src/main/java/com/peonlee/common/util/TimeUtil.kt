@@ -1,6 +1,7 @@
 package com.peonlee.common.util
 
 import android.content.Context
+import com.peonlee.common.R
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -22,14 +23,24 @@ object TimeUtil {
      */
     fun getDuration(context: Context, time: LocalDateTime): String {
         val duration = Duration.between(time, LocalDateTime.now()).toMillis()
-        return when {
-            duration / YEAR > 0 -> "${duration / YEAR}년"
-            duration / MONTH > 0 -> "${duration / MONTH}개월"
-            duration / DAY > 0 -> "${duration / DAY}일"
-            duration / HOUR > 0 -> "${duration / HOUR}시간"
-            duration / MINUTE > 0 -> "${duration / MINUTE}분"
-            duration / SECOND > 0 -> "${duration / SECOND}초"
-            else -> "방금"
-        } + "전"
+
+        val year = duration / YEAR
+        val month = duration / MONTH
+        val day = duration / DAY
+        val hour = duration / HOUR
+        val minute = duration / MINUTE
+        val second = duration / SECOND
+
+        return with(context) {
+            when {
+                year > 0 -> getString(R.string.duration_year, year)
+                month > 0 -> getString(R.string.duration_month, month)
+                day > 0 -> getString(R.string.duration_day, day)
+                hour > 0 -> getString(R.string.duration_hour, hour)
+                minute > 0 -> getString(R.string.duration_minute, minute)
+                second > 0 -> getString(R.string.duration_second, second)
+                else -> getString(R.string.duration_soon)
+            }
+        }
     }
 }
