@@ -48,9 +48,11 @@ private fun RecentReviewViewHolder.setRecommendedChip(
 private fun RecentReviewViewHolder.setNoneRecommendedChip(
     chip: MediumChip
 ) {
-    chip.text = getString(homeResource.string.item_recent_review_none_recommended)
-    chip.setBackgroundTint(UiResource.color.system_r40)
-    chip.setIcon(UiResource.drawable.ic_thumbs_down)
-    chip.setIconTint(UiResource.color.system_r100)
-    chip.setTextColor(UiResource.color.system_r100)
+    chip.apply {
+        text = getString(homeResource.string.item_recent_review_none_recommended)
+        setBackgroundTint(UiResource.color.system_r40)
+        setIcon(UiResource.drawable.ic_thumbs_down)
+        setIconTint(UiResource.color.system_r100)
+        setTextColor(UiResource.color.system_r100)
+    }
 }
