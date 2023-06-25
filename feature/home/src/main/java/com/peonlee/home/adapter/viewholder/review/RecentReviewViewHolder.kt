@@ -26,7 +26,10 @@ class RecentReviewViewHolder(
             tvUserNameAndDate.text = getStringWithArgs(
                 homeResource.string.item_recent_review_user_and_date,
                 item.userName,
-                TimeUtil.getDuration(item.updateDate)
+                TimeUtil.getDuration(
+                    itemView.context,
+                    item.updateDate
+                )
             )
             // 추천/비추천 chip
             if (item.recommended) {

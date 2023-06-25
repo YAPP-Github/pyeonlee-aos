@@ -1,5 +1,6 @@
 package com.peonlee.common.util
 
+import android.content.Context
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -14,40 +15,21 @@ object TimeUtil {
     private const val MONTH = DAY * 30
     private const val YEAR = MONTH * 12
 
-    fun getDuration(time: LocalDateTime): String {
-        var duration = Duration.between(time, LocalDateTime.now()).toMillis()
-        val builder = StringBuilder()
-
-        val year = duration / YEAR
-        if (year > 0) {
-            builder.append("${year}년")
-            duration -= YEAR * year
-        }
-        val month = duration / MONTH
-        if (month > 0) {
-            builder.append("${month}개월")
-            duration -= MONTH * month
-        }
-        val day = duration / DAY
-        if (day > 0) {
-            builder.append("${day}일")
-            duration -= DAY * day
-        }
-        val hour = duration / HOUR
-        if (hour > 0) {
-            builder.append("${hour}시간")
-            duration -= HOUR * hour
-        }
-        val minute = duration / MINUTE
-        if (minute > 0) {
-            builder.append("${minute}분")
-            duration -= MINUTE * minute
-        }
-        val second = duration / SECOND
-        if (second > 0) {
-            builder.append("${second}초")
-        }
-
-        return (if (builder.isEmpty()) "방금" else builder.toString()) + " 전"
+    /**
+     * 현재 시간과 time 까지의 기간을 반환
+     * @param context 해당 메서드 를 호출 하는 context
+     * @param time from time
+     */
+    fun getDuration(context: Context, time: LocalDateTime): String {
+        val duration = Duration.between(time, LocalDateTime.now()).toMillis()
+        return when {
+            duration / YEAR > 0 -> "${duration / YEAR}년"
+            duration / MONTH > 0 -> "${duration / MONTH}개월"
+            duration / DAY > 0 -> "${duration / DAY}일"
+            duration / HOUR > 0 -> "${duration / HOUR}시간"
+            duration / MINUTE > 0 -> "${duration / MINUTE}분"
+            duration / SECOND > 0 -> "${duration / SECOND}초"
+            else -> "방금"
+        } + "전"
     }
 }
