@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":feature:login"))
+    implementation(project(":feature:main"))
 
     implementation(libs.androidx.core.splashscreen)
 }

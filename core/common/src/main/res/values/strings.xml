@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TimeUtil -->
+    <string name="duration_year">%d년 전</string>
+    <string name="duration_month">%d개월 전</string>
+    <string name="duration_day">%d일 전</string>
+    <string name="duration_hour">%d시간 전</string>
+    <string name="duration_minute">%d분 전</string>
+    <string name="duration_second">%d초 전</string>
+    <string name="duration_soon">방금 전</string>
+</resources>
