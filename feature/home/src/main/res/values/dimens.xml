@@ -10,9 +10,6 @@
     <!-- 조건별 상품 리스트 -->
     <dimen name="item_conditional_products_list_horizontal_padding">8dp</dimen>
     <dimen name="item_conditional_products_height">189dp</dimen>
-    <dimen name="item_conditional_products_button_top_margin">24dp</dimen>
-    <dimen name="item_conditional_products_button_bottom_margin">32dp</dimen>
-    <dimen name="item_conditional_products_button_horizontal_margin">18dp</dimen>
     <!-- 최근 리뷰 -->
     <dimen name="item_recent_review_img_size">54dp</dimen>
     <dimen name="item_recent_review_padding_medium">8dp</dimen>
@@ -25,4 +22,12 @@
     <dimen name="item_event__store_tab_indicator_height">0dp</dimen>
     <dimen name="item_event__store_tab_margin_start">18dp</dimen>
     <dimen name="item_event_pager_padding">10dp</dimen>
+
+    <dimen name="item_store_horizontal_padding">12dp</dimen>
+    <dimen name="item_store_vertical_padding">8dp</dimen>
+
+    <!-- 공통 -->
+    <dimen name="item_button_top_margin">24dp</dimen>
+    <dimen name="item_button_bottom_margin">32dp</dimen>
+    <dimen name="item_button_horizontal_margin">18dp</dimen>
 </resources>

@@ -6,10 +6,11 @@ import androidx.core.view.doOnDetach
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
-import com.peonlee.core.ui.databinding.PeonleeMediumSelectorBinding
+import com.peonlee.core.ui.designsystem.selector.MediumSelector
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.home.adapter.ProductsByStoreAdapter
+import com.peonlee.home.databinding.ItemStoreSelectorBinding
 import com.peonlee.home.databinding.ListItemEventStoresBinding
 import com.peonlee.home.model.product.EventByStoresUiModel
 import com.peonlee.model.type.StoreType
@@ -26,7 +27,7 @@ class EventByStoresViewHolder(
         override fun onTabSelected(tab: TabLayout.Tab?) {
             tab?.let {
                 val store = StoreType.values()[it.position]
-                it.customView?.setBackgroundResource(getBackgroundByStore(store))
+                (it.customView as? MediumSelector)?.applyBackground(getBackgroundByStore(store))
                 binding.btnMoreProducts.text = getStringWithArgs(
                     id = HomeResource.string.item_conditional_products_button_text,
                     store.storeName
@@ -36,7 +37,7 @@ class EventByStoresViewHolder(
 
         override fun onTabUnselected(tab: TabLayout.Tab?) {
             tab?.let {
-                it.customView?.setBackgroundResource(
+                (it.customView as? MediumSelector)?.applyBackground(
                     UiResource.drawable.bg_white_outline_radius_17dp
                 )
             }
@@ -48,11 +49,11 @@ class EventByStoresViewHolder(
             pagerProducts.adapter = productsByStoreAdapter
             tabLayoutMediator = TabLayoutMediator(layoutStoreTab, pagerProducts) { tab, position ->
                 val store = StoreType.values()[position]
-                val tabItem = PeonleeMediumSelectorBinding.inflate(
+                val tabItem = ItemStoreSelectorBinding.inflate(
                     LayoutInflater.from(itemView.context)
                 )
-                tabItem.tvMediumSelectorTitle.text = store.storeName
-                tabItem.ivMediumSelectorIcon.setImageResource(getIconByStore(store))
+                tabItem.root.text = store.storeName
+                tabItem.root.setIcon(getIconByStore(store))
                 tab.customView = tabItem.root
             }
         }
