@@ -13,5 +13,6 @@ enum class MainHomeViewType {
     TITLE, // 제목
     DIVIDER, // 구분선
     CONDITIONAL_PRODUCTS, // 조건별 상품 리스트
-    RECENT_REVIEW // 최신 리뷰
+    RECENT_REVIEW, // 최신 리뷰
+    EVENT_BY_STORE
 }
