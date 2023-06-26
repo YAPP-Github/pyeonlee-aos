@@ -6,59 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".EvaluateFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_next"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_evaluate_top"
+        android:layout_marginEnd="@dimen/text_evaluate_next_right"
+        android:text="@string/evaluate_next"
+        android:textColor="@color/bg80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/layout_evaluate_left_right"
-        android:layout_marginTop="@dimen/layout_evaluate_top"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/text_evaluate_title_top"
+        android:text="@string/evaluate_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_next">
+    </TextView>
 
-        <TextView
-            android:id="@+id/tv_next"
-            style="@style/Text.Body02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/text_evaluate_next_right"
-            android:text="@string/evaluate_next"
-            android:textColor="@color/bg80"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </TextView>
-
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/Text.Subtitle01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_evaluate_title_top"
-            android:text="@string/evaluate_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_next">
-        </TextView>
-
-        <TextView
-            android:id="@+id/tv_evaluate"
-            style="@style/Text.Subtitle01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_evaluate_product_top"
-            android:layout_marginBottom="16dp"
-            android:text="@string/evaluate_product_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"></TextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_evaluate"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_evaluate_product_top"
+        android:text="@string/evaluate_product_count"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+    </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/layout_productList"
+        android:id="@+id/layout_evaluate_product_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/layout_evaluate_top"
+        android:layout_marginBottom="@dimen/layout_evaluate_top"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_evaluate">
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
