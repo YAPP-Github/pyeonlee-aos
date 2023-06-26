@@ -1,8 +1,11 @@
 package com.peonlee.home
 
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
+import com.peonlee.home.adapter.viewholder.product.EventByStoresViewHolder
 import com.peonlee.home.databinding.FragmentHomeBinding
 import com.peonlee.home.model.divider.DividerUiModel
 import com.peonlee.home.model.product.EVENT_PRODUCTS_DUMMY
@@ -20,6 +23,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val adapter = HomeAdapter()
         binding.layoutHome.adapter = adapter
         adapter.submitList(DUMMY)
+
+        binding.layoutHome.addOnChildAttachStateChangeListener(
+            object : OnChildAttachStateChangeListener {
+                override fun onChildViewAttachedToWindow(view: View) {
+                    val viewHolder = binding.layoutHome.getChildViewHolder(view)
+                    (viewHolder as? EventByStoresViewHolder)?.doOnAttach()
+                }
+
+                override fun onChildViewDetachedFromWindow(view: View) {
+                    val viewHolder = binding.layoutHome.getChildViewHolder(view)
+                    (viewHolder as? EventByStoresViewHolder)?.doOnDetach()
+                }
+
+            }
+        )
     }
 
     companion object {

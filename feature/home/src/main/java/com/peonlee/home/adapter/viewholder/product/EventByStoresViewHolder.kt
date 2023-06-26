@@ -1,8 +1,6 @@
 package com.peonlee.home.adapter.viewholder.product
 
 import android.view.LayoutInflater
-import androidx.core.view.doOnAttach
-import androidx.core.view.doOnDetach
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -20,8 +18,9 @@ import com.peonlee.home.R as HomeResource
 class EventByStoresViewHolder(
     private val binding: ListItemEventStoresBinding
 ) : CommonViewHolder<EventByStoresUiModel>(binding) {
+    private var tabLayoutMediator: TabLayoutMediator
     private var productsByStoreAdapter = ProductsByStoreAdapter()
-    private var tabLayoutMediator: TabLayoutMediator? = null
+
     private val onTabSelectedListener = object : OnTabSelectedListener {
         override fun onTabReselected(tab: TabLayout.Tab?) {}
         override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -57,15 +56,16 @@ class EventByStoresViewHolder(
                 tab.customView = tabItem.root
             }
         }
-        itemView.doOnAttach {
-            binding.layoutStoreTab.addOnTabSelectedListener(onTabSelectedListener)
-            tabLayoutMediator?.attach()
-        }
+    }
 
-        itemView.doOnDetach {
-            binding.layoutStoreTab.removeOnTabSelectedListener(onTabSelectedListener)
-            tabLayoutMediator?.detach()
-        }
+    fun doOnAttach() {
+        binding.layoutStoreTab.addOnTabSelectedListener(onTabSelectedListener)
+        tabLayoutMediator.attach()
+    }
+
+    fun doOnDetach() {
+        binding.layoutStoreTab.removeOnTabSelectedListener(onTabSelectedListener)
+        tabLayoutMediator.detach()
     }
 
     override fun onBindView(item: EventByStoresUiModel) {
