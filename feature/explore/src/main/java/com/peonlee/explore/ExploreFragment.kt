@@ -1,6 +1,9 @@
 package com.peonlee.explore
 
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
@@ -15,7 +18,9 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
     }
 
     override fun initViews() {
-        val adapter = ProductAdapter()
+        val adapter = ProductAdapter(
+            rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+        )
         binding.layoutExplore.layoutManager = GridLayoutManager(context, 2)
         binding.layoutExplore.adapter = adapter
         binding.layoutExplore.addItemDecoration(

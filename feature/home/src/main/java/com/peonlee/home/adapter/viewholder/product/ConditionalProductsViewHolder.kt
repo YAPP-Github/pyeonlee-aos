@@ -1,5 +1,8 @@
 package com.peonlee.home.adapter.viewholder.product
 
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.extensions.getStringWithArgs
@@ -9,10 +12,12 @@ import com.peonlee.home.databinding.ListItemConditionalProductsBinding
 import com.peonlee.home.model.product.ConditionalProductsUiModel
 import com.peonlee.model.util.PaddingValues
 
+private val rootLayoutParams = ConstraintLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
+
 class ConditionalProductsViewHolder(
     private val binding: ListItemConditionalProductsBinding
 ) : CommonViewHolder<ConditionalProductsUiModel>(binding) {
-    private var productAdapter = ProductAdapter()
+    private var productAdapter = ProductAdapter(rootLayoutParams = rootLayoutParams)
 
     init {
         with(binding) {
