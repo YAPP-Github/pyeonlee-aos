@@ -35,7 +35,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     val viewHolder = binding.layoutHome.getChildViewHolder(view)
                     (viewHolder as? EventByStoresViewHolder)?.doOnDetach()
                 }
-
             }
         )
     }
