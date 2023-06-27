@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/item_recent_review_horizontal_outlined"
+    android:layout_marginBottom="@dimen/item_recent_review_bottom_outlined"
+    android:background="@drawable/bg_white_outline_radius_10dp"
+    android:padding="@dimen/item_recent_review_padding_large">
+
+    <ImageView
+        android:id="@+id/iv_product"
+        android:layout_width="@dimen/item_recent_review_img_size"
+        android:layout_height="@dimen/item_recent_review_img_size"
+        android:contentDescription="@string/item_product_recommended_description"
+        android:src="@drawable/ic_test_product"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_productName" />
+
+    <TextView
+        android:id="@+id/tv_productName"
+        style="@style/Text.Body04"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_recent_review_padding_medium"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/bg80"
+        app:layout_constraintBottom_toTopOf="@id/chip_recommended"
+        app:layout_constraintStart_toEndOf="@id/iv_product"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:text="주)2XL 베스킨라빈스" />
+
+    <com.peonlee.core.ui.designsystem.chip.MediumChip
+        android:id="@+id/chip_recommended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/iv_product"
+        app:layout_constraintStart_toStartOf="@id/tv_productName"
+        app:layout_constraintTop_toBottomOf="@id/tv_productName"
+        tools:text="또 먹을거예요" />
+
+    <TextView
+        android:id="@+id/tv_comment"
+        style="@style/Text.Body03"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_recent_review_padding_large"
+        android:textColor="@color/bg70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_product"
+        app:layout_constraintTop_toBottomOf="@id/iv_product"
+        tools:text="궁금해서 사먹어 봤있는 듯 저는 아마 길어저라 댓글 다음줄로 넘어가는거 테스트" />
+
+    <TextView
+        android:id="@+id/tv_userNameAndDate"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_recent_review_padding_medium"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_product"
+        app:layout_constraintTop_toBottomOf="@id/tv_comment"
+        tools:text="닉네임 · 1분 전" />
+</androidx.constraintlayout.widget.ConstraintLayout>
