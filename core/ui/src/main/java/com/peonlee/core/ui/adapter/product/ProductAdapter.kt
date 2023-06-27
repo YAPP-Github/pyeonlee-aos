@@ -13,7 +13,7 @@ import com.peonlee.model.product.ProductUiModel
  * 상품을 위한 Single Item Adapter
  */
 class ProductAdapter(
-    private val rootLayoutParams: LayoutParams,
+    private val rootLayoutParams: LayoutParams
 ) : SingleTypeListAdapter<ProductUiModel>({ it.id }) {
     override fun onCreateViewHolder(parent: ViewGroup): CommonViewHolder<ProductUiModel> {
         return ProductViewHolder(
