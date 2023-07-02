@@ -1,5 +1,6 @@
 package com.peonlee.core.ui.viewholder.product
 
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.ListItemProductBinding
@@ -9,9 +10,11 @@ import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.model.product.ProductUiModel
 
 class ProductViewHolder(
-    private val binding: ListItemProductBinding
+    private val layoutParams: LayoutParams,
+    val binding: ListItemProductBinding
 ) : CommonViewHolder<ProductUiModel>(binding) {
     override fun onBindView(item: ProductUiModel) = with(binding) {
+        root.layoutParams = layoutParams
         tvProductName.text = item.name
         tvProductPrice.text = item.price.toFormattedMoney()
         tvProductRecommended.text = getStringWithArgs(

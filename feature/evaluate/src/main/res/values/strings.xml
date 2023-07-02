@@ -1,0 +1,5 @@
+<resources>
+    <string name="evaluate_title">편의점 음식을 평가해 주세요</string>
+    <string name="evaluate_product_count">개 평가</string>
+    <string name="evaluate_next">넘어가기</string>
+</resources>
