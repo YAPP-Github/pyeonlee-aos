@@ -18,7 +18,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initViews() {
         val adapter = HomeAdapter()
-        binding.layoutHome.adapter = adapter
+        binding.rvHome.adapter = adapter
         adapter.submitList(DUMMY)
     }
 
