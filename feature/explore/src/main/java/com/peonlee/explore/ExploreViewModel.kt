@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
-
-) : ViewModel() {
+class ExploreViewModel @Inject constructor() : ViewModel() {
     // 현재 선택 중인 정렬 타입
     private val _productSortType = MutableStateFlow<SortType>(SortType.LATEST)
 
