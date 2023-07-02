@@ -3,15 +3,15 @@ package com.peonlee.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
+import com.peonlee.core.ui.databinding.ListItemDividerBinding
+import com.peonlee.core.ui.databinding.ListItemTitleBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
-import com.peonlee.home.adapter.viewholder.divider.DividerViewHolder
+import com.peonlee.core.ui.viewholder.divider.DividerViewHolder
+import com.peonlee.core.ui.viewholder.title.TitleViewHolder
 import com.peonlee.home.adapter.viewholder.product.ConditionalProductsViewHolder
 import com.peonlee.home.adapter.viewholder.review.RecentReviewViewHolder
-import com.peonlee.home.adapter.viewholder.title.TitleViewHolder
 import com.peonlee.home.databinding.ListItemConditionalProductsBinding
-import com.peonlee.home.databinding.ListItemDividerBinding
 import com.peonlee.home.databinding.ListItemRecentReviewBinding
-import com.peonlee.home.databinding.ListItemTitleBinding
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
 
