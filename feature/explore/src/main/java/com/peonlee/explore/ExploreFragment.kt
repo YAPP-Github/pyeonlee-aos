@@ -21,9 +21,9 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         val adapter = ProductAdapter(
             rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         )
-        binding.layoutExplore.layoutManager = GridLayoutManager(context, 2)
-        binding.layoutExplore.adapter = adapter
-        binding.layoutExplore.addItemDecoration(
+        binding.rvProduct.layoutManager = GridLayoutManager(context, 2)
+        binding.rvProduct.adapter = adapter
+        binding.rvProduct.addItemDecoration(
             ContentPaddingDecoration(
                 PaddingValues(top = 12, right = 4, bottom = 12, left = 4)
             )
