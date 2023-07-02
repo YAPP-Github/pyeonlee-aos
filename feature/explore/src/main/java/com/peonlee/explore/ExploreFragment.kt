@@ -34,20 +34,22 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun initViews() {
+    override fun initViews() = with(binding) {
         // 상단 상품 정렬 tab 설정
         SortType.values().forEach {
-            binding.tabProductSort.addTab(
-                binding.tabProductSort.newTab().apply { text = it.sortName }
+            tabProductSort.addTab(
+                tabProductSort.newTab().apply { text = it.sortName }
             )
         }
-        binding.tabProductSort.addOnTabSelectedListener(onTabSelectedListener)
+        tabProductSort.addOnTabSelectedListener(onTabSelectedListener)
+
+        // 상품 리스트
         val adapter = ProductAdapter(
             rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         )
-        binding.rvProduct.layoutManager = GridLayoutManager(context, 2)
-        binding.rvProduct.adapter = adapter
-        binding.rvProduct.addItemDecoration(
+        rvProduct.layoutManager = GridLayoutManager(context, 2)
+        rvProduct.adapter = adapter
+        rvProduct.addItemDecoration(
             ContentPaddingDecoration(
                 PaddingValues(top = 12, right = 4, bottom = 12, left = 4)
             )
