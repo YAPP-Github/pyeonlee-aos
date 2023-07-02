@@ -19,6 +19,8 @@ class ExploreViewModel @Inject constructor() : ViewModel() {
      * 정렬 타입 변경
      */
     fun setProductSortType(sortType: SortType) {
+        // 동일한 tab 을 클릭한 경우 에는 무시
+        if (_productSortType.value == sortType) return
         _productSortType.value = sortType
     }
 }
