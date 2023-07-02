@@ -18,7 +18,6 @@ import com.peonlee.home.R as HomeResource
 class EventByStoresViewHolder(
     private val binding: ListItemEventStoresBinding
 ) : CommonViewHolder<EventByStoresUiModel>(binding) {
-    private var tabLayoutMediator: TabLayoutMediator
     private var productsByStoreAdapter = ProductsByStoreAdapter()
 
     private val onTabSelectedListener = object : OnTabSelectedListener {
@@ -46,7 +45,7 @@ class EventByStoresViewHolder(
     init {
         with(binding) {
             pagerProducts.adapter = productsByStoreAdapter
-            tabLayoutMediator = TabLayoutMediator(layoutStoreTab, pagerProducts) { tab, position ->
+            TabLayoutMediator(layoutStoreTab, pagerProducts) { tab, position ->
                 val store = StoreType.values()[position]
                 val tabItem = ItemStoreSelectorBinding.inflate(
                     LayoutInflater.from(itemView.context)
@@ -54,18 +53,13 @@ class EventByStoresViewHolder(
                 tabItem.root.text = store.storeName
                 tabItem.root.setIcon(getIconByStore(store))
                 tab.customView = tabItem.root
-            }
+            }.attach()
+            /**
+             * viewHolder 가 생성될 때, 1번만 onTabSelectedListener가 등록되도록 수정
+             * [Comment](https://github.com/YAPP-Github/22nd-Android-Team-1-Android/pull/32#discussion_r1244692924)
+             */
+            layoutStoreTab.addOnTabSelectedListener(onTabSelectedListener)
         }
-    }
-
-    fun doOnAttach() {
-        binding.layoutStoreTab.addOnTabSelectedListener(onTabSelectedListener)
-        tabLayoutMediator.attach()
-    }
-
-    fun doOnDetach() {
-        binding.layoutStoreTab.removeOnTabSelectedListener(onTabSelectedListener)
-        tabLayoutMediator.detach()
     }
 
     override fun onBindView(item: EventByStoresUiModel) {
