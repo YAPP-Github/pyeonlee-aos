@@ -12,8 +12,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/bg80"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="2dp"
         app:tabMode="scrollable"
-        app:tabRippleColor="@null" />
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/bg80"
+        app:tabTextAppearance="@style/Text.Body02"
+        app:tabTextColor="@color/bg30" />
+
+    <View
+        android:id="@+id/vSortDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/bg10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProduct"
@@ -25,6 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
+        app:layout_constraintTop_toBottomOf="@id/vSortDivider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

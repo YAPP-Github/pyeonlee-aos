@@ -9,7 +9,6 @@ import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.databinding.FragmentExploreBinding
-import com.peonlee.explore.databinding.TabItemProductSortBinding
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
@@ -35,11 +34,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         // 상단 상품 정렬 tab 설정
         SortType.values().forEach {
             binding.tabProductSort.addTab(
-                binding.tabProductSort.newTab().apply {
-                    val view = TabItemProductSortBinding.inflate(layoutInflater)
-                    view.tvSortName.text = it.sortName
-                    customView = view.root
-                }
+                binding.tabProductSort.newTab().apply { text = it.sortName }
             )
         }
     }
