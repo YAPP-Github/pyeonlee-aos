@@ -1,10 +1,15 @@
 package com.peonlee.explore
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
@@ -14,11 +19,29 @@ import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
 
 class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
+    private lateinit var exploreViewModel: ExploreViewModel
+
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
         return FragmentExploreBinding.inflate(layoutInflater, parent, false)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        exploreViewModel = ViewModelProvider(this).get(ExploreViewModel::class.java)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun initViews() {
+        // 상단 상품 정렬 tab 설정
+        SortType.values().forEach {
+            binding.tabProductSort.addTab(
+                binding.tabProductSort.newTab().apply { text = it.sortName }
+            )
+        }
+        binding.tabProductSort.addOnTabSelectedListener(onTabSelectedListener)
         val adapter = ProductAdapter(
             rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         )
@@ -30,12 +53,17 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             )
         )
         adapter.submitList(PRODUCTS_TEST_DOUBLE)
+    }
 
-        // 상단 상품 정렬 tab 설정
-        SortType.values().forEach {
-            binding.tabProductSort.addTab(
-                binding.tabProductSort.newTab().apply { text = it.sortName }
-            )
+    private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
+        override fun onTabReselected(tab: TabLayout.Tab) {}
+        override fun onTabUnselected(tab: TabLayout.Tab) {}
+        override fun onTabSelected(tab: TabLayout.Tab) {
+            /**
+             * 정렬 타입 변경
+             */
+            val sortPos = tab.position
+            exploreViewModel.setProductSortType(SortType.values()[sortPos])
         }
     }
 
