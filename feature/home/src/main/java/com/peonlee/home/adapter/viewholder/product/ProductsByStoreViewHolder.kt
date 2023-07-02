@@ -24,7 +24,7 @@ class ProductsByStoreViewHolder(
             /**
              * addView를 하기 전에 해당 layout에 child view가 있는 경우
              * 중복으로 생성 되는 것을 방지 하기 위해 기존의 child view 들은 전부 제거
-              */
+             */
             layoutProducts.removeAllViews()
             layoutProducts.addView(
                 ProductViewHolder(
