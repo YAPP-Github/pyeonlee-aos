@@ -1,5 +1,6 @@
 package com.peonlee.home.adapter.viewholder.review
 
+import androidx.core.view.isGone
 import com.peonlee.common.util.TimeUtil
 import com.peonlee.core.ui.designsystem.chip.MediumChip
 import com.peonlee.core.ui.extensions.getString
@@ -32,10 +33,15 @@ class RecentReviewViewHolder(
                 )
             )
             // 추천/비추천 chip
-            if (item.recommended) {
-                setRecommendedChip(binding.chipRecommended)
+            if (item.recommended != null) {
+                if (item.recommended) {
+                    setRecommendedChip(binding.chipRecommended)
+                } else {
+                    setNoneRecommendedChip(binding.chipRecommended)
+                }
             } else {
-                setNoneRecommendedChip(binding.chipRecommended)
+                // 평가(추천/비추천)이 null 인 경우에는 Chip 제거
+                binding.chipRecommended.isGone = true
             }
         }
 }
