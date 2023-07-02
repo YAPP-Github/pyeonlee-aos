@@ -1,8 +1,8 @@
-package com.peonlee.core.ui.viewholder.title
+package com.peonlee.home.adapter.viewholder.title
 
-import com.peonlee.core.ui.databinding.ListItemTitleBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
-import com.peonlee.model.title.TitleUiModel
+import com.peonlee.home.databinding.ListItemTitleBinding
+import com.peonlee.home.model.title.TitleUiModel
 
 class TitleViewHolder(
     private val binding: ListItemTitleBinding

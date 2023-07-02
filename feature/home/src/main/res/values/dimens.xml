@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- title -->
+    <dimen name="item_title_horizontal_padding">18dp</dimen>
+    <dimen name="item_title_vertical_padding">16dp</dimen>
+    <!-- divider -->
+    <dimen name="item_divider_bottom_padding">32dp</dimen>
+    <dimen name="item_divider_top_padding">22dp</dimen>
+    <dimen name="item_divider_height">8dp</dimen>
     <!-- 조건별 상품 리스트 -->
     <dimen name="item_conditional_products_list_horizontal_padding">8dp</dimen>
     <dimen name="item_conditional_products_height">189dp</dimen>

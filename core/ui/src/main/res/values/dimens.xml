@@ -50,11 +50,4 @@
     <dimen name="list_item_product_medium_margin">4dp</dimen>
     <dimen name="list_item_product_large_margin">8dp</dimen>
     <dimen name="list_item_product_grande_margin">12dp</dimen>
-    <!-- title -->
-    <dimen name="item_title_horizontal_padding">18dp</dimen>
-    <dimen name="item_title_vertical_padding">16dp</dimen>
-    <!-- divider -->
-    <dimen name="item_divider_bottom_padding">32dp</dimen>
-    <dimen name="item_divider_top_padding">22dp</dimen>
-    <dimen name="item_divider_height">8dp</dimen>
 </resources>
