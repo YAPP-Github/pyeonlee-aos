@@ -1,5 +1,8 @@
 package com.peonlee.feature.detail
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import com.peonlee.core.ui.R
 import com.peonlee.model.ListItem
 
 sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
@@ -25,9 +28,20 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
 
     // todo dummy domain model
     data class Event(
-        val imageUrl: String,
-        val title: String
+        val retailerType: RetailerType,
+        val promotionType: PromotionType
     )
+
+    enum class RetailerType(@DrawableRes val imageRes: Int) {
+        GS(R.drawable.ic_store_gs25),
+        CU(R.drawable.ic_store_cu),
+        SEVEN_ELEVEN(R.drawable.ic_store_seveneleven)
+    }
+
+    enum class PromotionType(@StringRes val stringRes: Int) {
+        ONE_PLUS_ONE(R.string.promotion_one_plus_one),
+        TWO_PLUS_ONE(R.string.promotion_two_plus_one)
+    }
 
     data class Rating(
         override val id: Long,

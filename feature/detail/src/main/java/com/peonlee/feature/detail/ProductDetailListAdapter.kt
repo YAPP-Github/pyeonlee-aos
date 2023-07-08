@@ -12,6 +12,7 @@ import coil.load
 import com.peonlee.common.util.TimeUtil
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
+import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -69,8 +70,8 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
                     }
                     item.eventList.forEachIndexed { index, event ->
                         val eventView = ListItemEventBinding.inflate(LayoutInflater.from(binding.root.context), binding.root, false).apply {
-                            tvEventDes.text = event.title
-                            ivStoreIcon.load(item.imageUrl)
+                            tvEventDes.text = getString(event.promotionType.stringRes)
+                            ivStoreIcon.load(event.retailerType.imageRes)
                             root.id = generateViewId()
                             binding.root.addView(root, index)
                         }
@@ -86,7 +87,7 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
             tvProductPrice.text = item.price.toFormattedMoney()
             tvProductRecommended.text = getStringWithArgs(
                 R.string.item_product_recommended_percentage,
-                item.upvoteRate.toFloat()
+                item.upvoteRate
             )
             tvReviewCount.text = getStringWithArgs(
                 R.string.item_product_review_count,
