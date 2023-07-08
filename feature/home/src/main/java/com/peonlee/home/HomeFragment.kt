@@ -10,7 +10,9 @@ import com.peonlee.home.model.product.NEW_PRODUCTS
 import com.peonlee.home.model.product.POP_PRODUCTS
 import com.peonlee.home.model.review.RECENT_REVIEW
 import com.peonlee.home.model.title.TitleUiModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun bindingFactory(parent: ViewGroup): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater, parent, false)

@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.peonlee.core.data.BuildConfig
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
+import com.peonlee.data.product.ProductApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,36 +22,50 @@ import javax.inject.Singleton
 object NetworkModule {
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().apply {
-            client(okHttpClient)
-            baseUrl(BuildConfig.BASE_URL)
-            addConverterFactory(Json.asConverterFactory(APPLICATION_JSON.toMediaType()))
-        }.build()
+    fun provideJson(): Json {
+        return Json {
+            coerceInputValues = true
+            ignoreUnknownKeys = true
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(json: Json, okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(json.asConverterFactory(APPLICATION_JSON.toMediaType()))
+            .build()
     }
 
     @Singleton
     @Provides
     fun provideOkHttp(): OkHttpClient {
-        return OkHttpClient.Builder().apply {
-            val loggingInterceptor = HttpLoggingInterceptor()
+        val loggingInterceptor = HttpLoggingInterceptor()
+        if (BuildConfig.DEBUG) {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
 
-            if (BuildConfig.DEBUG) {
-                loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            } else {
-                loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
-            }
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .build()
+    }
 
-            addInterceptor(loggingInterceptor)
-            connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            readTimeout(TIME_OUT, TimeUnit.SECONDS)
-            writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-        }.build()
+    @Singleton
+    @Provides
+    fun provideProductApi(retrofit: Retrofit): ProductApi {
+        return retrofit.create(ProductApi::class.java)
     }
 
     private object ConnectInfo {
         const val APPLICATION_JSON = "application/json"
 
-        const val TIME_OUT = 60L
+        const val TIME_OUT = 30000L
     }
 }
