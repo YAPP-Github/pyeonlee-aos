@@ -6,7 +6,10 @@
     <string name="item_product_img_description">상품 이미지</string>
     <string name="item_product_recommended_description">상품 평가 아이콘</string>
     <string name="item_product_event">행사중</string>
-    <string name="item_product_recommended_percentage">%.1f%%</string>
+    <string name="item_product_recommended_percentage">%d%%</string>
     <string name="item_product_review_count">리뷰 %d개</string>
     <string name="item_recent_review_user_and_date">%s · %s</string>
+
+    <string name="promotion_one_plus_one">1+1</string>
+    <string name="promotion_two_plus_one">2+1</string>
 </resources>
