@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
@@ -17,9 +17,11 @@ import com.peonlee.explore.databinding.FragmentExploreBinding
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
-    private lateinit var exploreViewModel: ExploreViewModel
+    private val exploreViewModel: ExploreViewModel by viewModels()
 
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
         return FragmentExploreBinding.inflate(layoutInflater, parent, false)
@@ -30,7 +32,6 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        exploreViewModel = ViewModelProvider(this).get(ExploreViewModel::class.java)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
