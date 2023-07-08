@@ -45,17 +45,19 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         tabProductSort.addOnTabSelectedListener(onTabSelectedListener)
 
         // 상품 리스트
-        val adapter = ProductAdapter(
+        val productAdapter = ProductAdapter(
             rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         )
-        rvProduct.layoutManager = GridLayoutManager(context, 2)
-        rvProduct.adapter = adapter
-        rvProduct.addItemDecoration(
-            ContentPaddingDecoration(
-                PaddingValues(top = 12, right = 4, bottom = 12, left = 4)
+        rvProduct.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = productAdapter
+            addItemDecoration(
+                ContentPaddingDecoration(
+                    PaddingValues(top = 12, right = 4, bottom = 12, left = 4)
+                )
             )
-        )
-        adapter.submitList(PRODUCTS_TEST_DOUBLE)
+        }
+        productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
