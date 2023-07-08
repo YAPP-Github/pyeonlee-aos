@@ -1,6 +1,9 @@
 package com.peonlee.home
 
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
@@ -11,9 +14,12 @@ import com.peonlee.home.model.product.POP_PRODUCTS
 import com.peonlee.home.model.review.RECENT_REVIEW
 import com.peonlee.home.model.title.TitleUiModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+    private val homeViewModel: HomeViewModel by viewModels()
     override fun bindingFactory(parent: ViewGroup): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater, parent, false)
     }
@@ -21,7 +27,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initViews() {
         val adapter = HomeAdapter()
         binding.rvHome.adapter = adapter
-        adapter.submitList(DUMMY)
+
+        homeViewModel.products.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle
+        ).onEach {
+            adapter.submitList(it)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     companion object {
