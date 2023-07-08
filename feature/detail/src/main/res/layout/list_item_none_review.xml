@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    android:paddingTop="26dp"
+    android:paddingBottom="18dp">
+
+    <TextView
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/review"
+        android:textColor="@color/bg100" />
+
+    <TextView
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="34dp"
+        android:text="@string/none_review_title"
+        android:textColor="@color/bg50" />
+
+    <TextView
+        android:id="@+id/tvWriteReviewButton"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:padding="14dp"
+        android:text="@string/go_to_write_review"
+        android:textColor="@color/bg80" />
+
+</LinearLayout>

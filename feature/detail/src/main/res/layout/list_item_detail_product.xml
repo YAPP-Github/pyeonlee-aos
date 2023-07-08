@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="18dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:id="@+id/iv_product_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_test_product" />
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        style="@style/Text.Subtitle01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/bg80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_product_image"
+        tools:text="코카)코카제로레몬캔355ml" />
+
+    <TextView
+        android:id="@+id/tv_product_price"
+        style="@style/Text.Body06"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_product_medium_margin"
+        android:textColor="@color/bg40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+        tools:text="2,000원" />
+
+    <ImageView
+        android:id="@+id/iv_product_recommended"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:contentDescription="@string/item_product_recommended_description"
+        android:src="@drawable/ic_thumbs_up"
+        app:layout_constraintBottom_toBottomOf="@id/tv_product_recommended"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_product_recommended"
+        app:tint="@color/brand100" />
+
+    <TextView
+        android:id="@+id/tv_product_recommended"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/bg100"
+        app:layout_constraintStart_toEndOf="@id/iv_product_recommended"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_price"
+        tools:text="87%" />
+
+    <TextView
+        android:id="@+id/tv_review_count"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/list_item_product_medium_margin"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tv_product_recommended"
+        app:layout_constraintStart_toEndOf="@id/tv_product_recommended"
+        app:layout_constraintTop_toTopOf="@id/tv_product_recommended"
+        tools:text="리뷰 24개" />
+
+    <TextView
+        android:id="@+id/tv_event_title"
+        style="@style/Text.Body05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/event_information"
+        android:textColor="@color/bg100"
+        app:layout_constraintBottom_toBottomOf="@id/flow_event"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/flow_event" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="12dp"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalGap="12dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_event_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_recommended" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
