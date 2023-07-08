@@ -8,4 +8,8 @@ import com.peonlee.data.model.request.ProductSearchRequest
 interface ProductRepository {
     suspend fun getProductDetail(productId: Int): Result<ProductDetail>
     suspend fun searchProduct(searchRequest: ProductSearchRequest): Result<ProductSearch>
+
+    suspend fun likeProduct(productId: Int): Result<Unit>
+    suspend fun dislikeProduct(productId: Int): Result<Unit>
+    suspend fun cancelLikeProduct(productId: Int): Result<Unit>
 }

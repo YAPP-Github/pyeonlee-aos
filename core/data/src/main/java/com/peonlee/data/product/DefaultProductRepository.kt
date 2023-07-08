@@ -14,4 +14,16 @@ class DefaultProductRepository @Inject constructor(
     override suspend fun searchProduct(searchRequest: ProductSearchRequest) = setResult {
         productApi.searchProduct(searchRequest)
     }
+
+    override suspend fun likeProduct(productId: Int) = setResult {
+        productApi.likeProduct(productId)
+    }
+
+    override suspend fun dislikeProduct(productId: Int) = setResult {
+        productApi.dislikeProduct(productId)
+    }
+
+    override suspend fun cancelLikeProduct(productId: Int) = setResult {
+        productApi.cancelLikeProductDetail(productId)
+    }
 }
