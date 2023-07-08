@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sort_latest">최신순</string>
+    <string name="sort_most_popular">인기순</string>
+    <string name="sort_most_evaluate">평가 높은순</string>
+    <string name="sort_most_review">리뷰 많은순</string>
+</resources>

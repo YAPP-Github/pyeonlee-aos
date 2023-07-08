@@ -38,7 +38,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         // 상단 상품 정렬 tab 설정
         SortType.values().forEach {
             tabProductSort.addTab(
-                tabProductSort.newTab().apply { text = it.sortName }
+                tabProductSort.newTab().apply { text = getString(it.sortName) }
             )
         }
         tabProductSort.addOnTabSelectedListener(onTabSelectedListener)

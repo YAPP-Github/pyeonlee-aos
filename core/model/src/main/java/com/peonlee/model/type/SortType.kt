@@ -1,5 +1,8 @@
 package com.peonlee.model.type
 
+import androidx.annotation.StringRes
+import com.peonlee.model.R
+
 /**
  * 상품 정렬 type
  * [사용 Activity]
@@ -7,10 +10,11 @@ package com.peonlee.model.type
  * - 메인 : 탐색
  */
 enum class SortType(
-    val sortName: String // 정렬 이름
+    @StringRes
+    val sortName: Int // 정렬 이름
 ) {
-    LATEST("최신순"),
-    MOST_POPULAR("인기순"),
-    MOST_EVALUATE("평가순"),
-    MOST_REVIEW("리뷰순")
+    LATEST(R.string.sort_latest),
+    MOST_POPULAR(R.string.sort_most_popular),
+    MOST_EVALUATE(R.string.sort_most_evaluate),
+    MOST_REVIEW(R.string.sort_most_review)
 }
