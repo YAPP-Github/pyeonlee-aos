@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.system.measureTimeMillis
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -34,45 +35,51 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            // 1. 신상품
-            val recentProducts = getHomeProductUseCase(orderBy = SortType.RECENT).getOrThrow()
-            // 2. 인기 상품
-            val popularProducts = getHomeProductUseCase(orderBy = SortType.POPULAR).getOrThrow()
-            // 3. 행사별 인기 상품
-            val eventProduct = StoreType.values().map { store ->
-                store to
-                    getHomeProductUseCase(
-                        orderBy = SortType.RECENT,
-                        pageSize = 6,
-                        retail = listOf(store.storeDataName),
-                        promotion = PromotionType.values().map { it.promotionDataName }
-                    ).getOrThrow()
-            }
-            _products.value = listOf(
-                TitleUiModel(id = 1, title = "주목할 신상"),
-                ConditionalProductsUiModel(
-                    id = 2, viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
-                    condition = ConditionType.NEW,
-                    products = recentProducts.content.map { it.toProductUiModel() }
-                ),
-                TitleUiModel(id = 3, title = "꾸준한 인기상품이에요."),
-                ConditionalProductsUiModel(
-                    id = 4, viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
-                    condition = ConditionType.POPULAR,
-                    products = popularProducts.content.map { it.toProductUiModel() }
-                ),
-                DividerUiModel(id = 5),
-                TitleUiModel(id = 6, title = "지금 행사 중!"),
-                EventByStoresUiModel(
-                    id = 7,
-                    stores = eventProduct.map { (store, products) ->
-                        ProductsByStoreUiModel(
-                            stores = store,
-                            products = products.content.slice(0..5).map { it.toProductUiModel() }
-                        )
-                    }
+            val time = measureTimeMillis {
+                // 1. 신상품
+                val recentProducts = getHomeProductUseCase(orderBy = SortType.RECENT).getOrThrow()
+                println("최신상품")
+                // 2. 인기 상품
+                val popularProducts = getHomeProductUseCase(orderBy = SortType.POPULAR).getOrThrow()
+                println("인기상품")
+                // 3. 행사별 인기 상품
+                val eventProduct = StoreType.values().map { store ->
+                    store to
+                        getHomeProductUseCase(
+                            orderBy = SortType.RECENT,
+                            pageSize = 6,
+                            retail = listOf(store.storeDataName),
+                            promotion = PromotionType.values().map { it.promotionDataName }
+                        ).getOrThrow()
+                }
+                println("행사상품")
+                _products.value = listOf(
+                    TitleUiModel(id = 1, title = "주목할 신상"),
+                    ConditionalProductsUiModel(
+                        id = 2, viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
+                        condition = ConditionType.NEW,
+                        products = recentProducts.content.map { it.toProductUiModel() }
+                    ),
+                    TitleUiModel(id = 3, title = "꾸준한 인기상품이에요."),
+                    ConditionalProductsUiModel(
+                        id = 4, viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
+                        condition = ConditionType.POPULAR,
+                        products = popularProducts.content.map { it.toProductUiModel() }
+                    ),
+                    DividerUiModel(id = 5),
+                    TitleUiModel(id = 6, title = "지금 행사 중!"),
+                    EventByStoresUiModel(
+                        id = 7,
+                        stores = eventProduct.map { (store, products) ->
+                            ProductsByStoreUiModel(
+                                stores = store,
+                                products = products.content.slice(0..5).map { it.toProductUiModel() }
+                            )
+                        }
+                    )
                 )
-            )
+            }
+            println(time)
         }
     }
 }
