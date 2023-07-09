@@ -3,5 +3,7 @@
     <style name="Base.Theme.PeonLee" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- 기본 배경 색 -->
         <item name="android:colorBackground">@color/bg0</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/bg0</item>
     </style>
 </resources>
