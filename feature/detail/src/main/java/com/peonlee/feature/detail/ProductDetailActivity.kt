@@ -1,29 +1,68 @@
 package com.peonlee.feature.detail
 
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.handle
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.feature.detail.databinding.ActivityProductDetailBinding
+import com.peonlee.review.edit.EditReviewActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
+    companion object {
+        private const val DEFAULT_PRODUCT_ID = -1
+        private const val EXTRA_PRODUCT_ID = "extra_product_id"
+        fun startActivity(context: Context, productId: Int) {
+            context.startActivity(Intent(context, ProductDetailActivity::class.java).apply {
+                putExtra(EXTRA_PRODUCT_ID, productId)
+            })
+        }
+    }
+
     @Inject
     lateinit var productRepository: ProductRepository
 
-    private val adapter by lazy { ProductDetailListAdapter() }
+    private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
+
+    private val adapter by lazy {
+        ProductDetailListAdapter {
+            ReviewManageDialog().run {
+                show(supportFragmentManager, tag)
+            }
+        }
+    }
+
     override fun bindingFactory(): ActivityProductDetailBinding = ActivityProductDetailBinding.inflate(layoutInflater)
 
     override fun initViews() {
+        if (productId == DEFAULT_PRODUCT_ID) {
+            finish()
+            return
+        }
         binding.ivBackBtn.setOnClickListener {
             finish()
         }
+        binding.btnUpvote.setOnClickListener {
+            lifecycleScope.launch {
+                productRepository.likeProduct(productId)
+            }
+        }
+        binding.btnDownvote.setOnClickListener {
+            lifecycleScope.launch {
+                productRepository.dislikeProduct(productId)
+            }
+        }
+        binding.btnReviewWrite.setOnClickListener {
+            startActivity(Intent(this, EditReviewActivity::class.java))
+        }
         binding.rvProductDetail.adapter = adapter
         lifecycleScope.launch {
-            productRepository.getProductDetail(721).handle({
+            productRepository.getProductDetail(productId).handle({
                 val itemList = listOf(
                     ProductDetailListItem.Product(
                         id = it.productId.toLong(),
@@ -57,7 +96,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = false,
                         reviewText = "고갱님",
                         isLike = false,
-                        likeCount = 0
+                        likeCount = 1,
+                        isMine = false
                     ),
                     ProductDetailListItem.Review(
                         id = 6,
@@ -66,7 +106,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = true,
                         reviewText = "고갱님",
                         isLike = true,
-                        likeCount = 2
+                        likeCount = 2,
+                        isMine = true
                     ),
                     ProductDetailListItem.Review(
                         id = 7,
@@ -75,7 +116,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = true,
                         reviewText = "고갱님",
                         isLike = true,
-                        likeCount = 4
+                        likeCount = 4,
+                        isMine = false
                     ),
                     ProductDetailListItem.Review(
                         id = 8,
@@ -84,7 +126,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = false,
                         reviewText = "고갱님",
                         isLike = false,
-                        likeCount = 0
+                        likeCount = 0,
+                        isMine = true
                     ),
                     ProductDetailListItem.Review(
                         id = 9,
@@ -93,7 +136,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = true,
                         reviewText = "고갱님",
                         isLike = true,
-                        likeCount = 5
+                        likeCount = 5,
+                        isMine = false
                     ),
                     ProductDetailListItem.Review(
                         id = 10,
@@ -102,7 +146,8 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         isUpvote = false,
                         reviewText = "고갱님",
                         isLike = false,
-                        likeCount = 0
+                        likeCount = 2,
+                        isMine = false
                     )
                 )
                 adapter.submitList(itemList)

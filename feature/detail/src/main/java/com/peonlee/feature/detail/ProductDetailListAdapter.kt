@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View.generateViewId
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.doOnAttach
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
+import com.peonlee.core.ui.viewholder.product.ProductViewHolder
 import com.peonlee.feature.detail.databinding.ListItemDetailProductBinding
 import com.peonlee.feature.detail.databinding.ListItemDividerBinding
 import com.peonlee.feature.detail.databinding.ListItemEventBinding
@@ -26,7 +28,9 @@ import com.peonlee.feature.detail.databinding.ListItemReviewBinding
 import com.peonlee.feature.detail.databinding.ListItemReviewHeaderBinding
 import java.time.LocalDateTime
 
-class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
+class ProductDetailListAdapter(
+    private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
+): MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
     override fun onCreateViewHolder(viewType: ProductDetailListItem.ViewType, parent: ViewGroup): CommonViewHolder<ProductDetailListItem> {
         return when (viewType) {
             ProductDetailListItem.ViewType.PRODUCT -> ProductViewHolder(
@@ -128,8 +132,14 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
     private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Rating>(binding) {
         override fun onBindView(item: ProductDetailListItem.Rating) = with(binding) {
             tvTotalRateCount.text = getStringWithArgs(com.peonlee.feature.detail.R.string.rate_count, item.rateCount)
-            tvThumbsUpPercent.text = "${item.upvoteRate}%"
-            tvThumbsDownPercent.text = "${item.downvoteRate}%"
+            tvThumbsUpPercent.text = getStringWithArgs(
+                R.string.item_product_recommended_percentage,
+                item.upvoteRate
+            )
+            tvThumbsDownPercent.text = getStringWithArgs(
+                R.string.item_product_recommended_percentage,
+                item.downvoteRate
+            )
 
             vThumbsUpRate.updateLayoutParams<LinearLayout.LayoutParams> {
                 weight = item.upvoteRate.toFloat()
@@ -141,6 +151,13 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
     }
 
     private inner class ReviewViewHolder(private val binding: ListItemReviewBinding) : CommonViewHolder<ProductDetailListItem.Review>(binding) {
+        init {
+            binding.ivManageReview.setOnClickListener {
+                getItem {
+                    showReviewManageDialog(it)
+                }
+            }
+        }
         override fun onBindView(item: ProductDetailListItem.Review) = with(binding) {
             tvComment.text = item.reviewText
             tvUserNameAndDate.text = getStringWithArgs(
@@ -151,9 +168,22 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
                     LocalDateTime.now()
                 )
             )
-            tvLikeCount.text = item.likeCount.toString()
+
+            tvLikeCount.setCompoundDrawablesWithIntrinsicBounds(
+                ResourcesCompat.getDrawable(
+                    binding.root.resources,
+                    if (item.isLike) {
+                        R.drawable.ic_filled_heart
+                    } else {
+                        R.drawable.ic_empty_heart
+                    }, null
+                ), null, null, null
+            )
+            tvLikeCount.text = if (item.likeCount > 0) item.likeCount.toString() else ""
             layoutThumbsDown.isVisible = item.isUpvote.not()
             layoutThumbsUp.isVisible = item.isUpvote
+            tvMyReviewBadge.isVisible = item.isMine
+            ivManageReview.isVisible = item.isMine
             return@with
         }
     }

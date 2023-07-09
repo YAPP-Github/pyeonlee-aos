@@ -66,7 +66,8 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
         val isUpvote: Boolean,
         val reviewText: String,
         val isLike: Boolean,
-        val likeCount: Int
+        val likeCount: Int,
+        val isMine: Boolean
     ) : ProductDetailListItem(ViewType.REVIEW)
 
     data class Divider(
