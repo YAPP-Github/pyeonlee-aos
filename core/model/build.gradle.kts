@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.peonlee.model"
 }
+
+dependencies {
+    implementation(project(":core:data"))
+}
