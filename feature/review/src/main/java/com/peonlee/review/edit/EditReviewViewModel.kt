@@ -46,8 +46,9 @@ class EditReviewViewModel @Inject constructor(
                 return@launch
             }
             _editReviewUiEvent.emit(EditReviewUiEvent.Loading)
+            // TODO 실제 리뷰를 작성할 상품의 id 로 변경
             val saveReviewResult = reviewRepository.saveReview(
-                productId = 6400,
+                productId = 6399,
                 review = editedReview
             )
             when (saveReviewResult) {
