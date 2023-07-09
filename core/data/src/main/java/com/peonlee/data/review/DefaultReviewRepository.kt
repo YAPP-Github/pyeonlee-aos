@@ -1,5 +1,6 @@
 package com.peonlee.data.review
 
+import com.peonlee.data.model.review.SaveReviewRequest
 import com.peonlee.data.setResult
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class DefaultReviewRepository @Inject constructor(
     override suspend fun saveReview(productId: Int, review: String) = setResult {
         reviewApi.saveReview(
             productId = productId,
-            content = review
-        ).body()!!
+            SaveReviewRequest(review = review)
+        ).body() ?: throw IllegalArgumentException()
     }
 }
