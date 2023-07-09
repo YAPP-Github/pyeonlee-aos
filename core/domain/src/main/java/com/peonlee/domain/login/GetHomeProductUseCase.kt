@@ -12,6 +12,7 @@ class GetHomeProductUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         orderBy: SortType,
+        pageSize: Int = 10,
         retail: List<String>? = null,
         promotion: List<String>? = null
     ): Result<ProductSearch> {
@@ -22,7 +23,7 @@ class GetHomeProductUseCase @Inject constructor(
                 minPrice = null,
                 offsetProductId = null,
                 orderBy = orderBy.sortName,
-                pageSize = 10,
+                pageSize = pageSize,
                 pbOnly = null,
                 productCategoryTypeList = null,
                 promotionRetailerList = retail,
