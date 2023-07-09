@@ -5,6 +5,8 @@ import com.peonlee.data.model.ProductSearch
 import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.model.type.SortType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GetHomeProductUseCase @Inject constructor(
@@ -15,8 +17,8 @@ class GetHomeProductUseCase @Inject constructor(
         pageSize: Int = 10,
         retail: List<String>? = null,
         promotion: List<String>? = null
-    ): Result<ProductSearch> {
-        return productRepository.searchProduct(
+    ): Result<ProductSearch> = withContext(Dispatchers.IO) {
+        productRepository.searchProduct(
             ProductSearchRequest(
                 keyword = null,
                 maxPrice = null,
