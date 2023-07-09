@@ -39,7 +39,7 @@ class ConditionalProductsViewHolder(
         }
         btnMoreProducts.text = getStringWithArgs(
             R.string.item_conditional_products_button_text,
-            item.condition.title
+            item.sortType.sortName
         )
     }
 }
