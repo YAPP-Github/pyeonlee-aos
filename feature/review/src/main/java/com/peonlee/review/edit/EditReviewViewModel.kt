@@ -54,8 +54,11 @@ class EditReviewViewModel @Inject constructor(
                 is Result.Error -> { /* TODO Toast */
                     val exception = saveReviewResult.exception.message
                     _editReviewUiEvent.emit(
-                        if (exception != null) EditReviewUiEvent.Fail.Exception(exception)
-                        else EditReviewUiEvent.Fail.Message(R.string.fail_to_review_api)
+                        if (exception != null) {
+                            EditReviewUiEvent.Fail.Exception(exception)
+                        } else {
+                            EditReviewUiEvent.Fail.Message(R.string.fail_to_review_api)
+                        }
                     )
                 }
 
