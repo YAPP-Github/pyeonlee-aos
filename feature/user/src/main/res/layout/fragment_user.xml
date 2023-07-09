@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvEvaluateName" />
 
     <TextView
-        android:id="@+id/tvStoreName"
+        android:id="@+id/tvSaveBoxName"
         style="@style/Text.Body02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +88,88 @@
         android:paddingVertical="19dp"
         android:text="보관함"
         android:textColor="@color/bg80"
+        app:layout_constraintEnd_toStartOf="@id/btnSaveBox"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/bg20"
+        android:text="준비중"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tvSaveBoxName"
+        app:layout_constraintStart_toEndOf="@id/tvSaveBoxName"
+        app:layout_constraintTop_toTopOf="@id/tvSaveBoxName" />
+
+    <ImageView
+        android:id="@+id/btnSaveBox"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="18dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/tvSaveBoxName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSaveBoxName"
+        app:layout_constraintTop_toTopOf="@id/tvSaveBoxName" />
+
+    <View
+        android:id="@+id/dividerSaveBox"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@color/bg20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSaveBoxName" />
+
+
+    <TextView
+        android:id="@+id/tvSettingName"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:gravity="center"
+        android:paddingVertical="19dp"
+        android:text="설정"
+        android:textColor="@color/bg80"
+        app:layout_constraintEnd_toStartOf="@id/btnSetting"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerSaveBox" />
+
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/bg20"
+        android:text="준비중"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tvSettingName"
+        app:layout_constraintStart_toEndOf="@id/tvSettingName"
+        app:layout_constraintTop_toTopOf="@id/tvSettingName" />
+
+    <ImageView
+        android:id="@+id/btnSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="18dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/tvSettingName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSettingName"
+        app:layout_constraintTop_toTopOf="@id/tvSettingName" />
+
+    <View
+        android:id="@+id/dividerSetting"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@color/bg20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSettingName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,7 @@
     <declare-styleable name="SmallChip">
         <attr name="android:text" format="reference|string" />
         <attr name="android:textColor" format="color" />
+        <attr name="android:backgroundTint" format="color" />
     </declare-styleable>
 
     <declare-styleable name="MediumChip">
