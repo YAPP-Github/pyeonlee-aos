@@ -4,6 +4,7 @@ androidGradleTool = "7.2.0"
 androidxActivity = "1.7.1"
 androidxComposeBom = "2023.05.00"
 androidxComposeCompiler = "1.4.6"
+andriidxCardView = "1.0.0"
 androidxCore = "1.10.1"
 androidxHilt = "1.0.0"
 androidxLifecycle = "2.6.1"
@@ -14,6 +15,7 @@ androidxTestCore = "1.5.0"
 androidxTestExt = "1.1.5"
 androidxTestRunner = "1.5.2"
 appCompat = "1.6.1"
+coil = "2.4.0"
 constraintLayout = "2.1.4"
 coreKtx = "1.10.1"
 coroutines = "1.6.4"
@@ -64,6 +66,7 @@ androidx-core-core-ktx = { module = "androidx.core:core-ktx", version.ref = "cor
 
 # androidX
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidXRecyclerview" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "andriidxCardView" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 
@@ -111,6 +114,9 @@ serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-jso
 squareup-okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
 squareup-okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttp" }
 squareup-retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
+# image
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
 # view model life cycle
 viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModel" }
