@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvNickname"
+        style="@style/Text.Subtitle01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="꿈꾸는날다람쥐" />
+
+    <TextView
+        android:id="@+id/tvEvaluateCount"
+        style="@style/Text.Subtitle01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textColor="@color/brand100"
+        app:layout_constraintEnd_toStartOf="@id/tvCommentCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNickname"
+        tools:text="0개" />
+
+    <TextView
+        android:id="@+id/tvEvaluateName"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="평가한 상품"
+        android:textColor="@color/bg40"
+        app:layout_constraintEnd_toEndOf="@id/tvEvaluateCount"
+        app:layout_constraintStart_toStartOf="@id/tvEvaluateCount"
+        app:layout_constraintTop_toBottomOf="@id/tvEvaluateCount" />
+
+    <TextView
+        android:id="@+id/tvCommentCount"
+        style="@style/Text.Subtitle01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:gravity="center"
+        android:textColor="@color/brand100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvEvaluateCount"
+        app:layout_constraintTop_toTopOf="@id/tvEvaluateCount"
+        tools:text="0개" />
+
+    <TextView
+        android:id="@+id/tvCommentName"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="남긴 리뷰"
+        android:textColor="@color/bg40"
+        app:layout_constraintEnd_toEndOf="@id/tvCommentCount"
+        app:layout_constraintStart_toStartOf="@id/tvCommentCount"
+        app:layout_constraintTop_toBottomOf="@id/tvCommentCount" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginTop="34dp"
+        android:background="@color/bg10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEvaluateName" />
+
+    <TextView
+        android:id="@+id/tvSaveBoxName"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:paddingVertical="19dp"
+        android:text="보관함"
+        android:textColor="@color/bg80"
+        app:layout_constraintEnd_toStartOf="@id/btnSaveBox"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/bg20"
+        android:text="준비중"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tvSaveBoxName"
+        app:layout_constraintStart_toEndOf="@id/tvSaveBoxName"
+        app:layout_constraintTop_toTopOf="@id/tvSaveBoxName" />
+
+    <ImageView
+        android:id="@+id/btnSaveBox"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="18dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/tvSaveBoxName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSaveBoxName"
+        app:layout_constraintTop_toTopOf="@id/tvSaveBoxName" />
+
+    <View
+        android:id="@+id/dividerSaveBox"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@color/bg20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSaveBoxName" />
+
+
+    <TextView
+        android:id="@+id/tvSettingName"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:gravity="center"
+        android:paddingVertical="19dp"
+        android:text="설정"
+        android:textColor="@color/bg80"
+        app:layout_constraintEnd_toStartOf="@id/btnSetting"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerSaveBox" />
+
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/bg20"
+        android:text="준비중"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/tvSettingName"
+        app:layout_constraintStart_toEndOf="@id/tvSettingName"
+        app:layout_constraintTop_toTopOf="@id/tvSettingName" />
+
+    <ImageView
+        android:id="@+id/btnSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="18dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/tvSettingName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSettingName"
+        app:layout_constraintTop_toTopOf="@id/tvSettingName" />
+
+    <View
+        android:id="@+id/dividerSetting"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@color/bg20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSettingName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.peonlee.core.ui.designsystem.chip
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.peonlee.core.ui.R
@@ -30,6 +31,21 @@ class SmallChip(
                     context.theme
                 )
             )
+            val chipBackgroundTint = getColor(
+                R.styleable.SmallChip_android_backgroundTint,
+                resources.getColor(
+                    R.color.system_r50,
+                    context.theme
+                )
+            )
+            /**
+             * TODO applyBackgroundAttributes Method 수정 필요
+             * background, backgroundTint 둘 중에 하나만 설정할 수 있는 코드
+             */
+            binding.layoutSmallChipBackground.apply {
+                backgroundTintList = ColorStateList.valueOf(chipBackgroundTint)
+            }
+
             applyTextAttributes(
                 chipTitleText,
                 chipTitleTextColor
