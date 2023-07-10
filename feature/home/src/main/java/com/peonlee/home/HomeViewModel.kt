@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.getOrThrow
 import com.peonlee.domain.login.GetHomeProductUseCase
-import com.peonlee.home.model.divider.DividerUiModel
+import com.peonlee.home.model.divider.HomeDividerUiModel
 import com.peonlee.home.model.product.ConditionalProductsUiModel
 import com.peonlee.home.model.product.EventByStoresUiModel
 import com.peonlee.home.model.product.ProductsByStoreUiModel
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
                 recentProduct.await(),
                 TitleUiModel(id = 3, title = "꾸준한 인기상품이에요."),
                 popularProduct.await(),
-                DividerUiModel(id = 5),
+                HomeDividerUiModel(id = 5),
                 TitleUiModel(id = 6, title = "지금 행사 중!"),
                 eventProduct.await()
             )
