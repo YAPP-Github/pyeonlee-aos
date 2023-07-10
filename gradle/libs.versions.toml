@@ -22,6 +22,7 @@ coroutines = "1.6.4"
 espressoCore = "3.5.1"
 firebaseBom = "32.0.0"
 fragment = "1.5.7"
+fragmentKtx = "1.3.6"
 googleService = "4.3.15"
 hilt = "2.46"
 junit = "4.13.2"
@@ -36,6 +37,7 @@ retrofit = "2.9.0"
 serializationConverter = "1.0.0"
 serializationJson = "1.5.1"
 splashScreen = "1.0.0-alpha01"
+viewModel = "2.3.1"
 
 [libraries]
 # compose
@@ -66,7 +68,7 @@ androidx-core-core-ktx = { module = "androidx.core:core-ktx", version.ref = "cor
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidXRecyclerview" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "andriidxCardView" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
-androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 
 # room
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
@@ -116,6 +118,9 @@ squareup-retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref =
 # image
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
+# view model life cycle
+viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModel" }
+livedata-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "viewModel" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
