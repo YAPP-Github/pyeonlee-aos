@@ -19,3 +19,13 @@ fun <T> Result<T>.handle(onSuccess: ((T) -> Unit)?, onError: ((Throwable) -> Uni
         is Result.Error -> onError?.invoke(exception)
     }
 }
+
+/**
+ * Error 일 경우 에는 throw 를 던질 수 있도록 처리
+ */
+fun <T> Result<T>.getOrThrow(): T {
+    return when (this) {
+        is Result.Success -> data
+        is Result.Error -> throw exception
+    }
+}

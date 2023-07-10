@@ -1,20 +1,12 @@
 package com.peonlee.model.type
 
-import androidx.annotation.StringRes
-import com.peonlee.model.R
-
-/**
- * 상품 정렬 type
- * [사용 Activity]
- * - 메인 : 홈
- * - 메인 : 탐색
- */
 enum class SortType(
-    @StringRes
-    val sortName: Int // 정렬 이름
+    val uiNameForHome: String,
+    val uiNameForExplore: String,
+    val sortName: String // 서버와 연동할 order type 이름
 ) {
-    LATEST(R.string.sort_latest),
-    MOST_POPULAR(R.string.sort_most_popular),
-    MOST_EVALUATE(R.string.sort_most_evaluate),
-    MOST_REVIEW(R.string.sort_most_review)
+    RECENT("신상품", "최신순", "RECENT"),
+    POPULAR("인기상품", "인기순", "POPULAR"),
+    LIKE("", "평가 많은순", "LIKE"),
+    COMMENT("", "리뷰 많은순", "COMMENT")
 }

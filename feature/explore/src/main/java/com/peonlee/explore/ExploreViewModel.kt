@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ExploreViewModel @Inject constructor() : ViewModel() {
     // 현재 선택 중인 정렬 타입
-    private val _productSortType = MutableStateFlow(SortType.LATEST)
+    private val _productSortType = MutableStateFlow(SortType.RECENT)
 
     init {
         // TODO 정렬 타입이 변경될 때마다 서버 에서 상품 정보(페이징) 요청
