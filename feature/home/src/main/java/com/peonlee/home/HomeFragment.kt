@@ -5,11 +5,14 @@ import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
 import com.peonlee.home.model.divider.DividerUiModel
+import com.peonlee.home.model.product.EVENT_PRODUCTS_DUMMY
 import com.peonlee.home.model.product.NEW_PRODUCTS
 import com.peonlee.home.model.product.POP_PRODUCTS
 import com.peonlee.home.model.review.RECENT_REVIEW
 import com.peonlee.home.model.title.TitleUiModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun bindingFactory(parent: ViewGroup): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater, parent, false)
@@ -17,7 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initViews() {
         val adapter = HomeAdapter()
-        binding.layoutHome.adapter = adapter
+        binding.rvHome.adapter = adapter
         adapter.submitList(DUMMY)
     }
 
@@ -38,5 +41,8 @@ private val DUMMY = listOf(
     )
 ) + POP_PRODUCTS + listOf(
     DividerUiModel(id = -3),
-    TitleUiModel(id = -4, title = "최근 리뷰")
+    TitleUiModel(id = -4, title = "지금 행사 중!")
+) + EVENT_PRODUCTS_DUMMY + listOf(
+    DividerUiModel(id = -5),
+    TitleUiModel(id = -6, title = "최근 리뷰")
 ) + RECENT_REVIEW

@@ -8,6 +8,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
     implementation(project(":core:common"))
+    implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
 }

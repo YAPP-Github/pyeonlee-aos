@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:evaluate"))
     implementation(project(":feature:main"))
+    implementation(project(":feature:detail"))
 
     implementation(libs.androidx.core.splashscreen)
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    android:paddingTop="26dp"
+    android:paddingBottom="32dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/Text.Subtitle01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/rating_title"
+            android:textColor="@color/bg100" />
+
+        <TextView
+            android:id="@+id/tvTotalRateCount"
+            style="@style/Text.Body05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/bg40"
+            tools:text="432명 평가" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100">
+
+            <View
+                android:id="@+id/vThumbsUpRate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/brand100"
+                tools:layout_weight="50" />
+
+            <View
+                android:id="@+id/vThumbsDownRate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/system_r100"
+                tools:layout_weight="50" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp">
+
+        <ImageView
+            android:id="@+id/ivThumbsUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_thumbs_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/brand100"
+            tools:tint="@color/brand100" />
+
+        <TextView
+            android:id="@+id/tvThumbsUpPercent"
+            style="@style/Text.Subtitle01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/bg100"
+            app:layout_constraintBottom_toTopOf="@id/tvThumbsUpDesc"
+            app:layout_constraintStart_toEndOf="@id/ivThumbsUp"
+            app:layout_constraintTop_toTopOf="@id/ivThumbsUp"
+            tools:text="87%" />
+
+        <TextView
+            android:id="@+id/tvThumbsUpDesc"
+            style="@style/Text.Body05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upvote_desc"
+            android:textColor="@color/bg40"
+            app:layout_constraintBottom_toBottomOf="@id/ivThumbsUp"
+            app:layout_constraintStart_toStartOf="@id/tvThumbsUpPercent"
+            app:layout_constraintTop_toBottomOf="@id/tvThumbsUpPercent" />
+
+        <ImageView
+            android:id="@+id/ivThumbsDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_thumbs_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/system_r100"
+            tools:tint="@color/system_r100" />
+
+
+        <TextView
+            android:id="@+id/tvThumbsDownPercent"
+            style="@style/Text.Subtitle01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/bg100"
+            app:layout_constraintBottom_toTopOf="@id/tvThumbsDownDesc"
+            app:layout_constraintEnd_toStartOf="@id/ivThumbsDown"
+            app:layout_constraintTop_toTopOf="@id/ivThumbsDown"
+            tools:text="87%" />
+
+        <TextView
+            android:id="@+id/tvThumbsDownDesc"
+            style="@style/Text.Body05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/downvote_desc"
+            android:textColor="@color/bg40"
+            app:layout_constraintBottom_toBottomOf="@id/ivThumbsDown"
+            app:layout_constraintEnd_toEndOf="@id/tvThumbsDownPercent"
+            app:layout_constraintTop_toBottomOf="@id/tvThumbsDownPercent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
