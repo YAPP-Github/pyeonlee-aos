@@ -5,6 +5,7 @@ import com.peonlee.core.data.BuildConfig
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import com.peonlee.data.product.ProductApi
+import com.peonlee.data.review.ReviewApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,6 +62,12 @@ object NetworkModule {
     @Provides
     fun provideProductApi(retrofit: Retrofit): ProductApi {
         return retrofit.create(ProductApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReviewApi(retrofit: Retrofit): ReviewApi {
+        return retrofit.create(ReviewApi::class.java)
     }
 
     private object ConnectInfo {

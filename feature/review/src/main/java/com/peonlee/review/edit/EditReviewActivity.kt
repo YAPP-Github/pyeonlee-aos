@@ -10,17 +10,18 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.focus
+import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEvent
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEventListener
 import com.peonlee.review.R
 import com.peonlee.review.databinding.ActivityEditReviewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -101,26 +102,42 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
     }
 
     private fun initState() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                editReviewViewModel.review.collect {
-                    binding.tvTextCount.text = getString(
-                        R.string.edit_review_text_count,
-                        it.length,
-                        REVIEW_MAX_LENGTH
-                    )
-                    val btnColor = getColor(
-                        if (it.length in REVIEW_MIN_LENGTH..REVIEW_MAX_LENGTH) {
-                            com.peonlee.core.ui.R.color.brand100
-                        } else {
-                            com.peonlee.core.ui.R.color.brand50
-                        }
-                    )
-                    // 작성한 리뷰의 길이가 최소 <= length <= 최대인 경우 버튼 색상 변경
-                    binding.btnSave.backgroundTintList = ColorStateList.valueOf(btnColor)
+        // 사용자가 작성한 review
+        editReviewViewModel.review.flowWithLifecycle(lifecycle)
+            .onEach { setReviewEditor(it) }
+            .launchIn(lifecycleScope)
+        // EditReview Ui Event
+        editReviewViewModel.editReviewUiEvent.flowWithLifecycle(lifecycle)
+            .onEach {
+                when (it) {
+                    is EditReviewUiEvent.Fail.Exception -> showToast(it.message)
+                    is EditReviewUiEvent.Fail.Message -> showToast(it.message)
+                    EditReviewUiEvent.Loading -> {}
+                    EditReviewUiEvent.Success -> finish()
                 }
             }
-        }
+            .launchIn(lifecycleScope)
+    }
+
+    /**
+     * 사용자가 작성한 review 에 따라 View Binding
+     * @param review viewModel 로 부터 전달된 리뷰 text
+     */
+    private fun setReviewEditor(review: String) {
+        binding.tvTextCount.text = getString(
+            R.string.edit_review_text_count,
+            review.length,
+            REVIEW_MAX_LENGTH
+        )
+        val btnColor = getColor(
+            if (review.length in REVIEW_MIN_LENGTH..REVIEW_MAX_LENGTH) {
+                com.peonlee.core.ui.R.color.brand100
+            } else {
+                com.peonlee.core.ui.R.color.brand50
+            }
+        )
+        // 작성한 리뷰의 길이가 최소 <= length <= 최대인 경우 버튼 색상 변경
+        binding.btnSave.backgroundTintList = ColorStateList.valueOf(btnColor)
     }
 
     /**

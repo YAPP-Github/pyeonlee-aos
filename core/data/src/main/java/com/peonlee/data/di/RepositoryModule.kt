@@ -4,6 +4,8 @@ import com.peonlee.data.login.LoginRepository
 import com.peonlee.data.login.LoginRepositoryImpl
 import com.peonlee.data.product.DefaultProductRepository
 import com.peonlee.data.product.ProductRepository
+import com.peonlee.data.review.DefaultReviewRepository
+import com.peonlee.data.review.ReviewRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -24,4 +26,10 @@ abstract class RepositoryModule {
     abstract fun bindProductRepository(
         productRepository: DefaultProductRepository
     ): ProductRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindReviewRepository(
+        reviewRepository: DefaultReviewRepository
+    ): ReviewRepository
 }
