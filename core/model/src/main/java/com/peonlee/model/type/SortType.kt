@@ -8,5 +8,5 @@ enum class SortType(
     RECENT("신상품", "최신순", "RECENT"),
     POPULAR("인기상품", "인기순", "POPULAR"),
     LIKE("", "평가 많은순", "LIKE"),
-    COMMENT("", "리뷰 많은순","COMMENT")
+    COMMENT("", "리뷰 많은순", "COMMENT")
 }
