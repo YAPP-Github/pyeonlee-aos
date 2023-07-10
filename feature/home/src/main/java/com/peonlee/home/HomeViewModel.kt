@@ -55,7 +55,8 @@ class HomeViewModel @Inject constructor(
             it.toProductUiModel()
         }
         ConditionalProductsUiModel(
-            id = id, viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
+            id = id,
+            viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
             sortType = sortType,
             products = conditionalProducts
         )
@@ -73,7 +74,7 @@ class HomeViewModel @Inject constructor(
                     ).getOrThrow().content
                     ProductsByStoreUiModel(
                         stores = store,
-                        products = products.subList(0, 5).map { it.toProductUiModel() }
+                        products = products.subList(0, 6).map { it.toProductUiModel() }
                     )
                 }
             }.awaitAll()
