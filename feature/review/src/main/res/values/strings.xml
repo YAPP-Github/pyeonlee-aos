@@ -7,4 +7,8 @@
     <string name="edit_review_text_count">%d/%d</string>
     <string name="edit_review_close_button_description">리뷰 종료</string>
     <string name="edit_review_product_img_description">상품 이미지</string>
+
+    <!-- Toast 메세지 -->
+    <string name="fail_to_review_length">리뷰는 최대 10글자 이상 적어주셔야 합니다.</string>
+    <string name="fail_to_review_api">리뷰를 저장하는 도중 문제가 발생하였습니다.</string>
 </resources>

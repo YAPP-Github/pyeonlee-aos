@@ -35,6 +35,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 "implementation"(libs.findLibrary("androidx.recyclerview").get())
                 "implementation"(libs.findLibrary("androidx.appcompat").get())
 
+                "implementation"(libs.findLibrary("viewmodel.ktx").get())
+                "implementation"(libs.findLibrary("livedata.lifecycle").get())
                 "implementation"(libs.findBundle("fragment").get())
             }
         }
