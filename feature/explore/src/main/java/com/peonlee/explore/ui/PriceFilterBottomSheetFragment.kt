@@ -2,6 +2,8 @@ package com.peonlee.explore.ui
 
 import android.view.View
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
+import com.peonlee.core.ui.extensions.toFormattedMoney
+import com.peonlee.explore.R
 import com.peonlee.explore.databinding.ItemPriceFilterBinding
 import com.peonlee.explore.databinding.LayoutPriceFilterBinding
 
@@ -12,10 +14,25 @@ class PriceFilterBottomSheetFragment : BaseBottomSheetFragment("가격") {
         // 하위 Filter 추가
         PriceFilter.values().forEach {
             val priceFilterItem = ItemPriceFilterBinding.inflate(layoutInflater).root
-            priceFilterItem.text = it.minPrice.toString()
+            priceFilterItem.text = getRangePrice(it)
             radioGroup.addView(priceFilterItem)
         }
         return radioGroup
+    }
+
+    private fun getRangePrice(priceFilter: PriceFilter): String {
+        return if (priceFilter.maxPrice != null) {
+            getString(
+                R.string.full_price_range,
+                priceFilter.minPrice.toFormattedMoney(),
+                priceFilter.maxPrice.toFormattedMoney()
+            )
+        } else {
+            getString(
+                R.string.half_price_range,
+                priceFilter.minPrice.toFormattedMoney()
+            )
+        }
     }
 
     private enum class PriceFilter(

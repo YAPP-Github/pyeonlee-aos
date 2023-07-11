@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Price Filter -->
+    <string name="full_price_range">%s 이상 ~ %s 미만</string>
+    <string name="half_price_range">%s 이상</string>
+</resources>
