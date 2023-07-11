@@ -41,7 +41,7 @@
 
     <style name="Text.Subtitle02" parent="PeonLee.Typography">
         <item name="android:textSize">@dimen/text_size_16dp</item>
-        <가item name="android:fontFamily">@font/pretendard_medium</가item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="fontWeight">500</item>
     </style>
 
