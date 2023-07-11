@@ -45,6 +45,12 @@
         <item name="fontWeight">500</item>
     </style>
 
+    <style name="Text.Subtitle03" parent="PeonLee.Typography">
+        <item name="android:textSize">@dimen/text_size_16dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="fontWeight">700</item>
+    </style>
+
     <!-- Body -->
     <style name="Text.Body01" parent="PeonLee.Typography">
         <item name="android:textSize">@dimen/text_size_14dp</item>
