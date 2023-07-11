@@ -10,7 +10,9 @@ import com.peonlee.core.ui.databinding.BaseBottomsheetDialogBinding
 /**
  * BottomSheetFragment 공통 코드 관리
  */
-class BaseBottomSheetFragment : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetFragment(
+    private val title: String
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BaseBottomsheetDialogBinding
 
@@ -26,6 +28,10 @@ class BaseBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvTitle.text = "Hello WOrld"
+        binding.tvTitle.text = title
+        // 하위 클래스에 따른 filter layout 추가
+        binding.layoutFilter.addView(getFilterLayout())
     }
+
+    abstract fun getFilterLayout(): View
 }
