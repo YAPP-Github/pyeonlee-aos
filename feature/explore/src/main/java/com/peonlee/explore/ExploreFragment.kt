@@ -14,6 +14,8 @@ import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.databinding.FragmentExploreBinding
+import com.peonlee.explore.ui.EventFilterBottomSheetFragment
+import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
@@ -25,14 +27,6 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
 
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
         return FragmentExploreBinding.inflate(layoutInflater, parent, false)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun initViews() = with(binding) {
@@ -58,6 +52,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             )
         }
         productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
+        EventFilterBottomSheetFragment().show(childFragmentManager, "Price")
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
