@@ -10,6 +10,9 @@ import com.peonlee.model.type.EventType
 import com.peonlee.model.type.StoreType
 
 class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
+
+    private val selectedStore = mutableListOf<StoreType>()
+
     override fun getFilterLayout(parent: ViewGroup): View {
         val listLayout = LayoutSelectorFilterBinding.inflate(layoutInflater, parent, false).root
 
@@ -20,6 +23,7 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
                 StoreType.values().forEach { store ->
                     flexEventChip.addView(
                         ItemFilterChipBinding.inflate(layoutInflater).apply {
+                            root.setCancelColor()
                             root.text = store.storeName
                         }.root
                     )
@@ -33,6 +37,7 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
                 EventType.values().forEach { event ->
                     flexEventChip.addView(
                         ItemFilterChipBinding.inflate(layoutInflater).apply {
+                            root.setCancelColor()
                             root.text = event.eventName
                         }.root
                     )

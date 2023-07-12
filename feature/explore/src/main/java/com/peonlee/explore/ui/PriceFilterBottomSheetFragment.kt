@@ -18,6 +18,7 @@ class PriceFilterBottomSheetFragment : BaseBottomSheetFragment("가격") {
             priceFilterItem.text = getRangePrice(it)
             radioGroup.addView(priceFilterItem)
         }
+
         return radioGroup
     }
 

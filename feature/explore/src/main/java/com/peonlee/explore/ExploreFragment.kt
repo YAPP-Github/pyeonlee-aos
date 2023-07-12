@@ -12,6 +12,8 @@ import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.databinding.FragmentExploreBinding
 import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
+import com.peonlee.explore.ui.EventFilterBottomSheetFragment
+import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
@@ -48,7 +50,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             )
         }
         productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
-        CategoryFilterBottomSheetFragment().show(childFragmentManager, "Price")
+        EventFilterBottomSheetFragment().show(childFragmentManager, "Price")
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
