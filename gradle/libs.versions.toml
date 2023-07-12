@@ -21,6 +21,7 @@ coreKtx = "1.10.1"
 coroutines = "1.6.4"
 espressoCore = "3.5.1"
 firebaseBom = "32.0.0"
+flowboxLayout = "3.0.0"
 fragment = "1.5.7"
 fragmentKtx = "1.5.2"
 googleService = "4.3.15"
@@ -121,6 +122,8 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 # view model life cycle
 viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModel" }
 livedata-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "viewModel" }
+
+flexbox-layout = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flowboxLayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
