@@ -3,22 +3,28 @@ package com.peonlee.explore.ui
 import android.view.View
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
+import com.peonlee.core.ui.designsystem.selector.SmallSelector
 import com.peonlee.explore.databinding.ItemFilterChipBinding
 import com.peonlee.explore.databinding.ItemSelectorFilterBinding
 import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
 
 class CategoryFilterBottomSheetFragment : BaseBottomSheetFragment("카테고리") {
+
+    private val selectedCategory = mutableListOf<Category>()
+
     override fun getFilterLayout(parent: ViewGroup): View {
         val listLayout = LayoutSelectorFilterBinding.inflate(layoutInflater, parent, false).root
 
         CategoryFilter.values().forEach { categoryFilter ->
             listLayout.addView(
-                ItemSelectorFilterBinding.inflate(layoutInflater).apply {
+                ItemSelectorFilterBinding.inflate(layoutInflater, listLayout, false).apply {
                     tvTitle.text = categoryFilter.title
                     categoryFilter.filters.forEach { category ->
                         flexEventChip.addView(
                             ItemFilterChipBinding.inflate(layoutInflater).apply {
                                 root.text = category.categoryName
+                                root.setCancelColor()
+                                root.setOnClickListener { onSelectCategory(root, category) }
                             }.root
                         )
                     }
@@ -28,7 +34,17 @@ class CategoryFilterBottomSheetFragment : BaseBottomSheetFragment("카테고리"
         return listLayout
     }
 
-
+    private fun onSelectCategory(
+        selector: SmallSelector, category: Category
+    ) {
+        if (category in selectedCategory) {
+            selector.setCancelColor()
+            selectedCategory.remove(category)
+        } else {
+            selector.setFillColor()
+            selectedCategory.add(category)
+        }
+    }
 }
 
 private enum class CategoryFilter(
