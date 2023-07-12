@@ -1,6 +1,5 @@
 package com.peonlee.core.ui.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,7 @@ abstract class BaseBottomSheetFragment(
         savedInstanceState: Bundle?
     ): View {
         binding = BaseBottomsheetDialogBinding.inflate(inflater, container, false)
-            return binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

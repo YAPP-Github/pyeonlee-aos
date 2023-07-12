@@ -52,7 +52,7 @@ class SmallSelector(
 
             applyTextAttributes(
                 selectorTitleText,
-                selectorTextColor
+                selectorTextColor가
             )
 
             applyBackground(selectorBackground)
@@ -85,7 +85,7 @@ class SmallSelector(
         titleTextColor: Int
     ) {
         binding.tvSelectorTitle.apply {
-            text = titleText
+            text = text.ifBlank { titleText }
             setTextColor(titleTextColor)
         }
     }
