@@ -2,8 +2,11 @@ package com.peonlee.explore.ui
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
+import com.google.android.flexbox.FlexboxLayout
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.designsystem.selector.SmallSelector
+import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.explore.databinding.ItemFilterChipBinding
 import com.peonlee.explore.databinding.ItemSelectorFilterBinding
 import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
@@ -14,6 +17,8 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
 
     private val selectedStore = mutableListOf<StoreType>()
     private val selectedEvent = mutableListOf<EventType>()
+    private var isAll: Boolean = false
+    private var eventLayout: FlexboxLayout? = null
 
     override fun getFilterLayout(parent: ViewGroup): View {
         val listLayout = LayoutSelectorFilterBinding.inflate(layoutInflater, parent, false).root
@@ -34,21 +39,28 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
             }.root
         )
         // 이벤트(행사)
-        listLayout.addView(
-            ItemSelectorFilterBinding.inflate(layoutInflater).apply {
-                tvTitle.text = "행사 상품"
-                EventType.values().forEach { event ->
-                    flexEventChip.addView(
-                        ItemFilterChipBinding.inflate(layoutInflater).apply {
-                            root.setCancelColor()
-                            root.text = event.eventName
-                            root.setOnClickListener { onClickEvent(root, event) }
-                        }.root
-                    )
-                }
-            }.root
-        )
+
+        listLayout.addView(ItemSelectorFilterBinding.inflate(layoutInflater).apply {
+            tvTitle.text = "행사 상품"
+            eventLayout = flexEventChip
+            EventType.values().forEach { event ->
+                flexEventChip.addView(
+                    ItemFilterChipBinding.inflate(layoutInflater).apply {
+                        root.setCancelColor()
+                        root.text = event.eventName
+                        root.setOnClickListener { onClickEvent(root, event) }
+                    }.root
+                )
+            }
+        }.root)
         return listLayout
+    }
+
+    override fun getProductResult(): ProductSearchRequest {
+        return ProductSearchRequest(
+            promotionRetailerList = selectedStore.map { it.storeDataName },
+            promotionTypeList = selectedEvent.map { it.eventDataName }
+        )
     }
 
     private fun onClickStoreType(
@@ -66,12 +78,46 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
     private fun onClickEvent(
         selector: SmallSelector, eventType: EventType
     ) {
-        if (eventType in selectedEvent) {
-            selectedEvent.remove(eventType)
-            selector.setCancelColor()
+        if (isAll) { // 행사 전체일 때
+            isAll = false
+            when (eventType) {
+                EventType.ALL -> { // 행사 전체 Click
+                    selector.setCancelColor()
+                    selectedEvent.clear()
+                }
+
+                else -> {
+                    eventLayout?.children?.forEach {
+                        (it as? SmallSelector)?.setCancelColor()
+                    }
+                    selector.setFillColor()
+                    selectedEvent.clear()
+                    selectedEvent.add(eventType)
+                }
+            }
         } else {
-            selectedEvent.add(eventType)
-            selector.setFillColor()
+            when (eventType) {
+                EventType.ALL -> {
+                    eventLayout?.children?.forEach {
+                        (it as? SmallSelector)?.setCancelColor()
+                    }
+                    selector.setFillColor()
+                    selectedEvent.addAll(
+                        EventType.values().filterNot { it == EventType.ALL }
+                    )
+                    isAll = true
+                }
+
+                else -> {
+                    if (eventType in selectedEvent) {
+                        selectedEvent.remove(eventType)
+                        selector.setCancelColor()
+                    } else {
+                        selectedEvent.add(eventType)
+                        selector.setFillColor()
+                    }
+                }
+            }
         }
     }
 }

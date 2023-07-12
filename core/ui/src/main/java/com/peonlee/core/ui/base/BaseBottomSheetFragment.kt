@@ -8,6 +8,7 @@ import android.view.WindowManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.BaseBottomsheetDialogBinding
+import com.peonlee.data.model.request.ProductSearchRequest
 
 
 /**
@@ -18,6 +19,7 @@ abstract class BaseBottomSheetFragment(
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BaseBottomsheetDialogBinding
+    private var onCompleteListener: ((ProductSearchRequest) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,16 +36,27 @@ abstract class BaseBottomSheetFragment(
         dialog?.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog?.window?.setDimAmount(0.6f)
 
-        binding.tvTitle.text = title
-        // 하위 클래스에 따른 filter layout 추가
-        binding.layoutFilter.addView(
-            getFilterLayout(binding.layoutFilter)
-        )
+        binding.apply {
+            tvTitle.text = title
+            // 하위 클래스에 따른 filter layout 추가
+            layoutFilter.addView(
+                getFilterLayout(binding.layoutFilter)
+            )
+            binding.btnComplete.setOnClickListener {
+                onCompleteListener?.invoke(getProductResult())
+            }
+        }
     }
 
     override fun getTheme(): Int {
         return R.style.RoundedBottomSheetDialog
     }
 
+    fun setOnCompleteListener(onCompleteListener: (ProductSearchRequest) -> Unit) {
+        this.onCompleteListener = onCompleteListener
+    }
+
     abstract fun getFilterLayout(parent: ViewGroup): View
+
+    abstract fun getProductResult(): ProductSearchRequest
 }

@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.designsystem.selector.SmallSelector
+import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.explore.databinding.ItemFilterChipBinding
 import com.peonlee.explore.databinding.ItemSelectorFilterBinding
 import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
@@ -32,6 +33,13 @@ class CategoryFilterBottomSheetFragment : BaseBottomSheetFragment("카테고리"
             )
         }
         return listLayout
+    }
+
+    override fun getProductResult(): ProductSearchRequest {
+        return ProductSearchRequest(
+            productCategoryTypeList = selectedCategory.filterNot { it == Category.PB }.map { it.categoryType },
+            pbOnly = Category.PB in selectedCategory
+        )
     }
 
     private fun onSelectCategory(

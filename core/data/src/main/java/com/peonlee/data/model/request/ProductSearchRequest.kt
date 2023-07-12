@@ -1,14 +1,14 @@
 package com.peonlee.data.model.request
 
 data class ProductSearchRequest(
-    val keyword: String?,
-    val maxPrice: Int?,
-    val minPrice: Int?,
-    val offsetProductId: Int?,
-    val orderBy: String?,
-    val pageSize: Int,
-    val pbOnly: Boolean?,
-    val productCategoryTypeList: List<String>?,
-    val promotionRetailerList: List<String>?,
-    val promotionTypeList: List<String>?
+    val keyword: String? = null,
+    val maxPrice: Int? = null,
+    val minPrice: Int? = null,
+    val offsetProductId: Int? = null,
+    val orderBy: String? = null,
+    val pageSize: Int = 10,
+    val pbOnly: Boolean? = null,
+    val productCategoryTypeList: List<String>? = null,
+    val promotionRetailerList: List<String>? = null,
+    val promotionTypeList: List<String>? = null
 )

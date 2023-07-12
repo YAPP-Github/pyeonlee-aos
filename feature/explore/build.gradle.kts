@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
 
