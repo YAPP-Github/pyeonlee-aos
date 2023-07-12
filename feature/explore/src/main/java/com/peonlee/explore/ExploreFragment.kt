@@ -1,8 +1,5 @@
 package com.peonlee.explore
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -14,8 +11,7 @@ import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.databinding.FragmentExploreBinding
-import com.peonlee.explore.ui.EventFilterBottomSheetFragment
-import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
+import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
@@ -52,7 +48,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             )
         }
         productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
-        EventFilterBottomSheetFragment().show(childFragmentManager, "Price")
+        CategoryFilterBottomSheetFragment().show(childFragmentManager, "Price")
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
