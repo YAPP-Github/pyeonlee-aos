@@ -50,7 +50,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             )
         }
         productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
-        EventFilterBottomSheetFragment().show(childFragmentManager, "Price")
+        PriceFilterBottomSheetFragment().show(childFragmentManager, "Price")
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {

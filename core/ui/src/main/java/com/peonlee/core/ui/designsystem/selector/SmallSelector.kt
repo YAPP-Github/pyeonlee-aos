@@ -52,7 +52,7 @@ class SmallSelector(
 
             applyTextAttributes(
                 selectorTitleText,
-                selectorTextColor가
+                selectorTextColor
             )
 
             applyBackground(selectorBackground)

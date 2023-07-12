@@ -9,6 +9,9 @@ import com.peonlee.explore.databinding.ItemPriceFilterBinding
 import com.peonlee.explore.databinding.LayoutPriceFilterBinding
 
 class PriceFilterBottomSheetFragment : BaseBottomSheetFragment("가격") {
+
+    private var currentSelectedPrice: PriceFilter? = null
+
     override fun getFilterLayout(parent: ViewGroup): View {
         val radioGroup = LayoutPriceFilterBinding.inflate(layoutInflater, parent, false).root
 
@@ -19,6 +22,9 @@ class PriceFilterBottomSheetFragment : BaseBottomSheetFragment("가격") {
             radioGroup.addView(priceFilterItem)
         }
 
+        radioGroup.setOnCheckedChangeListener { _, position ->
+            currentSelectedPrice = PriceFilter.values().getOrNull(position - 1)
+        }
         return radioGroup
     }
 
