@@ -1,6 +1,7 @@
 package com.peonlee.explore.ui
 
 import android.view.View
+import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.explore.R
@@ -8,8 +9,8 @@ import com.peonlee.explore.databinding.ItemPriceFilterBinding
 import com.peonlee.explore.databinding.LayoutPriceFilterBinding
 
 class PriceFilterBottomSheetFragment : BaseBottomSheetFragment("가격") {
-    override fun getFilterLayout(): View {
-        val radioGroup = LayoutPriceFilterBinding.inflate(layoutInflater).root
+    override fun getFilterLayout(parent: ViewGroup): View {
+        val radioGroup = LayoutPriceFilterBinding.inflate(layoutInflater, parent, false).root
 
         // 하위 Filter 추가
         PriceFilter.values().forEach {

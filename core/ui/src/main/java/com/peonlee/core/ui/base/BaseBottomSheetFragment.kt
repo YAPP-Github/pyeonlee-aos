@@ -30,8 +30,10 @@ abstract class BaseBottomSheetFragment(
 
         binding.tvTitle.text = title
         // 하위 클래스에 따른 filter layout 추가
-        binding.layoutFilter.addView(getFilterLayout())
+        binding.layoutFilter.addView(
+            getFilterLayout(binding.layoutFilter)
+        )
     }
 
-    abstract fun getFilterLayout(): View
+    abstract fun getFilterLayout(parent: ViewGroup): View
 }
