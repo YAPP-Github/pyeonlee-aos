@@ -9,9 +9,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
+import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
+import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.explore.databinding.FragmentExploreBinding
+import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
 import com.peonlee.explore.ui.EventFilterBottomSheetFragment
+import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
@@ -20,6 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
     private val exploreViewModel: ExploreViewModel by viewModels()
+
+    private var currentBottomSheet: BaseBottomSheetFragment? = null
 
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
         return FragmentExploreBinding.inflate(layoutInflater, parent, false)
@@ -43,12 +49,17 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             adapter = productAdapter
             addItemDecoration(
                 ContentPaddingDecoration(
-                    PaddingValues(top = 12, right = 4, bottom = 12, left = 4)
+                    PaddingValues(right = 4, bottom = 12, left = 4)
                 )
             )
         }
         productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
-        EventFilterBottomSheetFragment().show(childFragmentManager, "Price")
+
+        binding.let {
+            chipPriceFilter.setOnClickListener { showFilterBottomSheet(Filter.PRICE) }
+            chipEventFilter.setOnClickListener { showFilterBottomSheet(Filter.EVENT) }
+            chipCategoryFilter.setOnClickListener { showFilterBottomSheet(Filter.CATEGORY) }
+        }
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
@@ -62,6 +73,25 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             exploreViewModel.setProductSortType(SortType.values()[sortPos])
         }
     }
+
+    private fun showFilterBottomSheet(filter: Filter) {
+        currentBottomSheet = (when (filter) {
+            Filter.PRICE -> PriceFilterBottomSheetFragment()
+            Filter.EVENT -> EventFilterBottomSheetFragment()
+            Filter.CATEGORY -> CategoryFilterBottomSheetFragment()
+        })
+        currentBottomSheet
+            ?.setOnCompleteListener(::requestProduct)
+            ?.show(childFragmentManager, "Filter")
+    }
+
+    private fun requestProduct(request: ProductSearchRequest) {
+        currentBottomSheet?.dismiss()
+        currentBottomSheet = null
+        println(request)
+    }
+
+    private enum class Filter { PRICE, EVENT, CATEGORY }
 
     companion object {
         fun getInstance(): ExploreFragment = ExploreFragment()

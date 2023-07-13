@@ -52,8 +52,11 @@ abstract class BaseBottomSheetFragment(
         return R.style.RoundedBottomSheetDialog
     }
 
-    fun setOnCompleteListener(onCompleteListener: (ProductSearchRequest) -> Unit) {
+    fun setOnCompleteListener(
+        onCompleteListener: (ProductSearchRequest) -> Unit
+    ): BaseBottomSheetFragment {
         this.onCompleteListener = onCompleteListener
+        return this@BaseBottomSheetFragment
     }
 
     abstract fun getFilterLayout(parent: ViewGroup): View

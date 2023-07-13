@@ -30,16 +30,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
 
+
+    <LinearLayout
+        android:id="@+id/layoutFilter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:divider="@drawable/divider_filter_sheet"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="16dp"
+        android:showDividers="middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vSortDivider">
+
+        <com.peonlee.core.ui.designsystem.selector.SmallSelector
+            android:id="@+id/chipPriceFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가격"
+            app:showIcon="true" />
+
+        <com.peonlee.core.ui.designsystem.selector.SmallSelector
+            android:id="@+id/chipEventFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="행사"
+            app:showIcon="true" />
+
+        <com.peonlee.core.ui.designsystem.selector.SmallSelector
+            android:id="@+id/chipCategoryFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카테고리"
+            app:showIcon="true" />
+
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProduct"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingHorizontal="14dp"
-        android:paddingVertical="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vSortDivider" />
+        app:layout_constraintTop_toBottomOf="@id/layoutFilter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
