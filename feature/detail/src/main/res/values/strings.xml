@@ -7,6 +7,8 @@
     <string name="rate_count">%d명 평가</string>
     <string name="upvote_desc">또 먹을거에요</string>
     <string name="downvote_desc">또 안사먹어요</string>
+    <string name="do_cancel">평가 취소</string>
+    <string name="already_vote">평가했어요</string>
     <string name="review">리뷰</string>
     <string name="show_all">전체보기</string>
     <string name="none_review_title">이 상품에는 리뷰가 아직 없어요</string>

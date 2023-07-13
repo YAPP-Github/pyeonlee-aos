@@ -18,7 +18,6 @@ import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
-import com.peonlee.core.ui.viewholder.product.ProductViewHolder
 import com.peonlee.feature.detail.databinding.ListItemDetailProductBinding
 import com.peonlee.feature.detail.databinding.ListItemDividerBinding
 import com.peonlee.feature.detail.databinding.ListItemEventBinding
@@ -41,7 +40,7 @@ class ProductDetailListAdapter(
                 )
             )
 
-            ProductDetailListItem.ViewType.RATING -> RatingViewHolder(ListItemRatingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ProductDetailListItem.ViewType.SCORE -> RatingViewHolder(ListItemRatingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             ProductDetailListItem.ViewType.REVIEW_HEADER -> ReviewHeaderViewHolder(
                 ListItemReviewHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -129,8 +128,8 @@ class ProductDetailListAdapter(
         }
     }
 
-    private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Rating>(binding) {
-        override fun onBindView(item: ProductDetailListItem.Rating) = with(binding) {
+    private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Score>(binding) {
+        override fun onBindView(item: ProductDetailListItem.Score) = with(binding) {
             tvTotalRateCount.text = getStringWithArgs(com.peonlee.feature.detail.R.string.rate_count, item.rateCount)
             tvThumbsUpPercent.text = getStringWithArgs(
                 R.string.item_product_recommended_percentage,

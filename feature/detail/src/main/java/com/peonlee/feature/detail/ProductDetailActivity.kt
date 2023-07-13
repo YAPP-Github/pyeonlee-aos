@@ -2,9 +2,11 @@ package com.peonlee.feature.detail
 
 import android.content.Context
 import android.content.Intent
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.handle
+import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.feature.detail.databinding.ActivityProductDetailBinding
 import com.peonlee.review.edit.EditReviewActivity
@@ -51,12 +53,26 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         }
         binding.btnUpvote.setOnClickListener {
             lifecycleScope.launch {
-                productRepository.likeProduct(productId)
+                productRepository.likeProduct(productId).handle({
+                    handleVoteState(VoteType.UPVOTE)
+                    updateScore(it)
+                })
             }
         }
         binding.btnDownvote.setOnClickListener {
             lifecycleScope.launch {
-                productRepository.dislikeProduct(productId)
+                productRepository.dislikeProduct(productId).handle({
+                    handleVoteState(VoteType.DOWNVOTE)
+                    updateScore(it)
+                })
+            }
+        }
+        binding.btnCancel.setOnClickListener {
+            lifecycleScope.launch {
+                productRepository.cancelLikeProduct(productId).handle({
+                    handleVoteState(VoteType.NONE)
+                    updateScore(it)
+                })
             }
         }
         binding.btnReviewWrite.setOnClickListener {
@@ -81,7 +97,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                         }
                     ),
                     ProductDetailListItem.Divider(1),
-                    ProductDetailListItem.Rating(
+                    ProductDetailListItem.Score(
                         id = 2,
                         rateCount = it.score.totalCount,
                         upvoteRate = it.score.likeRatio,
@@ -153,7 +169,37 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                     )
                 )
                 adapter.submitList(itemList)
+
+                binding.llVoteContainer.isVisible = true
+                handleVoteState(VoteType.NONE)
             })
         }
+    }
+
+    private enum class VoteType {
+        NONE,
+        UPVOTE,
+        DOWNVOTE
+    }
+
+    private fun handleVoteState(voteType: VoteType) {
+        binding.llAlreadyVoteContainer.isVisible = voteType != VoteType.NONE
+        binding.llUpvote.isVisible = voteType == VoteType.UPVOTE
+        binding.llDownvote.isVisible = voteType == VoteType.DOWNVOTE
+        binding.llNoneVoteContainer.isVisible = voteType == VoteType.NONE
+    }
+
+    private fun updateScore(score: Score) {
+        val newList = adapter.currentList.toMutableList()
+        val detailItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Product }
+        newList[detailItemIndex] = (newList[detailItemIndex] as ProductDetailListItem.Product).copy(upvoteRate = score.likeRatio)
+
+        val scoreItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Score }
+        newList[scoreItemIndex] = (newList[scoreItemIndex] as ProductDetailListItem.Score).copy(
+            rateCount = score.totalCount,
+            upvoteRate = score.likeRatio,
+            downvoteRate = 100 - score.likeRatio
+        )
+        adapter.submitList(newList)
     }
 }
