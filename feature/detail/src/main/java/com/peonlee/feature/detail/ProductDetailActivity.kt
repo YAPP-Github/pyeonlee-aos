@@ -18,9 +18,11 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         private const val DEFAULT_PRODUCT_ID = -1
         private const val EXTRA_PRODUCT_ID = "extra_product_id"
         fun startActivity(context: Context, productId: Int) {
-            context.startActivity(Intent(context, ProductDetailActivity::class.java).apply {
-                putExtra(EXTRA_PRODUCT_ID, productId)
-            })
+            context.startActivity(
+                Intent(context, ProductDetailActivity::class.java).apply {
+                    putExtra(EXTRA_PRODUCT_ID, productId)
+                }
+            )
         }
     }
 

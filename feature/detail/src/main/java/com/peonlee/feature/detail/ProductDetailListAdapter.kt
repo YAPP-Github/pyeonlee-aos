@@ -30,7 +30,7 @@ import java.time.LocalDateTime
 
 class ProductDetailListAdapter(
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
-): MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
+) : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
     override fun onCreateViewHolder(viewType: ProductDetailListItem.ViewType, parent: ViewGroup): CommonViewHolder<ProductDetailListItem> {
         return when (viewType) {
             ProductDetailListItem.ViewType.PRODUCT -> ProductViewHolder(
@@ -176,8 +176,12 @@ class ProductDetailListAdapter(
                         R.drawable.ic_filled_heart
                     } else {
                         R.drawable.ic_empty_heart
-                    }, null
-                ), null, null, null
+                    },
+                    null
+                ),
+                null,
+                null,
+                null
             )
             tvLikeCount.text = if (item.likeCount > 0) item.likeCount.toString() else ""
             layoutThumbsDown.isVisible = item.isUpvote.not()

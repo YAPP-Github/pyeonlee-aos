@@ -24,10 +24,8 @@ class ReviewManageDialog : BottomSheetDialogFragment() {
 
         binding.apply {
             llEditReview.setOnClickListener {
-
             }
             llDeleteReview.setOnClickListener {
-
             }
         }
     }
