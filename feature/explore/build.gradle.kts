@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.constraintlayout)
 }
