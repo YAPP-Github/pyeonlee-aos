@@ -1,0 +1,4 @@
+<resources>
+    <string name="explore_cancel">취소</string>
+    <string name="explore_text_hint">라면, 음료, 과자, 빵 등</string>
+</resources>
