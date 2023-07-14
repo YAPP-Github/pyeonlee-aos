@@ -19,7 +19,6 @@ abstract class BaseBottomSheetFragment(
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BaseBottomsheetDialogBinding
-    private var onCompleteListener: ((ProductSearchRequest) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,9 +41,7 @@ abstract class BaseBottomSheetFragment(
             layoutFilter.addView(
                 getFilterLayout(binding.layoutFilter)
             )
-            binding.btnComplete.setOnClickListener {
-                onCompleteListener?.invoke(getProductResult())
-            }
+            binding.btnComplete.setOnClickListener { onClickComplete() }
         }
     }
 
@@ -52,14 +49,7 @@ abstract class BaseBottomSheetFragment(
         return R.style.RoundedBottomSheetDialog
     }
 
-    fun setOnCompleteListener(
-        onCompleteListener: (ProductSearchRequest) -> Unit
-    ): BaseBottomSheetFragment {
-        this.onCompleteListener = onCompleteListener
-        return this@BaseBottomSheetFragment
-    }
-
     abstract fun getFilterLayout(parent: ViewGroup): View
 
-    abstract fun getProductResult(): ProductSearchRequest
+    abstract fun onClickComplete()
 }

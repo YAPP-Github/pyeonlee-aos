@@ -6,14 +6,15 @@ import androidx.core.view.children
 import com.google.android.flexbox.FlexboxLayout
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.designsystem.selector.SmallSelector
-import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.explore.databinding.ItemFilterChipBinding
 import com.peonlee.explore.databinding.ItemSelectorFilterBinding
 import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
 import com.peonlee.model.type.EventType
 import com.peonlee.model.type.StoreType
 
-class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
+class EventFilterBottomSheetFragment(
+    private val onEventSelect: (List<StoreType>, List<EventType>) -> Unit
+) : BaseBottomSheetFragment("행사") {
 
     private val selectedStore = mutableListOf<StoreType>()
     private val selectedEvent = mutableListOf<EventType>()
@@ -56,11 +57,8 @@ class EventFilterBottomSheetFragment : BaseBottomSheetFragment("행사") {
         return listLayout
     }
 
-    override fun getProductResult(): ProductSearchRequest {
-        return ProductSearchRequest(
-            promotionRetailerList = selectedStore.map { it.storeDataName },
-            promotionTypeList = selectedEvent.map { it.eventDataName }
-        )
+    override fun onClickComplete() {
+        onEventSelect(selectedStore, selectedEvent)
     }
 
     private fun onClickStoreType(

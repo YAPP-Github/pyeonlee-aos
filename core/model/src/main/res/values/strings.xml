@@ -4,4 +4,8 @@
     <string name="sort_most_popular">인기순</string>
     <string name="sort_most_evaluate">평가 높은순</string>
     <string name="sort_most_review">리뷰 많은순</string>
+
+    <!-- Price Filter -->
+    <string name="full_price_range">%s 이상 ~ %s 미만</string>
+    <string name="half_price_range">%s 이상</string>
 </resources>

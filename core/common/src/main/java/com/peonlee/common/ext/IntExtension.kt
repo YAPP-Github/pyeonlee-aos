@@ -1,4 +1,4 @@
-package com.peonlee.core.ui.extensions
+package com.peonlee.common.ext
 
 import android.content.Context
 import java.text.DecimalFormat

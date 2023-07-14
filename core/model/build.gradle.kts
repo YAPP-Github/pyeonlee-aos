@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation(project(":core:data"))
+    implementation(project(":core:common"))
 }

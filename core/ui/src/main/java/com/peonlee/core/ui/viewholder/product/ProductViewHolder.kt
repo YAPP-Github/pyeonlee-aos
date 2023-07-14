@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.extensions.getStringWithArgs
-import com.peonlee.core.ui.extensions.toFormattedMoney
+import com.peonlee.common.ext.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.model.product.ProductUiModel
 
