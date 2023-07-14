@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.designsystem.selector.MediumSelector
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -16,9 +17,10 @@ import com.peonlee.core.ui.R as UiResource
 import com.peonlee.home.R as HomeResource
 
 class EventByStoresViewHolder(
-    private val binding: ListItemEventStoresBinding
+    private val binding: ListItemEventStoresBinding,
+    navigator: Navigator
 ) : CommonViewHolder<EventByStoresUiModel>(binding) {
-    private var productsByStoreAdapter = ProductsByStoreAdapter()
+    private var productsByStoreAdapter = ProductsByStoreAdapter(navigator)
 
     private val onTabSelectedListener = object : OnTabSelectedListener {
         override fun onTabReselected(tab: TabLayout.Tab?) {}

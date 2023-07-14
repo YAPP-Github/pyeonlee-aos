@@ -6,6 +6,7 @@ import android.widget.GridLayout
 import android.widget.GridLayout.LayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintProperties.WRAP_CONTENT
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.core.ui.viewholder.product.ProductViewHolder
@@ -19,7 +20,8 @@ private val productLayoutParams = ConstraintLayout.LayoutParams(
 )
 
 class ProductsByStoreViewHolder(
-    private val binding: PagerItemProductsByStoreBinding
+    private val binding: PagerItemProductsByStoreBinding,
+    private val navigator: Navigator
 ) : CommonViewHolder<ProductsByStoreUiModel>(binding) {
     override fun onBindView(item: ProductsByStoreUiModel) = with(binding) {
         item.products.forEachIndexed { index, product ->
@@ -35,7 +37,8 @@ class ProductsByStoreViewHolder(
             layoutProducts.addView(
                 ProductViewHolder(
                     layoutParams = productLayoutParams,
-                    ListItemProductBinding.inflate(LayoutInflater.from(itemView.context))
+                    ListItemProductBinding.inflate(LayoutInflater.from(itemView.context)),
+                    navigator
                 ).also {
                     it.onBindView(product)
                 }.itemView,

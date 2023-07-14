@@ -3,6 +3,7 @@ package com.peonlee.home.adapter.viewholder.product
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.extensions.getStringWithArgs
@@ -15,9 +16,10 @@ import com.peonlee.model.util.PaddingValues
 private val rootLayoutParams = ConstraintLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
 
 class ConditionalProductsViewHolder(
-    private val binding: ListItemConditionalProductsBinding
+    private val binding: ListItemConditionalProductsBinding,
+    private val navigator: Navigator
 ) : CommonViewHolder<ConditionalProductsUiModel>(binding) {
-    private var productAdapter = ProductAdapter(rootLayoutParams = rootLayoutParams)
+    private var productAdapter = ProductAdapter(rootLayoutParams = rootLayoutParams, navigator)
 
     init {
         with(binding) {
