@@ -12,6 +12,6 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
         etExplore.addTextChangedListener { input -> ivTextCleaer.isVisible = input?.isNotEmpty() ?: false }
         tvExploreCancel.setOnClickListener { finish() }
         ivTextCleaer.setOnClickListener { etExplore.setText("") }
-        ivSearch.setOnClickListener {  }
+        ivSearch.setOnClickListener { }
     }
 }
