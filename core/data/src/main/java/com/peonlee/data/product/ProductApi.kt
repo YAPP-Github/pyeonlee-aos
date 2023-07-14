@@ -20,12 +20,12 @@ interface ProductApi {
         @Path("productId") productId: Int
     ): Score
 
-    @GET("v1/product/{productId}/rate/dislike")
+    @POST("v1/product/{productId}/rate/dislike")
     suspend fun dislikeProduct(
         @Path("productId") productId: Int
     ): Score
 
-    @GET("v1/product/{productId}/rate/cancel")
+    @POST("v1/product/{productId}/rate/cancel")
     suspend fun cancelLikeProductDetail(
         @Path("productId") productId: Int
     ): Score
