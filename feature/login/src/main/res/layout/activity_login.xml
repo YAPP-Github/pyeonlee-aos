@@ -6,54 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/tv_google_login"
+    <ImageView
+        android:id="@+id/iv_google_login"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="24dp"
-        android:background="#123123"
-        android:gravity="center"
-        android:text="@string/google_login"
-        android:textColor="#ffffff"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/btn_bottom_margin"
+        android:background="@drawable/btn_google_login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_kakao_login"
-        app:layout_constraintStart_toStartOf="@+id/tv_kakao_login" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_kakao_login"
+        app:layout_constraintStart_toStartOf="@+id/iv_kakao_login" />
 
-    <TextView
-        android:id="@+id/tv_kakao_login"
+    <ImageView
+        android:id="@+id/iv_kakao_login"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="14dp"
-        android:background="#123123"
-        android:gravity="center"
-        android:text="@string/kakao_login"
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toTopOf="@+id/tv_google_login"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_x_large"
+        android:layout_marginBottom="@dimen/space_m_large"
+        android:background="@drawable/btn_kakao_login"
+        app:layout_constraintBottom_toTopOf="@+id/iv_google_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/login_logo_width"
+        android:layout_height="@dimen/login_logo_height"
+        android:src="@drawable/ic_logo_brand_symbol_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        android:src="@drawable/ic_launcher_background" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/Text.Title01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/space_m_large"
         android:gravity="center"
         android:text="@string/peonlee_slogan"
-        android:textColor="#363D45"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
