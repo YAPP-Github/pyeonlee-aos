@@ -14,7 +14,7 @@ fun setTextSpannable(
     contents: String,
     context: Context,
     @ColorRes textColor: Int = R.color.brand100
-) : SpannableString {
+): SpannableString {
     val spannableText = SpannableString(contents).apply {
         setSpan(
             ForegroundColorSpan(

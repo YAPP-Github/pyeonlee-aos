@@ -62,7 +62,7 @@ class SwipeCallback(
         drawSwipeBackground(
             canvas = canvas,
             viewItem = viewHolder.itemView,
-            dX = dX,
+            dX = dX
         )
         super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
@@ -70,7 +70,7 @@ class SwipeCallback(
     private fun drawSwipeBackground(
         canvas: Canvas,
         viewItem: View,
-        dX: Float,
+        dX: Float
     ) {
         drawBackgroundColor(canvas, viewItem, dX)
         drawIcon(canvas, viewItem, dX)

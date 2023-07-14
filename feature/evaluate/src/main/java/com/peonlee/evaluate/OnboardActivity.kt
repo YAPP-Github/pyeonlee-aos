@@ -17,6 +17,5 @@ class OnboardActivity : BaseActivity<ActivityOnboadingBinding>() {
     }
 
     override fun bindViews() {
-
     }
 }

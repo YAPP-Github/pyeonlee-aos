@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class EvaluateRepository @Inject constructor(private val productApi: ProductApi) {
-    fun getSearchProduct() : Flow<PagingData<Content>> {
+    fun getSearchProduct(): Flow<PagingData<Content>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,

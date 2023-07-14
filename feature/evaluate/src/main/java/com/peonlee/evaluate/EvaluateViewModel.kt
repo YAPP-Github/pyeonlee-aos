@@ -77,9 +77,9 @@ class EvaluateViewModel @Inject constructor(
 
     private fun handleState(result: Result<Score>) {
         viewModelScope.launch {
-            when(result) {
+            when (result) {
                 is Result.Success -> {
-                    when(likeType) {
+                    when (likeType) {
                         "LIKE" -> {
                             evaluateCount++
                             _evaluateState.emit(EvaluateProductUiState.Like)
@@ -116,7 +116,7 @@ class EvaluateViewModel @Inject constructor(
     }
 }
 
-sealed class EvaluateProductUiState  {
+sealed class EvaluateProductUiState {
     object Like : EvaluateProductUiState()
     object Dislike : EvaluateProductUiState()
     object Undo : EvaluateProductUiState()

@@ -93,7 +93,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
                             is EvaluateProductUiState.Like -> evaluateProduct()
                             is EvaluateProductUiState.Dislike -> evaluateProduct()
                             is EvaluateProductUiState.Undo -> undoProduct()
-                            is EvaluateProductUiState.EvaluateFail ->  requireActivity().showToast(evaluateProductUiState.exception.toString())
+                            is EvaluateProductUiState.EvaluateFail -> requireActivity().showToast(evaluateProductUiState.exception.toString())
                         }
                     }
                 }
