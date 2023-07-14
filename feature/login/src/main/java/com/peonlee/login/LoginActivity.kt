@@ -2,7 +2,6 @@ package com.peonlee.login
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
