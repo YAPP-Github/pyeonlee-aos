@@ -40,6 +40,8 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     }
 
     override fun initViews() {
+        // TODO : 바텀네비 구현 완료 후 "넘어가기" 텍스트 비활성 처리
+
         with(binding) {
             setEvaluateCountSpannable()
 
