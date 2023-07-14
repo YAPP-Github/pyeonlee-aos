@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_evaluate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EvaluateFragment">
@@ -16,20 +17,18 @@
         android:text="@string/evaluate_next"
         android:textColor="@color/bg80"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/textView2"
         style="@style/Text.Subtitle01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_evaluate_left_right"
+        android:layout_marginLeft="@dimen/layout_evaluate_left_right"
         android:layout_marginTop="@dimen/text_evaluate_title_top"
         android:text="@string/evaluate_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_next">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/tv_next"></TextView>
 
     <TextView
         android:id="@+id/tv_evaluate"
@@ -39,19 +38,16 @@
         android:layout_marginTop="@dimen/text_evaluate_product_top"
         android:text="@string/evaluate_product_count"
         app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/textView2"></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/layout_evaluate_product_list"
+        android:id="@+id/rv_productList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/layout_evaluate_top"
-        android:layout_marginBottom="@dimen/layout_evaluate_top"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_evaluate">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/tv_evaluate"></androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
