@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import coil.load
 import com.peonlee.common.util.TimeUtil
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.extensions.getString
@@ -28,6 +29,7 @@ import com.peonlee.feature.detail.databinding.ListItemReviewHeaderBinding
 import java.time.LocalDateTime
 
 class ProductDetailListAdapter(
+    private val navigator: Navigator,
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
 ) : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
     override fun onCreateViewHolder(viewType: ProductDetailListItem.ViewType, parent: ViewGroup): CommonViewHolder<ProductDetailListItem> {
@@ -118,14 +120,16 @@ class ProductDetailListAdapter(
         }
     }
 
-    private inner class NoneReviewViewHolder(private val binding: ListItemNoneReviewBinding) : ViewOnlyViewHolder(binding) {
+    private inner class NoneReviewViewHolder(private val binding: ListItemNoneReviewBinding) : CommonViewHolder<ProductDetailListItem.NoneReview>(binding) {
         init {
             binding.tvWriteReviewButton.setOnClickListener {
                 getItem {
-                    // TODO
+                    navigator.navigateToEditReview(binding.root.context)
                 }
             }
         }
+
+        override fun onBindView(item: ProductDetailListItem.NoneReview) = Unit
     }
 
     private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Score>(binding) {
@@ -157,6 +161,7 @@ class ProductDetailListAdapter(
                 }
             }
         }
+
         override fun onBindView(item: ProductDetailListItem.Review) = with(binding) {
             tvComment.text = item.reviewText
             tvUserNameAndDate.text = getStringWithArgs(

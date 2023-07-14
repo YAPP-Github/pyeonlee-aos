@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseFragment
@@ -18,9 +19,13 @@ import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
+    @Inject
+    lateinit var navigator: Navigator
+
     private val exploreViewModel: ExploreViewModel by viewModels()
 
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
@@ -46,7 +51,8 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
 
         // 상품 리스트
         val productAdapter = ProductAdapter(
-            rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+            rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT),
+            navigator
         )
         rvProduct.apply {
             layoutManager = GridLayoutManager(context, 2)

@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.handle
+import com.peonlee.data.model.ProductRatingType
 import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.feature.detail.databinding.ActivityProductDetailBinding
-import com.peonlee.review.edit.EditReviewActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,10 +32,13 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
     @Inject
     lateinit var productRepository: ProductRepository
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
 
     private val adapter by lazy {
-        ProductDetailListAdapter {
+        ProductDetailListAdapter(navigator) {
             ReviewManageDialog().run {
                 show(supportFragmentManager, tag)
             }
@@ -54,7 +58,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         binding.btnUpvote.setOnClickListener {
             lifecycleScope.launch {
                 productRepository.likeProduct(productId).handle({
-                    handleVoteState(VoteType.UPVOTE)
+                    handleVoteState(ProductRatingType.LIKE)
                     updateScore(it)
                 })
             }
@@ -62,7 +66,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         binding.btnDownvote.setOnClickListener {
             lifecycleScope.launch {
                 productRepository.dislikeProduct(productId).handle({
-                    handleVoteState(VoteType.DOWNVOTE)
+                    handleVoteState(ProductRatingType.DISLIKE)
                     updateScore(it)
                 })
             }
@@ -70,13 +74,13 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         binding.btnCancel.setOnClickListener {
             lifecycleScope.launch {
                 productRepository.cancelLikeProduct(productId).handle({
-                    handleVoteState(VoteType.NONE)
+                    handleVoteState(ProductRatingType.NONE)
                     updateScore(it)
                 })
             }
         }
         binding.btnReviewWrite.setOnClickListener {
-            startActivity(Intent(this, EditReviewActivity::class.java))
+            navigator.navigateToEditReview(this)
         }
         binding.rvProductDetail.adapter = adapter
         lifecycleScope.launch {
@@ -171,22 +175,16 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                 adapter.submitList(itemList)
 
                 binding.llVoteContainer.isVisible = true
-                handleVoteState(VoteType.NONE)
+                handleVoteState(ProductRatingType.NONE)
             })
         }
     }
 
-    private enum class VoteType {
-        NONE,
-        UPVOTE,
-        DOWNVOTE
-    }
-
-    private fun handleVoteState(voteType: VoteType) {
-        binding.llAlreadyVoteContainer.isVisible = voteType != VoteType.NONE
-        binding.llUpvote.isVisible = voteType == VoteType.UPVOTE
-        binding.llDownvote.isVisible = voteType == VoteType.DOWNVOTE
-        binding.llNoneVoteContainer.isVisible = voteType == VoteType.NONE
+    private fun handleVoteState(voteType: ProductRatingType) {
+        binding.llAlreadyVoteContainer.isVisible = voteType != ProductRatingType.NONE
+        binding.llUpvote.isVisible = voteType == ProductRatingType.LIKE
+        binding.llDownvote.isVisible = voteType == ProductRatingType.DISLIKE
+        binding.llNoneVoteContainer.isVisible = voteType == ProductRatingType.NONE
     }
 
     private fun updateScore(score: Score) {
