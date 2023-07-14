@@ -32,6 +32,7 @@ ksp = "1.8.20-1.0.11"
 ktlintGradlePlugin = "11.3.2"
 material = "1.9.0"
 okHttp = "4.10.0"
+paging3 = "3.1.1"
 playServicesAuth = "20.5.0"
 retrofit = "2.9.0"
 serializationConverter = "1.0.0"
@@ -63,6 +64,7 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
 androidx-core-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-paging3 = { module = "androidx.paging:paging-runtime", version.ref = "paging3" }
 
 # androidX
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidXRecyclerview" }

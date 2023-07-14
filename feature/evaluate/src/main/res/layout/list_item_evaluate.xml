@@ -13,11 +13,11 @@
         android:layout_marginTop="@dimen/list_item_evaluate_product_top_bottom"
         android:layout_marginBottom="@dimen/list_item_evaluate_product_top_bottom"
         android:background="@drawable/bg_white_outline_radius_10dp"
+        android:padding="@dimen/space_x_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_check">
-    </ImageView>
+        tools:src="@drawable/ic_check"></ImageView>
 
     <TextView
         android:id="@+id/tv_evaluateProductTitle"
@@ -31,8 +31,7 @@
         app:layout_constraintStart_toEndOf="@+id/iv_evaluateProductImage"
         app:layout_constraintTop_toTopOf="@+id/iv_evaluateProductImage"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="코카)코카제로레몬캔355ml">
-    </TextView>
+        tools:text="코카)코카제로레몬캔355ml"></TextView>
 
     <TextView
         android:id="@+id/tv_evaluateProductPrice"
@@ -44,6 +43,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_evaluateProductImage"
         app:layout_constraintStart_toStartOf="@+id/tv_evaluateProductTitle"
         app:layout_constraintTop_toBottomOf="@+id/tv_evaluateProductTitle"
-        tools:text="2,000원">
-    </TextView>
+        tools:text="2,000원"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
