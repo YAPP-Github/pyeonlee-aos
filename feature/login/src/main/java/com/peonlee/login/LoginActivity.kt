@@ -27,15 +27,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun bindingFactory() = ActivityLoginBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding) {
-        tvGoogleLogin.setOnClickListener { googleLogin() }
-        tvKakaoLogin.setOnClickListener { kakaoLogin() }
+        ivGoogleLogin.setOnClickListener { googleLogin() }
+        ivKakaoLogin.setOnClickListener { kakaoLogin() }
     }
 
     private fun googleLogin() {
