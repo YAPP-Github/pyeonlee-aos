@@ -41,16 +41,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_productImage"
         android:layout_width="@dimen/edit_review_product_img_size"
         android:layout_height="@dimen/edit_review_product_img_size"
         android:layout_margin="@dimen/edit_review_large_padding"
-        android:background="@drawable/bg_white_outline_radius_10dp"
         android:contentDescription="@string/edit_review_product_img_description"
         app:layout_constraintBottom_toBottomOf="@id/layout_product"
         app:layout_constraintStart_toStartOf="@id/layout_product"
         app:layout_constraintTop_toTopOf="@id/layout_product"
+        app:shapeAppearance="@style/RoundedImage"
+        app:strokeColor="@color/bg20"
+        app:strokeWidth="1dp"
         tools:src="@drawable/ic_check" />
 
     <TextView

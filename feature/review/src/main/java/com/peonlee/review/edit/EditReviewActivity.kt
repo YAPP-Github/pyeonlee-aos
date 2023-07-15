@@ -1,6 +1,7 @@
 package com.peonlee.review.edit
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
@@ -12,9 +13,11 @@ import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.focus
 import com.peonlee.core.ui.extensions.showToast
+import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEvent
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEventListener
 import com.peonlee.review.R
@@ -26,17 +29,43 @@ import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
+    companion object {
+        private const val REVIEW_MIN_LENGTH = 10 // 최소 리뷰 길이
+        private const val REVIEW_MAX_LENGTH = 300 // 최대 리뷰 길이
+
+        private const val EXTRA_PRODUCT_ID = "product_id"
+        private const val EXTRA_PRODUCT_IMAGE_URL = "product_image_url"
+        private const val EXTRA_PRODUCT_NAME = "product_name"
+        private const val EXTRA_PRODUCT_PRICE = "product_price"
+
+        fun startActivity(context: Context, productId: Int, imageUrl: String, productName: String, price: Int) {
+            context.startActivity(Intent(context, EditReviewActivity::class.java).apply {
+                putExtra(EXTRA_PRODUCT_ID, productId)
+                putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
+                putExtra(EXTRA_PRODUCT_NAME, productName)
+                putExtra(EXTRA_PRODUCT_PRICE, price)
+            })
+        }
+    }
+
     private val editReviewViewModel: EditReviewViewModel by viewModels()
+
+    private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, -1) }
 
     override fun bindingFactory(): ActivityEditReviewBinding {
         return ActivityEditReviewBinding.inflate(layoutInflater)
     }
 
     override fun initViews() {
+        if (productId == -1) {
+            finish()
+            return
+        }
         with(binding) {
-            // TODO 이후 비지 니스 로직 구현 이슈 에서 수정 예정
-            tvProductName.text = "코카)코카제로레몬캔355ml"
-            tvProductPrice.text = "2,000원"
+            ivProductImage.load(intent.getStringExtra(EXTRA_PRODUCT_IMAGE_URL))
+            tvProductName.text = intent.getStringExtra(EXTRA_PRODUCT_NAME)
+            tvProductPrice.text = intent.getIntExtra(EXTRA_PRODUCT_PRICE, 0).toFormattedMoney()
+
             // 리뷰 작성 editor 의 최대 작성 길이 제한(300자)
             editReview.filters = arrayOf(
                 InputFilter.LengthFilter(REVIEW_MAX_LENGTH)
@@ -62,7 +91,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                 editReviewViewModel.setReview(text?.toString())
             }
             // 등록 하기 버튼 클릭
-            btnSave.setOnClickListener { editReviewViewModel.saveReview() }
+            btnSave.setOnClickListener { editReviewViewModel.saveReview(productId) }
             btnClose.setOnClickListener { finish() } // 상단 X 버튼 클릭
             // editor focusing 변경
             editReview.onFocusChangeListener = reviewEditorFocusChangedListener
@@ -85,19 +114,17 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
     /**
      * 리뷰 작성 editor 의 focus 가 맞춰질 때마다 stroke 색 변경
      */
-    private val reviewEditorFocusChangedListener = object : OnFocusChangeListener {
-        override fun onFocusChange(view: View?, focused: Boolean) {
-            val backgroundTint = if (focused) {
-                com.peonlee.core.ui.R.color.brand100
-            } else {
-                com.peonlee.core.ui.R.color.bg20
-            }
-            (binding.layoutEditReview.background as? GradientDrawable)?.apply {
-                setStroke(
-                    1.dpToPx(this@EditReviewActivity),
-                    getColor(backgroundTint)
-                )
-            }
+    private val reviewEditorFocusChangedListener = OnFocusChangeListener { view, focused ->
+        val backgroundTint = if (focused) {
+            com.peonlee.core.ui.R.color.brand100
+        } else {
+            com.peonlee.core.ui.R.color.bg20
+        }
+        (binding.layoutEditReview.background as? GradientDrawable)?.apply {
+            setStroke(
+                1.dpToPx(this@EditReviewActivity),
+                getColor(backgroundTint)
+            )
         }
     }
 
@@ -146,10 +173,5 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
     fun Int.dpToPx(context: Context): Int {
         val density = context.resources.displayMetrics.density
         return (this * density).roundToInt()
-    }
-
-    companion object {
-        const val REVIEW_MIN_LENGTH = 10 // 최소 리뷰 길이
-        const val REVIEW_MAX_LENGTH = 300 // 최대 리뷰 길이
     }
 }
