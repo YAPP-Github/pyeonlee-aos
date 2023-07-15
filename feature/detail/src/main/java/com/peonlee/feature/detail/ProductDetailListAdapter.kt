@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import coil.load
 import com.peonlee.common.util.TimeUtil
-import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.extensions.getString
@@ -29,7 +28,7 @@ import com.peonlee.feature.detail.databinding.ListItemReviewHeaderBinding
 import java.time.LocalDateTime
 
 class ProductDetailListAdapter(
-    private val navigator: Navigator,
+    private val navigateToEditReview: () -> Unit,
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
 ) : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
     override fun onCreateViewHolder(viewType: ProductDetailListItem.ViewType, parent: ViewGroup): CommonViewHolder<ProductDetailListItem> {
@@ -124,7 +123,7 @@ class ProductDetailListAdapter(
         init {
             binding.tvWriteReviewButton.setOnClickListener {
                 getItem {
-                    navigator.navigateToEditReview(binding.root.context)
+                    navigateToEditReview()
                 }
             }
         }

@@ -12,4 +12,6 @@ dependencies {
     implementation(project(":core:data"))
     implementation(libs.androidx.constraintlayout)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.coil)
+    implementation("com.google.android.material:material:1.9.0")
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.handle
+import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductRatingType
 import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
@@ -35,10 +36,14 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
+    private lateinit var productDetail: ProductDetail
+
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
 
     private val adapter by lazy {
-        ProductDetailListAdapter(navigator) {
+        ProductDetailListAdapter({
+            navigator.navigateToEditReview(this, productDetail.productId, productDetail.imageUrl, productDetail.name, productDetail.price)
+        }) {
             ReviewManageDialog().run {
                 show(supportFragmentManager, tag)
             }
@@ -80,11 +85,12 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
             }
         }
         binding.btnReviewWrite.setOnClickListener {
-            navigator.navigateToEditReview(this)
+            navigator.navigateToEditReview(this, productDetail.productId, productDetail.imageUrl, productDetail.name, productDetail.price)
         }
         binding.rvProductDetail.adapter = adapter
         lifecycleScope.launch {
             productRepository.getProductDetail(productId).handle({
+                productDetail = it
                 val itemList = listOf(
                     ProductDetailListItem.Product(
                         id = it.productId.toLong(),
@@ -175,7 +181,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                 adapter.submitList(itemList)
 
                 binding.llVoteContainer.isVisible = true
-                handleVoteState(ProductRatingType.NONE)
+                handleVoteState(it.productRatingType)
             })
         }
     }

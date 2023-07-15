@@ -4,5 +4,5 @@ import android.content.Context
 
 interface Navigator {
     fun navigateToProductDetail(context: Context, productId: Int)
-    fun navigateToEditReview(context: Context)
+    fun navigateToEditReview(context: Context, productId: Int, imageUrl: String, productName: String, price: Int)
 }

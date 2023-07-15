@@ -14,7 +14,7 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
         ProductDetailActivity.startActivity(context, productId)
     }
 
-    override fun navigateToEditReview(context: Context) {
-        context.startActivity(Intent(context, EditReviewActivity::class.java))
+    override fun navigateToEditReview(context: Context, productId: Int, imageUrl: String, productName: String, price: Int) {
+        EditReviewActivity.startActivity(context, productId, imageUrl, productName, price)
     }
 }
