@@ -46,5 +46,7 @@ sealed interface BaseFilter {
 }
 
 val baseFilterSet = listOf(
-    BaseFilter.Price(), BaseFilter.Event(), BaseFilter.Category()
+    BaseFilter.Price(),
+    BaseFilter.Event(),
+    BaseFilter.Category()
 )

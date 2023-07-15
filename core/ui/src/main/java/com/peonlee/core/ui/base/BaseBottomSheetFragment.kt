@@ -10,7 +10,6 @@ import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.BaseBottomsheetDialogBinding
 import com.peonlee.model.product.ProductSearchConditionUiModel
 
-
 /**
  * BottomSheetFragment 공통 코드 관리
  */

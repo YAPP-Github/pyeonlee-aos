@@ -27,7 +27,11 @@ class HomeAdapter(private val navigator: Navigator) : MultiTypeListAdapter<MainH
         return when (viewType) {
             MainHomeViewType.TITLE -> TitleViewHolder(ListItemTitleBinding.inflate(inflater, parent, false))
             MainHomeViewType.DIVIDER -> HomeDividerViewHolder(ListItemHomeDividerBinding.inflate(inflater, parent, false))
-            MainHomeViewType.CONDITIONAL_PRODUCTS -> ConditionalProductsViewHolder(ListItemConditionalProductsBinding.inflate(inflater, parent, false), navigator)
+            MainHomeViewType.CONDITIONAL_PRODUCTS -> ConditionalProductsViewHolder(
+                ListItemConditionalProductsBinding.inflate(inflater, parent, false),
+                navigator
+            )
+
             MainHomeViewType.RECENT_REVIEW -> RecentReviewViewHolder(ListItemRecentReviewBinding.inflate(inflater, parent, false))
             MainHomeViewType.EVENT_BY_STORE -> EventByStoresViewHolder(ListItemEventStoresBinding.inflate(inflater, parent, false), navigator)
         }

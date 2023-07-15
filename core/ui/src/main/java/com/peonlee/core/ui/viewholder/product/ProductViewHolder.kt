@@ -3,11 +3,11 @@ package com.peonlee.core.ui.viewholder.product
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.core.view.isVisible
 import coil.load
+import com.peonlee.common.ext.toFormattedMoney
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.extensions.getStringWithArgs
-import com.peonlee.common.ext.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.model.product.ProductUiModel
 
