@@ -21,4 +21,15 @@ interface ReviewApi {
         @Path("productId") productId: Int,
         @Body request: SaveReviewRequest
     ): Response<SaveReviewResponse>
+
+    @POST("v1/product/{productId}/comment/edit")
+    suspend fun editReview(
+        @Path("productId") productId: Int,
+        @Body request: SaveReviewRequest
+    ): Response<SaveReviewResponse>
+
+    @POST("v1/product/{productId}/comment/delete")
+    suspend fun deleteReview(
+        @Path("productId") productId: Int
+    ): Response<Unit>
 }

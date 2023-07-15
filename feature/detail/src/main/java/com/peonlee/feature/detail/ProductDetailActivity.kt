@@ -2,18 +2,18 @@ package com.peonlee.feature.detail
 
 import android.content.Context
 import android.content.Intent
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
-import com.peonlee.data.handle
-import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductRatingType
-import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.feature.detail.databinding.ActivityProductDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,13 +36,15 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    private lateinit var productDetail: ProductDetail
+    private val viewModel: ProductDetailViewModel by viewModels()
 
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
 
     private val adapter by lazy {
         ProductDetailListAdapter({
-            navigator.navigateToEditReview(this, productDetail.productId, productDetail.imageUrl, productDetail.name, productDetail.price)
+            with(viewModel.productDetail) {
+                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+            }
         }) {
             ReviewManageDialog().run {
                 show(supportFragmentManager, tag)
@@ -61,129 +63,35 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
             finish()
         }
         binding.btnUpvote.setOnClickListener {
-            lifecycleScope.launch {
-                productRepository.likeProduct(productId).handle({
-                    handleVoteState(ProductRatingType.LIKE)
-                    updateScore(it)
-                })
-            }
+            viewModel.likeProduct(productId)
         }
         binding.btnDownvote.setOnClickListener {
-            lifecycleScope.launch {
-                productRepository.dislikeProduct(productId).handle({
-                    handleVoteState(ProductRatingType.DISLIKE)
-                    updateScore(it)
-                })
-            }
+            viewModel.dislikeProduct(productId)
         }
         binding.btnCancel.setOnClickListener {
-            lifecycleScope.launch {
-                productRepository.cancelLikeProduct(productId).handle({
-                    handleVoteState(ProductRatingType.NONE)
-                    updateScore(it)
-                })
-            }
+            viewModel.cancelLikeProduct(productId)
         }
         binding.btnReviewWrite.setOnClickListener {
-            navigator.navigateToEditReview(this, productDetail.productId, productDetail.imageUrl, productDetail.name, productDetail.price)
+            with(viewModel.productDetail) {
+                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+            }
         }
-        binding.rvProductDetail.adapter = adapter
-        lifecycleScope.launch {
-            productRepository.getProductDetail(productId).handle({
-                productDetail = it
-                val itemList = listOf(
-                    ProductDetailListItem.Product(
-                        id = it.productId.toLong(),
-                        imageUrl = it.imageUrl,
-                        productName = it.name,
-                        price = it.price,
-                        upvoteRate = it.score.likeRatio,
-                        reviewCount = 10,
-                        eventList = it.promotionList.map { promotion ->
-                            ProductDetailListItem.Event(
-                                retailerType = enumValueOf(promotion.retailerType),
-                                promotionType = enumValueOf(promotion.promotionType)
-                            )
-                        }
-                    ),
-                    ProductDetailListItem.Divider(1),
-                    ProductDetailListItem.Score(
-                        id = 2,
-                        rateCount = it.score.totalCount,
-                        upvoteRate = it.score.likeRatio,
-                        downvoteRate = 100 - it.score.likeRatio
-                    ),
-                    ProductDetailListItem.Divider(3),
-                    ProductDetailListItem.NoneReview(id = 11),
-                    ProductDetailListItem.Divider(3),
-                    ProductDetailListItem.ReviewHeader(id = 4, reviewCount = 5),
-                    ProductDetailListItem.Review(
-                        id = 5,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = false,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 1,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 6,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 2,
-                        isMine = true
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 7,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 4,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 8,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = false,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 0,
-                        isMine = true
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 9,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 5,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 10,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = false,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 2,
-                        isMine = false
-                    )
-                )
-                adapter.submitList(itemList)
 
-                binding.llVoteContainer.isVisible = true
-                handleVoteState(it.productRatingType)
-            })
-        }
+        binding.rvProductDetail.adapter = adapter
+        viewModel.productDetailItemList.flowWithLifecycle(
+            lifecycle
+        ).onEach {
+            adapter.submitList(it)
+        }.launchIn(lifecycleScope)
+
+        viewModel.productRatingType.flowWithLifecycle(
+            lifecycle
+        ).onEach {
+            binding.llVoteContainer.isVisible = true
+            handleVoteState(it)
+        }.launchIn(lifecycleScope)
+
+        viewModel.start(productId)
     }
 
     private fun handleVoteState(voteType: ProductRatingType) {
@@ -191,19 +99,5 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         binding.llUpvote.isVisible = voteType == ProductRatingType.LIKE
         binding.llDownvote.isVisible = voteType == ProductRatingType.DISLIKE
         binding.llNoneVoteContainer.isVisible = voteType == ProductRatingType.NONE
-    }
-
-    private fun updateScore(score: Score) {
-        val newList = adapter.currentList.toMutableList()
-        val detailItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Product }
-        newList[detailItemIndex] = (newList[detailItemIndex] as ProductDetailListItem.Product).copy(upvoteRate = score.likeRatio)
-
-        val scoreItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Score }
-        newList[scoreItemIndex] = (newList[scoreItemIndex] as ProductDetailListItem.Score).copy(
-            rateCount = score.totalCount,
-            upvoteRate = score.likeRatio,
-            downvoteRate = 100 - score.likeRatio
-        )
-        adapter.submitList(newList)
     }
 }

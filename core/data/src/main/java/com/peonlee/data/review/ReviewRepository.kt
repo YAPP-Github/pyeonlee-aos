@@ -14,4 +14,8 @@ interface ReviewRepository {
      * @return 리뷰 저장 API Response
      */
     suspend fun saveReview(productId: Int, review: String): Result<SaveReviewResponse>
+
+    suspend fun editReview(productId: Int, review: String): Result<SaveReviewResponse>
+
+    suspend fun deleteReview(productId: Int): Result<Unit>
 }
