@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,17 +12,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
-import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.adapter.FilterAdapter
+import com.peonlee.explore.adapter.ProductPagingAdapter
 import com.peonlee.explore.databinding.FragmentExploreBinding
 import com.peonlee.explore.model.BaseFilter
-import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.explore.model.baseFilterSet
 import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
 import com.peonlee.explore.ui.EventFilterBottomSheetFragment
 import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.toRangeString
 import com.peonlee.model.util.PaddingValues
@@ -67,10 +68,17 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         tabProductSort.addOnTabSelectedListener(onTabSelectedListener)
 
         // 상품 리스트
-        val productAdapter = ProductAdapter(
+        val productAdapter = ProductPagingAdapter(
             rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT),
             navigator
         )
+        productAdapter.addLoadStateListener { loadState ->
+            if (loadState.append.endOfPaginationReached) {
+                setEmptyView(visible = productAdapter.itemCount == 0)
+            } else {
+                setEmptyView(visible = false)
+            }
+        }
         rvProduct.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = productAdapter
@@ -89,6 +97,13 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
                 currentBottomSheet?.dismiss()
                 setFilterView(it)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        // 상품 flow
+        exploreViewModel.products.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                productAdapter.submitData(it)
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
         Unit
     }
 
@@ -104,6 +119,11 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         }
     }
 
+    private fun setEmptyView(visible: Boolean) = with(binding) {
+        tvEmptyProductDescription.isVisible = visible
+        tvEmptyProductTitle.isVisible = visible
+    }
+
     private fun setFilterView(productSearchCondition: ProductSearchConditionUiModel) {
         val priceFilter = productSearchCondition.price?.let { BaseFilter.Price(title = it.toRangeString(requireContext()), isSelected = true) }
         val storeFilters = productSearchCondition.stores?.let { stores ->
@@ -117,7 +137,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         }
 
         // 아무것도 선택되지 않았을 때경
-        if (priceFilter == null && eventFilters == null && categories == null) {
+        if (priceFilter == null && storeFilters == null && eventFilters == null && categories == null) {
             filterAdapter.submitList(baseFilterSet)
         } else {
             val filterList = mutableListOf<BaseFilter>(BaseFilter.Init)

@@ -87,4 +87,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutFilter" />
 
+    <TextView
+        android:id="@+id/tvEmptyProductTitle"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="텅"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvEmptyProductDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutFilter"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvEmptyProductDescription"
+        style="@style/Text.Subtitle02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="검색결과가 없습니다."
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvEmptyProductTitle"
+        app:layout_constraintStart_toStartOf="@id/tvEmptyProductTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvEmptyProductTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

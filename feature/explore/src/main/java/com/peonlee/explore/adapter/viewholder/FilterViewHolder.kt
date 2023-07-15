@@ -1,4 +1,4 @@
-package com.peonlee.explore.adapter
+package com.peonlee.explore.adapter.viewholder
 
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.explore.databinding.ItemFilterSelectorBinding
