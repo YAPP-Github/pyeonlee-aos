@@ -16,8 +16,8 @@ import javax.inject.Inject
 class ReviewManageDialog : BottomSheetDialogFragment() {
     companion object {
         private const val ARGUMENT_PRODUCT_ID = "product_id"
-        fun newInstance(productId: Int) {
-            ReviewManageDialog().apply {
+        fun newInstance(productId: Int): ReviewManageDialog {
+            return ReviewManageDialog().apply {
                 arguments = bundleOf(
                     ARGUMENT_PRODUCT_ID to productId
                 )

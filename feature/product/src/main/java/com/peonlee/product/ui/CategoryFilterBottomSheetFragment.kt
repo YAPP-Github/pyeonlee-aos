@@ -53,7 +53,8 @@ class CategoryFilterBottomSheetFragment(
     }
 
     private fun onSelectCategory(
-        selector: SmallSelector, category: Category
+        selector: SmallSelector,
+        category: Category
     ) {
         if (category in selectedCategory) {
             selector.setCancelColor()

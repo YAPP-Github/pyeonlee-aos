@@ -46,7 +46,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
                 navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
             }
         }) {
-            ReviewManageDialog().run {
+            ReviewManageDialog.newInstance(productId).run {
                 show(supportFragmentManager, tag)
             }
         }
