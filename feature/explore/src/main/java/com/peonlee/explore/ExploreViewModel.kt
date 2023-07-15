@@ -42,15 +42,23 @@ class ExploreViewModel @Inject constructor() : ViewModel() {
     // 이벤트 선택
     fun setEventFilter(stores: List<StoreType>, events: List<EventType>) {
         _productSearchCondition.value = _productSearchCondition.value.copy(
-            stores = stores,
-            events = events
+            stores = stores.ifEmpty { null },
+            events = events.ifEmpty { null }
         )
     }
 
     // 카테고리 선택
     fun setCategoryFilter(categories: List<Category>) {
         _productSearchCondition.value = _productSearchCondition.value.copy(
-            categories = categories
+            categories = categories.ifEmpty { null }
+        )
+    }
+
+    // 초기화
+    fun setInitProductSearchCondition() {
+        _productSearchCondition.value = ProductSearchConditionUiModel(
+            keyword = _productSearchCondition.value.keyword,
+            sortedBy = _productSearchCondition.value.sortedBy
         )
     }
 }

@@ -20,7 +20,6 @@ class EventFilterBottomSheetFragment(
 
     private var selectedStore = mutableListOf<StoreType>()
     private var selectedEvent = mutableListOf<EventType>()
-    private var isAll: Boolean = false
     private var eventLayout: FlexboxLayout? = null
 
     override fun getFilterLayout(
@@ -87,15 +86,14 @@ class EventFilterBottomSheetFragment(
     private fun onClickEvent(
         selector: SmallSelector, eventType: EventType
     ) {
-        if (isAll) { // 행사 전체일 때
-            isAll = false
+        if (eventType in selectedEvent) {
+            // 이미 선택된 행사인 경우
+            selectedEvent.remove(eventType)
+            selector.setCancelColor()
+        } else {
+            // 처음 선택하는 행사인 경우
             when (eventType) {
-                EventType.ALL -> { // 행사 전체 Click
-                    selector.setCancelColor()
-                    selectedEvent.clear()
-                }
-
-                else -> {
+                EventType.ALL -> {
                     eventLayout?.children?.forEach {
                         (it as? SmallSelector)?.setCancelColor()
                     }
@@ -103,28 +101,16 @@ class EventFilterBottomSheetFragment(
                     selectedEvent.clear()
                     selectedEvent.add(eventType)
                 }
-            }
-        } else {
-            when (eventType) {
-                EventType.ALL -> {
-                    eventLayout?.children?.forEach {
-                        (it as? SmallSelector)?.setCancelColor()
-                    }
-                    selector.setFillColor()
-                    selectedEvent.addAll(
-                        EventType.values().filterNot { it == EventType.ALL }
-                    )
-                    isAll = true
-                }
 
                 else -> {
-                    if (eventType in selectedEvent) {
-                        selectedEvent.remove(eventType)
-                        selector.setCancelColor()
-                    } else {
-                        selectedEvent.add(eventType)
-                        selector.setFillColor()
+                    if (EventType.ALL in selectedEvent) {
+                        eventLayout?.children?.forEach {
+                            (it as? SmallSelector)?.setCancelColor()
+                        }
+                        selectedEvent.clear()
                     }
+                    selectedEvent.add(eventType)
+                    selector.setFillColor()
                 }
             }
         }
