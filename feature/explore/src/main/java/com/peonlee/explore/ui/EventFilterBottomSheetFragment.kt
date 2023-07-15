@@ -1,5 +1,6 @@
 package com.peonlee.explore.ui
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
@@ -21,7 +22,10 @@ class EventFilterBottomSheetFragment(
     private var isAll: Boolean = false
     private var eventLayout: FlexboxLayout? = null
 
-    override fun getFilterLayout(parent: ViewGroup): View {
+    override fun getFilterLayout(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
+    ): View {
         val listLayout = LayoutSelectorFilterBinding.inflate(layoutInflater, parent, false).root
 
         // 편의점

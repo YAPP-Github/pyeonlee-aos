@@ -1,5 +1,6 @@
 package com.peonlee.explore.ui
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
@@ -14,7 +15,10 @@ class PriceFilterBottomSheetFragment(
 
     private var currentSelectedPrice: PriceFilter? = null
 
-    override fun getFilterLayout(parent: ViewGroup): View {
+    override fun getFilterLayout(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
+    ): View {
         val radioGroup = LayoutPriceFilterBinding.inflate(layoutInflater, parent, false).root
 
         // 하위 Filter 추가
@@ -24,8 +28,9 @@ class PriceFilterBottomSheetFragment(
             radioGroup.addView(priceFilterItem)
         }
 
-        radioGroup.setOnCheckedChangeListener { _, position ->
-            currentSelectedPrice = PriceFilter.values().getOrNull(position - 1)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val position  = group.indexOfChild(group.findViewById(checkedId))
+            currentSelectedPrice = PriceFilter.values().getOrNull(position)
         }
         return radioGroup
     }

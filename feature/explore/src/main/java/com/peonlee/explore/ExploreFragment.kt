@@ -13,12 +13,16 @@ import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
+import com.peonlee.explore.adapter.FilterAdapter
 import com.peonlee.explore.databinding.FragmentExploreBinding
+import com.peonlee.explore.model.BaseFilter
+import com.peonlee.explore.model.ProductSearchConditionUiModel
+import com.peonlee.explore.model.baseFilterSet
 import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
 import com.peonlee.explore.ui.EventFilterBottomSheetFragment
 import com.peonlee.explore.ui.PriceFilterBottomSheetFragment
-import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
 import com.peonlee.model.type.SortType
+import com.peonlee.model.type.toRangeString
 import com.peonlee.model.util.PaddingValues
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -37,6 +41,10 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
     }
     private val categoryFilter by lazy {
         CategoryFilterBottomSheetFragment(exploreViewModel::setCategoryFilter)
+    }
+
+    private val filterAdapter = FilterAdapter { filter ->
+        showBottomSheet(filter)
     }
 
     override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
@@ -65,18 +73,14 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
                 )
             )
         }
-        productAdapter.submitList(PRODUCTS_TEST_DOUBLE)
 
-        binding.let {
-            chipPriceFilter.setOnClickListener { showFilterBottomSheet(Filter.PRICE) }
-            chipEventFilter.setOnClickListener { showFilterBottomSheet(Filter.EVENT) }
-            chipCategoryFilter.setOnClickListener { showFilterBottomSheet(Filter.CATEGORY) }
-        }
-
+        layoutFilter.adapter = filterAdapter
+        layoutFilter.addItemDecoration(ContentPaddingDecoration(PaddingValues(left = 2, right = 2)))
         // 검색 조건 변경 시
         exploreViewModel.productSearchCondition.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 currentBottomSheet?.dismiss()
+                setFilterView(it)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         Unit
     }
@@ -93,16 +97,41 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         }
     }
 
-    private fun showFilterBottomSheet(filter: Filter) {
-        currentBottomSheet = when (filter) {
-            Filter.PRICE -> priceFilter
-            Filter.EVENT -> eventFilter
-            Filter.CATEGORY -> categoryFilter
+    private fun setFilterView(productSearchCondition: ProductSearchConditionUiModel) {
+        val priceFilter = productSearchCondition.price?.let { BaseFilter.Price(title = it.toRangeString(requireContext()), isSelected = true) }
+        val storeFilters = productSearchCondition.stores?.let { stores ->
+            stores.map { BaseFilter.Event(title = it.storeName, isSelected = true) }
+        }
+        val eventFilters = productSearchCondition.events?.let { events ->
+            events.map { BaseFilter.Event(title = it.eventName, isSelected = true) }
+        }
+        val categories = productSearchCondition.categories?.let { categories ->
+            categories.map { BaseFilter.Category(title = it.categoryName, isSelected = true) }
+        }
+
+        // 아무것도 선택되지 않았을 때
+        if (priceFilter == null && eventFilters == null && categories == null) {
+            filterAdapter.submitList(baseFilterSet)
+        } else {
+            val filterList = mutableListOf<BaseFilter>(BaseFilter.Init)
+            filterList += priceFilter ?: BaseFilter.Price()
+            if (storeFilters != null) filterList += storeFilters
+            if (eventFilters != null) filterList += eventFilters
+            if (storeFilters == null && eventFilters == null) filterList += BaseFilter.Event()
+            filterList += categories ?: listOf(BaseFilter.Category())
+            filterAdapter.submitList(filterList)
+        }
+    }
+
+    private fun showBottomSheet(baseFilter: BaseFilter) {
+        currentBottomSheet = when (baseFilter) {
+            is BaseFilter.Category -> categoryFilter
+            is BaseFilter.Event -> eventFilter
+            BaseFilter.Init -> null
+            is BaseFilter.Price -> priceFilter
         }
         currentBottomSheet?.show(childFragmentManager, "Filter")
     }
-
-    private enum class Filter { PRICE, EVENT, CATEGORY }
 
     companion object {
         fun getInstance(): ExploreFragment = ExploreFragment()

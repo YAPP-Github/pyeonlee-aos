@@ -31,42 +31,18 @@
         app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
 
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/layoutFilter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:divider="@drawable/divider_filter_sheet"
         android:orientation="horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="16dp"
-        android:showDividers="middle"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vSortDivider">
-
-        <com.peonlee.core.ui.designsystem.selector.SmallSelector
-            android:id="@+id/chipPriceFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="가격"
-            app:showIcon="true" />
-
-        <com.peonlee.core.ui.designsystem.selector.SmallSelector
-            android:id="@+id/chipEventFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="행사"
-            app:showIcon="true" />
-
-        <com.peonlee.core.ui.designsystem.selector.SmallSelector
-            android:id="@+id/chipCategoryFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카테고리"
-            app:showIcon="true" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/vSortDivider"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

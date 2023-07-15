@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(project(":core:data"))
+    implementation(project(":core:ui"))
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
 

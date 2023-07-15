@@ -1,5 +1,6 @@
 package com.peonlee.explore.ui
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
@@ -16,7 +17,10 @@ class CategoryFilterBottomSheetFragment(
 
     private val selectedCategory = mutableListOf<Category>()
 
-    override fun getFilterLayout(parent: ViewGroup): View {
+    override fun getFilterLayout(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup
+    ): View {
         val listLayout = LayoutSelectorFilterBinding.inflate(layoutInflater, parent, false).root
 
         CategoryFilter.values().forEach { categoryFilter ->
