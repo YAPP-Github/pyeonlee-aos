@@ -1,15 +1,14 @@
-package com.peonlee.explore.ui
+package com.peonlee.product.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
-import com.peonlee.explore.databinding.ItemPriceFilterBinding
-import com.peonlee.explore.databinding.LayoutPriceFilterBinding
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.PriceFilter
 import com.peonlee.model.type.toRangeString
+import com.peonlee.product.databinding.ItemPriceFilterBinding
+import com.peonlee.product.databinding.LayoutPriceFilterBinding
 
 class PriceFilterBottomSheetFragment(
     private val onPriceSelect: (PriceFilter?) -> Unit

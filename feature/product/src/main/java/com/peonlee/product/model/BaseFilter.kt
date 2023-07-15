@@ -1,4 +1,4 @@
-package com.peonlee.explore.model
+package com.peonlee.product.model
 
 import androidx.annotation.DrawableRes
 import com.peonlee.core.ui.R

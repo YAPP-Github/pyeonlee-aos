@@ -1,8 +1,8 @@
-package com.peonlee.explore.adapter.viewholder
+package com.peonlee.product.adapter.viewholder
 
 import com.peonlee.core.ui.viewholder.CommonViewHolder
-import com.peonlee.explore.databinding.ItemFilterSelectorBinding
-import com.peonlee.explore.model.BaseFilter
+import com.peonlee.product.databinding.ItemFilterSelectorBinding
+import com.peonlee.product.model.BaseFilter
 
 class FilterViewHolder(
     private val binding: ItemFilterSelectorBinding,

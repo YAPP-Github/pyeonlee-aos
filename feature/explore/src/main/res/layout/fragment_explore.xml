@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_search"
-            android:tint="@color/bg40" />
+            app:tint="@color/bg40" />
 
         <TextView
             style="@style/Text.Subtitle02"
@@ -35,80 +35,12 @@
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabProductSort"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutSearch"
-        app:tabIndicatorColor="@color/bg80"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable"
-        app:tabRippleColor="@null"
-        app:tabSelectedTextColor="@color/bg80"
-        app:tabTextAppearance="@style/Text.Body02"
-        app:tabTextColor="@color/bg30" />
-
-    <View
-        android:id="@+id/vSortDivider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/bg10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/layoutFilter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
-        android:paddingBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vSortDivider" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProduct"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/layoutProduct"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingHorizontal="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutFilter" />
-
-    <TextView
-        android:id="@+id/tvEmptyProductTitle"
-        style="@style/Text.Subtitle01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="텅"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tvEmptyProductDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutFilter"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/tvEmptyProductDescription"
-        style="@style/Text.Subtitle02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="검색결과가 없습니다."
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/tvEmptyProductTitle"
-        app:layout_constraintStart_toStartOf="@id/tvEmptyProductTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvEmptyProductTitle" />
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

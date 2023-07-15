@@ -8,12 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:ui"))
+    implementation(project(":feature:product"))
     implementation(libs.google.material)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.paging3)
-
-    implementation(libs.flexbox.layout)
 }

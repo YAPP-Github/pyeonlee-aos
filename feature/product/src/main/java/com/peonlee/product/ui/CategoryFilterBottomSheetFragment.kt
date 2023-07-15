@@ -1,16 +1,16 @@
-package com.peonlee.explore.ui
+package com.peonlee.product.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.designsystem.selector.SmallSelector
-import com.peonlee.explore.databinding.ItemFilterChipBinding
-import com.peonlee.explore.databinding.ItemSelectorFilterBinding
-import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.Category
 import com.peonlee.model.type.CategoryFilter
+import com.peonlee.product.databinding.ItemFilterChipBinding
+import com.peonlee.product.databinding.ItemSelectorFilterBinding
+import com.peonlee.product.databinding.LayoutSelectorFilterBinding
 
 class CategoryFilterBottomSheetFragment(
     private val onCategorySelect: (List<Category>) -> Unit

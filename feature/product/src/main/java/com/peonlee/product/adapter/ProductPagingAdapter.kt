@@ -1,4 +1,4 @@
-package com.peonlee.explore.adapter
+package com.peonlee.product.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

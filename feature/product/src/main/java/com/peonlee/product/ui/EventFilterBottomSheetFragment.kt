@@ -1,4 +1,4 @@
-package com.peonlee.explore.ui
+package com.peonlee.product.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,12 @@ import androidx.core.view.children
 import com.google.android.flexbox.FlexboxLayout
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.designsystem.selector.SmallSelector
-import com.peonlee.explore.databinding.ItemFilterChipBinding
-import com.peonlee.explore.databinding.ItemSelectorFilterBinding
-import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.EventType
 import com.peonlee.model.type.StoreType
+import com.peonlee.product.databinding.ItemFilterChipBinding
+import com.peonlee.product.databinding.ItemSelectorFilterBinding
+import com.peonlee.product.databinding.LayoutSelectorFilterBinding
 
 class EventFilterBottomSheetFragment(
     private val onEventSelect: (List<StoreType>, List<EventType>) -> Unit
