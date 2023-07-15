@@ -5,18 +5,29 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_productImage"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/layoutImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/item_product_img_description"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_test_product"
+        app:cardBackgroundColor="@color/bg0"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@id/tv_productName"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/bg20"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/iv_productImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/item_product_img_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_test_product" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tv_productName"
@@ -27,7 +38,7 @@
         android:textColor="@color/bg80"
         app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_productImage"
+        app:layout_constraintTop_toBottomOf="@id/layoutImage"
         tools:text="코카)코카제로레몬캔355ml" />
 
     <com.peonlee.core.ui.designsystem.chip.SmallChip
@@ -36,8 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_medium"
         android:text="@string/item_product_event"
-        app:layout_constraintEnd_toEndOf="@id/iv_productImage"
-        app:layout_constraintTop_toTopOf="@id/iv_productImage" />
+        app:layout_constraintEnd_toEndOf="@id/layoutImage"
+        app:layout_constraintTop_toTopOf="@id/layoutImage" />
 
     <TextView
         android:id="@+id/tv_productPrice"

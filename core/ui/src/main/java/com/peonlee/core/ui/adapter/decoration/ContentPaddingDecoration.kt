@@ -3,7 +3,7 @@ package com.peonlee.core.ui.adapter.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.peonlee.core.ui.extensions.dpToPx
+import com.peonlee.common.ext.dpToPx
 import com.peonlee.model.util.PaddingValues
 
 class ContentPaddingDecoration(

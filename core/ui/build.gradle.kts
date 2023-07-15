@@ -14,9 +14,12 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(project(":core:data"))
+    implementation(project(":core:common"))
 
     implementation(libs.androidx.core.core.ktx)
     implementation(libs.google.material)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.coil)
 }

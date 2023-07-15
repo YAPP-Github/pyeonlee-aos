@@ -10,12 +10,12 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import coil.load
+import com.peonlee.common.ext.toFormattedMoney
 import com.peonlee.common.util.TimeUtil
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
-import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
 import com.peonlee.feature.detail.databinding.ListItemDetailProductBinding

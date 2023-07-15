@@ -25,6 +25,14 @@ class SmallSelector(
             field = value
         }
 
+    // icon
+    var icon: Int? = null
+        set(value) {
+            value ?: return
+            binding.ivSelectorIcon.setImageResource(value)
+            field = value
+        }
+
     init {
         applyAttributes(attributeSet)
     }
@@ -85,7 +93,7 @@ class SmallSelector(
         titleTextColor: Int
     ) {
         binding.tvSelectorTitle.apply {
-            text = titleText
+            text = text.ifBlank { titleText }
             setTextColor(titleTextColor)
         }
     }
@@ -98,8 +106,8 @@ class SmallSelector(
         background: Int,
         backgroundTint: Int
     ) {
+        icon = background
         binding.ivSelectorIcon.apply {
-            setImageResource(background)
             imageTintList = ColorStateList.valueOf(backgroundTint)
         }
     }

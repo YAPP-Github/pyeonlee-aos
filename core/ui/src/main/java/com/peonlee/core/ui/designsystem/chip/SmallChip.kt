@@ -34,7 +34,7 @@ class SmallChip(
             val chipBackgroundTint = getColor(
                 R.styleable.SmallChip_android_backgroundTint,
                 resources.getColor(
-                    R.color.system_r50,
+                    R.color.system_y50,
                     context.theme
                 )
             )

@@ -4,42 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabProductSort"
+    <LinearLayout
+        android:id="@+id/layoutSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="12dp"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:backgroundTint="@color/bg10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/bg80"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable"
-        app:tabRippleColor="@null"
-        app:tabSelectedTextColor="@color/bg80"
-        app:tabTextAppearance="@style/Text.Body02"
-        app:tabTextColor="@color/bg30" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/vSortDivider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/bg10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabProductSort" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            app:tint="@color/bg40" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProduct"
+        <TextView
+            style="@style/Text.Subtitle02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="라면, 음료, 과자, 빵 등"
+            android:textColor="@color/bg40" />
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/layoutProduct"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vSortDivider" />
-
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

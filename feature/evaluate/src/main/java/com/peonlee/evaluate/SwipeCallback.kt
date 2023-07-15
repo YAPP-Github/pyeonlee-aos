@@ -12,7 +12,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.peonlee.core.ui.extensions.dpToPx
+import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.R.color as Color
 import com.peonlee.core.ui.R.drawable as Drawable
 import com.peonlee.evaluate.R.string as String

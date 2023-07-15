@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":feature:main"))
+    implementation(project(":core:common"))
 
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)

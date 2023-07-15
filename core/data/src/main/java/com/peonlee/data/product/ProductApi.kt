@@ -3,7 +3,6 @@ package com.peonlee.data.product
 import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductSearch
 import com.peonlee.data.model.Score
-import com.peonlee.data.model.request.ProductSearchRequest
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -32,7 +31,16 @@ interface ProductApi {
 
     @GET("v1/product/search")
     suspend fun searchProduct(
-        @Query("query") request: ProductSearchRequest
+        @Query("keyword") keyword: String? = null,
+        @Query("maxPrice") maxPrice: Int? = null,
+        @Query("minPrice") minPrice: Int? = null,
+        @Query("offsetProductId") offsetProductId: Int? = null,
+        @Query("orderBy") orderBy: String? = null,
+        @Query("pageSize") pageSize: Int? = null,
+        @Query("pbOnly") pbOnly: Boolean? = null,
+        @Query("productCategoryTypeList") productCategoryTypeList: List<String>? = null,
+        @Query("promotionRetailerList") promotionRetailerList: List<String>? = null,
+        @Query("promotionTypeList") promotionTypeList: List<String>? = null
     ): ProductSearch
 
     // 온보딩, 평가 전용 api로 변경전 임시로 연동한 api 입니다.

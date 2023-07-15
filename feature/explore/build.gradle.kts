@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:product"))
     implementation(libs.google.material)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.constraintlayout)
 }
