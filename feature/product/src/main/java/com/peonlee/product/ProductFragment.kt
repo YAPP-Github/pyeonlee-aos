@@ -50,8 +50,11 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     }
 
     private val filterAdapter = FilterAdapter {
-        if (it == BaseFilter.Init) exploreViewModel.setInitProductSearchCondition()
-        else showBottomSheet(it)
+        if (it == BaseFilter.Init) {
+            exploreViewModel.setInitProductSearchCondition()
+        } else {
+            showBottomSheet(it)
+        }
     }
 
     override fun bindingFactory(parent: ViewGroup): FragmentProductBinding {

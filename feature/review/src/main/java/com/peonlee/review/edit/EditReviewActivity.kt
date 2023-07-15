@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
-import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -14,10 +13,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.peonlee.common.ext.toFormattedMoney
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.focus
 import com.peonlee.core.ui.extensions.showToast
-import com.peonlee.core.ui.extensions.toFormattedMoney
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEvent
 import com.peonlee.core.ui.util.keyboard.KeyboardVisibilityEventListener
 import com.peonlee.review.R
@@ -39,12 +38,14 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         private const val EXTRA_PRODUCT_PRICE = "product_price"
 
         fun startActivity(context: Context, productId: Int, imageUrl: String, productName: String, price: Int) {
-            context.startActivity(Intent(context, EditReviewActivity::class.java).apply {
-                putExtra(EXTRA_PRODUCT_ID, productId)
-                putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
-                putExtra(EXTRA_PRODUCT_NAME, productName)
-                putExtra(EXTRA_PRODUCT_PRICE, price)
-            })
+            context.startActivity(
+                Intent(context, EditReviewActivity::class.java).apply {
+                    putExtra(EXTRA_PRODUCT_ID, productId)
+                    putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
+                    putExtra(EXTRA_PRODUCT_NAME, productName)
+                    putExtra(EXTRA_PRODUCT_PRICE, price)
+                }
+            )
         }
     }
 

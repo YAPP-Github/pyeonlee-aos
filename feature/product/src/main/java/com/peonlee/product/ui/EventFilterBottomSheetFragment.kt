@@ -45,19 +45,21 @@ class EventFilterBottomSheetFragment(
         )
         // 이벤트(행사)
 
-        listLayout.addView(ItemSelectorFilterBinding.inflate(layoutInflater).apply {
-            tvTitle.text = "행사 상품"
-            eventLayout = flexEventChip
-            EventType.values().forEach { event ->
-                flexEventChip.addView(
-                    ItemFilterChipBinding.inflate(layoutInflater).apply {
-                        if (event in selectedEvent) root.setFillColor() else root.setCancelColor()
-                        root.text = event.eventName
-                        root.setOnClickListener { onClickEvent(root, event) }
-                    }.root
-                )
-            }
-        }.root)
+        listLayout.addView(
+            ItemSelectorFilterBinding.inflate(layoutInflater).apply {
+                tvTitle.text = "행사 상품"
+                eventLayout = flexEventChip
+                EventType.values().forEach { event ->
+                    flexEventChip.addView(
+                        ItemFilterChipBinding.inflate(layoutInflater).apply {
+                            if (event in selectedEvent) root.setFillColor() else root.setCancelColor()
+                            root.text = event.eventName
+                            root.setOnClickListener { onClickEvent(root, event) }
+                        }.root
+                    )
+                }
+            }.root
+        )
         return listLayout
     }
 
@@ -72,7 +74,8 @@ class EventFilterBottomSheetFragment(
     }
 
     private fun onClickStoreType(
-        selector: SmallSelector, storeType: StoreType
+        selector: SmallSelector,
+        storeType: StoreType
     ) {
         if (storeType in selectedStore) {
             selectedStore.remove(storeType)
@@ -84,7 +87,8 @@ class EventFilterBottomSheetFragment(
     }
 
     private fun onClickEvent(
-        selector: SmallSelector, eventType: EventType
+        selector: SmallSelector,
+        eventType: EventType
     ) {
         if (eventType in selectedEvent) {
             // 이미 선택된 행사인 경우

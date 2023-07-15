@@ -13,7 +13,7 @@ suspend fun <T : Any> setResult(response: (suspend () -> T)): Result<T> {
     }
 }
 
-fun <T> Result<T>.handle(onSuccess: ((T) -> Unit)?, onError: ((Throwable) -> Unit)? = null) {
+suspend fun <T> Result<T>.handle(onSuccess: (suspend (T) -> Unit)?, onError: (suspend (Throwable) -> Unit)? = null) {
     when (this) {
         is Result.Success -> onSuccess?.invoke(data)
         is Result.Error -> onError?.invoke(exception)
