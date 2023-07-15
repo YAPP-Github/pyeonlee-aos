@@ -8,6 +8,7 @@ import android.view.WindowManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.BaseBottomsheetDialogBinding
+import com.peonlee.model.product.ProductSearchConditionUiModel
 
 
 /**
@@ -17,7 +18,7 @@ abstract class BaseBottomSheetFragment(
     private val title: String
 ) : BottomSheetDialogFragment() {
 
-    private  var binding: BaseBottomsheetDialogBinding? = null
+    private var binding: BaseBottomsheetDialogBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +54,9 @@ abstract class BaseBottomSheetFragment(
     abstract fun getFilterLayout(layoutInflater: LayoutInflater, parent: ViewGroup): View
 
     abstract fun onClickComplete()
+
+    // 변경된 filter 값 변경
+    abstract fun setChangedFilter(productSearchCondition: ProductSearchConditionUiModel): BaseBottomSheetFragment
 
     override fun onDestroyView() {
         super.onDestroyView()

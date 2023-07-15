@@ -1,4 +1,4 @@
-package com.peonlee.explore.model
+package com.peonlee.model.product
 
 import com.peonlee.model.type.Category
 import com.peonlee.model.type.EventType

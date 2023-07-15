@@ -16,7 +16,7 @@ import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.adapter.FilterAdapter
 import com.peonlee.explore.databinding.FragmentExploreBinding
 import com.peonlee.explore.model.BaseFilter
-import com.peonlee.explore.model.ProductSearchConditionUiModel
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.explore.model.baseFilterSet
 import com.peonlee.explore.ui.CategoryFilterBottomSheetFragment
 import com.peonlee.explore.ui.EventFilterBottomSheetFragment
@@ -109,7 +109,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             categories.map { BaseFilter.Category(title = it.categoryName, isSelected = true) }
         }
 
-        // 아무것도 선택되지 않았을 때
+        // 아무것도 선택되지 않았을 때경
         if (priceFilter == null && eventFilters == null && categories == null) {
             filterAdapter.submitList(baseFilterSet)
         } else {
@@ -130,7 +130,9 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
             BaseFilter.Init -> null
             is BaseFilter.Price -> priceFilter
         }
-        currentBottomSheet?.show(childFragmentManager, "Filter")
+        currentBottomSheet
+            ?.setChangedFilter(exploreViewModel.productSearchCondition.value)
+            ?.show(childFragmentManager, "Filter")
     }
 
     companion object {

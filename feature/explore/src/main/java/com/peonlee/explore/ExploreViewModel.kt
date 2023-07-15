@@ -2,7 +2,7 @@ package com.peonlee.explore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.peonlee.explore.model.ProductSearchConditionUiModel
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.Category
 import com.peonlee.model.type.EventType
 import com.peonlee.model.type.PriceFilter

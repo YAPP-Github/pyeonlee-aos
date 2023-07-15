@@ -8,6 +8,7 @@ import com.peonlee.core.ui.designsystem.selector.SmallSelector
 import com.peonlee.explore.databinding.ItemFilterChipBinding
 import com.peonlee.explore.databinding.ItemSelectorFilterBinding
 import com.peonlee.explore.databinding.LayoutSelectorFilterBinding
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.Category
 import com.peonlee.model.type.CategoryFilter
 
@@ -15,7 +16,7 @@ class CategoryFilterBottomSheetFragment(
     private val onCategorySelect: (List<Category>) -> Unit
 ) : BaseBottomSheetFragment("카테고리") {
 
-    private val selectedCategory = mutableListOf<Category>()
+    private var selectedCategory = mutableListOf<Category>()
 
     override fun getFilterLayout(
         layoutInflater: LayoutInflater,
@@ -31,7 +32,7 @@ class CategoryFilterBottomSheetFragment(
                         flexEventChip.addView(
                             ItemFilterChipBinding.inflate(layoutInflater).apply {
                                 root.text = category.categoryName
-                                root.setCancelColor()
+                                if (category in selectedCategory) root.setFillColor() else root.setCancelColor()
                                 root.setOnClickListener { onSelectCategory(root, category) }
                             }.root
                         )
@@ -44,6 +45,11 @@ class CategoryFilterBottomSheetFragment(
 
     override fun onClickComplete() {
         onCategorySelect(selectedCategory)
+    }
+
+    override fun setChangedFilter(productSearchCondition: ProductSearchConditionUiModel): BaseBottomSheetFragment {
+        selectedCategory = productSearchCondition.categories?.toMutableList() ?: mutableListOf()
+        return this
     }
 
     private fun onSelectCategory(

@@ -3,9 +3,11 @@ package com.peonlee.explore.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.explore.databinding.ItemPriceFilterBinding
 import com.peonlee.explore.databinding.LayoutPriceFilterBinding
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.PriceFilter
 import com.peonlee.model.type.toRangeString
 
@@ -28,11 +30,19 @@ class PriceFilterBottomSheetFragment(
             radioGroup.addView(priceFilterItem)
         }
 
+        currentSelectedPrice?.let {
+            radioGroup.check(radioGroup.getChildAt(PriceFilter.values().indexOf(currentSelectedPrice)).id)
+        }
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            val position  = group.indexOfChild(group.findViewById(checkedId))
+            val position = group.indexOfChild(group.findViewById(checkedId))
             currentSelectedPrice = PriceFilter.values().getOrNull(position)
         }
         return radioGroup
+    }
+
+    override fun setChangedFilter(productSearchCondition: ProductSearchConditionUiModel): BaseBottomSheetFragment {
+        currentSelectedPrice = productSearchCondition.price
+        return this
     }
 
     override fun onClickComplete() {
