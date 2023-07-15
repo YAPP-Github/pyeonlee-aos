@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.constraintlayout)
 
     implementation(libs.flexbox.layout)
 }

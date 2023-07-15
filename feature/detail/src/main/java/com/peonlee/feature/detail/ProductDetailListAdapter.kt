@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.View.generateViewId
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.doOnAttach
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import coil.load
 import com.peonlee.common.util.TimeUtil
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.extensions.getString
@@ -26,7 +28,10 @@ import com.peonlee.feature.detail.databinding.ListItemReviewBinding
 import com.peonlee.feature.detail.databinding.ListItemReviewHeaderBinding
 import java.time.LocalDateTime
 
-class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
+class ProductDetailListAdapter(
+    private val navigator: Navigator,
+    private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
+) : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
     override fun onCreateViewHolder(viewType: ProductDetailListItem.ViewType, parent: ViewGroup): CommonViewHolder<ProductDetailListItem> {
         return when (viewType) {
             ProductDetailListItem.ViewType.PRODUCT -> ProductViewHolder(
@@ -37,7 +42,7 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
                 )
             )
 
-            ProductDetailListItem.ViewType.RATING -> RatingViewHolder(ListItemRatingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ProductDetailListItem.ViewType.SCORE -> RatingViewHolder(ListItemRatingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             ProductDetailListItem.ViewType.REVIEW_HEADER -> ReviewHeaderViewHolder(
                 ListItemReviewHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -115,21 +120,29 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
         }
     }
 
-    private inner class NoneReviewViewHolder(private val binding: ListItemNoneReviewBinding) : ViewOnlyViewHolder(binding) {
+    private inner class NoneReviewViewHolder(private val binding: ListItemNoneReviewBinding) : CommonViewHolder<ProductDetailListItem.NoneReview>(binding) {
         init {
             binding.tvWriteReviewButton.setOnClickListener {
                 getItem {
-                    // TODO
+                    navigator.navigateToEditReview(binding.root.context)
                 }
             }
         }
+
+        override fun onBindView(item: ProductDetailListItem.NoneReview) = Unit
     }
 
-    private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Rating>(binding) {
-        override fun onBindView(item: ProductDetailListItem.Rating) = with(binding) {
+    private inner class RatingViewHolder(private val binding: ListItemRatingBinding) : CommonViewHolder<ProductDetailListItem.Score>(binding) {
+        override fun onBindView(item: ProductDetailListItem.Score) = with(binding) {
             tvTotalRateCount.text = getStringWithArgs(com.peonlee.feature.detail.R.string.rate_count, item.rateCount)
-            tvThumbsUpPercent.text = "${item.upvoteRate}%"
-            tvThumbsDownPercent.text = "${item.downvoteRate}%"
+            tvThumbsUpPercent.text = getStringWithArgs(
+                R.string.item_product_recommended_percentage,
+                item.upvoteRate
+            )
+            tvThumbsDownPercent.text = getStringWithArgs(
+                R.string.item_product_recommended_percentage,
+                item.downvoteRate
+            )
 
             vThumbsUpRate.updateLayoutParams<LinearLayout.LayoutParams> {
                 weight = item.upvoteRate.toFloat()
@@ -141,6 +154,14 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
     }
 
     private inner class ReviewViewHolder(private val binding: ListItemReviewBinding) : CommonViewHolder<ProductDetailListItem.Review>(binding) {
+        init {
+            binding.ivManageReview.setOnClickListener {
+                getItem {
+                    showReviewManageDialog(it)
+                }
+            }
+        }
+
         override fun onBindView(item: ProductDetailListItem.Review) = with(binding) {
             tvComment.text = item.reviewText
             tvUserNameAndDate.text = getStringWithArgs(
@@ -151,9 +172,26 @@ class ProductDetailListAdapter : MultiTypeListAdapter<ProductDetailListItem, Pro
                     LocalDateTime.now()
                 )
             )
-            tvLikeCount.text = item.likeCount.toString()
+
+            tvLikeCount.setCompoundDrawablesWithIntrinsicBounds(
+                ResourcesCompat.getDrawable(
+                    binding.root.resources,
+                    if (item.isLike) {
+                        R.drawable.ic_filled_heart
+                    } else {
+                        R.drawable.ic_empty_heart
+                    },
+                    null
+                ),
+                null,
+                null,
+                null
+            )
+            tvLikeCount.text = if (item.likeCount > 0) item.likeCount.toString() else ""
             layoutThumbsDown.isVisible = item.isUpvote.not()
             layoutThumbsUp.isVisible = item.isUpvote
+            tvMyReviewBadge.isVisible = item.isMine
+            ivManageReview.isVisible = item.isMine
             return@with
         }
     }

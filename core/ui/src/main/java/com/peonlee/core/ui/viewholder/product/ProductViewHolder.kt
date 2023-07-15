@@ -2,6 +2,7 @@ package com.peonlee.core.ui.viewholder.product
 
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.core.view.isVisible
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.R
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.extensions.getStringWithArgs
@@ -11,8 +12,17 @@ import com.peonlee.model.product.ProductUiModel
 
 class ProductViewHolder(
     private val layoutParams: LayoutParams,
-    val binding: ListItemProductBinding
+    val binding: ListItemProductBinding,
+    val navigator: Navigator
 ) : CommonViewHolder<ProductUiModel>(binding) {
+    init {
+        binding.root.setOnClickListener {
+            getItem {
+                navigator.navigateToProductDetail(binding.root.context, it.id)
+            }
+        }
+    }
+
     override fun onBindView(item: ProductUiModel) = with(binding) {
         root.layoutParams = layoutParams
         tvProductName.text = item.name

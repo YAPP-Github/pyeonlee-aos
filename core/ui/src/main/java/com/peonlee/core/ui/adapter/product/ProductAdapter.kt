@@ -3,6 +3,7 @@ package com.peonlee.core.ui.adapter.product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.SingleTypeListAdapter
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -13,7 +14,8 @@ import com.peonlee.model.product.ProductUiModel
  * 상품을 위한 Single Item Adapter
  */
 class ProductAdapter(
-    private val rootLayoutParams: LayoutParams
+    private val rootLayoutParams: LayoutParams,
+    private val navigator: Navigator
 ) : SingleTypeListAdapter<ProductUiModel>({ it.id }) {
     override fun onCreateViewHolder(parent: ViewGroup): CommonViewHolder<ProductUiModel> {
         return ProductViewHolder(
@@ -22,7 +24,8 @@ class ProductAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            navigator
         )
     }
 }

@@ -12,5 +12,12 @@ data class ProductDetail(
     val price: Int,
     val productId: Int,
     val promotionList: List<Promotion>,
-    val score: Score
+    val score: Score,
+    val productRatingType: ProductRatingType
 )
+
+enum class ProductRatingType {
+    LIKE,
+    DISLIKE,
+    NONE
+}

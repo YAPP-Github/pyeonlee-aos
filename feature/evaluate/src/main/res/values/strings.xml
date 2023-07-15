@@ -1,5 +1,10 @@
 <resources>
     <string name="evaluate_title">편의점 음식을 평가해 주세요</string>
-    <string name="evaluate_product_count">개 평가</string>
+    <string name="evaluate_product_count">%d개 평가</string>
     <string name="evaluate_next">넘어가기</string>
+    <string name="evaluate_snackbar_title">상품을 평가했어요</string>
+    <string name="evaluate_snackbar_undo">실행취소</string>
+    <string name="item_evaluate_positive">또 먹을거에요</string>
+    <string name="item_evaluate_negative">또 안사먹어요</string>
+    <string name="evaluate_count">10개 이상 평가해야 합니다.</string>
 </resources>

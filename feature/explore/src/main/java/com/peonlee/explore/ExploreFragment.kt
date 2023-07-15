@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.adapter.product.ProductAdapter
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
@@ -27,9 +28,13 @@ import com.peonlee.model.util.PaddingValues
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
+    @Inject
+    lateinit var navigator: Navigator
+
     private val exploreViewModel: ExploreViewModel by viewModels()
 
     private var currentBottomSheet: BaseBottomSheetFragment? = null
@@ -63,7 +68,8 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
 
         // 상품 리스트
         val productAdapter = ProductAdapter(
-            rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+            rootLayoutParams = ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT),
+            navigator
         )
         rvProduct.apply {
             layoutManager = GridLayoutManager(context, 2)

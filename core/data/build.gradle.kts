@@ -13,5 +13,6 @@ dependencies {
     implementation(project(":core:database"))
 
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.paging3)
     implementation(libs.androidx.test.runner)
 }

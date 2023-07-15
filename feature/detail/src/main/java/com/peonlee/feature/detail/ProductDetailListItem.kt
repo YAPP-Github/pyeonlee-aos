@@ -9,7 +9,7 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
 
     enum class ViewType {
         PRODUCT,
-        RATING,
+        SCORE,
         REVIEW_HEADER,
         NONE_REVIEW,
         REVIEW,
@@ -43,12 +43,12 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
         TWO_PLUS_ONE(R.string.promotion_two_plus_one)
     }
 
-    data class Rating(
+    data class Score(
         override val id: Long,
         val rateCount: Int,
         val upvoteRate: Int,
         val downvoteRate: Int
-    ) : ProductDetailListItem(ViewType.RATING)
+    ) : ProductDetailListItem(ViewType.SCORE)
 
     data class ReviewHeader(
         override val id: Long,
@@ -66,7 +66,8 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
         val isUpvote: Boolean,
         val reviewText: String,
         val isLike: Boolean,
-        val likeCount: Int
+        val likeCount: Int,
+        val isMine: Boolean
     ) : ProductDetailListItem(ViewType.REVIEW)
 
     data class Divider(
