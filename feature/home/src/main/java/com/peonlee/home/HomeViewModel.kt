@@ -74,7 +74,7 @@ class HomeViewModel @Inject constructor(
                     ).getOrThrow().content
                     ProductsByStoreUiModel(
                         stores = store,
-                        products = products.subList(0, 6).map { it.toProductUiModel() }
+                        products = (if (products.size > 6) products.subList(0, 6) else products).map { it.toProductUiModel() }
                     )
                 }
             }.awaitAll()
