@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintProperties.WRAP_CONTENT
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -17,8 +18,8 @@ import com.peonlee.home.model.product.ProductsByStoreUiModel
 
 private const val GRID_COLUMN = 3
 private val productLayoutParams = ConstraintLayout.LayoutParams(
-    WRAP_CONTENT, // width
-    MATCH_PARENT // height
+    MATCH_PARENT, // width
+    WRAP_CONTENT // height
 )
 
 class ProductsByStoreViewHolder(

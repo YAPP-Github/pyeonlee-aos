@@ -35,8 +35,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getHomeProductUseCase().handle(
                 onSuccess = { allInfo ->
-                    _products.value = getConditionalProductsItem(1, SortType.RECENT, allInfo.newProductList) +
-                        getConditionalProductsItem(3, SortType.POPULAR, allInfo.popularProductList) +
+                    _products.value = getConditionalProductsItem(1, SortType.RECENT, "주목할 신상", allInfo.newProductList) +
+                        getConditionalProductsItem(3, SortType.POPULAR, "꾸준한 인기상품이에요", allInfo.popularProductList) +
                         getEventProductsItem(allInfo.promotionProductMap) +
                         getRecentComment(allInfo.recentProductCommentList)
                 }
@@ -47,10 +47,11 @@ class HomeViewModel @Inject constructor(
     private fun getConditionalProductsItem(
         id: Long,
         sortType: SortType,
+        title: String,
         products: List<Content>
     ): List<MainHomeListItem> {
         return listOf(
-            TitleUiModel(id = id, title = "주목할 신상"),
+            TitleUiModel(id = id, title = title),
             ConditionalProductsUiModel(
                 id = id + 1,
                 viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
