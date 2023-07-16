@@ -35,7 +35,7 @@ fun Content.toProductUiModel() = ProductUiModel(
     imageUrl = imageUrl,
     name = productName,
     price = price,
-    percentage = 36,
-    reviewCnt = 24,
+    percentage = score.likeRatio,
+    reviewCnt = score.totalCount,
     isEvent = isPromotion
 )
