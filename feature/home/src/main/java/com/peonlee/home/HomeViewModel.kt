@@ -2,28 +2,26 @@ package com.peonlee.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.peonlee.data.getOrThrow
+import com.peonlee.data.handle
+import com.peonlee.data.model.Content
+import com.peonlee.data.model.home.HomeReviewResponse
 import com.peonlee.domain.login.GetHomeProductUseCase
 import com.peonlee.home.model.divider.HomeDividerUiModel
 import com.peonlee.home.model.product.ConditionalProductsUiModel
 import com.peonlee.home.model.product.EventByStoresUiModel
 import com.peonlee.home.model.product.ProductsByStoreUiModel
+import com.peonlee.home.model.review.toUiModel
 import com.peonlee.home.model.title.TitleUiModel
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
 import com.peonlee.model.product.toProductUiModel
-import com.peonlee.model.type.PromotionType
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.StoreType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,52 +33,55 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val recentProduct = async { getConditionalProducts(2, SortType.RECENT) }
-            val popularProduct = async { getConditionalProducts(4, SortType.POPULAR) }
-            val eventProduct = async { getEventProducts() }
-            _products.value = listOf(
-                TitleUiModel(id = 1, title = "주목할 신상"),
-                recentProduct.await(),
-                TitleUiModel(id = 3, title = "꾸준한 인기상품이에요."),
-                popularProduct.await(),
-                HomeDividerUiModel(id = 5),
-                TitleUiModel(id = 6, title = "지금 행사 중!"),
-                eventProduct.await()
+            getHomeProductUseCase().handle(
+                onSuccess = { allInfo ->
+                    _products.value = getConditionalProductsItem(1, SortType.RECENT, allInfo.newProductList) +
+                        getConditionalProductsItem(3, SortType.POPULAR, allInfo.popularProductList) +
+                        getEventProductsItem(allInfo.promotionProductMap) +
+                        getRecentComment(allInfo.recentProductCommentList)
+                }
             )
         }
     }
 
-    private suspend fun getConditionalProducts(id: Long, sortType: SortType): ConditionalProductsUiModel = withContext(Dispatchers.IO) {
-        val conditionalProducts = getHomeProductUseCase(orderBy = sortType).getOrThrow().content.map {
-            it.toProductUiModel()
-        }
-        ConditionalProductsUiModel(
-            id = id,
-            viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
-            sortType = sortType,
-            products = conditionalProducts
+    private fun getConditionalProductsItem(
+        id: Long,
+        sortType: SortType,
+        products: List<Content>
+    ): List<MainHomeListItem> {
+        return listOf(
+            TitleUiModel(id = id, title = "주목할 신상"),
+            ConditionalProductsUiModel(
+                id = id + 1,
+                viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
+                sortType = sortType,
+                products = products.map { it.toProductUiModel() }
+            ),
         )
     }
 
-    private suspend fun getEventProducts(): EventByStoresUiModel = withContext(Dispatchers.IO) {
-        val eventProduct =
-            StoreType.values().map { store ->
-                async {
-                    val products = getHomeProductUseCase(
-                        orderBy = SortType.RECENT,
-                        pageSize = 6,
-                        retail = listOf(store.storeDataName),
-                        promotion = PromotionType.values().map { it.promotionDataName }
-                    ).getOrThrow().content
-                    ProductsByStoreUiModel(
-                        stores = store,
-                        products = (if (products.size > 6) products.subList(0, 6) else products).map { it.toProductUiModel() }
-                    )
-                }
-            }.awaitAll()
-        EventByStoresUiModel(
-            id = 7,
-            stores = eventProduct
+    private fun getEventProductsItem(stores: Map<String, List<Content>>): List<MainHomeListItem> {
+        val eventByStores = StoreType.values().map {
+            val products = stores[it.storeDataName]?.map { it.toProductUiModel() } ?: emptyList()
+            ProductsByStoreUiModel(
+                stores = it,
+                products = if (products.size > 6) products.subList(0, 6) else products
+            )
+        }
+        return listOf(
+            HomeDividerUiModel(id = 5),
+            TitleUiModel(id = 6, title = "지금 행사 중!"),
+            EventByStoresUiModel(
+                id = 7,
+                stores = eventByStores
+            )
         )
+    }
+
+    private fun getRecentComment(comment: List<HomeReviewResponse>): List<MainHomeListItem> {
+        return listOf(
+            HomeDividerUiModel(id = 8),
+            TitleUiModel(id = 9, title = "최근 리뷰")
+        ) + comment.map { it.toUiModel() }
     }
 }
