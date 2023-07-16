@@ -21,7 +21,7 @@ class DefaultProductRepository @Inject constructor(
             keyword = searchRequest.keyword,
             maxPrice = searchRequest.maxPrice,
             minPrice = searchRequest.minPrice,
-            offsetProductId = 1,
+            offsetProductId = null,
             orderBy = searchRequest.orderBy,
             pageSize = 10,
             pbOnly = searchRequest.pbOnly,
