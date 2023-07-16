@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.filter
 import com.peonlee.data.Result
 import com.peonlee.data.evaluate.EvaluateRepository
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.model.Score
 import com.peonlee.domain.evaluate.EvaluateProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,12 +32,12 @@ class EvaluateViewModel @Inject constructor(
     var likeType = ""
         private set
 
-    lateinit var lastEvaluateItem: Content
+    lateinit var lastEvaluateItem: Product
         private set
 
-    private val changeProductFlow: MutableStateFlow<List<Content>> = MutableStateFlow(listOf())
+    private val changeProductFlow: MutableStateFlow<List<Product>> = MutableStateFlow(listOf())
 
-    val productFlow: Flow<PagingData<Content>> = evaluateRepository.getSearchProduct()
+    val productFlow: Flow<PagingData<Product>> = evaluateRepository.getSearchProduct()
         .cachedIn(viewModelScope)
         .combine(changeProductFlow) { pagingData, uiState ->
             uiState.fold(pagingData) { currentPagingData, evaluateProduct ->
@@ -48,7 +48,7 @@ class EvaluateViewModel @Inject constructor(
     private val _evaluateState = MutableSharedFlow<EvaluateProductUiState>()
     val evaluateState: SharedFlow<EvaluateProductUiState> get() = _evaluateState.asSharedFlow()
 
-    private fun evaluateProductApply(paging: PagingData<Content>, value: Content): PagingData<Content> {
+    private fun evaluateProductApply(paging: PagingData<Product>, value: Product): PagingData<Product> {
         return paging.filter {
             value.productId != it.productId
         }
@@ -99,15 +99,15 @@ class EvaluateViewModel @Inject constructor(
         }
     }
 
-    fun setLastEvaluateItem(evaluateProduct: Content) {
+    fun setLastEvaluateItem(evaluateProduct: Product) {
         lastEvaluateItem = evaluateProduct
     }
 
-    fun evaluateProductItem(evaluateProduct: Content) {
+    fun evaluateProductItem(evaluateProduct: Product) {
         changeProductFlow.value += evaluateProduct
     }
 
-    fun undoProductItem(evaluateProduct: Content) {
+    fun undoProductItem(evaluateProduct: Product) {
         changeProductFlow.value -= evaluateProduct
     }
 

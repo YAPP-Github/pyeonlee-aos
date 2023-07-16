@@ -41,15 +41,21 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
 
     private val adapter by lazy {
-        ProductDetailListAdapter({
-            with(viewModel.productDetail) {
-                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+        ProductDetailListAdapter(
+            navigateToEditReview = {
+                with(viewModel.productDetail) {
+                    navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+                }
+            },
+            navigateToProductComments = {
+                navigator.navigateToProductComments(this, productId)
+            },
+            showReviewManageDialog = {
+                ReviewManageDialog.newInstance(productId).run {
+                    show(supportFragmentManager, tag)
+                }
             }
-        }) {
-            ReviewManageDialog.newInstance(productId).run {
-                show(supportFragmentManager, tag)
-            }
-        }
+        )
     }
 
     override fun bindingFactory(): ActivityProductDetailBinding = ActivityProductDetailBinding.inflate(layoutInflater)

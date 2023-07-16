@@ -3,6 +3,7 @@ package com.peonlee.feature.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.handle
+import com.peonlee.data.model.LikeType
 import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductRatingType
 import com.peonlee.data.model.Score
@@ -56,7 +57,7 @@ class ProductDetailViewModel @Inject constructor(
                         id = 2,
                         rateCount = it.score.totalCount,
                         upvoteRate = it.score.likeRatio,
-                        downvoteRate = 100 - it.score.likeRatio
+                        downvoteRate = if (it.score.totalCount == 0) 0 else 100 - it.score.likeRatio
                     ),
                     ProductDetailListItem.Divider(3),
                     ProductDetailListItem.NoneReview(id = 11),
@@ -66,57 +67,27 @@ class ProductDetailViewModel @Inject constructor(
                         id = 5,
                         nickname = "사랑합니다.",
                         writeDate = "",
-                        isUpvote = false,
+                        likeType = LikeType.LIKE,
                         reviewText = "고갱님",
                         isLike = false,
                         likeCount = 1,
                         isMine = false
                     ),
                     ProductDetailListItem.Review(
-                        id = 6,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 2,
-                        isMine = true
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 7,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 4,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
                         id = 8,
                         nickname = "사랑합니다.",
                         writeDate = "",
-                        isUpvote = false,
+                        likeType = LikeType.NONE,
                         reviewText = "고갱님",
                         isLike = false,
                         likeCount = 0,
                         isMine = true
                     ),
                     ProductDetailListItem.Review(
-                        id = 9,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        isUpvote = true,
-                        reviewText = "고갱님",
-                        isLike = true,
-                        likeCount = 5,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
                         id = 10,
                         nickname = "사랑합니다.",
                         writeDate = "",
-                        isUpvote = false,
+                        likeType = LikeType.DISLIKE,
                         reviewText = "고갱님",
                         isLike = false,
                         likeCount = 2,
@@ -165,7 +136,7 @@ class ProductDetailViewModel @Inject constructor(
         newList[scoreItemIndex] = (newList[scoreItemIndex] as ProductDetailListItem.Score).copy(
             rateCount = score.totalCount,
             upvoteRate = score.likeRatio,
-            downvoteRate = 100 - score.likeRatio
+            downvoteRate = if (score.totalCount == 0) 0 else 100 - score.likeRatio
         )
         _productDetailItemList.value = newList
     }

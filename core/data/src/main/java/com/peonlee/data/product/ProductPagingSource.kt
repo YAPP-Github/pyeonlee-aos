@@ -2,7 +2,7 @@ package com.peonlee.data.product
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.model.request.ProductSearchRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -10,8 +10,8 @@ import kotlinx.coroutines.withContext
 class ProductPagingSource(
     private val productSearchRequest: ProductSearchRequest,
     private val productApi: ProductApi
-) : PagingSource<Int, Content>() {
-    override fun getRefreshKey(state: PagingState<Int, Content>): Int? {
+) : PagingSource<Int, Product>() {
+    override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val closetPageToPosition = state.closestPageToPosition(anchorPosition)
             closetPageToPosition?.prevKey?.plus(PAGE_SIZE)
@@ -19,7 +19,7 @@ class ProductPagingSource(
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> = withContext(Dispatchers.IO) {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> = withContext(Dispatchers.IO) {
         try {
             val page = params.key
             val productList = productApi.searchProduct(

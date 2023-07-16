@@ -2,6 +2,7 @@ package com.peonlee.data.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.peonlee.core.data.BuildConfig
+import com.peonlee.data.comment.CommentApi
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import com.peonlee.data.product.ProductApi
@@ -62,6 +63,12 @@ object NetworkModule {
     @Provides
     fun provideProductApi(retrofit: Retrofit): ProductApi {
         return retrofit.create(ProductApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCommentApi(retrofit: Retrofit): CommentApi {
+        return retrofit.create(CommentApi::class.java)
     }
 
     @Provides
