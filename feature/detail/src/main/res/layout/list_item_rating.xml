@@ -16,6 +16,7 @@
         android:gravity="center_vertical">
 
         <TextView
+            android:id="@+id/tvTitle"
             style="@style/Text.Subtitle01"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,25 +39,36 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="100">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100">
+
+                <View
+                    android:id="@+id/vThumbsUpRate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/brand100"
+                    tools:layout_weight="50" />
+
+                <View
+                    android:id="@+id/vThumbsDownRate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/system_r100"
+                    tools:layout_weight="50" />
+            </LinearLayout>
 
             <View
-                android:id="@+id/vThumbsUpRate"
-                android:layout_width="0dp"
+                android:id="@+id/vNoneScore"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/brand100"
-                tools:layout_weight="50" />
-
-            <View
-                android:id="@+id/vThumbsDownRate"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/system_r100"
-                tools:layout_weight="50" />
-        </LinearLayout>
+                android:background="@color/bg30" />
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout

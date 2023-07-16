@@ -3,6 +3,7 @@ package com.peonlee.feature.detail
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.peonlee.core.ui.R
+import com.peonlee.data.model.LikeType
 import com.peonlee.model.ListItem
 
 sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
@@ -63,7 +64,7 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
         override val id: Long,
         val nickname: String,
         val writeDate: String,
-        val isUpvote: Boolean,
+        val likeType: LikeType,
         val reviewText: String,
         val isLike: Boolean,
         val likeCount: Int,

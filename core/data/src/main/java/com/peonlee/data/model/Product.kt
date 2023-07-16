@@ -3,7 +3,7 @@ package com.peonlee.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Content(
+data class Product(
     val brandName: String,
     val imageUrl: String,
     val isPbProduct: Boolean,

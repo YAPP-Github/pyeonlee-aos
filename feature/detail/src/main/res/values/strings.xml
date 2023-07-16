@@ -3,6 +3,7 @@
     <string name="title_activity_product_detail">ProductDetailActivity</string>
     <string name="event_information">행사 정보</string>
     <string name="rating_title">사람들의 평가를 확인하세요!</string>
+    <string name="none_rating_title">아직 아무도 평가하지 않았어요</string>
     <string name="count">%d개</string>
     <string name="rate_count">%d명 평가</string>
     <string name="upvote_desc">또 먹을거에요</string>

@@ -1,5 +1,7 @@
 package com.peonlee.data.di
 
+import com.peonlee.data.comment.CommentRepository
+import com.peonlee.data.comment.DefaultCommentRepository
 import com.peonlee.data.login.LoginRepository
 import com.peonlee.data.login.LoginRepositoryImpl
 import com.peonlee.data.product.DefaultProductRepository
@@ -32,4 +34,10 @@ abstract class RepositoryModule {
     abstract fun bindReviewRepository(
         reviewRepository: DefaultReviewRepository
     ): ReviewRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCommentRepository(
+        repository: DefaultCommentRepository
+    ): CommentRepository
 }

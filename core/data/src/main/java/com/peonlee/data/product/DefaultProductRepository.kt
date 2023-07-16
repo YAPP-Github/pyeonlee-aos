@@ -3,7 +3,7 @@ package com.peonlee.data.product
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.data.setResult
 import kotlinx.coroutines.flow.Flow
@@ -43,7 +43,7 @@ class DefaultProductRepository @Inject constructor(
         productApi.cancelLikeProductDetail(productId)
     }
 
-    override fun getProductsPaging(productSearchRequest: ProductSearchRequest): Flow<PagingData<Content>> {
+    override fun getProductsPaging(productSearchRequest: ProductSearchRequest): Flow<PagingData<Product>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ProductPagingSource.PAGE_SIZE,

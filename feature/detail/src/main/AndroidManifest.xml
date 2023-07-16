@@ -5,6 +5,10 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
+            android:name=".ProductCommentsActivity"
+            android:theme="@style/Product.Detail"
+            android:exported="false" />
+        <activity
             android:name=".ProductDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_product_detail"

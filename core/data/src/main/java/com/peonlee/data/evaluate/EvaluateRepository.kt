@@ -3,13 +3,13 @@ package com.peonlee.data.evaluate
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.product.ProductApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class EvaluateRepository @Inject constructor(private val productApi: ProductApi) {
-    fun getSearchProduct(): Flow<PagingData<Content>> {
+    fun getSearchProduct(): Flow<PagingData<Product>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
