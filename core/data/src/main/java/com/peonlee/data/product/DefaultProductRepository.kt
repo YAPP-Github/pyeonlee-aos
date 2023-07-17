@@ -5,8 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.peonlee.common.exception.NoneDataException
 import com.peonlee.data.Result
-import com.peonlee.data.model.home.HomeInfoResponse
 import com.peonlee.data.model.Product
+import com.peonlee.data.model.home.HomeInfoResponse
 import com.peonlee.data.model.request.ProductSearchRequest
 import com.peonlee.data.setResult
 import kotlinx.coroutines.flow.Flow
