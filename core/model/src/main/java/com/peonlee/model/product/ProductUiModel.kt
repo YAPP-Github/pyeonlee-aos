@@ -1,6 +1,6 @@
 package com.peonlee.model.product
 
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 
 /**
  * 상품 리스트 에 보여줄 상품 정보
@@ -30,7 +30,7 @@ val PRODUCTS_TEST_DOUBLE = (1..10).map {
 /**
  * data module Content -> ProductUiModel
  */
-fun Content.toProductUiModel() = ProductUiModel(
+fun Product.toProductUiModel() = ProductUiModel(
     id = productId,
     imageUrl = imageUrl,
     name = productName,

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.evaluate.databinding.ListItemEvaluateBinding
 
-class EvaluateAdapter : PagingDataAdapter<Content, EvaluateViewHolder>(EVALUATE_DIFF_CALLBACK) {
+class EvaluateAdapter : PagingDataAdapter<Product, EvaluateViewHolder>(EVALUATE_DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: EvaluateViewHolder, position: Int) {
         getItem(position)?.let { product ->
             holder.onBindView(product)
@@ -25,12 +25,12 @@ class EvaluateAdapter : PagingDataAdapter<Content, EvaluateViewHolder>(EVALUATE_
     }
 
     companion object {
-        private val EVALUATE_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Content>() {
-            override fun areItemsTheSame(oldItem: Content, newItem: Content): Boolean {
+        private val EVALUATE_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Product>() {
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
                 return oldItem.productId == newItem.productId
             }
 
-            override fun areContentsTheSame(oldItem: Content, newItem: Content): Boolean {
+            override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
                 return oldItem == newItem
             }
         }

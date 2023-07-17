@@ -2,14 +2,14 @@ package com.peonlee.data.evaluate
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.product.ProductApi
 import javax.inject.Inject
 
-class EvaluatePagingSource @Inject constructor(private val productApi: ProductApi) : PagingSource<Int, Content>() {
+class EvaluatePagingSource @Inject constructor(private val productApi: ProductApi) : PagingSource<Int, Product>() {
     private var offsetProductId: Int? = null
 
-    override fun getRefreshKey(state: PagingState<Int, Content>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val closestPageToPosition = state.closestPageToPosition(anchorPosition)
             closestPageToPosition?.prevKey?.plus(PAGE_SIZE)
@@ -17,7 +17,7 @@ class EvaluatePagingSource @Inject constructor(private val productApi: ProductAp
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         val page = params.key ?: 1
         val productList = productApi.searchProductTemp(offsetProductId = offsetProductId).copy()
 
