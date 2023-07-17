@@ -11,5 +11,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:explore"))
     implementation(project(":feature:user"))
+
+    implementation(libs.google.material)
     implementation(libs.bundles.fragment)
 }
