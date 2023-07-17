@@ -9,5 +9,9 @@ enum class StoreType(
 ) {
     CU("CU", "CU"),
     GS25("GS25", "GS"),
-    SEVEN("세븐일레븐", "SEVEN_ELEVEN")
+    SEVEN("세븐일레븐", "SEVEN_ELEVEN");
+
+    companion object {
+        fun getStoreByName(name: String) = StoreType.values().find { it.storeDataName == name } ?: CU
+    }
 }
