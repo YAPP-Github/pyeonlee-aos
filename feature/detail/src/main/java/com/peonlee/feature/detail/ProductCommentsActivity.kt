@@ -48,7 +48,6 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>() {
             finish()
         }
         rvProductComments.adapter = adapter
-
     }
 
     override fun bindViews() {
