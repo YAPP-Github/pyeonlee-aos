@@ -1,8 +1,8 @@
 package com.peonlee.data.product
 
 import com.peonlee.data.model.ProductDetail
-import com.peonlee.data.model.response.SearchProductResponse
 import com.peonlee.data.model.Score
+import com.peonlee.data.model.response.SearchProductResponse
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path

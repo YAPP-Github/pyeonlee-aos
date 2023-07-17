@@ -4,9 +4,9 @@ import androidx.paging.PagingData
 import com.peonlee.data.Result
 import com.peonlee.data.model.Product
 import com.peonlee.data.model.ProductDetail
-import com.peonlee.data.model.response.SearchProductResponse
 import com.peonlee.data.model.Score
 import com.peonlee.data.model.request.ProductSearchRequest
+import com.peonlee.data.model.response.SearchProductResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {

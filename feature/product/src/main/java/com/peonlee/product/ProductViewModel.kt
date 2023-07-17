@@ -35,6 +35,8 @@ class ProductViewModel @Inject constructor(
 
     val products: Flow<PagingData<ProductUiModel>>
 
+    private var keyword: String? = ""
+
     init {
         products = _productSearchCondition
             .flatMapLatest {
@@ -49,6 +51,7 @@ class ProductViewModel @Inject constructor(
         return try {
             productRepository.getProductsPaging(
                 ProductSearchRequest(
+                    keyword = keyword,
                     maxPrice = productSearch.price?.maxPrice,
                     minPrice = productSearch.price?.minPrice,
                     orderBy = productSearch.sortedBy.sortName,
@@ -94,5 +97,9 @@ class ProductViewModel @Inject constructor(
             keyword = _productSearchCondition.value.keyword,
             sortedBy = _productSearchCondition.value.sortedBy
         )
+    }
+
+    fun setKeyword(keyword: String?) {
+        this.keyword = keyword
     }
 }
