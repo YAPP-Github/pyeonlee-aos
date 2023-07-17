@@ -1,8 +1,8 @@
 package com.peonlee.domain.login
 
 import com.peonlee.data.Result
-import com.peonlee.data.model.response.SearchProductResponse
 import com.peonlee.data.model.request.ProductSearchRequest
+import com.peonlee.data.model.response.SearchProductResponse
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.model.type.SortType
 import kotlinx.coroutines.Dispatchers

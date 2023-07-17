@@ -1,6 +1,5 @@
 package com.peonlee.core.ui.extensions
 
-import android.view.View
 import android.widget.EditText
 import com.peonlee.core.ui.util.keyboard.KeyboardUtil
 
@@ -17,6 +16,6 @@ fun EditText.hideKeyboard() {
     KeyboardUtil.hide(this)
 }
 
-fun EditText.trim() : String {
+fun EditText.trim(): String {
     return this.text.trim().toString()
 }
