@@ -1,9 +1,9 @@
 package com.peonlee.data.product
 
 import com.peonlee.data.model.ProductDetail
-import com.peonlee.data.model.ProductSearch
 import com.peonlee.data.model.Score
 import com.peonlee.data.model.home.HomeInfoResponse
+import com.peonlee.data.model.response.SearchProductResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -50,7 +50,7 @@ interface ProductApi {
     suspend fun searchProductTemp(
         @Query("pageSize") pageSize: Int = 20,
         @Query("offsetProductId") offsetProductId: Int?
-    ): ProductSearch
+    ): SearchProductResponse
 
     /**
      * [GET] v1/home

@@ -1,6 +1,6 @@
 package com.peonlee.data.model.home
 
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,11 +10,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HomeInfoResponse(
     @SerialName("newProductList")
-    val newProductList: List<Content>, // 신상품
+    val newProductList: List<Product>, // 신상품
     @SerialName("popularProductList")
-    val popularProductList: List<Content>, // 인기 상품
+    val popularProductList: List<Product>, // 인기 상품
     @SerialName("promotionProductMap")
-    val promotionProductMap: Map<String, List<Content>>, // 편의점 별 행사 상품
+    val promotionProductMap: Map<String, List<Product>>, // 편의점 별 행사 상품
     @SerialName("recentProductCommentList")
     val recentProductCommentList: List<HomeReviewResponse>
 )

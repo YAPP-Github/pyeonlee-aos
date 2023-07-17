@@ -12,7 +12,7 @@ data class ProductUiModel(
     val price: Int, // 상품 가격
     val percentage: Int, // 평점
     val reviewCnt: Int, // 리뷰 개수
-    val isEvent: Boolean // 행사 여부
+    val isPromotion: Boolean // 행사 여부
 )
 
 val PRODUCTS_TEST_DOUBLE = (1..10).map {
@@ -23,7 +23,7 @@ val PRODUCTS_TEST_DOUBLE = (1..10).map {
         price = 1000 * it,
         percentage = 36,
         reviewCnt = 24,
-        isEvent = it % 2 == 0
+        isPromotion = it % 2 == 0
     )
 }
 
@@ -37,5 +37,5 @@ fun Product.toProductUiModel() = ProductUiModel(
     price = price,
     percentage = score.likeRatio,
     reviewCnt = score.totalCount,
-    isEvent = isPromotion
+    isPromotion = isPromotion
 )

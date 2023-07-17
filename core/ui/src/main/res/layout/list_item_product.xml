@@ -36,8 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_medium"
         android:text="@string/item_product_event"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:translationZ="2dp"
+        app:layout_constraintEnd_toEndOf="@id/layoutImage"
+        app:layout_constraintTop_toTopOf="@id/layoutImage" />
 
     <TextView
         android:id="@+id/tv_productName"

@@ -3,7 +3,7 @@ package com.peonlee.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.handle
-import com.peonlee.data.model.Content
+import com.peonlee.data.model.Product
 import com.peonlee.data.model.home.HomeReviewResponse
 import com.peonlee.domain.login.GetHomeProductUseCase
 import com.peonlee.home.model.divider.HomeDividerUiModel
@@ -48,7 +48,7 @@ class HomeViewModel @Inject constructor(
         id: Long,
         sortType: SortType,
         title: String,
-        products: List<Content>
+        products: List<Product>
     ): List<MainHomeListItem> {
         return listOf(
             TitleUiModel(id = id, title = title),
@@ -61,7 +61,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun getEventProductsItem(stores: Map<String, List<Content>>): List<MainHomeListItem> {
+    private fun getEventProductsItem(stores: Map<String, List<Product>>): List<MainHomeListItem> {
         val eventByStores = StoreType.values().map {
             val products = stores[it.storeDataName]?.map { it.toProductUiModel() } ?: emptyList()
             ProductsByStoreUiModel(
