@@ -1,5 +1,6 @@
 package com.peonlee.core.ui.extensions
 
+import android.view.View
 import android.widget.EditText
 import com.peonlee.core.ui.util.keyboard.KeyboardUtil
 
@@ -10,4 +11,12 @@ import com.peonlee.core.ui.util.keyboard.KeyboardUtil
 fun EditText.focus() {
     requestFocus() // focus 요청
     KeyboardUtil.show(findFocus()) // 키보드 생성
+}
+
+fun EditText.hideKeyboard() {
+    KeyboardUtil.hide(this)
+}
+
+fun EditText.trim() : String {
+    return this.text.trim().toString()
 }
