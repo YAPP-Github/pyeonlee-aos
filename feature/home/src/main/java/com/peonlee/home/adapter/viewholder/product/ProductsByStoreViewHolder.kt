@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintProperties.WRAP_CONTENT
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder

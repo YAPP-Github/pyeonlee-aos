@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
                 viewType = MainHomeViewType.CONDITIONAL_PRODUCTS,
                 sortType = sortType,
                 products = products.map { it.toProductUiModel() }
-            ),
+            )
         )
     }
 
