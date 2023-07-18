@@ -21,7 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             mainViewModel.changeTab(it.itemId)
             true
         }
-        binding.layoutFragment.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.layoutFragment.isUserInputEnabled = false
         binding.layoutFragment.adapter = MainAdapter(this)
     }
 
@@ -30,7 +30,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             .onEach {
                 binding.layoutFragment.currentItem = when (it) {
                     R.id.navHome -> 0
-                    else -> 2
+                    R.id.navExplore -> 2
+                    else -> 3
                 }
             }.launchIn(lifecycleScope)
     }

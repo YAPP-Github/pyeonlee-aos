@@ -13,5 +13,6 @@ dependencies {
     implementation(project(":feature:user"))
 
     implementation(libs.google.material)
+    implementation(libs.androidx.viewpager)
     implementation(libs.bundles.fragment)
 }

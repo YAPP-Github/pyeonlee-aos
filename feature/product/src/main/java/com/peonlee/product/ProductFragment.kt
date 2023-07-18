@@ -59,7 +59,7 @@ class ProductFragment(
         }
     }
 
-    override fun bindingFactory(parent: ViewGroup): FragmentProductBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentProductBinding {
         return FragmentProductBinding.inflate(layoutInflater, parent, false)
     }
 

@@ -14,7 +14,7 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    override fun bindingFactory(parent: ViewGroup): FragmentExploreBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentExploreBinding {
         return FragmentExploreBinding.inflate(layoutInflater, parent, false)
     }
 

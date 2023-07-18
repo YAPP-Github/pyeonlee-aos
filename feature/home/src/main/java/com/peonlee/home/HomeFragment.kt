@@ -20,7 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
-    override fun bindingFactory(parent: ViewGroup): FragmentHomeBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater, parent, false)
     }
 

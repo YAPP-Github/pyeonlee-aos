@@ -17,14 +17,8 @@ class MainAdapter(
         UserFragment.getInstance()
     )
 
-    override fun getItemCount() = 4
+    override fun getItemCount() = mainFragments.size
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
-            0 -> HomeFragment()
-            1 -> HomeFragment.getInstance()
-            2 -> ExploreFragment.getInstance()
-            else -> UserFragment.getInstance()
-        }
+        return mainFragments[position]
     }
-
 }
