@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.peonlee.R
+import com.peonlee.evaluate.OnboardActivity
 import com.peonlee.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
                 override fun onPreDraw(): Boolean {
                     return if (true) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
-                        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                        startActivity(Intent(this@SplashActivity, OnboardActivity::class.java))
                         finish()
                         true
                     } else {
