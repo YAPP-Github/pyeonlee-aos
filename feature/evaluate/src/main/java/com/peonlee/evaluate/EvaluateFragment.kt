@@ -2,10 +2,8 @@ package com.peonlee.evaluate
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle

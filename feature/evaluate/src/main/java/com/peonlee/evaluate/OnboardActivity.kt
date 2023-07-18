@@ -12,13 +12,15 @@ class OnboardActivity : BaseActivity<ActivityOnboadingBinding>() {
     }
 
     override fun initViews() {
-        val bundle = Bundle()
-        bundle.putBoolean("onBoarding", true)
-
-        supportFragmentManager.beginTransaction()
-            .add(R.id.layout_onboarding, EvaluateFragment().apply {
-                arguments = bundle
-            }).commit()
+        val evaluateFragment = EvaluateFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("onBoarding", true)
+            }
+        }
+        supportFragmentManager.beginTransaction().add(
+            R.id.layout_onboarding,
+            evaluateFragment
+        ).commit()
     }
 
     override fun bindViews() {
