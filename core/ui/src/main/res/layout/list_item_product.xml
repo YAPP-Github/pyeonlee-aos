@@ -12,6 +12,7 @@
         android:theme="@style/Theme.MaterialComponents"
         app:cardBackgroundColor="@color/bg0"
         app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@id/tv_productName"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

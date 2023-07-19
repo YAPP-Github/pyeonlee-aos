@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>() {
+class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), CommentStateChangeListener {
     companion object {
         private const val EXTRA_PRODUCT = "extra_product"
         private const val EXTRA_TOTAL_COMMENTS_COUNT = "extra_total_comments_count"
@@ -58,5 +58,9 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>() {
                 adapter.submitData(it)
             }
         }
+    }
+
+    override fun onChanged() {
+        adapter.refresh()
     }
 }
