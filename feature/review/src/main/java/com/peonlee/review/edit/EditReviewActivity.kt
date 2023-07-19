@@ -36,14 +36,16 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         private const val EXTRA_PRODUCT_IMAGE_URL = "product_image_url"
         private const val EXTRA_PRODUCT_NAME = "product_name"
         private const val EXTRA_PRODUCT_PRICE = "product_price"
+        private const val EXTRA_COMMENT_CONTENT = "comment_content"
 
-        fun startActivity(context: Context, productId: Int, imageUrl: String, productName: String, price: Int) {
+        fun startActivity(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, content: String? = null) {
             context.startActivity(
                 Intent(context, EditReviewActivity::class.java).apply {
                     putExtra(EXTRA_PRODUCT_ID, productId)
                     putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
                     putExtra(EXTRA_PRODUCT_NAME, productName)
                     putExtra(EXTRA_PRODUCT_PRICE, price)
+                    putExtra(EXTRA_COMMENT_CONTENT, content)
                 }
             )
         }
@@ -52,6 +54,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
     private val editReviewViewModel: EditReviewViewModel by viewModels()
 
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, -1) }
+    private val content by lazy { intent.getStringExtra(EXTRA_COMMENT_CONTENT) }
 
     override fun bindingFactory(): ActivityEditReviewBinding {
         return ActivityEditReviewBinding.inflate(layoutInflater)
@@ -66,6 +69,9 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
             ivProductImage.load(intent.getStringExtra(EXTRA_PRODUCT_IMAGE_URL))
             tvProductName.text = intent.getStringExtra(EXTRA_PRODUCT_NAME)
             tvProductPrice.text = intent.getIntExtra(EXTRA_PRODUCT_PRICE, 0).toFormattedMoney()
+            editReview.setText(content)
+            editReview.setSelection(content?.length ?: 0)
+            editReviewViewModel.setReview(content)
 
             // 리뷰 작성 editor 의 최대 작성 길이 제한(300자)
             editReview.filters = arrayOf(
@@ -92,7 +98,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                 editReviewViewModel.setReview(text?.toString())
             }
             // 등록 하기 버튼 클릭
-            btnSave.setOnClickListener { editReviewViewModel.saveReview(productId) }
+            btnSave.setOnClickListener { editReviewViewModel.saveReview(productId, content != null) }
             btnClose.setOnClickListener { finish() } // 상단 X 버튼 클릭
             // editor focusing 변경
             editReview.onFocusChangeListener = reviewEditorFocusChangedListener

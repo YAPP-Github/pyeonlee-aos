@@ -44,15 +44,19 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         ProductDetailListAdapter(
             navigateToEditReview = {
                 with(viewModel.productDetail) {
-                    navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+                    navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null)
                 }
             },
             navigateToProductComments = {
-                navigator.navigateToProductComments(this, productId)
+                with(viewModel.productDetail) {
+                    navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, 1) // TODO total comments
+                }
             },
             showReviewManageDialog = {
-                ReviewManageDialog.newInstance(productId).run {
-                    show(supportFragmentManager, tag)
+                with(viewModel.productDetail) {
+                    CommentManageDialog.newInstance(ProductExtra(productId, imageUrl, name, price), it.reviewText).run {
+                        show(supportFragmentManager, tag)
+                    }
                 }
             }
         )
@@ -79,7 +83,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         }
         binding.btnReviewWrite.setOnClickListener {
             with(viewModel.productDetail) {
-                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price)
+                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null)
             }
         }
 

@@ -2,7 +2,6 @@ package com.peonlee.data.review
 
 import com.peonlee.data.model.review.SaveReviewRequest
 import com.peonlee.data.model.review.SaveReviewResponse
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -20,16 +19,16 @@ interface ReviewApi {
     suspend fun saveReview(
         @Path("productId") productId: Int,
         @Body request: SaveReviewRequest
-    ): Response<SaveReviewResponse>
+    )
 
     @POST("v1/product/{productId}/comment/edit")
     suspend fun editReview(
         @Path("productId") productId: Int,
         @Body request: SaveReviewRequest
-    ): Response<SaveReviewResponse>
+    )
 
     @POST("v1/product/{productId}/comment/delete")
     suspend fun deleteReview(
         @Path("productId") productId: Int
-    ): Response<Unit>
+    )
 }

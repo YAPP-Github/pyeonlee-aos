@@ -6,7 +6,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CommentApi {
-    @GET("v1/product/{productId}/comments")
+    @GET("v1/product/{productId}/comment")
     suspend fun getProductComments(
         @Path("productId") productId: Int,
         @Query("offsetProductCommentId") offsetProductCommentId: Int? = null,

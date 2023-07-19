@@ -23,14 +23,14 @@ class DefaultReviewRepository @Inject constructor(
         reviewApi.saveReview(
             productId = productId,
             SaveReviewRequest(review = review)
-        ).body() ?: throw IllegalArgumentException()
+        )
     }
 
-    override suspend fun editReview(productId: Int, review: String): Result<SaveReviewResponse> = setResult {
+    override suspend fun editReview(productId: Int, review: String) = setResult {
         reviewApi.editReview(
             productId = productId,
             SaveReviewRequest(review = review)
-        ).body() ?: throw IllegalArgumentException()
+        )
     }
 
     override suspend fun deleteReview(productId: Int): Result<Unit> = setResult {
