@@ -51,7 +51,7 @@ class ProductViewModel @Inject constructor(
         return try {
             productRepository.getProductsPaging(
                 ProductSearchRequest(
-                    keyword = keyword,
+                    keyword = null,
                     maxPrice = productSearch.price?.maxPrice,
                     minPrice = productSearch.price?.minPrice,
                     orderBy = productSearch.sortedBy.sortName,

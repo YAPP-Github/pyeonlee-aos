@@ -32,9 +32,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductFragment(
-    private val keyword: String? = null
-) : BaseFragment<FragmentProductBinding>() {
+class ProductFragment : BaseFragment<FragmentProductBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
@@ -64,9 +62,8 @@ class ProductFragment(
     }
 
     override fun initViews() = with(binding) {
-        exploreViewModel.setKeyword(keyword)
         // 상단 상품 정렬 tab 설정
-        com.peonlee.model.type.SortType.values().forEach {
+        SortType.values().forEach {
             tabProductSort.addTab(
                 tabProductSort.newTab().apply { text = it.uiNameForExplore }
             )
@@ -113,7 +110,7 @@ class ProductFragment(
                 productAdapter.submitData(it)
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
-        kotlin.Unit
+        Unit
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
