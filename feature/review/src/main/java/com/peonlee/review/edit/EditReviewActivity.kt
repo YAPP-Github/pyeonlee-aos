@@ -38,17 +38,14 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
         private const val EXTRA_PRODUCT_PRICE = "product_price"
         private const val EXTRA_COMMENT_CONTENT = "comment_content"
 
-        fun startActivity(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, content: String? = null) {
-            context.startActivity(
-                Intent(context, EditReviewActivity::class.java).apply {
-                    putExtra(EXTRA_PRODUCT_ID, productId)
-                    putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
-                    putExtra(EXTRA_PRODUCT_NAME, productName)
-                    putExtra(EXTRA_PRODUCT_PRICE, price)
-                    putExtra(EXTRA_COMMENT_CONTENT, content)
-                }
-            )
-        }
+        fun newIntent(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, content: String? = null) =
+            Intent(context, EditReviewActivity::class.java).apply {
+                putExtra(EXTRA_PRODUCT_ID, productId)
+                putExtra(EXTRA_PRODUCT_IMAGE_URL, imageUrl)
+                putExtra(EXTRA_PRODUCT_NAME, productName)
+                putExtra(EXTRA_PRODUCT_PRICE, price)
+                putExtra(EXTRA_COMMENT_CONTENT, content)
+            }
     }
 
     private val editReviewViewModel: EditReviewViewModel by viewModels()
@@ -146,8 +143,11 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
                 when (it) {
                     is EditReviewUiEvent.Fail.Exception -> showToast(it.message)
                     is EditReviewUiEvent.Fail.Message -> showToast(it.message)
-                    EditReviewUiEvent.Loading -> {}
-                    EditReviewUiEvent.Success -> finish()
+                    EditReviewUiEvent.Loading -> Unit
+                    EditReviewUiEvent.Success -> {
+                        setResult(RESULT_OK)
+                        finish()
+                    }
                 }
             }
             .launchIn(lifecycleScope)

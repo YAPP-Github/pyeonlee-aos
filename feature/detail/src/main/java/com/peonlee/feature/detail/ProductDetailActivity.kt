@@ -1,7 +1,11 @@
 package com.peonlee.feature.detail
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.flowWithLifecycle
@@ -9,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.model.ProductRatingType
-import com.peonlee.data.product.ProductRepository
 import com.peonlee.feature.detail.databinding.ActivityProductDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -17,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
+class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>(), CommentStateChangeListener {
     companion object {
         private const val DEFAULT_PRODUCT_ID = -1
         private const val EXTRA_PRODUCT_ID = "extra_product_id"
@@ -31,20 +34,24 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
     }
 
     @Inject
-    lateinit var productRepository: ProductRepository
-
-    @Inject
     lateinit var navigator: Navigator
 
     private val viewModel: ProductDetailViewModel by viewModels()
 
     private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
 
+    private val editCommentLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                viewModel.start(productId)
+            }
+        }
+
     private val adapter by lazy {
         ProductDetailListAdapter(
             navigateToEditReview = {
                 with(viewModel.productDetail) {
-                    navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null)
+                    navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null, editCommentLauncher)
                 }
             },
             navigateToProductComments = {
@@ -83,7 +90,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         }
         binding.btnReviewWrite.setOnClickListener {
             with(viewModel.productDetail) {
-                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null)
+                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null, editCommentLauncher)
             }
         }
 
@@ -109,5 +116,9 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>() {
         binding.llUpvote.isVisible = voteType == ProductRatingType.LIKE
         binding.llDownvote.isVisible = voteType == ProductRatingType.DISLIKE
         binding.llNoneVoteContainer.isVisible = voteType == ProductRatingType.NONE
+    }
+
+    override fun onChanged() {
+        viewModel.start(productId)
     }
 }
