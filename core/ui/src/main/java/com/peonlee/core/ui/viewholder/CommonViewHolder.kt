@@ -1,5 +1,6 @@
 package com.peonlee.core.ui.viewholder
 
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -14,12 +15,16 @@ abstract class CommonViewHolder<out E>(binding: ViewBinding) : RecyclerView.View
 
     @PublishedApi
     internal fun getItem(position: Int): Any? {
-        val adapter =
-            bindingAdapter as? ListAdapter<*, *> ?: throw IllegalAccessException("This function can only be used on ViewHolders inside a ListAdapter.")
-        return try {
-            adapter.currentList[position]
-        } catch (e: Exception) {
-            null
+        return when (val adapter = bindingAdapter) {
+            is ListAdapter<*, *> -> {
+                adapter.currentList[position]
+            }
+            is PagingDataAdapter<*, *> -> {
+                adapter.peek(position)
+            }
+            else -> {
+                throw IllegalAccessException("This function can only be used on ViewHolders inside a ListAdapter.")
+            }
         }
     }
 

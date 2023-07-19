@@ -34,7 +34,7 @@ class EditReviewViewModel @Inject constructor(
     /**
      * 사용자가 작성한 리뷰 저장
      */
-    fun saveReview(productId: Int) {
+    fun saveReview(productId: Int, isEdit: Boolean) {
         viewModelScope.launch {
             // 1. 리뷰 작성 요청
             val editedReview = _review.value
@@ -46,10 +46,17 @@ class EditReviewViewModel @Inject constructor(
                 return@launch
             }
             _editReviewUiEvent.emit(EditReviewUiEvent.Loading)
-            val saveReviewResult = reviewRepository.saveReview(
-                productId = productId,
-                review = editedReview
-            )
+            val saveReviewResult = if (isEdit) {
+                reviewRepository.editReview(
+                    productId = productId,
+                    review = editedReview
+                )
+            } else {
+                reviewRepository.saveReview(
+                    productId = productId,
+                    review = editedReview
+                )
+            }
             when (saveReviewResult) {
                 is Result.Error -> { /* TODO Toast */
                     val exception = saveReviewResult.exception.message

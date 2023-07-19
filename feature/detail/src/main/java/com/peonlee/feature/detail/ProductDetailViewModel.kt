@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,7 +67,7 @@ class ProductDetailViewModel @Inject constructor(
                     ProductDetailListItem.Review(
                         id = 5,
                         nickname = "사랑합니다.",
-                        writeDate = "",
+                        writeDate = LocalDateTime.now().toString(),
                         likeType = LikeType.LIKE,
                         reviewText = "고갱님",
                         isLike = false,
@@ -76,7 +77,7 @@ class ProductDetailViewModel @Inject constructor(
                     ProductDetailListItem.Review(
                         id = 8,
                         nickname = "사랑합니다.",
-                        writeDate = "",
+                        writeDate = LocalDateTime.now().toString(),
                         likeType = LikeType.NONE,
                         reviewText = "고갱님",
                         isLike = false,
@@ -86,7 +87,7 @@ class ProductDetailViewModel @Inject constructor(
                     ProductDetailListItem.Review(
                         id = 10,
                         nickname = "사랑합니다.",
-                        writeDate = "",
+                        writeDate = LocalDateTime.now().toString(),
                         likeType = LikeType.DISLIKE,
                         reviewText = "고갱님",
                         isLike = false,

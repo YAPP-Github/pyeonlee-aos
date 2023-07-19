@@ -54,7 +54,7 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
     data class ReviewHeader(
         override val id: Long,
         val reviewCount: Int
-    ) : ProductDetailListItem(ViewType.REVIEW_HEADER)
+    ) : ProductDetailListItem(ViewType.REVIEW_HEADER), ReviewItem
 
     data class NoneReview(
         override val id: Long
@@ -69,9 +69,11 @@ sealed class ProductDetailListItem(override val viewType: ViewType) : ListItem {
         val isLike: Boolean,
         val likeCount: Int,
         val isMine: Boolean
-    ) : ProductDetailListItem(ViewType.REVIEW)
+    ) : ProductDetailListItem(ViewType.REVIEW), ReviewItem
 
     data class Divider(
         override val id: Long
     ) : ProductDetailListItem(ViewType.DIVIDER)
 }
+
+sealed interface ReviewItem

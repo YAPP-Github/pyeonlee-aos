@@ -13,9 +13,9 @@ interface ReviewRepository {
      * @param review 사용자가 작성한 리뷰
      * @return 리뷰 저장 API Response
      */
-    suspend fun saveReview(productId: Int, review: String): Result<SaveReviewResponse>
+    suspend fun saveReview(productId: Int, review: String): Result<Unit>
 
-    suspend fun editReview(productId: Int, review: String): Result<SaveReviewResponse>
+    suspend fun editReview(productId: Int, review: String): Result<Unit>
 
     suspend fun deleteReview(productId: Int): Result<Unit>
 }
