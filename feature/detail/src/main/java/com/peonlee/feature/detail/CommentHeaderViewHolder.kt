@@ -7,7 +7,7 @@ import com.peonlee.feature.detail.databinding.ListItemCommentHeaderBinding
 
 class CommentHeaderViewHolder(
     private val binding: ListItemCommentHeaderBinding,
-    private val navigateToProductComments: (() -> Unit)? = null,
+    private val navigateToProductComments: (() -> Unit)? = null
 ) :
     CommonViewHolder<ProductDetailListItem.ReviewHeader>(binding) {
     init {

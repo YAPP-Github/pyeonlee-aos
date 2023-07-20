@@ -2,7 +2,6 @@ package com.peonlee.data.review
 
 import com.peonlee.data.Result
 import com.peonlee.data.model.review.SaveReviewRequest
-import com.peonlee.data.model.review.SaveReviewResponse
 import com.peonlee.data.setResult
 import javax.inject.Inject
 

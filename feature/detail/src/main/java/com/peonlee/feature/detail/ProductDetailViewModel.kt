@@ -85,7 +85,7 @@ class ProductDetailViewModel @Inject constructor(
             upvoteRate = score.likeRatio,
             downvoteRate = if (score.totalCount == 0) 0 else 100 - score.likeRatio
         ),
-        ProductDetailListItem.Divider(3),
+        ProductDetailListItem.Divider(3)
     )
 
     private fun List<Comment>.mapToPresentation(): List<ProductDetailListItem> {
@@ -94,18 +94,20 @@ class ProductDetailViewModel @Inject constructor(
             itemList.add(ProductDetailListItem.NoneReview(id = 4))
         } else {
             itemList.add(ProductDetailListItem.ReviewHeader(id = 5, reviewCount = size)) // TODO review size
-            itemList.addAll(map { comment ->
-                ProductDetailListItem.Review(
-                    id = comment.productCommentId.toLong(),
-                    nickname = comment.memberNickName,
-                    writeDate = comment.createdAt,
-                    likeType = comment.productLikeType,
-                    reviewText = comment.content,
-                    isLike = comment.liked,
-                    likeCount = comment.likeCount,
-                    isMine = comment.isOwner
-                )
-            })
+            itemList.addAll(
+                map { comment ->
+                    ProductDetailListItem.Review(
+                        id = comment.productCommentId.toLong(),
+                        nickname = comment.memberNickName,
+                        writeDate = comment.createdAt,
+                        likeType = comment.productLikeType,
+                        reviewText = comment.content,
+                        isLike = comment.liked,
+                        likeCount = comment.likeCount,
+                        isMine = comment.isOwner
+                    )
+                }
+            )
         }
         return itemList
     }

@@ -1,6 +1,5 @@
 package com.peonlee.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.Result
@@ -13,8 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -47,14 +44,14 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun getToken() : Flow<String> = dataStore.getAccessToken()
+    fun getToken(): Flow<String> = dataStore.getAccessToken()
 
     private fun handleState(result: Result<AuthResult>) {
         viewModelScope.launch {
-            when(result) {
+            when (result) {
                 is Result.Success -> _loginState.emit(LoginState.Success(result.data))
                 is Result.Error -> {
-                    when(result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
+                    when (result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
                         true -> _loginState.emit(LoginState.Fail)
                         false -> _loginState.emit(LoginState.Already)
                     }
@@ -63,7 +60,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun setRequest(token: String, type: String) : AuthRequest = AuthRequest(token, type)
+    private fun setRequest(token: String, type: String): AuthRequest = AuthRequest(token, type)
 }
 
 sealed class LoginState {

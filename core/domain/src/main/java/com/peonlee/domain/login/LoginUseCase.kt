@@ -10,10 +10,10 @@ class LoginUseCase @Inject constructor(private val loginRepository: LoginReposit
     suspend fun login(
         token: String,
         loginRequest: AuthRequest
-    ) : Result<AuthResult> = loginRepository.login(token, loginRequest)
+    ): Result<AuthResult> = loginRepository.login(token, loginRequest)
 
     suspend fun signUp(
         token: String,
         loginRequest: AuthRequest
-    ) : Result<AuthResult> = loginRepository.signUp(token, loginRequest)
+    ): Result<AuthResult> = loginRepository.signUp(token, loginRequest)
 }

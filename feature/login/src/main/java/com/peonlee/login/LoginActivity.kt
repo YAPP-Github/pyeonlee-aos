@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 loginViewModel.loginState.collect { loginState ->
-                    when(loginState) {
+                    when (loginState) {
                         is LoginState.Init -> Unit
                         is LoginState.Success -> {
                             loginViewModel.setToken(loginState.data.accessToken)
@@ -78,7 +78,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         task.result.idToken?.let { googleIdToken ->
                             loginViewModel.login(googleIdToken, "GOOGLE")
                         } ?: showToast(getString(R.string.login_failed))
-                    } else showToast(getString(R.string.login_failed))
+                    } else {
+                        showToast(getString(R.string.login_failed))
+                    }
                 }
             }
             else -> showToast(getString(R.string.login_failed))
@@ -100,7 +102,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     token != null -> loginViewModel.login(token.accessToken, "KAKAO")
                 }
             }
-        } else loginWithKakaoAccount()
+        } else {
+            loginWithKakaoAccount()
+        }
     }
 
     private fun loginWithKakaoAccount() {

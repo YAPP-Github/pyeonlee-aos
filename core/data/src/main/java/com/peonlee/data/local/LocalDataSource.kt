@@ -12,8 +12,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(private val datastore: DataStore<Preferences>) {
-    fun getAccessToken() : Flow<String> = datastore.data.catch { exception ->
-        if(exception is IOException) {
+    fun getAccessToken(): Flow<String> = datastore.data.catch { exception ->
+        if (exception is IOException) {
             emit(emptyPreferences())
         } else {
             throw exception
