@@ -1,21 +1,27 @@
 package com.peonlee.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.Result
+import com.peonlee.data.local.LocalDataSource
 import com.peonlee.data.model.login.AuthRequest
 import com.peonlee.data.model.login.AuthResult
 import com.peonlee.domain.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val dataStore: LocalDataSource
 ) : ViewModel() {
 
     private val _loginState: MutableSharedFlow<LoginState> = MutableStateFlow(LoginState.Init)
@@ -34,6 +40,14 @@ class LoginViewModel @Inject constructor(
             handleState(signUpResult)
         }
     }
+
+    fun setToken(accessToken: String) {
+        viewModelScope.launch {
+            dataStore.setAccessToken(accessToken)
+        }
+    }
+
+    fun getToken() : Flow<String> = dataStore.getAccessToken()
 
     private fun handleState(result: Result<AuthResult>) {
         viewModelScope.launch {

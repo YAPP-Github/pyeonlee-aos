@@ -9,13 +9,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@InstallIn
 @Module
+@InstallIn(SingletonComponent::class)
 object DataStoreModule {
     private const val PEONLEE_PREFERENCE = "peonlee_preference"
 
     @Provides
+    @Singleton
     fun provideDataStore(@ApplicationContext context: Context) : DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = { context.preferencesDataStoreFile(PEONLEE_PREFERENCE) }

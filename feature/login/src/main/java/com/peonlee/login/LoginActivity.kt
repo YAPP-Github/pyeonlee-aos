@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     when(loginState) {
                         is LoginState.Init -> Unit
                         is LoginState.Success -> {
-                            // TODO : datastore 연동
+                            loginViewModel.setToken(loginState.data.accessToken)
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         }
                         is LoginState.Already -> {
