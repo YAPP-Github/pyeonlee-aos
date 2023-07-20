@@ -1,7 +1,6 @@
 package com.peonlee.data.review
 
 import com.peonlee.data.Result
-import com.peonlee.data.model.review.SaveReviewResponse
 
 /**
  * 리뷰와 관련된 Repository

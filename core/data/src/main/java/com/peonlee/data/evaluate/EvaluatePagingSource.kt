@@ -39,7 +39,6 @@ class EvaluatePagingSource @Inject constructor(private val productApi: ProductAp
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
-
     }
 
     companion object {

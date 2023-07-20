@@ -45,7 +45,9 @@ class ProductCommentsPagingAdapter(
             override fun areItemsTheSame(oldItem: ReviewItem, newItem: ReviewItem): Boolean {
                 return if (oldItem is Review && newItem is Review) {
                     oldItem.id == newItem.id
-                } else oldItem is ReviewHeader && newItem is ReviewHeader
+                } else {
+                    oldItem is ReviewHeader && newItem is ReviewHeader
+                }
             }
 
             override fun areContentsTheSame(oldItem: ReviewItem, newItem: ReviewItem): Boolean {

@@ -85,7 +85,7 @@ class ProductDetailViewModel @Inject constructor(
             upvoteRate = score.likeRatio,
             downvoteRate = if (score.totalCount == 0) 0 else 100 - score.likeRatio
         ),
-        ProductDetailListItem.Divider(3),
+        ProductDetailListItem.Divider(3)
     )
 
     private fun List<Comment>.mapToPresentation(commentCount: Int): List<ProductDetailListItem> {

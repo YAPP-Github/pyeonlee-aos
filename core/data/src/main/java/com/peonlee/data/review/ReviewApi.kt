@@ -1,7 +1,6 @@
 package com.peonlee.data.review
 
 import com.peonlee.data.model.review.SaveReviewRequest
-import com.peonlee.data.model.review.SaveReviewResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path

@@ -6,6 +6,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
@@ -15,7 +18,9 @@ import com.kakao.sdk.user.UserApiClient
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.login.databinding.ActivityLoginBinding
+import com.peonlee.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -29,8 +34,29 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun bindingFactory() = ActivityLoginBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding) {
+        loginObserve()
         ivGoogleLogin.setOnClickListener { googleLogin() }
         ivKakaoLogin.setOnClickListener { kakaoLogin() }
+    }
+
+    private fun loginObserve() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loginViewModel.loginState.collect { loginState ->
+                    when (loginState) {
+                        is LoginState.Init -> Unit
+                        is LoginState.Success -> {
+                            loginViewModel.setToken(loginState.data.accessToken)
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        }
+                        is LoginState.Already -> {
+                            // TODO : 약관 화면 이동
+                        }
+                        is LoginState.Fail -> showToast(R.string.server_error)
+                    }
+                }
+            }
+        }
     }
 
     private fun googleLogin() {
@@ -50,7 +76,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 task.addOnCompleteListener { result ->
                     if (result.isSuccessful) {
                         task.result.idToken?.let { googleIdToken ->
-                            loginViewModel.snsLogin(googleIdToken)
+                            loginViewModel.login(googleIdToken, "GOOGLE")
                         } ?: showToast(getString(R.string.login_failed))
                     } else {
                         showToast(getString(R.string.login_failed))
@@ -73,7 +99,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         }
                         loginWithKakaoAccount()
                     }
-                    token != null -> loginViewModel.snsLogin(token.accessToken)
+                    token != null -> loginViewModel.login(token.accessToken, "KAKAO")
                 }
             }
         } else {
@@ -85,7 +111,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             when {
                 error != null -> showToast(getString(R.string.login_failed))
-                token != null -> loginViewModel.snsLogin(token.accessToken)
+                token != null -> loginViewModel.login(token.accessToken, "KAKAO")
             }
         }
         return UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoLoginCallback)

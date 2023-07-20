@@ -6,6 +6,7 @@ import com.peonlee.data.comment.CommentApi
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import com.peonlee.data.interceptor.AuthInterceptor
+import com.peonlee.data.login.LoginApi
 import com.peonlee.data.product.ProductApi
 import com.peonlee.data.review.ReviewApi
 import dagger.Module
@@ -79,6 +80,12 @@ object NetworkModule {
     @Singleton
     fun provideReviewApi(retrofit: Retrofit): ReviewApi {
         return retrofit.create(ReviewApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoginApi(retrofit: Retrofit): LoginApi {
+        return retrofit.create(LoginApi::class.java)
     }
 
     private object ConnectInfo {
