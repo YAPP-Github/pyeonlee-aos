@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(project(":feature:evaluate"))
+    implementation(project(":feature:main"))
 }
