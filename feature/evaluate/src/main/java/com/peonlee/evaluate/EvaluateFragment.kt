@@ -3,6 +3,7 @@ package com.peonlee.evaluate
 import android.content.res.ColorStateList
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +30,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private val viewModel: EvaluateViewModel by viewModels()
     private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
+    private val isOnboard: Boolean by lazy { requireArguments().getBoolean("onBoarding") }
 
     override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
@@ -38,43 +40,42 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         )
     }
 
-    override fun initViews() {
-        // TODO : 바텀네비 구현 완료 후 "넘어가기" 텍스트 비활성 처리
+    override fun initViews() = with(binding) {
+        observable()
+        setEvaluateCountSpannable()
 
-        with(binding) {
-            setEvaluateCountSpannable()
-
-            tvNext.setOnClickListener {
+        tvNext.apply {
+            isVisible = isOnboard
+            setOnClickListener {
                 if (viewModel.evaluateCount >= EVALUATE_PRODUCT_COUNT) {
                     moveToNextPage()
                 } else {
                     requireActivity().showToast(R.string.evaluate_count)
                 }
             }
+        }
 
-            rvProductList.apply {
-                adapter = evaluateAdapter
-                val scrollListener = object : RecyclerView.OnScrollListener() {
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        when (newState) {
-                            RecyclerView.SCROLL_STATE_DRAGGING -> {
-                                if (undoSnackBar.isShown) {
-                                    undoSnackBar.dismiss()
-                                }
+        rvProductList.apply {
+            adapter = evaluateAdapter
+            val scrollListener = object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    when (newState) {
+                        RecyclerView.SCROLL_STATE_DRAGGING -> {
+                            if (undoSnackBar.isShown) {
+                                undoSnackBar.dismiss()
                             }
                         }
                     }
                 }
-                addOnScrollListener(scrollListener)
             }
-            ItemTouchHelper(
-                SwipeCallback(
-                    context = requireContext(),
-                    swipeCallbackListener = this@EvaluateFragment
-                )
-            ).attachToRecyclerView(rvProductList)
+            addOnScrollListener(scrollListener)
         }
-        observable()
+        ItemTouchHelper(
+            SwipeCallback(
+                context = requireContext(),
+                swipeCallbackListener = this@EvaluateFragment
+            )
+        ).attachToRecyclerView(rvProductList)
     }
 
     /**
@@ -173,7 +174,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
 
     private fun setEvaluateCountSpannable() {
         binding.tvEvaluate.text = setTextSpannable(
-            end = EVALUATE_TEXT_COUNT + viewModel.evaluateCount.toString().length,
+            end = EVALUATE_TEXT_SIZE + viewModel.evaluateCount.toString().length,
             context = requireContext(),
             contents = String.format(getString(EvaluateString.evaluate_product_count), viewModel.evaluateCount)
         )
@@ -197,7 +198,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         private const val SNACKBAR_SIDE = 20
         private const val SNACKBAR_BOTTOM = 16
 
-        private const val EVALUATE_TEXT_COUNT = 2
+        private const val EVALUATE_TEXT_SIZE = 2
         private const val EVALUATE_PRODUCT_COUNT = 10
 
         private const val LIKE = 8

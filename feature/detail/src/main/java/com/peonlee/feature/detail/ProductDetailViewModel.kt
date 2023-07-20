@@ -2,14 +2,16 @@ package com.peonlee.feature.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.peonlee.data.comment.CommentRepository
 import com.peonlee.data.handle
-import com.peonlee.data.model.LikeType
+import com.peonlee.data.model.Comment
 import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductRatingType
 import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
 import com.peonlee.data.review.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     private val productRepository: ProductRepository,
-    private val reviewRepository: ReviewRepository
+    private val reviewRepository: ReviewRepository,
+    private val commentRepository: CommentRepository
 ) : ViewModel() {
     lateinit var productDetail: ProductDetail
         private set
@@ -35,69 +38,76 @@ class ProductDetailViewModel @Inject constructor(
 
     fun start(productId: Int) {
         viewModelScope.launch {
-            productRepository.getProductDetail(productId).handle({
-                productDetail = it
-                val itemList = listOf(
-                    ProductDetailListItem.Product(
-                        id = it.productId.toLong(),
-                        imageUrl = it.imageUrl,
-                        productName = it.name,
-                        price = it.price,
-                        upvoteRate = it.score.likeRatio,
-                        reviewCount = 10,
-                        eventList = it.promotionList.map { promotion ->
-                            ProductDetailListItem.Event(
-                                retailerType = enumValueOf(promotion.retailerType),
-                                promotionType = enumValueOf(promotion.promotionType)
-                            )
-                        }
-                    ),
-                    ProductDetailListItem.Divider(1),
-                    ProductDetailListItem.Score(
-                        id = 2,
-                        rateCount = it.score.totalCount,
-                        upvoteRate = it.score.likeRatio,
-                        downvoteRate = if (it.score.totalCount == 0) 0 else 100 - it.score.likeRatio
-                    ),
-                    ProductDetailListItem.Divider(3),
-                    ProductDetailListItem.NoneReview(id = 11),
-                    ProductDetailListItem.Divider(3),
-                    ProductDetailListItem.ReviewHeader(id = 4, reviewCount = 5),
-                    ProductDetailListItem.Review(
-                        id = 5,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        likeType = LikeType.LIKE,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 1,
-                        isMine = false
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 8,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        likeType = LikeType.NONE,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 0,
-                        isMine = true
-                    ),
-                    ProductDetailListItem.Review(
-                        id = 10,
-                        nickname = "사랑합니다.",
-                        writeDate = "",
-                        likeType = LikeType.DISLIKE,
-                        reviewText = "고갱님",
-                        isLike = false,
-                        likeCount = 2,
-                        isMine = false
-                    )
-                )
+            val commentsResponse = async { commentRepository.getProductComments(productId) }
+            if (::productDetail.isInitialized.not()) {
+                val productDetailResponse = async { productRepository.getProductDetail(productId) }
+                productDetailResponse.await().handle({
+                    productDetail = it
+                    val itemList = mutableListOf<ProductDetailListItem>()
+                    itemList.addAll(it.mapToPresentation())
+                    commentsResponse.await().handle({ comments ->
+                        itemList.addAll(comments.mapToPresentation())
+                    })
+                    _productDetailItemList.value = itemList
+                    _productRatingType.emit(it.productRatingType)
+                })
+            } else {
+                val itemList = mutableListOf<ProductDetailListItem>()
+                itemList.addAll(productDetail.mapToPresentation())
+                commentsResponse.await().handle({ comments ->
+                    itemList.addAll(comments.mapToPresentation())
+                })
                 _productDetailItemList.value = itemList
-                _productRatingType.emit(it.productRatingType)
+                _productRatingType.emit(productDetail.productRatingType)
+            }
+        }
+    }
+
+    private fun ProductDetail.mapToPresentation() = listOf(
+        ProductDetailListItem.Product(
+            id = productId.toLong(),
+            imageUrl = imageUrl,
+            productName = name,
+            price = price,
+            upvoteRate = score.likeRatio,
+            reviewCount = 10, // TODO review count
+            eventList = promotionList.map { promotion ->
+                ProductDetailListItem.Event(
+                    retailerType = enumValueOf(promotion.retailerType),
+                    promotionType = enumValueOf(promotion.promotionType)
+                )
+            }
+        ),
+        ProductDetailListItem.Divider(1),
+        ProductDetailListItem.Score(
+            id = 2,
+            rateCount = score.totalCount,
+            upvoteRate = score.likeRatio,
+            downvoteRate = if (score.totalCount == 0) 0 else 100 - score.likeRatio
+        ),
+        ProductDetailListItem.Divider(3),
+    )
+
+    private fun List<Comment>.mapToPresentation(): List<ProductDetailListItem> {
+        val itemList = mutableListOf<ProductDetailListItem>()
+        if (isEmpty()) {
+            itemList.add(ProductDetailListItem.NoneReview(id = 4))
+        } else {
+            itemList.add(ProductDetailListItem.ReviewHeader(id = 5, reviewCount = size)) // TODO review size
+            itemList.addAll(map { comment ->
+                ProductDetailListItem.Review(
+                    id = comment.productCommentId.toLong(),
+                    nickname = comment.memberNickName,
+                    writeDate = comment.createdAt,
+                    likeType = comment.productLikeType,
+                    reviewText = comment.content,
+                    isLike = comment.liked,
+                    likeCount = comment.likeCount,
+                    isMine = comment.isOwner
+                )
             })
         }
+        return itemList
     }
 
     fun likeProduct(productId: Int) {

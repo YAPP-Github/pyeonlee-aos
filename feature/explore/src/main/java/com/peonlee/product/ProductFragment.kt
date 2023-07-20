@@ -5,15 +5,19 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
+import com.peonlee.explore.ExploreViewModel
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.toRangeString
@@ -29,31 +33,31 @@ import com.peonlee.product.ui.PriceFilterBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductFragment(
-    private val keyword: String? = null
-) : BaseFragment<FragmentProductBinding>() {
+class ProductFragment : BaseFragment<FragmentProductBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    private val exploreViewModel: ProductViewModel by viewModels()
+    private val exploreViewModel: ExploreViewModel by activityViewModels()
+    private val productViewModel: ProductViewModel by viewModels()
 
     private var currentBottomSheet: BaseBottomSheetFragment? = null
     private val priceFilter by lazy {
-        PriceFilterBottomSheetFragment(exploreViewModel::setPriceFilter)
+        PriceFilterBottomSheetFragment(productViewModel::setPriceFilter)
     }
     private val eventFilter by lazy {
-        EventFilterBottomSheetFragment(exploreViewModel::setEventFilter)
+        EventFilterBottomSheetFragment(productViewModel::setEventFilter)
     }
     private val categoryFilter by lazy {
-        CategoryFilterBottomSheetFragment(exploreViewModel::setCategoryFilter)
+        CategoryFilterBottomSheetFragment(productViewModel::setCategoryFilter)
     }
 
     private val filterAdapter = FilterAdapter {
         if (it == BaseFilter.Init) {
-            exploreViewModel.setInitProductSearchCondition()
+            productViewModel.setInitProductSearchCondition()
         } else {
             showBottomSheet(it)
         }
@@ -64,8 +68,8 @@ class ProductFragment(
     }
 
     override fun initViews() = with(binding) {
-        exploreViewModel.setKeyword(keyword)
-        // 상단 상품 정렬 tab 설정
+        observeKeyword()
+
         com.peonlee.model.type.SortType.values().forEach {
             tabProductSort.addTab(
                 tabProductSort.newTab().apply { text = it.uiNameForExplore }
@@ -101,19 +105,19 @@ class ProductFragment(
         layoutFilter.adapter = filterAdapter
         layoutFilter.addItemDecoration(ContentPaddingDecoration(PaddingValues(left = 2, right = 2)))
         // 검색 조건 변경 시
-        exploreViewModel.productSearchCondition.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        productViewModel.productSearchCondition.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 currentBottomSheet?.dismiss()
                 setFilterView(it)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         // 상품 flow
-        exploreViewModel.products.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        productViewModel.products.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 productAdapter.submitData(it)
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
-        kotlin.Unit
+        Unit
     }
 
     private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
@@ -124,7 +128,7 @@ class ProductFragment(
              * 정렬 타입 변경
              */
             val sortPos = tab.position
-            exploreViewModel.setProductSortType(SortType.values()[sortPos])
+            productViewModel.setProductSortType(SortType.values()[sortPos])
         }
     }
 
@@ -167,8 +171,18 @@ class ProductFragment(
             is BaseFilter.Price -> priceFilter
         }
         currentBottomSheet
-            ?.setChangedFilter(exploreViewModel.productSearchCondition.value)
+            ?.setChangedFilter(productViewModel.productSearchCondition.value)
             ?.show(childFragmentManager, "Filter")
+    }
+
+    private fun observeKeyword() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                exploreViewModel.keyword.collect { newKeyword ->
+                    productViewModel.setKeyword(newKeyword)
+                }
+            }
+        }
     }
 
     companion object {

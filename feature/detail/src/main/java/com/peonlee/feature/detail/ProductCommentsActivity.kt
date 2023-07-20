@@ -11,25 +11,27 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>() {
+class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), CommentStateChangeListener {
     companion object {
-        private const val DEFAULT_PRODUCT_ID = -1
-        private const val EXTRA_PRODUCT_ID = "extra_product_id"
+        private const val EXTRA_PRODUCT = "extra_product"
+        private const val EXTRA_TOTAL_COMMENTS_COUNT = "extra_total_comments_count"
 
-        fun startActivity(context: Context, productId: Int) {
+        fun startActivity(context: Context, productExtra: ProductExtra, totalCommentsCount: Int) {
             context.startActivity(
                 Intent(context, ProductCommentsActivity::class.java).apply {
-                    putExtra(EXTRA_PRODUCT_ID, productId)
+                    putExtra(EXTRA_PRODUCT, productExtra)
+                    putExtra(EXTRA_TOTAL_COMMENTS_COUNT, totalCommentsCount)
                 }
             )
         }
     }
 
     private val viewModel: ProductCommentsViewModel by viewModels()
-    private val productId by lazy { intent.getIntExtra(EXTRA_PRODUCT_ID, DEFAULT_PRODUCT_ID) }
+    private val totalCommentsCount by lazy { intent.getIntExtra(EXTRA_TOTAL_COMMENTS_COUNT, 0) }
+    private val product by lazy { intent.getParcelableExtra<ProductExtra>(EXTRA_PRODUCT)!! }
     private val adapter by lazy {
         ProductCommentsPagingAdapter {
-            ReviewManageDialog.newInstance(productId).run {
+            CommentManageDialog.newInstance(product, it.reviewText).run {
                 show(supportFragmentManager, tag)
             }
         }
@@ -40,21 +42,25 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>() {
     }
 
     override fun initViews() = with(binding) {
-        if (productId == DEFAULT_PRODUCT_ID) {
-            finish()
-            return
-        }
         ivBackBtn.setOnClickListener {
-            finish()
+            viewModel.getProductComments(totalCommentsCount, product.id)
         }
         rvProductComments.adapter = adapter
+        srlRefresh.setOnRefreshListener {
+            adapter.refresh()
+            srlRefresh.isRefreshing = false
+        }
     }
 
     override fun bindViews() {
         lifecycleScope.launch {
-            viewModel.getProductComments(productId).collectLatest {
+            viewModel.getProductComments(totalCommentsCount, product.id).collectLatest {
                 adapter.submitData(it)
             }
         }
+    }
+
+    override fun onChanged() {
+        adapter.refresh()
     }
 }

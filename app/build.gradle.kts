@@ -22,6 +22,7 @@ dependencies {
     implementation(project(":feature:detail"))
     implementation(project(":feature:review"))
     implementation(project(":feature:explore"))
+    implementation(project(":feature:evaluate"))
 
     implementation(libs.androidx.core.splashscreen)
 }

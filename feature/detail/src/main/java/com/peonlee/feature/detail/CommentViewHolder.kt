@@ -7,12 +7,12 @@ import com.peonlee.core.ui.R
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.data.model.LikeType
-import com.peonlee.feature.detail.databinding.ListItemReviewBinding
+import com.peonlee.feature.detail.databinding.ListItemCommentBinding
 import java.time.LocalDateTime
 
-class ReviewViewHolder(
+class CommentViewHolder(
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit,
-    private val binding: ListItemReviewBinding
+    private val binding: ListItemCommentBinding
 ) : CommonViewHolder<ProductDetailListItem.Review>(binding) {
     init {
         binding.ivManageReview.setOnClickListener {
@@ -29,7 +29,7 @@ class ReviewViewHolder(
             item.nickname,
             TimeUtil.getDuration(
                 itemView.context,
-                LocalDateTime.now()
+                LocalDateTime.parse(item.writeDate)
             )
         )
 

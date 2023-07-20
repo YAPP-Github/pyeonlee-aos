@@ -8,6 +8,7 @@
     tools:context=".EvaluateFragment">
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/tv_next"
         style="@style/Text.Body02"
         android:layout_width="wrap_content"
