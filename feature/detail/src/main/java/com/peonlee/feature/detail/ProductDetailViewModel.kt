@@ -46,7 +46,7 @@ class ProductDetailViewModel @Inject constructor(
                     val itemList = mutableListOf<ProductDetailListItem>()
                     itemList.addAll(it.mapToPresentation())
                     commentsResponse.await().handle({ comments ->
-                        itemList.addAll(comments.mapToPresentation())
+                        itemList.addAll(comments.mapToPresentation(it.commentCount))
                     })
                     _productDetailItemList.value = itemList
                     _productRatingType.emit(it.productRatingType)
@@ -55,7 +55,7 @@ class ProductDetailViewModel @Inject constructor(
                 val itemList = mutableListOf<ProductDetailListItem>()
                 itemList.addAll(productDetail.mapToPresentation())
                 commentsResponse.await().handle({ comments ->
-                    itemList.addAll(comments.mapToPresentation())
+                    itemList.addAll(comments.mapToPresentation(productDetail.commentCount))
                 })
                 _productDetailItemList.value = itemList
                 _productRatingType.emit(productDetail.productRatingType)
@@ -70,7 +70,7 @@ class ProductDetailViewModel @Inject constructor(
             productName = name,
             price = price,
             upvoteRate = score.likeRatio,
-            reviewCount = 10, // TODO review count
+            reviewCount = commentCount,
             eventList = promotionList.map { promotion ->
                 ProductDetailListItem.Event(
                     retailerType = enumValueOf(promotion.retailerType),
@@ -88,12 +88,12 @@ class ProductDetailViewModel @Inject constructor(
         ProductDetailListItem.Divider(3),
     )
 
-    private fun List<Comment>.mapToPresentation(): List<ProductDetailListItem> {
+    private fun List<Comment>.mapToPresentation(commentCount: Int): List<ProductDetailListItem> {
         val itemList = mutableListOf<ProductDetailListItem>()
         if (isEmpty()) {
             itemList.add(ProductDetailListItem.NoneReview(id = 4))
         } else {
-            itemList.add(ProductDetailListItem.ReviewHeader(id = 5, reviewCount = size)) // TODO review size
+            itemList.add(ProductDetailListItem.ReviewHeader(id = 5, reviewCount = commentCount)) // TODO review size
             itemList.addAll(map { comment ->
                 ProductDetailListItem.Review(
                     id = comment.productCommentId.toLong(),
@@ -149,13 +149,5 @@ class ProductDetailViewModel @Inject constructor(
             downvoteRate = if (score.totalCount == 0) 0 else 100 - score.likeRatio
         )
         _productDetailItemList.value = newList
-    }
-
-    fun deleteReview(productId: Int) {
-        viewModelScope.launch {
-            reviewRepository.deleteReview(productId).handle({
-                // TODO remove review Item
-            })
-        }
     }
 }

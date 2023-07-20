@@ -13,7 +13,8 @@ data class ProductDetail(
     val productId: Int,
     val promotionList: List<Promotion>,
     val score: Score,
-    val productRatingType: ProductRatingType
+    val productRatingType: ProductRatingType,
+    val commentCount: Int
 )
 
 enum class ProductRatingType {
