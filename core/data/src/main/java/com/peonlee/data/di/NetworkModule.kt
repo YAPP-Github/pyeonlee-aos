@@ -5,6 +5,7 @@ import com.peonlee.core.data.BuildConfig
 import com.peonlee.data.comment.CommentApi
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
+import com.peonlee.data.interceptor.AuthInterceptor
 import com.peonlee.data.product.ProductApi
 import com.peonlee.data.review.ReviewApi
 import dagger.Module
@@ -43,7 +44,9 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(
+        authInterceptor: AuthInterceptor
+    ): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -53,6 +56,7 @@ object NetworkModule {
 
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(authInterceptor)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
