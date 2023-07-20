@@ -7,10 +7,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.main.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.take
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -18,7 +16,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initViews() {
         binding.bottomNav.setOnItemSelectedListener {
-            mainViewModel.changeTab(it.itemId)
+            mainViewModel.changeSelectedNav(it.itemId)
             true
         }
         binding.layoutFragment.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -26,11 +24,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun bindViews() {
-        mainViewModel.currentTab.flowWithLifecycle(lifecycle)
+        mainViewModel.selectedNav.flowWithLifecycle(lifecycle)
             .onEach {
                 binding.layoutFragment.currentItem = when (it) {
                     R.id.navHome -> 0
-                    else -> 2
+                    R.id.navEvaluate -> 1
+                    R.id.navExplore -> 2
+                    else -> 3
                 }
             }.launchIn(lifecycleScope)
     }

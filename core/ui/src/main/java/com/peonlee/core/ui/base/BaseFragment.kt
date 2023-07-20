@@ -16,7 +16,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = container?.let { bindingFactory(it) }
+        _binding = bindingFactory(container)
         return _binding?.root
     }
 
@@ -25,7 +25,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         initViews()
     }
 
-    abstract fun bindingFactory(parent: ViewGroup): T
+    abstract fun bindingFactory(parent: ViewGroup?): T
     open fun initViews() {}
 
     override fun onDestroy() {

@@ -9,9 +9,9 @@ import com.peonlee.user.databinding.FragmentUserBinding
  * 사용자 마이 페이지 Fragment
  */
 class UserFragment : BaseFragment<FragmentUserBinding>() {
-    override fun bindingFactory(parent: ViewGroup): FragmentUserBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentUserBinding {
         return FragmentUserBinding.inflate(
-            LayoutInflater.from(parent.context),
+            layoutInflater,
             parent,
             false
         )

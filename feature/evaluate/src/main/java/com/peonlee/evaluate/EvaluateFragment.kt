@@ -31,7 +31,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
 
-    override fun bindingFactory(parent: ViewGroup): FragmentEvaluateBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
             layoutInflater,
             parent,
