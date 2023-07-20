@@ -2,8 +2,14 @@ package com.peonlee.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.peonlee.data.Result
+import com.peonlee.data.model.login.AuthFailResult
+import com.peonlee.data.model.login.AuthRequest
+import com.peonlee.data.model.login.AuthResult
 import com.peonlee.domain.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -12,9 +18,43 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
-    fun snsLogin(token: String) {
+    private val _loginState: MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Init)
+    val loginState = _loginState.asStateFlow()
+
+    fun login(token: String, type: String) {
         viewModelScope.launch {
-            loginUseCase.login(token)
+            val loginResult = loginUseCase.login(token, setRequest(token, type))
+            handleState(loginResult)
         }
     }
+
+    fun signUp(token: String, type: String) {
+        viewModelScope.launch {
+            val signUpResult = loginUseCase.signUp(token, setRequest(token, type))
+            handleState(signUpResult)
+        }
+    }
+
+    private fun handleState(result: Result<AuthResult>) {
+        viewModelScope.launch {
+            when(result) {
+                is Result.Success -> _loginState.emit(LoginState.Success(result.data))
+                is Result.Error -> {
+                    when(result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
+                        true -> _loginState.emit(LoginState.Fail)
+                        false -> _loginState.emit(LoginState.Already)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setRequest(token: String, type: String) : AuthRequest = AuthRequest(token, type)
+}
+
+sealed class LoginState {
+    object Init : LoginState()
+    data class Success(val data: AuthResult) : LoginState()
+    object Already : LoginState()
+    object Fail : LoginState()
 }

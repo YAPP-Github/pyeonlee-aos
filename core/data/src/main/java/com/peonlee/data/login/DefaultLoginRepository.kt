@@ -11,6 +11,6 @@ class DefaultLoginRepository @Inject constructor(private val loginApi: LoginApi)
         return setResult { loginApi.login(token, loginRequest) }
     }
     override suspend fun signUp(token: String, loginRequest: AuthRequest): Result<AuthResult> {
-        return setResult { loginApi.login(token, loginRequest) }
+        return setResult { loginApi.signUp(token, loginRequest) }
     }
 }
