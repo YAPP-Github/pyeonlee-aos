@@ -1,20 +1,38 @@
 package com.peonlee.main
 
-import android.os.Bundle
-import androidx.fragment.app.commit
+import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.peonlee.core.ui.base.BaseActivity
-import com.peonlee.home.HomeFragment
 import com.peonlee.main.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // TODO Navigation 적용 Issue 작업 에서 수정할 예정
-        supportFragmentManager.commit {
-            add(binding.layoutFragment.id, HomeFragment.getInstance())
+    private val mainViewModel: MainViewModel by viewModels()
+
+    override fun initViews() {
+        binding.bottomNav.setOnItemSelectedListener {
+            mainViewModel.changeSelectedNav(it.itemId)
+            true
         }
+        binding.layoutFragment.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.layoutFragment.adapter = MainAdapter(this)
+    }
+
+    override fun bindViews() {
+        mainViewModel.selectedNav.flowWithLifecycle(lifecycle)
+            .onEach {
+                binding.layoutFragment.currentItem = when (it) {
+                    R.id.navHome -> 0
+                    R.id.navEvaluate -> 1
+                    R.id.navExplore -> 2
+                    else -> 3
+                }
+            }.launchIn(lifecycleScope)
     }
 
     override fun bindingFactory(): ActivityMainBinding {

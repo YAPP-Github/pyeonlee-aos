@@ -1,7 +1,7 @@
 package com.peonlee.evaluate
 
-import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.base.BaseFragment
+import com.peonlee.core.ui.base.Navigatable
 import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.core.ui.util.spannable.setTextSpannable
 import com.peonlee.evaluate.databinding.FragmentEvaluateBinding
 import com.peonlee.evaluate.databinding.LayoutEvaluateSnackbarBinding
-import com.peonlee.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,9 +31,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private val viewModel: EvaluateViewModel by viewModels()
     private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
-    private val isOnboard: Boolean by lazy { requireArguments().getBoolean("onBoarding") }
-
-    override fun bindingFactory(parent: ViewGroup): FragmentEvaluateBinding {
+    override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
             layoutInflater,
             parent,
@@ -45,11 +43,12 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         observable()
         setEvaluateCountSpannable()
 
+        val isFromOnboard = arguments?.getBoolean(FROM_ONBOARDING_FLAG) ?: false
         tvNext.apply {
-            isVisible = isOnboard
+            isVisible = isFromOnboard
             setOnClickListener {
                 if (viewModel.evaluateCount >= EVALUATE_PRODUCT_COUNT) {
-                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    moveToNextPage()
                 } else {
                     requireActivity().showToast(R.string.evaluate_count)
                 }
@@ -77,6 +76,13 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
                 swipeCallbackListener = this@EvaluateFragment
             )
         ).attachToRecyclerView(rvProductList)
+    }
+
+    /**
+     * 메인 화면으로 이동
+     */
+    private fun moveToNextPage() {
+        (requireActivity() as? Navigatable)?.moveToNextPage()
     }
 
     private fun observable() {
@@ -114,6 +120,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
                     likeProduct(evaluateAdapter.snapshot().items[position].productId)
                 }
             }
+
             DISLIKE -> {
                 viewModel.apply {
                     setLikeType("DISLIKE")
@@ -196,5 +203,15 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
 
         private const val LIKE = 8
         private const val DISLIKE = 4
+
+        private const val FROM_ONBOARDING_FLAG = "onboarding"
+        fun getInstance(fromOnboard: Boolean = false): EvaluateFragment {
+            val bundle = Bundle()
+            bundle.putBoolean(FROM_ONBOARDING_FLAG, fromOnboard)
+
+            return EvaluateFragment().apply {
+                arguments = bundle
+            }
+        }
     }
 }

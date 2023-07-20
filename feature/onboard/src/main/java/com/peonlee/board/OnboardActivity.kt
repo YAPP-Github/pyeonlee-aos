@@ -1,8 +1,10 @@
-package com.peonlee.evaluate
+package com.peonlee.board
 
 import android.os.Bundle
 import com.peonlee.core.ui.base.BaseActivity
-import com.peonlee.evaluate.databinding.ActivityOnboadingBinding
+import com.peonlee.evaluate.EvaluateFragment
+import com.peonleeonboard.R
+import com.peonleeonboard.databinding.ActivityOnboadingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
