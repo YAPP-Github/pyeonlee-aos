@@ -17,8 +17,8 @@ import com.peonlee.home.model.product.ProductsByStoreUiModel
 
 private const val GRID_COLUMN = 3
 private val productLayoutParams = ConstraintLayout.LayoutParams(
-    WRAP_CONTENT, // width
-    MATCH_PARENT // height
+    MATCH_PARENT, // width
+    WRAP_CONTENT // height
 )
 
 class ProductsByStoreViewHolder(

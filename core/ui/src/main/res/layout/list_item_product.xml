@@ -9,6 +9,7 @@
         android:id="@+id/layoutImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:theme="@style/Theme.MaterialComponents"
         app:cardBackgroundColor="@color/bg0"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@id/tv_productName"
@@ -29,26 +30,30 @@
             android:src="@drawable/ic_test_product" />
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tv_productName"
-        style="@style/Text.Body02"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/list_item_product_medium_margin"
-        android:textColor="@color/bg80"
-        app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutImage"
-        tools:text="코카)코카제로레몬캔355ml" />
-
     <com.peonlee.core.ui.designsystem.chip.SmallChip
         android:id="@+id/tv_productEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_medium"
         android:text="@string/item_product_event"
+        android:translationZ="2dp"
         app:layout_constraintEnd_toEndOf="@id/layoutImage"
         app:layout_constraintTop_toTopOf="@id/layoutImage" />
+
+    <TextView
+        android:id="@+id/tv_productName"
+        style="@style/Text.Body02"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_product_medium_margin"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/bg80"
+        app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutImage"
+        tools:text="코카)코카제로레몬캔355ml" />
 
     <TextView
         android:id="@+id/tv_productPrice"
@@ -94,8 +99,6 @@
         android:layout_marginLeft="@dimen/list_item_product_medium_margin"
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toBottomOf="@id/tv_productRecommended"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/tv_productRecommended"
         app:layout_constraintTop_toTopOf="@id/tv_productRecommended"
         tools:text="리뷰 24개" />

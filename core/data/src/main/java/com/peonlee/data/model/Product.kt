@@ -11,5 +11,6 @@ data class Product(
     val price: Int,
     val productCategoryType: String,
     val productId: Int,
-    val productName: String
+    val productName: String,
+    val score: Score
 )

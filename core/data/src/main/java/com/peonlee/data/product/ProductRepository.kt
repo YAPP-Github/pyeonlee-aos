@@ -4,9 +4,10 @@ import androidx.paging.PagingData
 import com.peonlee.data.Result
 import com.peonlee.data.model.Product
 import com.peonlee.data.model.ProductDetail
-import com.peonlee.data.model.response.SearchProductResponse
 import com.peonlee.data.model.Score
+import com.peonlee.data.model.home.HomeInfoResponse
 import com.peonlee.data.model.request.ProductSearchRequest
+import com.peonlee.data.model.response.SearchProductResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
@@ -19,4 +20,7 @@ interface ProductRepository {
 
     // 상품 paging 요청
     fun getProductsPaging(productSearchRequest: ProductSearchRequest): Flow<PagingData<Product>>
+
+    // 홈 화면에 필요한 데이터 통합 요청
+    suspend fun getAllInfoForHome(): Result<HomeInfoResponse>
 }

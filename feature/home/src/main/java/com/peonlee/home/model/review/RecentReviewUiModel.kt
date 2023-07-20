@@ -1,5 +1,6 @@
 package com.peonlee.home.model.review
 
+import com.peonlee.data.model.home.HomeReviewResponse
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
 import com.peonlee.model.product.PRODUCTS_TEST_DOUBLE
@@ -29,3 +30,12 @@ val RECENT_REVIEW = (1..10).map {
         updateDate = LocalDateTime.now()
     )
 }
+
+fun HomeReviewResponse.toUiModel() = RecentReviewUiModel(
+    id = productCommentId.toLong(),
+    product = PRODUCTS_TEST_DOUBLE.first(),
+    recommended = false,
+    comment = content,
+    userName = "이웃집 개발자",
+    updateDate = LocalDateTime.now()
+)

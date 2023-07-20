@@ -37,6 +37,6 @@ class ProductViewHolder(
             R.string.item_product_review_count,
             item.reviewCnt
         )
-        tvProductEvent.isVisible = item.isEvent
+        tvProductEvent.isVisible = item.isPromotion
     }
 }
