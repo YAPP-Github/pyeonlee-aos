@@ -9,13 +9,13 @@ import retrofit2.http.POST
 interface LoginApi {
     @POST("v1/member/signup")
     suspend fun signUp(
-        @Header("X_ACCESS_TOKEN") X_ACCESS_TOKEN: String,
+        @Header("X-AUTH-TOKEN") X_ACCESS_TOKEN: String,
         @Body signUpRequest: AuthRequest
     ): AuthResult
 
     @POST("v1/member/login")
     suspend fun login(
-        @Header("X_ACCESS_TOKEN") X_ACCESS_TOKEN: String,
+        @Header("X-AUTH-TOKEN") X_ACCESS_TOKEN: String,
         @Body loginRequest: AuthRequest
     ): AuthResult
 }
