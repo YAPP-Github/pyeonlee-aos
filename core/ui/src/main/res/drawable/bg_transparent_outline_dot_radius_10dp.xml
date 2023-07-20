@@ -1,0 +1,14 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="@color/transparent" />
+            <stroke
+                android:dashGap="1.5dp"
+                android:dashWidth="1.5dp"
+                android:width="@dimen/outline_stroke_width"
+                android:color="@color/brand100" />
+            <corners android:radius="@dimen/radius_10dp" />
+        </shape>
+    </item>
+</ripple>
