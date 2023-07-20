@@ -195,5 +195,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
 
         private const val LIKE = 8
         private const val DISLIKE = 4
+
+        fun getInstance() = EvaluateFragment()
     }
 }

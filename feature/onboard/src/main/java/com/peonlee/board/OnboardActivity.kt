@@ -1,7 +1,9 @@
-package com.peonlee.evaluate
+package com.peonlee.board
 
 import com.peonlee.core.ui.base.BaseActivity
-import com.peonlee.evaluate.databinding.ActivityOnboadingBinding
+import com.peonlee.evaluate.EvaluateFragment
+import com.peonleeonboard.R
+import com.peonleeonboard.databinding.ActivityOnboadingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -12,7 +14,7 @@ class OnboardActivity : BaseActivity<ActivityOnboadingBinding>() {
 
     override fun initViews() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.layout_onboarding, EvaluateFragment())
+            .add(R.id.layout_onboarding, EvaluateFragment.getInstance())
             .commit()
     }
 
