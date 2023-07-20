@@ -94,18 +94,20 @@ class ProductDetailViewModel @Inject constructor(
             itemList.add(ProductDetailListItem.NoneReview(id = 4))
         } else {
             itemList.add(ProductDetailListItem.ReviewHeader(id = 5, reviewCount = commentCount)) // TODO review size
-            itemList.addAll(map { comment ->
-                ProductDetailListItem.Review(
-                    id = comment.productCommentId.toLong(),
-                    nickname = comment.memberNickName,
-                    writeDate = comment.createdAt,
-                    likeType = comment.productLikeType,
-                    reviewText = comment.content,
-                    isLike = comment.liked,
-                    likeCount = comment.likeCount,
-                    isMine = comment.isOwner
-                )
-            })
+            itemList.addAll(
+                map { comment ->
+                    ProductDetailListItem.Review(
+                        id = comment.productCommentId.toLong(),
+                        nickname = comment.memberNickName,
+                        writeDate = comment.createdAt,
+                        likeType = comment.productLikeType,
+                        reviewText = comment.content,
+                        isLike = comment.liked,
+                        likeCount = comment.likeCount,
+                        isMine = comment.isOwner
+                    )
+                }
+            )
         }
         return itemList
     }
