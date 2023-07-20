@@ -16,4 +16,5 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.paging3)
     implementation(libs.androidx.test.runner)
+    implementation(libs.androidx.datastore)
 }
