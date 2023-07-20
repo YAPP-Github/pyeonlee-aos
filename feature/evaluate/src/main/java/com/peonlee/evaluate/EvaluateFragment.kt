@@ -1,6 +1,7 @@
 package com.peonlee.evaluate
 
 import android.content.res.ColorStateList
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -30,8 +31,6 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private val viewModel: EvaluateViewModel by viewModels()
     private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
-    private val isOnboard: Boolean by lazy { requireArguments().getBoolean("onBoarding") }
-
     override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
             layoutInflater,
@@ -44,8 +43,9 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         observable()
         setEvaluateCountSpannable()
 
+        val isFromOnboard = arguments?.getBoolean(FROM_ONBOARDING_FLAG) ?: false
         tvNext.apply {
-            isVisible = isOnboard
+            isVisible = isFromOnboard
             setOnClickListener {
                 if (viewModel.evaluateCount >= EVALUATE_PRODUCT_COUNT) {
                     moveToNextPage()
@@ -204,6 +204,14 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         private const val LIKE = 8
         private const val DISLIKE = 4
 
-        fun getInstance() = EvaluateFragment()
+        private const val FROM_ONBOARDING_FLAG = "onboarding"
+        fun getInstance(fromOnboard: Boolean = false): EvaluateFragment {
+            val bundle = Bundle()
+            bundle.putBoolean(FROM_ONBOARDING_FLAG, fromOnboard)
+
+            return EvaluateFragment().apply {
+                arguments = bundle
+            }
+        }
     }
 }
