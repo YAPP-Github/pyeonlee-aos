@@ -2,8 +2,8 @@
     <string name="title">편리에 오신 것을 환영해요</string>
     <string name="subtitle1">편리 서비스 이용을 위해</string>
     <string name="subtitle2">필수 약관에 동의해 주세요</string>
-    <string name="terms_all_agree">약관 전체동의</string>
-    <string name="service_agree">서비스 이용약관 동의</string>
-    <string name="personal_agree">개인정보 수집 및 이용동의</string>
+    <string name="agree_terms_all">약관 전체동의</string>
+    <string name="agree_service">서비스 이용약관 동의</string>
+    <string name="agree_personal">개인정보 수집 및 이용동의</string>
     <string name="start">시작하기</string>
 </resources>
