@@ -2,6 +2,7 @@ package com.peonlee.feature.terms
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.peonlee.terms.R
 
 class TermsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
