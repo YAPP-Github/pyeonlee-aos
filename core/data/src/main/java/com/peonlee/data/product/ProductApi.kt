@@ -45,8 +45,7 @@ interface ProductApi {
         @Query("promotionTypeList") promotionTypeList: List<String>? = null
     ): SearchProductResponse
 
-    // 온보딩, 평가 전용 api로 변경전 임시로 연동한 api 입니다.
-    @GET("v1/product/search")
+    @GET("v1/product/unrated")
     suspend fun searchProductTemp(
         @Query("pageSize") pageSize: Int = 20,
         @Query("offsetProductId") offsetProductId: Int?
