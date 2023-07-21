@@ -4,14 +4,14 @@ import android.app.Activity
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.peonlee.core.ui.base.BaseActivity
+import com.peonlee.terms.databinding.ActivityTermsBinding
 import com.peonlee.core.ui.R.color as Color
 import com.peonlee.core.ui.R.drawable as Drawable
-import com.peonlee.terms.databinding.ActivityTermsBinding
 
 class TermsActivity : BaseActivity<ActivityTermsBinding>() {
     override fun bindingFactory(): ActivityTermsBinding = ActivityTermsBinding.inflate(layoutInflater)
 
-    override fun initViews() = with(binding)  {
+    override fun initViews() = with(binding) {
         ivTermsClose.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
@@ -45,7 +45,7 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
     }
 
     private fun updateBackground(isUpdate: Boolean) {
-        when(isUpdate) {
+        when (isUpdate) {
             true -> binding.layoutTerms.setBackgroundResource(Drawable.bg_brand30_outline_brand60_radius_10dp)
             false -> binding.layoutTerms.setBackgroundResource(Drawable.bg_white_outline_radius_10dp)
         }
@@ -65,7 +65,7 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
             backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(
                     this@TermsActivity,
-                    if(isActive) Color.brand100 else Color.brand50
+                    if (isActive) Color.brand100 else Color.brand50
                 )
             )
         }
