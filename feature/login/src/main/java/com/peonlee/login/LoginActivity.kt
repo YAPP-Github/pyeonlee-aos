@@ -99,7 +99,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         }
                         loginWithKakaoAccount()
                     }
-                    token != null -> loginViewModel.login(token.accessToken, "KAKAO")
+                    token != null -> {
+                        token.idToken?.let { idToken ->
+                            loginViewModel.login(idToken, "KAKAO")
+                        } ?: showToast(R.string.invalid_token)
+                    }
                 }
             }
         } else {
