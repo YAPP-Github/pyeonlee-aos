@@ -49,9 +49,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             loginViewModel.setToken(loginState.data.accessToken)
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         }
-                        is LoginState.Already -> {
-                            // TODO : 약관 화면 이동
-                        }
+                        is LoginState.NotRegistered -> startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         is LoginState.Fail -> showToast(R.string.server_error)
                     }
                 }

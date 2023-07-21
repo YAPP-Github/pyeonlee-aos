@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
                 is Result.Error -> {
                     when (result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
                         true -> _loginState.emit(LoginState.Fail)
-                        false -> _loginState.emit(LoginState.Already)
+                        false -> _loginState.emit(LoginState.NotRegistered)
                     }
                 }
             }
@@ -66,6 +66,6 @@ class LoginViewModel @Inject constructor(
 sealed class LoginState {
     object Init : LoginState()
     data class Success(val data: AuthResult) : LoginState()
-    object Already : LoginState()
+    object NotRegistered : LoginState()
     object Fail : LoginState()
 }
