@@ -14,7 +14,8 @@ import com.peonlee.user.UserFragment
  * FragmentPagerAdapter 는 특정 생성자만 deprecated 되었습니다.
  */
 class MainAdapter(
-    fragmentManager: FragmentManager, lifecycle: Lifecycle
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
     private val mainFragments = listOf<() -> Fragment>(
         { HomeFragment.getInstance() },

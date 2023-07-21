@@ -4,7 +4,6 @@ import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.Score
 import com.peonlee.data.model.home.HomeInfoResponse
 import com.peonlee.data.model.response.SearchProductResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -45,10 +44,9 @@ interface ProductApi {
         @Query("promotionTypeList") promotionTypeList: List<String>? = null
     ): SearchProductResponse
 
-    // 온보딩, 평가 전용 api로 변경전 임시로 연동한 api 입니다.
-    @GET("v1/product/search")
-    suspend fun searchProductTemp(
-        @Query("pageSize") pageSize: Int = 20,
+    @GET("v1/product/unrated")
+    suspend fun evaluateProduct(
+        @Query("pageSize") pageSize: Int,
         @Query("offsetProductId") offsetProductId: Int?
     ): SearchProductResponse
 
