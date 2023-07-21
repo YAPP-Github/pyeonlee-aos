@@ -9,7 +9,6 @@ import com.peonlee.data.model.ProductDetail
 import com.peonlee.data.model.ProductRatingType
 import com.peonlee.data.model.Score
 import com.peonlee.data.product.ProductRepository
-import com.peonlee.data.review.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +23,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     private val productRepository: ProductRepository,
-    private val reviewRepository: ReviewRepository,
     private val commentRepository: CommentRepository
 ) : ViewModel() {
     lateinit var productDetail: ProductDetail

@@ -9,19 +9,12 @@ import com.peonlee.evaluate.databinding.ListItemEvaluateBinding
 
 class EvaluateAdapter : PagingDataAdapter<Product, EvaluateViewHolder>(EVALUATE_DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: EvaluateViewHolder, position: Int) {
-        getItem(position)?.let { product ->
-            holder.onBindView(product)
-        }
+        val item = getItem(position) ?: return
+        holder.onBindView(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EvaluateViewHolder {
-        return EvaluateViewHolder(
-            ListItemEvaluateBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        return EvaluateViewHolder(ListItemEvaluateBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     companion object {

@@ -3,7 +3,6 @@ package com.peonlee.data.product
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.peonlee.common.exception.NoneDataException
 import com.peonlee.data.Result
 import com.peonlee.data.model.Product
 import com.peonlee.data.model.home.HomeInfoResponse
@@ -62,16 +61,7 @@ class DefaultProductRepository @Inject constructor(
      * 홈 화면을 위한 모든 데이터 통합 요청
      * @return 홈 화면에 필요한 각 카테고리 데이터
      */
-    override suspend fun getAllInfoForHome(): Result<HomeInfoResponse> {
-        try {
-            val allInfoResponse = productApi.getAllInfoForHome()
-            if (allInfoResponse.isSuccessful && allInfoResponse.body() != null) {
-                val allInfoBody = allInfoResponse.body()
-                return Result.Success(allInfoBody!!)
-            }
-            throw NoneDataException()
-        } catch (exception: Exception) {
-            return Result.Error(exception)
-        }
+    override suspend fun getAllInfoForHome(): Result<HomeInfoResponse> = setResult {
+        productApi.getAllInfoForHome()
     }
 }

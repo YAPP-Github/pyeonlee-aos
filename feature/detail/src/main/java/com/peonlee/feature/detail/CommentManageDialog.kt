@@ -14,8 +14,8 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.peonlee.core.ui.Navigator
+import com.peonlee.data.comment.CommentRepository
 import com.peonlee.data.handle
-import com.peonlee.data.review.ReviewRepository
 import com.peonlee.feature.detail.databinding.BottomSheetManageReviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,7 +46,7 @@ class CommentManageDialog : BottomSheetDialogFragment() {
     lateinit var navigator: Navigator
 
     @Inject
-    lateinit var reviewRepository: ReviewRepository
+    lateinit var commentRepository: CommentRepository
 
     private var stateChangeListener: CommentStateChangeListener? = null
 
@@ -94,7 +94,7 @@ class CommentManageDialog : BottomSheetDialogFragment() {
             llDeleteReview.setOnClickListener {
                 productExtra?.run {
                     viewLifecycleOwner.lifecycleScope.launch {
-                        reviewRepository.deleteReview(id).handle({
+                        commentRepository.deleteComment(id).handle({
                             stateChangeListener?.onChanged()
                             dismiss()
                         })
