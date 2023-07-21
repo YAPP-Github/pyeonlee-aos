@@ -44,8 +44,8 @@
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView2"></TextView>
 
-    <View
-        android:id="@+id/view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_terms"
         android:layout_width="0dp"
         android:layout_height="@dimen/agree_terms_height"
         android:layout_marginStart="@dimen/space_x_large"
@@ -54,39 +54,41 @@
         android:background="@drawable/bg_white_outline_radius_10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"></View>
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-    <CheckBox
-        android:id="@+id/checkbox_all_terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_large"
-        android:button="@drawable/peonlee_custom_checkbox"
-        android:paddingRight="@dimen/space_x_medium"
-        android:paddingBottom="@dimen/space_x_medium"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"></CheckBox>
+        <CheckBox
+            android:id="@+id/checkbox_all_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_large"
+            android:button="@drawable/peonlee_custom_checkbox"
+            android:paddingRight="@dimen/space_x_medium"
+            android:paddingBottom="@dimen/space_x_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_terms"
+            app:layout_constraintStart_toStartOf="@+id/layout_terms"
+            app:layout_constraintTop_toTopOf="@+id/layout_terms"></CheckBox>
 
-    <TextView
-        style="@style/Text.Body02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/agree_terms_all"
-        app:layout_constraintBottom_toBottomOf="@+id/checkbox_all_terms"
-        app:layout_constraintStart_toEndOf="@+id/checkbox_all_terms"
-        app:layout_constraintTop_toTopOf="@+id/checkbox_all_terms"></TextView>
+        <TextView
+            style="@style/Text.Body02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agree_terms_all"
+            app:layout_constraintBottom_toBottomOf="@+id/checkbox_all_terms"
+            app:layout_constraintStart_toEndOf="@+id/checkbox_all_terms"
+            app:layout_constraintTop_toTopOf="@+id/checkbox_all_terms"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <CheckBox
         android:id="@+id/checkbox_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_large"
         android:layout_marginTop="@dimen/checkbox_margin"
         android:button="@drawable/peonlee_custom_checkbox"
         android:paddingRight="@dimen/space_x_medium"
         android:paddingBottom="@dimen/space_x_medium"
-        app:layout_constraintStart_toStartOf="@+id/checkbox_all_terms"
-        app:layout_constraintTop_toBottomOf="@+id/view"></CheckBox>
+        app:layout_constraintStart_toStartOf="@+id/layout_terms"
+        app:layout_constraintTop_toBottomOf="@+id/layout_terms"></CheckBox>
 
     <TextView
         style="@style/Text.Body06"
@@ -129,7 +131,6 @@
         android:text="@string/start"
         android:textColor="@color/bg0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"></TextView>
-
+        app:layout_constraintEnd_toEndOf="@+id/layout_terms"
+        app:layout_constraintStart_toStartOf="@+id/layout_terms"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
