@@ -120,6 +120,7 @@
         app:layout_constraintTop_toTopOf="@+id/checkbox_personal"></TextView>
 
     <TextView
+        android:enabled="false"
         android:id="@+id/tv_start"
         style="@style/Text.Body02"
         android:layout_width="0dp"
