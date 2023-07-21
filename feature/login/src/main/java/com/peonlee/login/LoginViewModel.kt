@@ -21,19 +21,28 @@ class LoginViewModel @Inject constructor(
     private val dataStore: LocalDataSource
 ) : ViewModel() {
 
+    var loginType: String = ""
+        private set
+
+    var loginToken: String = ""
+        private set
+
     private val _loginState: MutableSharedFlow<LoginState> = MutableStateFlow(LoginState.Init)
     val loginState = _loginState.asSharedFlow()
 
     fun login(token: String, type: String) {
+        loginType = type
+        loginToken = token
+
         viewModelScope.launch {
             val loginResult = loginUseCase.login(token, setRequest(token, type))
             handleState(loginResult)
         }
     }
 
-    fun signUp(token: String, type: String) {
+    fun signUp() {
         viewModelScope.launch {
-            val signUpResult = loginUseCase.signUp(token, setRequest(token, type))
+            val signUpResult = loginUseCase.signUp(loginToken, setRequest(loginToken, loginType))
             handleState(signUpResult)
         }
     }

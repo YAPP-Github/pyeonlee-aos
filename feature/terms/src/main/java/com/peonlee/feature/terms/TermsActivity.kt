@@ -1,5 +1,6 @@
 package com.peonlee.feature.terms
 
+import android.app.Activity
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.peonlee.core.ui.base.BaseActivity
@@ -11,7 +12,10 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
     override fun bindingFactory(): ActivityTermsBinding = ActivityTermsBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding)  {
-        ivTermsClose.setOnClickListener { finish() }
+        ivTermsClose.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
 
         checkboxAllTerms.apply {
             setOnClickListener {
@@ -32,6 +36,11 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
             checkboxAllTerms.isChecked = false
             updateBackground(false)
             updateNextButton()
+        }
+
+        tvStart.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 
