@@ -17,6 +17,7 @@
 package com.peonlee
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -24,7 +25,7 @@ import dagger.hilt.android.HiltAndroidApp
 class PeonleeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
         KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_KEY)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

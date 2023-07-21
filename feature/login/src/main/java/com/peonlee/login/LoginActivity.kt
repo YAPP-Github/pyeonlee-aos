@@ -17,6 +17,7 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.showToast
+import com.peonlee.feature.terms.TermsActivity
 import com.peonlee.login.databinding.ActivityLoginBinding
 import com.peonlee.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val googleSignInLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             googleSignInResult(activityResult)
+        }
+
+    private val agreeTermsLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            termsResult(activityResult)
         }
 
     private val loginViewModel: LoginViewModel by viewModels()
@@ -48,9 +54,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         is LoginState.Success -> {
                             loginViewModel.setToken(loginState.data.accessToken)
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()
                         }
-                        is LoginState.Already -> {
-                            // TODO : 약관 화면 이동
+                        is LoginState.NotRegistered -> {
+                            val intent = Intent(this@LoginActivity, TermsActivity::class.java)
+                            agreeTermsLauncher.launch(intent)
                         }
                         is LoginState.Fail -> showToast(R.string.server_error)
                     }
@@ -99,7 +107,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         }
                         loginWithKakaoAccount()
                     }
-                    token != null -> loginViewModel.login(token.accessToken, "KAKAO")
+                    token != null -> {
+                        token.idToken?.let { idToken ->
+                            loginViewModel.login(idToken, "KAKAO")
+                        } ?: showToast(R.string.invalid_token)
+                    }
                 }
             }
         } else {
@@ -115,5 +127,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
         }
         return UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoLoginCallback)
+    }
+
+    private fun termsResult(activityResult: ActivityResult) {
+        when (activityResult.resultCode) {
+            Activity.RESULT_OK -> loginViewModel.signUp()
+            else -> Unit
+        }
     }
 }

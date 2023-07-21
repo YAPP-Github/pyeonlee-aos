@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":core:data"))
 
     implementation(project(":feature:main"))
+    implementation(project(":feature:terms"))
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
