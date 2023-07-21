@@ -18,7 +18,10 @@ class EvaluatePagingSource(private val productApi: ProductApi) : PagingSource<In
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         return try {
             val offsetId = params.key
-            val products = productApi.searchProductTemp(offsetProductId = offsetId)
+            val products = productApi.evaluateProduct(
+                offsetProductId = offsetId,
+                pageSize = PAGE_SIZE
+            )
 
             LoadResult.Page(
                 data = products.content,

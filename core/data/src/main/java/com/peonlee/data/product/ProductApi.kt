@@ -46,8 +46,8 @@ interface ProductApi {
     ): SearchProductResponse
 
     @GET("v1/product/unrated")
-    suspend fun searchProductTemp(
-        @Query("pageSize") pageSize: Int = 20,
+    suspend fun evaluateProduct(
+        @Query("pageSize") pageSize: Int,
         @Query("offsetProductId") offsetProductId: Int?
     ): SearchProductResponse
 
