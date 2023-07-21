@@ -9,4 +9,10 @@ interface CommentRepository {
 
     suspend fun getProductComments(productId: Int): Result<List<Comment>>
     fun getProductCommentsPaging(productId: Int): Flow<PagingData<Comment>>
+
+    suspend fun saveComment(productId: Int, review: String): Result<Unit>
+
+    suspend fun editComment(productId: Int, review: String): Result<Unit>
+
+    suspend fun deleteComment(productId: Int): Result<Unit>
 }

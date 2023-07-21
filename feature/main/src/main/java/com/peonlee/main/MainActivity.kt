@@ -19,8 +19,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             mainViewModel.changeSelectedNav(it.itemId)
             true
         }
+        binding.layoutFragment.isUserInputEnabled = false
         binding.layoutFragment.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.layoutFragment.adapter = MainAdapter(this)
+        binding.layoutFragment.adapter = MainAdapter(supportFragmentManager, lifecycle)
     }
 
     override fun bindViews() {

@@ -50,11 +50,11 @@ interface ProductApi {
     suspend fun searchProductTemp(
         @Query("pageSize") pageSize: Int = 20,
         @Query("offsetProductId") offsetProductId: Int?
-    ): Response<SearchProductResponse>
+    ): SearchProductResponse
 
     /**
      * [GET] v1/home
      */
     @GET("v1/home")
-    suspend fun getAllInfoForHome(): Response<HomeInfoResponse>
+    suspend fun getAllInfoForHome(): HomeInfoResponse
 }
