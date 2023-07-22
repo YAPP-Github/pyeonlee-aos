@@ -6,14 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".OnboardActivity">
 
+    <TextView
+        android:id="@+id/tv_next"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_evaluate_top"
+        android:layout_marginEnd="@dimen/text_evaluate_next_right"
+        android:text="@string/evaluate_next"
+        android:textColor="@color/bg80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <FrameLayout
         android:id="@+id/layout_onboarding"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tv_next">
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

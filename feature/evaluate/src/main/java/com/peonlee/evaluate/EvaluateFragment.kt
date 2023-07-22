@@ -17,7 +17,6 @@ import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.core.ui.util.spannable.setTextSpannable
 import com.peonlee.evaluate.databinding.FragmentEvaluateBinding
 import com.peonlee.evaluate.databinding.LayoutEvaluateSnackbarBinding
-import com.peonlee.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -44,14 +43,6 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
 
         with(binding) {
             setEvaluateCountSpannable()
-
-            tvNext.setOnClickListener {
-                if (viewModel.evaluateCount >= EVALUATE_PRODUCT_COUNT) {
-                    startActivity(Intent(requireActivity(), MainActivity::class.java))
-                } else {
-                    requireActivity().showToast(R.string.evaluate_count)
-                }
-            }
 
             rvProductList.apply {
                 adapter = evaluateAdapter
@@ -191,9 +182,10 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         private const val SNACKBAR_BOTTOM = 16
 
         private const val EVALUATE_TEXT_COUNT = 2
-        private const val EVALUATE_PRODUCT_COUNT = 10
 
         private const val LIKE = 8
         private const val DISLIKE = 4
+
+        fun getInstance() = EvaluateFragment()
     }
 }

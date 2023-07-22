@@ -25,7 +25,7 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
 
     private fun attachProduct() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.layout_search_product, ProductFragment(binding.etExploreBar.trim()))
+            .replace(R.id.layout_search_product, ProductFragment.getInstance())
             .commit()
     }
 }
