@@ -8,6 +8,10 @@ import com.peonlee.explore.ExploreFragment
 import com.peonlee.home.HomeFragment
 import com.peonlee.user.UserFragment
 
+/**
+ * 주의
+ * FragmentPagerAdapter 는 특정 생성자만 deprecated 되었습니다.
+ */
 class MainAdapter(
     fragment: FragmentActivity
 ) : FragmentStateAdapter(fragment) {
@@ -18,7 +22,7 @@ class MainAdapter(
         UserFragment.getInstance()
     )
 
-    override fun getItemCount() = mainFragments.size
+    override fun getItemCount(): Int = mainFragments.size
     override fun createFragment(position: Int): Fragment {
         return mainFragments[position]
     }

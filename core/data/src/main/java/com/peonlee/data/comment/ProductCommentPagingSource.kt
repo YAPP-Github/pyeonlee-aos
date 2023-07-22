@@ -10,11 +10,7 @@ class ProductCommentPagingSource(
 ) : PagingSource<Int, Comment>() {
 
     override fun getRefreshKey(state: PagingState<Int, Comment>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            val closestPageToPosition = state.closestPageToPosition(anchorPosition)
-            closestPageToPosition?.prevKey?.plus(PAGE_SIZE)
-                ?: closestPageToPosition?.nextKey?.minus(PAGE_SIZE)
-        }
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comment> {

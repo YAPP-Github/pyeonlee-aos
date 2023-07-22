@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GetCommentResponse(
     val content: List<Comment>,
-    val lastId: Int
+    val lastId: Int?
 )

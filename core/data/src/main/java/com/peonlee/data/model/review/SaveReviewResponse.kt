@@ -7,8 +7,5 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SaveReviewResponse(
-    val productCommentId: Int, // 작성한 리뷰 id
-    val productId: Int, // 작성한 상품 id
-    val memberId: Int, // 작성한 사용자 id
-    val content: String // 작성한 리뷰 내용
+    val content: String
 )

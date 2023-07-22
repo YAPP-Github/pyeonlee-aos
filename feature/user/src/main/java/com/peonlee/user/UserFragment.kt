@@ -11,7 +11,7 @@ import com.peonlee.user.databinding.FragmentUserBinding
 class UserFragment : BaseFragment<FragmentUserBinding>() {
     override fun bindingFactory(parent: ViewGroup?): FragmentUserBinding {
         return FragmentUserBinding.inflate(
-            LayoutInflater.from(requireContext()),
+            layoutInflater,
             parent,
             false
         )

@@ -4,15 +4,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Comment(
-    val commentLikeCount: Int,
     val content: String,
     val createdAt: String,
     val isOwner: Boolean,
-    val likeType: LikeType,
+    val likeCount: Int,
     val liked: Boolean,
-    val member: Member,
+    val memberId: Int,
+    val memberNickName: String,
     val productCommentId: Int,
-    val productId: Int
+    val productId: Int,
+    val productLikeType: LikeType
 )
 
 enum class LikeType {

@@ -2,6 +2,7 @@ package com.peonlee.data.evaluate
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.peonlee.common.exception.NoneDataException
 import com.peonlee.data.model.Product
 import com.peonlee.data.product.ProductApi
 import javax.inject.Inject
@@ -18,19 +19,27 @@ class EvaluatePagingSource @Inject constructor(private val productApi: ProductAp
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
-        val page = params.key ?: 1
-        val productList = productApi.searchProductTemp(offsetProductId = offsetProductId).copy()
+        return try {
+            val offsetId = params.key
 
-        offsetProductId = productList.lastId
+            val productsResponse = productApi.searchProductTemp(offsetProductId = offsetId)
 
-        return LoadResult.Page(
-            data = productList.content,
-            prevKey = when (page) {
-                1 -> null
-                else -> page - 1
-            },
-            nextKey = offsetProductId?.let { page + 1 }
-        )
+            if (productsResponse.isSuccessful && productsResponse.body() != null) {
+                val products = productsResponse.body()!!
+                val lastId = products.lastId
+
+                LoadResult.Page(
+                    data = products.content,
+                    prevKey = offsetId,
+                    nextKey = if (offsetId == lastId) null else lastId
+                )
+            } else {
+                throw NoneDataException()
+            }
+        } catch (exception: Exception) {
+            LoadResult.Error(exception)
+        }
+
     }
 
     companion object {

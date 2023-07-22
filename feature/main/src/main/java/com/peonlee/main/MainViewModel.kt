@@ -9,10 +9,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
-    private val _currentTab = MutableStateFlow(R.id.navHome)
-    val currentTab: StateFlow<Int> = _currentTab.asStateFlow()
+    private val _selectedNav = MutableStateFlow<Int>(R.id.navHome)
+    val selectedNav: StateFlow<Int> = _selectedNav.asStateFlow()
 
-    fun changeTab(tabId: Int) {
-        _currentTab.value = tabId
+    /**
+     * Bottom Navigation 변경
+     */
+    fun changeSelectedNav(navId: Int) {
+        _selectedNav.value = navId
     }
 }

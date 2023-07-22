@@ -1,6 +1,7 @@
 plugins {
     id("peonlee.android.feature")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -21,7 +22,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.coil)
     implementation(libs.androidx.cardview)
-    implementation("androidx.paging:paging-common-ktx:3.1.1")
+    implementation(libs.androidx.paging3)
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }

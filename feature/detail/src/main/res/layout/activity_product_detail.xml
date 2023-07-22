@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_item_review" />
+            tools:listitem="@layout/list_item_comment" />
 
         <View
             android:layout_width="match_parent"

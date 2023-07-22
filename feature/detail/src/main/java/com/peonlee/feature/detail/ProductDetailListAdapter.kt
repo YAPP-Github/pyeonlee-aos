@@ -19,10 +19,10 @@ import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
 import com.peonlee.feature.detail.databinding.ListItemDetailProductBinding
 import com.peonlee.feature.detail.databinding.ListItemDividerBinding
 import com.peonlee.feature.detail.databinding.ListItemEventBinding
-import com.peonlee.feature.detail.databinding.ListItemNoneReviewBinding
+import com.peonlee.feature.detail.databinding.ListItemNoneCommentBinding
 import com.peonlee.feature.detail.databinding.ListItemRatingBinding
-import com.peonlee.feature.detail.databinding.ListItemReviewBinding
-import com.peonlee.feature.detail.databinding.ListItemReviewHeaderBinding
+import com.peonlee.feature.detail.databinding.ListItemCommentBinding
+import com.peonlee.feature.detail.databinding.ListItemCommentHeaderBinding
 
 class ProductDetailListAdapter(
     private val navigateToEditReview: () -> Unit,
@@ -40,25 +40,26 @@ class ProductDetailListAdapter(
             )
 
             ProductDetailListItem.ViewType.SCORE -> RatingViewHolder(ListItemRatingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            ProductDetailListItem.ViewType.REVIEW_HEADER -> ReviewHeaderViewHolder(
-                ListItemReviewHeaderBinding.inflate(
+            ProductDetailListItem.ViewType.REVIEW_HEADER -> CommentHeaderViewHolder(
+                ListItemCommentHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                navigateToProductComments
             )
 
             ProductDetailListItem.ViewType.NONE_REVIEW -> NoneReviewViewHolder(
-                ListItemNoneReviewBinding.inflate(
+                ListItemNoneCommentBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
 
-            ProductDetailListItem.ViewType.REVIEW -> ReviewViewHolder(
+            ProductDetailListItem.ViewType.REVIEW -> CommentViewHolder(
                 showReviewManageDialog,
-                ListItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                ListItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
 
             ProductDetailListItem.ViewType.DIVIDER -> DividerViewHolder(ListItemDividerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -105,21 +106,7 @@ class ProductDetailListAdapter(
 
     private inner class DividerViewHolder(binding: ListItemDividerBinding) : ViewOnlyViewHolder(binding)
 
-    private inner class ReviewHeaderViewHolder(private val binding: ListItemReviewHeaderBinding) :
-        CommonViewHolder<ProductDetailListItem.ReviewHeader>(binding) {
-        init {
-            binding.tvShowMoreButton.setOnClickListener {
-                navigateToProductComments()
-            }
-        }
-
-        override fun onBindView(item: ProductDetailListItem.ReviewHeader) = with(binding) {
-            tvReviewCount.text = getStringWithArgs(com.peonlee.feature.detail.R.string.count, item.reviewCount)
-            return@with
-        }
-    }
-
-    private inner class NoneReviewViewHolder(private val binding: ListItemNoneReviewBinding) : CommonViewHolder<ProductDetailListItem.NoneReview>(binding) {
+    private inner class NoneReviewViewHolder(private val binding: ListItemNoneCommentBinding) : CommonViewHolder<ProductDetailListItem.NoneReview>(binding) {
         init {
             binding.tvWriteReviewButton.setOnClickListener {
                 getItem {
