@@ -16,7 +16,7 @@ class ProductCommentPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comment> {
         val page = params.key
         return try {
-            val commentList = commentApi.getProductComments(productId, page).copy()
+            val commentList = commentApi.getProductComments(productId, page)
             LoadResult.Page(
                 data = commentList.content,
                 prevKey = page,

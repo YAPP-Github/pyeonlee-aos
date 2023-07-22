@@ -16,13 +16,13 @@ import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.core.ui.viewholder.ViewOnlyViewHolder
+import com.peonlee.feature.detail.databinding.ListItemCommentBinding
+import com.peonlee.feature.detail.databinding.ListItemCommentHeaderBinding
 import com.peonlee.feature.detail.databinding.ListItemDetailProductBinding
 import com.peonlee.feature.detail.databinding.ListItemDividerBinding
 import com.peonlee.feature.detail.databinding.ListItemEventBinding
 import com.peonlee.feature.detail.databinding.ListItemNoneCommentBinding
 import com.peonlee.feature.detail.databinding.ListItemRatingBinding
-import com.peonlee.feature.detail.databinding.ListItemCommentBinding
-import com.peonlee.feature.detail.databinding.ListItemCommentHeaderBinding
 
 class ProductDetailListAdapter(
     private val navigateToEditReview: () -> Unit,

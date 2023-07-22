@@ -56,7 +56,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>(), Comm
             },
             navigateToProductComments = {
                 with(viewModel.productDetail) {
-                    navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, 1) // TODO total comments
+                    navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, commentCount)
                 }
             },
             showReviewManageDialog = {

@@ -1,18 +1,21 @@
 package com.peonlee.data.di
 
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.peonlee.core.data.BuildConfig
 import com.peonlee.data.comment.CommentApi
 import com.peonlee.data.di.NetworkModule.ConnectInfo.APPLICATION_JSON
 import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import com.peonlee.data.interceptor.AuthInterceptor
+import com.peonlee.data.login.LoginApi
 import com.peonlee.data.product.ProductApi
-import com.peonlee.data.review.ReviewApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,15 +50,29 @@ object NetworkModule {
     fun provideOkHttp(
         authInterceptor: AuthInterceptor
     ): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        } else {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
+        val json = Json { prettyPrint = true }
+        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                if (!message.startsWith("{") && !message.startsWith("[")) {
+                    Log.d("OkHttp", message)
+                    return
+                }
+                try {
+                    Log.d("OkHttp", json.encodeToString((Json.parseToJsonElement(message).jsonObject)))
+                } catch (m: Exception) {
+                    Log.d("OkHttp", message)
+                }
+            }
+        }).apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
         }
 
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(loggingInterceptor)
             .addInterceptor(authInterceptor)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -75,10 +92,10 @@ object NetworkModule {
         return retrofit.create(CommentApi::class.java)
     }
 
-    @Provides
     @Singleton
-    fun provideReviewApi(retrofit: Retrofit): ReviewApi {
-        return retrofit.create(ReviewApi::class.java)
+    @Provides
+    fun provideLoginApi(retrofit: Retrofit): LoginApi {
+        return retrofit.create(LoginApi::class.java)
     }
 
     private object ConnectInfo {

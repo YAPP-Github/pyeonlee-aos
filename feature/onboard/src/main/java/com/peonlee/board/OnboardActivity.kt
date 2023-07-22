@@ -16,7 +16,7 @@ class OnboardActivity : BaseActivity<ActivityOnboadingBinding>() {
     override fun initViews() {
         val evaluateFragment = EvaluateFragment().apply {
             arguments = Bundle().apply {
-                putBoolean("onBoarding", true)
+                putBoolean("onboarding", true)
             }
         }
         supportFragmentManager.beginTransaction().add(

@@ -39,11 +39,18 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         )
     }
 
+    // TODO : 가독성 좋게 리팩토링
     override fun initViews() = with(binding) {
         observable()
         setEvaluateCountSpannable()
 
         val isFromOnboard = arguments?.getBoolean(FROM_ONBOARDING_FLAG) ?: false
+
+        layoutGuide.apply {
+            isVisible = isFromOnboard
+            setOnClickListener { hideGuide() }
+        }
+
         tvNext.apply {
             isVisible = isFromOnboard
             setOnClickListener {
@@ -61,6 +68,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     when (newState) {
                         RecyclerView.SCROLL_STATE_DRAGGING -> {
+                            hideGuide()
                             if (undoSnackBar.isShown) {
                                 undoSnackBar.dismiss()
                             }
@@ -113,6 +121,8 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         direction: Int
     ) {
         viewModel.setLastEvaluateItem(evaluateAdapter.snapshot().items[position])
+        hideGuide()
+
         when (direction) {
             LIKE -> {
                 viewModel.apply {
@@ -192,6 +202,10 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         undoSnackBar.dismiss()
     }
 
+    private fun hideGuide() {
+        binding.layoutGuide.isVisible = false
+    }
+
     companion object {
         private const val SNACKBAR_DURATION = 8000
         private const val SNACKBAR_HEIGHT = 50
@@ -205,6 +219,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         private const val DISLIKE = 4
 
         private const val FROM_ONBOARDING_FLAG = "onboarding"
+
         fun getInstance(fromOnboard: Boolean = false): EvaluateFragment {
             val bundle = Bundle()
             bundle.putBoolean(FROM_ONBOARDING_FLAG, fromOnboard)

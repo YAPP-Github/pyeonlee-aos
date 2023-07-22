@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.Result
-import com.peonlee.data.review.ReviewRepository
+import com.peonlee.data.comment.CommentRepository
 import com.peonlee.review.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditReviewViewModel @Inject constructor(
-    private val reviewRepository: ReviewRepository
+    private val commentRepository: CommentRepository
 ) : ViewModel() {
     private val _review = MutableStateFlow("")
     val review: StateFlow<String> = _review.asStateFlow()
@@ -47,12 +47,12 @@ class EditReviewViewModel @Inject constructor(
             }
             _editReviewUiEvent.emit(EditReviewUiEvent.Loading)
             val saveReviewResult = if (isEdit) {
-                reviewRepository.editReview(
+                commentRepository.editComment(
                     productId = productId,
                     review = editedReview
                 )
             } else {
-                reviewRepository.saveReview(
+                commentRepository.saveComment(
                     productId = productId,
                     review = editedReview
                 )

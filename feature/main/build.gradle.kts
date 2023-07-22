@@ -14,6 +14,5 @@ dependencies {
     implementation(project(":feature:evaluate"))
 
     implementation(libs.google.material)
-    implementation(libs.androidx.viewpager)
     implementation(libs.bundles.fragment)
 }

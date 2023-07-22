@@ -2,13 +2,10 @@ package com.peonlee.data.evaluate
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.peonlee.common.exception.NoneDataException
 import com.peonlee.data.model.Product
 import com.peonlee.data.product.ProductApi
-import javax.inject.Inject
 
-class EvaluatePagingSource @Inject constructor(private val productApi: ProductApi) : PagingSource<Int, Product>() {
-    private var offsetProductId: Int? = null
+class EvaluatePagingSource(private val productApi: ProductApi) : PagingSource<Int, Product>() {
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -21,25 +18,19 @@ class EvaluatePagingSource @Inject constructor(private val productApi: ProductAp
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         return try {
             val offsetId = params.key
+            val products = productApi.evaluateProduct(
+                offsetProductId = offsetId,
+                pageSize = PAGE_SIZE
+            )
 
-            val productsResponse = productApi.searchProductTemp(offsetProductId = offsetId)
-
-            if (productsResponse.isSuccessful && productsResponse.body() != null) {
-                val products = productsResponse.body()!!
-                val lastId = products.lastId
-
-                LoadResult.Page(
-                    data = products.content,
-                    prevKey = offsetId,
-                    nextKey = if (offsetId == lastId) null else lastId
-                )
-            } else {
-                throw NoneDataException()
-            }
+            LoadResult.Page(
+                data = products.content,
+                prevKey = offsetId,
+                nextKey = if (offsetId == products.lastId) null else products.lastId
+            )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }
-
     }
 
     companion object {

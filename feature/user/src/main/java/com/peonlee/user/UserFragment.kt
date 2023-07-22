@@ -1,6 +1,5 @@
 package com.peonlee.user
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.user.databinding.FragmentUserBinding
