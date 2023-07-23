@@ -2,6 +2,7 @@ package com.peonlee.login
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -47,21 +48,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private fun loginObserve() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.loginState.collect { loginState ->
-                    when (loginState) {
-                        is LoginState.Init -> Unit
-                        is LoginState.Success -> {
-                            loginViewModel.setToken(loginState.data.accessToken)
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            finish()
-                        }
-                        is LoginState.NotRegistered -> {
-                            val intent = Intent(this@LoginActivity, TermsActivity::class.java)
-                            agreeTermsLauncher.launch(intent)
-                        }
-                        is LoginState.Fail -> showToast(R.string.server_error)
+            loginViewModel.loginState.collect { loginState ->
+                when (loginState) {
+                    is LoginState.Init -> Unit
+                    is LoginState.Success -> {
+                        Log.d("loginObserve Success : ", loginState.data.toString())
+                        loginViewModel.setToken(loginState.data.accessToken)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
                     }
+
+                    is LoginState.NotRegistered -> {
+                        Log.d("loginObserve NotRegistered : ", "NotRegistered")
+                        val intent = Intent(this@LoginActivity, TermsActivity::class.java)
+                        agreeTermsLauncher.launch(intent)
+                    }
+
+                    is LoginState.Fail -> showToast(R.string.server_error)
                 }
             }
         }
@@ -84,6 +87,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 task.addOnCompleteListener { result ->
                     if (result.isSuccessful) {
                         task.result.idToken?.let { googleIdToken ->
+                            Log.d("googleIdToken : ", googleIdToken.toString())
                             loginViewModel.login(googleIdToken, "GOOGLE")
                         } ?: showToast(getString(R.string.login_failed))
                     } else {
@@ -109,6 +113,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     token != null -> {
                         token.idToken?.let { idToken ->
+                            Log.d("kakaoIdToken : ", idToken)
                             loginViewModel.login(idToken, "KAKAO")
                         } ?: showToast(R.string.invalid_token)
                     }

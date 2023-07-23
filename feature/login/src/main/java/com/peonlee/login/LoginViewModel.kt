@@ -1,8 +1,10 @@
 package com.peonlee.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.Result
+import com.peonlee.data.handle
 import com.peonlee.data.local.LocalDataSource
 import com.peonlee.data.model.login.AuthRequest
 import com.peonlee.data.model.login.AuthResult
@@ -27,7 +29,7 @@ class LoginViewModel @Inject constructor(
     var loginToken: String = ""
         private set
 
-    private val _loginState: MutableSharedFlow<LoginState> = MutableStateFlow(LoginState.Init)
+    private val _loginState: MutableSharedFlow<LoginState> = MutableSharedFlow()
     val loginState = _loginState.asSharedFlow()
 
     fun login(token: String, type: String) {
@@ -58,8 +60,12 @@ class LoginViewModel @Inject constructor(
     private fun handleState(result: Result<AuthResult>) {
         viewModelScope.launch {
             when (result) {
-                is Result.Success -> _loginState.emit(LoginState.Success(result.data))
+                is Result.Success -> {
+                    Log.d("LoginState Success : ", result.data.toString())
+                    _loginState.emit(LoginState.Success(result.data))
+                }
                 is Result.Error -> {
+                    Log.d("LoginState Error : ", result.exception.message.toString())
                     when (result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
                         true -> _loginState.emit(LoginState.Fail)
                         false -> _loginState.emit(LoginState.NotRegistered)
