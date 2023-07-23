@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val productSearchableViewModel: ProductSearchableViewModel by activityViewModels()
 
     override fun bindingFactory(parent: ViewGroup?): FragmentHomeBinding {
-        return FragmentHomeBinding.inflate(layoutInflater, parent, false)
+        return FragmentHomeBinding.inflate(layoutInflater)
     }
 
     override fun initViews() {
