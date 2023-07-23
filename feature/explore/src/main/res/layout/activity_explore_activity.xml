@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:hint="라면, 음료, 과자, 빵 등"
-        tools:text="우유"></EditText>
+        tools:text="우유"/>
 
     <TextView
         android:id="@+id/tv_explore_cancel"
@@ -36,7 +36,7 @@
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toBottomOf="@+id/et_explore_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"></TextView>
+        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"/>
 
     <ImageView
         android:id="@+id/iv_search"
@@ -47,7 +47,7 @@
         android:backgroundTint="@color/bg40"
         app:layout_constraintBottom_toBottomOf="@+id/et_explore_bar"
         app:layout_constraintStart_toStartOf="@+id/et_explore_bar"
-        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"></ImageView>
+        app:layout_constraintTop_toTopOf="@+id/et_explore_bar" />
 
     <ImageView
         android:id="@+id/iv_text_cleaer"
@@ -59,7 +59,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/et_explore_bar"
         app:layout_constraintEnd_toEndOf="@+id/et_explore_bar"
-        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"></ImageView>
+        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"/>
 
     <FrameLayout
         android:id="@+id/layout_search_product"
@@ -67,7 +67,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/space_s_large"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_explore_cancel"
-        app:layout_constraintStart_toStartOf="@+id/et_explore_bar"
-        app:layout_constraintTop_toBottomOf="@+id/et_explore_bar"></FrameLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_explore_bar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

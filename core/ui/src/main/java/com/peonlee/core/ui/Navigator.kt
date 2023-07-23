@@ -17,4 +17,9 @@ interface Navigator {
         content: String?,
         launcher: ActivityResultLauncher<Intent>
     )
+
+    /**
+     * 검색 화면으로 이동
+     */
+    fun navigateToExplore(context: Context)
 }

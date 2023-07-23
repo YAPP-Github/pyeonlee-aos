@@ -1,5 +1,7 @@
 package com.peonlee.explore
 
+import android.content.Context
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -32,5 +34,13 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.layout_search_product, ProductFragment.getInstance())
             .commit()
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(
+                Intent(context, ExploreActivity::class.java)
+            )
+        }
     }
 }
