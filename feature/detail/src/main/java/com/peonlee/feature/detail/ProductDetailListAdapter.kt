@@ -26,6 +26,7 @@ import com.peonlee.feature.detail.databinding.ListItemRatingBinding
 
 class ProductDetailListAdapter(
     private val navigateToEditReview: () -> Unit,
+    private val onClickLikeButton: (comment: ProductDetailListItem.Review) -> Unit,
     private val navigateToProductComments: () -> Unit,
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit
 ) : MultiTypeListAdapter<ProductDetailListItem, ProductDetailListItem.ViewType>() {
@@ -58,6 +59,7 @@ class ProductDetailListAdapter(
             )
 
             ProductDetailListItem.ViewType.REVIEW -> CommentViewHolder(
+                onClickLikeButton,
                 showReviewManageDialog,
                 ListItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )

@@ -30,7 +30,9 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), 
     private val totalCommentsCount by lazy { intent.getIntExtra(EXTRA_TOTAL_COMMENTS_COUNT, 0) }
     private val product by lazy { intent.getParcelableExtra<ProductExtra>(EXTRA_PRODUCT)!! }
     private val adapter by lazy {
-        ProductCommentsPagingAdapter {
+        ProductCommentsPagingAdapter({ comment ->
+            viewModel.updateComment(comment)
+        }) {
             CommentManageDialog.newInstance(product, it.reviewText).run {
                 show(supportFragmentManager, tag)
             }
@@ -43,7 +45,7 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), 
 
     override fun initViews() = with(binding) {
         ivBackBtn.setOnClickListener {
-            viewModel.getProductComments(totalCommentsCount, product.id)
+            finish()
         }
         rvProductComments.adapter = adapter
         srlRefresh.setOnRefreshListener {

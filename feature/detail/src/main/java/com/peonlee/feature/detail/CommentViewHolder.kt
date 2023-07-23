@@ -11,6 +11,7 @@ import com.peonlee.feature.detail.databinding.ListItemCommentBinding
 import java.time.LocalDateTime
 
 class CommentViewHolder(
+    private val onClickLikeButton: (comment: ProductDetailListItem.Review) -> Unit,
     private val showReviewManageDialog: (ProductDetailListItem.Review) -> Unit,
     private val binding: ListItemCommentBinding
 ) : CommonViewHolder<ProductDetailListItem.Review>(binding) {
@@ -18,6 +19,11 @@ class CommentViewHolder(
         binding.ivManageReview.setOnClickListener {
             getItem {
                 showReviewManageDialog(it)
+            }
+        }
+        binding.tvLikeCount.setOnClickListener {
+            getItem {
+                onClickLikeButton(it)
             }
         }
     }
