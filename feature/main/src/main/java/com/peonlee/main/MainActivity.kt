@@ -2,6 +2,7 @@ package com.peonlee.main
 
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,13 +34,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    private fun changeFragment(fragment:Fragment, tag: String) {
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        val stackedFragment = supportFragmentManager.findFragmentByTag(tag)
+
+//        if (stackedFragment != null) {
+//            supportFragmentManager.popBackStack(
+//                tag,
+//                FragmentManager.POP_BACK_STACK_INCLUSIVE
+//            )
+//        }
+
         supportFragmentManager.commit {
-            replace(
-                R.id.layout_fragment,
-                supportFragmentManager.findFragmentByTag(tag) ?: fragment,
-                tag
-            )
+            setReorderingAllowed(false)
+            replace(R.id.layout_fragment, stackedFragment ?: fragment, tag)
             addToBackStack(tag)
         }
     }
@@ -48,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         (mainViewModel as? MainViewModel)?.selectedNav?.flowWithLifecycle(lifecycle)
             ?.onEach {
                 binding.bottomNav.selectedItemId = it
-                val (fragment, tag) = when(it) {
+                val (fragment, tag) = when (it) {
                     R.id.navHome -> mainFragments[0] to "Home"
                     R.id.navEvaluate -> mainFragments[1] to "Evaluate"
                     R.id.navExplore -> mainFragments[2] to "Explore"
