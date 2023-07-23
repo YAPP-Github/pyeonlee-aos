@@ -11,13 +11,15 @@ import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.home.R
 import com.peonlee.home.databinding.ListItemConditionalProductsBinding
 import com.peonlee.home.model.product.ConditionalProductsUiModel
+import com.peonlee.model.type.SortType
 import com.peonlee.model.util.PaddingValues
 
 private val rootLayoutParams = ConstraintLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
 
 class ConditionalProductsViewHolder(
     private val binding: ListItemConditionalProductsBinding,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val moveToConditionExplore: (SortType) -> Unit
 ) : CommonViewHolder<ConditionalProductsUiModel>(binding) {
     private var productAdapter = ProductAdapter(rootLayoutParams = rootLayoutParams, navigator)
 
@@ -43,5 +45,6 @@ class ConditionalProductsViewHolder(
             R.string.item_conditional_products_button_text,
             item.sortType.uiNameForHome
         )
+        btnMoreProducts.setOnClickListener { moveToConditionExplore(item.sortType) }
     }
 }

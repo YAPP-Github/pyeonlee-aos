@@ -2,6 +2,8 @@ package com.peonlee.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import com.peonlee.model.product.ProductSearchConditionUiModel
+import com.peonlee.model.type.SortType
+import com.peonlee.model.type.StoreType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,4 +20,14 @@ open class ProductSearchableViewModel : ViewModel() {
     ) {
         _productSearchCondition.value = newProductSearchCondition
     }
+
+    /**
+     * 정렬 키워드 변경
+     */
+    open fun changeSortType(sortType: SortType) {}
+
+    /**
+     * 편의점의 행사 상품 변경
+     */
+    open fun changeStoreType(storeType: StoreType) {}
 }

@@ -70,7 +70,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     override fun initViews() = with(binding) {
         observeKeyword()
 
-        com.peonlee.model.type.SortType.values().forEach {
+        SortType.values().forEach {
             tabProductSort.addTab(
                 tabProductSort.newTab().apply { text = it.uiNameForExplore }
             )
@@ -108,6 +108,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
         productViewModel.productSearchCondition.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 currentBottomSheet?.dismiss()
+                binding.tabProductSort.getTabAt(it.sortedBy.ordinal)?.select()
                 setFilterView(it)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
