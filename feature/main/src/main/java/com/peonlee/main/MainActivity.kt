@@ -36,14 +36,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun changeFragment(fragment: Fragment, tag: String) {
         val stackedFragment = supportFragmentManager.findFragmentByTag(tag)
-
-//        if (stackedFragment != null) {
-//            supportFragmentManager.popBackStack(
-//                tag,
-//                FragmentManager.POP_BACK_STACK_INCLUSIVE
-//            )
-//        }
-
         supportFragmentManager.commit {
             setReorderingAllowed(false)
             replace(R.id.layout_fragment, stackedFragment ?: fragment, tag)
@@ -67,5 +59,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun bindingFactory(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

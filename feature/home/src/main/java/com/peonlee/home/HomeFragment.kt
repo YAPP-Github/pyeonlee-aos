@@ -23,17 +23,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModels()
     private val productSearchableViewModel: ProductSearchableViewModel by activityViewModels()
 
+    private val homeAdapter by lazy {
+        HomeAdapter(
+            navigator = navigator,
+            moveToConditionExplore = productSearchableViewModel::changeSortType,
+            moveToStoreExplore = productSearchableViewModel::changeStoreType
+        )
+    }
+
     override fun bindingFactory(parent: ViewGroup?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(layoutInflater)
     }
 
     override fun initViews() {
-        val adapter = HomeAdapter(
-            navigator = navigator,
-            moveToConditionExplore = productSearchableViewModel::changeSortType,
-            moveToStoreExplore = productSearchableViewModel::changeStoreType
-        )
-        binding.rvHome.adapter = adapter
+        binding.rvHome.adapter = homeAdapter
         binding.btnSearch.setOnClickListener {
             navigator.navigateToSearch(requireContext())
         }
@@ -41,7 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         homeViewModel.products.flowWithLifecycle(
             viewLifecycleOwner.lifecycle
         ).onEach {
-            adapter.submitList(it)
+            homeAdapter.submitList(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
