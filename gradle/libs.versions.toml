@@ -41,6 +41,7 @@ serializationConverter = "1.0.0"
 serializationJson = "1.5.1"
 splashScreen = "1.0.0-alpha01"
 viewModel = "2.3.1"
+viewPager2 = "1.0.0"
 
 [libraries]
 # compose

@@ -30,7 +30,7 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
 
     private fun attachProductFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.layout_search_product, ProductFragment())
+            .replace(R.id.layout_search_product, ProductFragment.getInstance())
             .commit()
     }
 }

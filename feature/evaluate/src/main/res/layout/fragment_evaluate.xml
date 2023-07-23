@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/text_evaluate_title_top"
         android:text="@string/evaluate_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_next"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_evaluate"
