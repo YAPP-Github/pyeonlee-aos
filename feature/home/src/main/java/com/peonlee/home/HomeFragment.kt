@@ -28,7 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val adapter = HomeAdapter(navigator)
         binding.rvHome.adapter = adapter
         binding.btnSearch.setOnClickListener {
-            navigator.navigateToExplore(requireContext())
+            navigator.navigateToSearch(requireContext())
         }
 
         homeViewModel.products.flowWithLifecycle(

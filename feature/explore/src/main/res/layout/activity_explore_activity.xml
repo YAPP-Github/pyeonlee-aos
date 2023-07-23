@@ -7,7 +7,7 @@
     tools:context=".ExploreActivity">
 
     <EditText
-       android:id="@+id/et_explore_bar"
+        android:id="@+id/et_explore_bar"
         style="@style/Text.Subtitle02"
         android:layout_width="0dp"
         android:layout_height="@dimen/explore_bar_height"
@@ -16,6 +16,9 @@
         android:background="@drawable/bg_white_radius_10dp"
         android:backgroundTint="@color/bg10"
         android:hint="@string/explore_text_hint"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1"
         android:paddingLeft="@dimen/explore_text_left_padding"
         android:textColorHint="@color/bg40"
         app:layout_constraintEnd_toStartOf="@+id/tv_explore_cancel"
@@ -23,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:hint="라면, 음료, 과자, 빵 등"
-        tools:text="우유"/>
+        tools:text="우유" />
 
     <TextView
         android:id="@+id/tv_explore_cancel"
@@ -36,7 +39,7 @@
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toBottomOf="@+id/et_explore_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"/>
+        app:layout_constraintTop_toTopOf="@+id/et_explore_bar" />
 
     <ImageView
         android:id="@+id/iv_search"
@@ -59,7 +62,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/et_explore_bar"
         app:layout_constraintEnd_toEndOf="@+id/et_explore_bar"
-        app:layout_constraintTop_toTopOf="@+id/et_explore_bar"/>
+        app:layout_constraintTop_toTopOf="@+id/et_explore_bar" />
 
     <FrameLayout
         android:id="@+id/layout_search_product"
@@ -69,5 +72,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_explore_bar"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_explore_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
