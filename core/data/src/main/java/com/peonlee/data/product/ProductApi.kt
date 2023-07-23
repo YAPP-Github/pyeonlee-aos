@@ -48,7 +48,7 @@ interface ProductApi {
     suspend fun evaluateProduct(
         @Query("pageSize") pageSize: Int,
         @Query("offsetProductId") offsetProductId: Int?
-    ): Response<SearchProductResponse>
+    ): SearchProductResponse
 
     /**
      * [GET] v1/home

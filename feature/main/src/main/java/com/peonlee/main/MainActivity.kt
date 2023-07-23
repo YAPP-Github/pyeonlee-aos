@@ -21,7 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         binding.layoutFragment.isUserInputEnabled = false
         binding.layoutFragment.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.layoutFragment.adapter = MainAdapter(supportFragmentManager, lifecycle)
+        binding.layoutFragment.adapter = MainAdapter(this)
     }
 
     override fun bindViews() {
