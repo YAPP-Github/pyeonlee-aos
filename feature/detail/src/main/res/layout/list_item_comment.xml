@@ -91,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:background="?selectableItemBackgroundBorderless"
         android:drawablePadding="2dp"
         android:includeFontPadding="true"
         android:textColor="@color/bg40"

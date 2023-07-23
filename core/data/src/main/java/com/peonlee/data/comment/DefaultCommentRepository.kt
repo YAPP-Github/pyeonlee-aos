@@ -46,4 +46,12 @@ class DefaultCommentRepository @Inject constructor(
     override suspend fun deleteComment(productId: Int): Result<Unit> = setResult {
         commentApi.deleteComment(productId)
     }
+
+    override suspend fun likeComment(commentId: Int): Result<Unit> = setResult {
+        commentApi.likeComment(commentId)
+    }
+
+    override suspend fun unlikeComment(commentId: Int): Result<Unit> = setResult {
+        commentApi.unlikeComment(commentId)
+    }
 }

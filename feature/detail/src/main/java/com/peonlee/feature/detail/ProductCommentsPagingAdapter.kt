@@ -11,12 +11,14 @@ import com.peonlee.feature.detail.databinding.ListItemCommentBinding
 import com.peonlee.feature.detail.databinding.ListItemCommentHeaderBinding
 
 class ProductCommentsPagingAdapter(
+    private val onClickLikeButton: (comment: Review) -> Unit,
     private val showReviewManageDialog: (Review) -> Unit
 ) : PagingDataAdapter<ReviewItem, CommonViewHolder<ReviewItem>>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder<ReviewItem> {
         return if (viewType == 0) {
             CommentViewHolder(
+                onClickLikeButton,
                 showReviewManageDialog,
                 ListItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )

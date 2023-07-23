@@ -15,4 +15,8 @@ interface CommentRepository {
     suspend fun editComment(productId: Int, review: String): Result<Unit>
 
     suspend fun deleteComment(productId: Int): Result<Unit>
+
+    suspend fun likeComment(commentId: Int): Result<Unit>
+
+    suspend fun unlikeComment(commentId: Int): Result<Unit>
 }

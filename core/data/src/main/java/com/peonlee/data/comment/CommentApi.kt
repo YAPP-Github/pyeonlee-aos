@@ -32,4 +32,14 @@ interface CommentApi {
     suspend fun deleteComment(
         @Path("productId") productId: Int
     )
+
+    @POST("v1/product/comment/{commentId}/like")
+    suspend fun likeComment(
+        @Path("commentId") commentId: Int
+    )
+
+    @POST("v1/product/comment/{commentId}/cancel")
+    suspend fun unlikeComment(
+        @Path("commentId") commentId: Int
+    )
 }

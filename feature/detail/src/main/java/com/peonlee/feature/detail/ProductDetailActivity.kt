@@ -54,6 +54,9 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>(), Comm
                     navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null, editCommentLauncher)
                 }
             },
+            onClickLikeButton = { comment ->
+                viewModel.updateComment(comment)
+            },
             navigateToProductComments = {
                 with(viewModel.productDetail) {
                     navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, commentCount)
