@@ -27,6 +27,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initViews() {
         val adapter = HomeAdapter(navigator)
         binding.rvHome.adapter = adapter
+        binding.btnSearch.setOnClickListener {
+            navigator.navigateToExplore(requireContext())
+        }
 
         homeViewModel.products.flowWithLifecycle(
             viewLifecycleOwner.lifecycle

@@ -21,6 +21,7 @@
             android:layout_margin="18dp"/>
 
         <ImageView
+            android:id="@+id/btnSearch"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="end"
