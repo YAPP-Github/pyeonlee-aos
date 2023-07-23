@@ -28,6 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun bindViews() {
         (mainViewModel as? MainViewModel)?.selectedNav?.flowWithLifecycle(lifecycle)
             ?.onEach {
+                binding.bottomNav.selectedItemId = it
                 binding.layoutFragment.currentItem = when (it) {
                     R.id.navHome -> 0
                     R.id.navEvaluate -> 1

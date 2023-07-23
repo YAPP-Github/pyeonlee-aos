@@ -3,6 +3,7 @@ package com.peonlee.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.peonlee.core.ui.base.ProductSearchableViewModel
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.StoreType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,9 +28,7 @@ class MainViewModel @Inject constructor() : ProductSearchableViewModel() {
      * 정렬 키워드 변경
      */
     override fun changeSortType(sortType: SortType) {
-        _productSearchCondition.value = _productSearchCondition.value.copy(
-            sortedBy = sortType
-        )
+        _productSearchCondition.value = ProductSearchConditionUiModel(sortedBy = sortType)
         _selectedNav.value = R.id.navExplore
     }
 
@@ -37,9 +36,7 @@ class MainViewModel @Inject constructor() : ProductSearchableViewModel() {
      * 편의점의 행사 상품 변경
      */
     override fun changeStoreType(storeType: StoreType) {
-        _productSearchCondition.value = _productSearchCondition.value.copy(
-            stores = listOf(storeType)
-        )
+        _productSearchCondition.value = ProductSearchConditionUiModel(stores = listOf(storeType))
         _selectedNav.value = R.id.navExplore
     }
 
