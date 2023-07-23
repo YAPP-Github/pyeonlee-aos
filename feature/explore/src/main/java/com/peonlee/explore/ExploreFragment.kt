@@ -22,6 +22,10 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
         childFragmentManager.commit {
             add(R.id.layoutProduct, ProductFragment.getInstance(), "Product")
         }
+        // 상단 검색 바 클릭 시, 검색 화면으로 이동
+        binding.layoutSearch.setOnClickListener {
+            navigator.navigateToExplore(requireContext())
+        }
     }
 
     companion object {
