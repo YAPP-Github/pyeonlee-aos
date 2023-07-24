@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,8 +30,8 @@ class LoginViewModel @Inject constructor(
     var loginToken: String = ""
         private set
 
-    private val _loginState: MutableSharedFlow<LoginState> = MutableSharedFlow()
-    val loginState = _loginState.asSharedFlow()
+    private val _loginState: MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Init)
+    val loginState = _loginState.asStateFlow()
 
     fun login(token: String, type: String) {
         loginType = type
