@@ -19,13 +19,15 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         return FragmentSettingBinding.inflate(layoutInflater, parent, false)
     }
 
-    override fun initViews() {
+    override fun initViews() = with(binding){
         val adapter = SettingAdapter { settingUiModel ->
             handleEvent(settingUiModel)
         }.apply {
             submitList(termsList)
         }
-        binding.rvTermsList.adapter = adapter
+        rvTermsList.adapter = adapter
+
+        ivSettingClose.setOnClickListener {  }
     }
 
     private fun handleEvent(event: SettingUiModel) {

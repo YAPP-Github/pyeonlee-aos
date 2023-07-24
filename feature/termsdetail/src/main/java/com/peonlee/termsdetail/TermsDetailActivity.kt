@@ -9,5 +9,6 @@ class TermsDetailActivity : BaseActivity<ActivityTermsDetailActivityBinding>() {
     override fun initViews() = with(binding) {
         tvDetailTitle.text = intent.getStringExtra("title")
         webviewTerms.loadUrl(intent.getStringExtra("url") ?: return)
+        ivDetailClose.setOnClickListener { finish() }
     }
 }
