@@ -6,6 +6,8 @@ import com.peonlee.data.login.DefaultLoginRepository
 import com.peonlee.data.login.LoginRepository
 import com.peonlee.data.product.DefaultProductRepository
 import com.peonlee.data.product.ProductRepository
+import com.peonlee.data.user.DefaultUserRepository
+import com.peonlee.data.user.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,4 +34,10 @@ abstract class RepositoryModule {
     abstract fun bindCommentRepository(
         repository: DefaultCommentRepository
     ): CommentRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUserRepository(
+        userRepository: DefaultUserRepository
+    ): UserRepository
 }

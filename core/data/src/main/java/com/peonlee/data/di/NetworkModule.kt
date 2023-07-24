@@ -9,6 +9,7 @@ import com.peonlee.data.di.NetworkModule.ConnectInfo.TIME_OUT
 import com.peonlee.data.interceptor.AuthInterceptor
 import com.peonlee.data.login.LoginApi
 import com.peonlee.data.product.ProductApi
+import com.peonlee.data.user.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -97,6 +98,10 @@ object NetworkModule {
     fun provideLoginApi(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
     private object ConnectInfo {
         const val APPLICATION_JSON = "application/json"
