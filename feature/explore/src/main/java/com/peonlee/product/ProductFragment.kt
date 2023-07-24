@@ -17,7 +17,7 @@ import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
-import com.peonlee.explore.ExploreViewModel
+import com.peonlee.core.ui.base.ProductSearchableViewModel
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.toRangeString
@@ -41,7 +41,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    private val exploreViewModel: ExploreViewModel by activityViewModels()
+    private val exploreViewModel: ProductSearchableViewModel by activityViewModels()
     private val productViewModel: ProductViewModel by viewModels()
 
     private var currentBottomSheet: BaseBottomSheetFragment? = null
@@ -70,7 +70,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     override fun initViews() = with(binding) {
         observeKeyword()
 
-        com.peonlee.model.type.SortType.values().forEach {
+        SortType.values().forEach {
             tabProductSort.addTab(
                 tabProductSort.newTab().apply { text = it.uiNameForExplore }
             )
@@ -108,6 +108,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
         productViewModel.productSearchCondition.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 currentBottomSheet?.dismiss()
+                binding.tabProductSort.getTabAt(it.sortedBy.ordinal)?.select()
                 setFilterView(it)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
@@ -176,10 +177,11 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     }
 
     private fun observeKeyword() {
+        println(exploreViewModel)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                exploreViewModel.keyword.collect { newKeyword ->
-                    productViewModel.setKeyword(newKeyword)
+                exploreViewModel.productSearchCondition.collect {
+                    productViewModel.setProductSearchCondition(it)
                 }
             }
         }

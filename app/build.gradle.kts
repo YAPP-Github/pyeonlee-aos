@@ -23,6 +23,7 @@ dependencies {
     implementation(project(":feature:review"))
     implementation(project(":feature:explore"))
     implementation(project(":feature:evaluate"))
+    implementation(project(":core:model"))
 
     implementation(project(":core:data"))
 

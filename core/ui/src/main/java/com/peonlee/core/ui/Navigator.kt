@@ -3,6 +3,7 @@ package com.peonlee.core.ui
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
+import com.peonlee.model.product.ProductSearchConditionUiModel
 
 interface Navigator {
     fun navigateToProductDetail(context: Context, productId: Int)
@@ -21,5 +22,11 @@ interface Navigator {
     /**
      * 검색 화면으로 이동
      */
-    fun navigateToExplore(context: Context)
+    fun navigateToSearch(context: Context)
+
+    /**
+     * 탐색 화면으로 이동
+     * @param productSearchConditionUiModel 기본 탐색 조건
+     */
+    fun navigateToExplore(productSearchConditionUiModel: ProductSearchConditionUiModel?)
 }

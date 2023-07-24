@@ -18,15 +18,18 @@ import com.peonlee.home.R as HomeResource
 
 class EventByStoresViewHolder(
     private val binding: ListItemEventStoresBinding,
-    navigator: Navigator
+    navigator: Navigator,
+    private val moveToStoreExplore: (StoreType) -> Unit
 ) : CommonViewHolder<EventByStoresUiModel>(binding) {
     private var productsByStoreAdapter = ProductsByStoreAdapter(navigator)
+    private var currentStoreType: StoreType = StoreType.CU
 
     private val onTabSelectedListener = object : OnTabSelectedListener {
         override fun onTabReselected(tab: TabLayout.Tab?) {}
         override fun onTabSelected(tab: TabLayout.Tab?) {
             tab?.let {
                 val store = StoreType.values()[it.position]
+                currentStoreType = store
                 (it.customView as? MediumSelector)?.applyBackground(getBackgroundByStore(store))
                 binding.btnMoreProducts.text = getStringWithArgs(
                     id = HomeResource.string.item_conditional_products_button_text,
@@ -66,6 +69,9 @@ class EventByStoresViewHolder(
 
     override fun onBindView(item: EventByStoresUiModel) {
         productsByStoreAdapter.submitList(item.stores)
+        binding.btnMoreProducts.setOnClickListener {
+            moveToStoreExplore(currentStoreType)
+        }
     }
 
     companion object {
