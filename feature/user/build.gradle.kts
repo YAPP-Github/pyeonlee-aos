@@ -6,3 +6,7 @@ android {
     namespace = "com.peonlee.user"
     viewBinding { enable = true }
 }
+
+dependencies {
+    implementation(project(":core:data"))
+}
