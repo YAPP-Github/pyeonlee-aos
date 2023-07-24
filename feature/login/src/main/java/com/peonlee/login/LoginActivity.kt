@@ -52,14 +52,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 when (loginState) {
                     is LoginState.Init -> Unit
                     is LoginState.Success -> {
-                        Log.d("loginObserve Success : ", loginState.data.toString())
                         loginViewModel.setToken(loginState.data.accessToken)
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
 
                     is LoginState.NotRegistered -> {
-                        Log.d("loginObserve NotRegistered : ", "NotRegistered")
                         val intent = Intent(this@LoginActivity, TermsActivity::class.java)
                         agreeTermsLauncher.launch(intent)
                     }
@@ -73,6 +71,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private fun googleLogin() {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestEmail()
             .build()
 
         val googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
@@ -87,7 +86,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 task.addOnCompleteListener { result ->
                     if (result.isSuccessful) {
                         task.result.idToken?.let { googleIdToken ->
-                            Log.d("googleIdToken : ", googleIdToken.toString())
                             loginViewModel.login(googleIdToken, "GOOGLE")
                         } ?: showToast(getString(R.string.login_failed))
                     } else {
@@ -113,15 +111,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     token != null -> {
                         token.idToken?.let { idToken ->
-                            Log.d("kakaoIdToken : ", idToken)
                             loginViewModel.login(idToken, "KAKAO")
                         } ?: showToast(R.string.invalid_token)
                     }
                 }
             }
-        } else {
-            loginWithKakaoAccount()
-        }
+        } else loginWithKakaoAccount()
     }
 
     private fun loginWithKakaoAccount() {
