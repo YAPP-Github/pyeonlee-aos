@@ -6,3 +6,7 @@ android {
     namespace = "com.peonlee.settings"
     viewBinding { enable = true }
 }
+
+dependencies {
+    implementation(project(":feature:termsdetail"))
+}

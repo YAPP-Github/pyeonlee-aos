@@ -28,11 +28,24 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_terms_list"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_large"
         android:layout_marginEnd="@dimen/toolbar_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_setting_close"
         app:layout_constraintTop_toBottomOf="@+id/iv_setting_close"></androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_withdrawal"
+        style="@style/Text.Body05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/text_size_16dp"
+        android:paddingRight="@dimen/space_large"
+        android:paddingBottom="@dimen/space_large"
+        android:text="@string/withdrawal"
+        android:textColor="@color/bg40"
+        app:layout_constraintStart_toStartOf="@+id/rv_terms_list"
+        app:layout_constraintTop_toBottomOf="@+id/rv_terms_list"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
