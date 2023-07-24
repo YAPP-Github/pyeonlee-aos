@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_withdrawal_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="@dimen/space_large"
+        android:background="@drawable/ic_chevron_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/withdrawal"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_withdrawal_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_withdrawal_close"></TextView>
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/delete_review_content"
+        app:layout_constraintStart_toStartOf="@+id/iv_withdrawal_close"
+        app:layout_constraintTop_toBottomOf="@+id/iv_withdrawal_close"></TextView>
+
+    <include
+        android:id="@+id/layout_review"
+        layout="@layout/layout_user_review"
+        android:layout_width="0dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_withdrawal_close"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"></include>
+
+    <TextView
+        style="@style/Text.Body03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/withdrawal_content"
+        android:textColor="@color/bg50"
+        app:layout_constraintStart_toStartOf="@+id/layout_review"
+        app:layout_constraintTop_toBottomOf="@+id/layout_review"></TextView>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:button="@drawable/peonlee_custom_checkbox"
+        app:layout_constraintBottom_toTopOf="@+id/largeButton2"
+        app:layout_constraintStart_toStartOf="@+id/largeButton2"></CheckBox>
+
+    <TextView
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/agree_withdrawal"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toTopOf="@+id/checkBox"></TextView>
+
+    <com.peonlee.core.ui.designsystem.button.LargeButton
+        android:id="@+id/largeButton2"
+        style="@style/Text.Body02"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:text="@string/use"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/largeButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"></com.peonlee.core.ui.designsystem.button.LargeButton>
+
+    <com.peonlee.core.ui.designsystem.button.LargeButton
+        android:id="@+id/largeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_white_radius_10dp"
+        android:backgroundTint="@color/brand50"
+        android:text="@string/un_use"
+        android:textColor="@color/brand30"
+        app:layout_constraintBottom_toBottomOf="@+id/largeButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/largeButton2"></com.peonlee.core.ui.designsystem.button.LargeButton>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
