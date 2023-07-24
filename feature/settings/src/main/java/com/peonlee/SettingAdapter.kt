@@ -10,7 +10,7 @@ class SettingAdapter(
     private val onClickEvent: (SettingUiModel) -> Unit
 ) : SingleTypeListAdapter<SettingUiModel>({ it.termTitle }) {
     override fun onCreateViewHolder(parent: ViewGroup): CommonViewHolder<SettingUiModel> {
-        return TermsViewHolder(
+        return SettingViewHolder(
             ItemTermsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

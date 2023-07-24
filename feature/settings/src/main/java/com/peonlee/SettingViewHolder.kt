@@ -3,7 +3,7 @@ package com.peonlee
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.settings.databinding.ItemTermsBinding
 
-class TermsViewHolder(
+class SettingViewHolder(
     private val binding: ItemTermsBinding,
     private val onClickEvent: (SettingUiModel) -> Unit
     ) : CommonViewHolder<SettingUiModel>(binding) {
