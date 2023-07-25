@@ -7,19 +7,14 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewTreeObserver
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.peonlee.R
 import com.peonlee.data.local.LocalDataSource
 import com.peonlee.login.LoginActivity
-import com.peonlee.login.LoginViewModel
 import com.peonlee.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

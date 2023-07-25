@@ -142,7 +142,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private fun showSnackBar(): Snackbar {
         val snackBar = Snackbar.make(binding.layoutEvaluate, "", SNACKBAR_DURATION)
         val marginFromSides = SNACKBAR_SIDE.dpToPx(requireContext())
-        val marginFromBottom = if(viewModel.isFromOnboard) {
+        val marginFromBottom = if (viewModel.isFromOnboard) {
             SNACKBAR_BOTTOM.dpToPx(requireContext())
         } else {
             (BOTTOM_NAVI_HEIGHT + SNACKBAR_BOTTOM).dpToPx(requireContext())

@@ -6,16 +6,17 @@ import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.local.LocalDataSource
 import com.peonlee.settings.R
-import com.peonlee.core.ui.R.string as String
 import com.peonlee.settings.databinding.ActivitySettingBinding
 import com.peonlee.termsdetail.TermsDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.peonlee.core.ui.R.string as String
 
 @AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     @Inject lateinit var dataStore: LocalDataSource
+
     @Inject lateinit var navigator: Navigator
 
     override fun bindingFactory() = ActivitySettingBinding.inflate(layoutInflater)

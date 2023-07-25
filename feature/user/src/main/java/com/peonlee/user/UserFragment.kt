@@ -6,13 +6,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.SettingActivity
-import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.user.databinding.FragmentUserBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 /**
  * 사용자 마이 페이지 Fragment
