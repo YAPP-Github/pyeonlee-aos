@@ -35,6 +35,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
         rvTermsList.adapter = settingAdapter
         ivSettingClose.setOnClickListener { finish() }
+        tvWithdrawal.setOnClickListener {  }
     }
 
     private fun handleEvent(event: SettingUiModel) {
