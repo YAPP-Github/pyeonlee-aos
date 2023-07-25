@@ -35,7 +35,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
         rvTermsList.adapter = settingAdapter
         ivSettingClose.setOnClickListener { finish() }
-        tvWithdrawal.setOnClickListener {  }
+        tvWithdrawal.setOnClickListener { moveWithdrawalScreen() }
     }
 
     private fun handleEvent(event: SettingUiModel) {
@@ -54,5 +54,14 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     private fun logout() {
         lifecycleScope.launch { dataStore.setAccessToken("") }
         navigator.navigateToLogin(this)
+    }
+
+    private fun moveWithdrawalScreen() {
+        val intent = Intent(this, WithdrawalActivity::class.java).apply {
+            putExtra("reviewCount", intent.getIntExtra("reviewCount", 0))
+            putExtra("evaluateCount", intent.getIntExtra("evaluateCount", 0))
+            putExtra("memberId", intent.getIntExtra("memberId", -1))
+        }
+        startActivity(intent)
     }
 }

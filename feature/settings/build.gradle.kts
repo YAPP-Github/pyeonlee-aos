@@ -9,5 +9,6 @@ android {
 
 dependencies {
     implementation(project(":feature:termsdetail"))
+    implementation(project(":feature:withdrawal"))
     implementation(project(":core:data"))
 }
