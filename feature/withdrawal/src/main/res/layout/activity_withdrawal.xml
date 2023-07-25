@@ -78,23 +78,25 @@
         app:layout_constraintStart_toEndOf="@+id/checkbox_agree"
         app:layout_constraintTop_toTopOf="@+id/checkbox_agree"></TextView>
 
-    <com.peonlee.core.ui.designsystem.button.LargeButton
+    <TextView
+        android:gravity="center"
         android:id="@+id/btn_use"
         style="@style/Text.Body02"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginStart="@dimen/space_x_large"
         android:layout_marginBottom="@dimen/button_margin"
         android:background="@drawable/bg_white_outline_radius_10dp"
         android:text="@string/use"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_un_use"
-        app:layout_constraintStart_toStartOf="parent"></com.peonlee.core.ui.designsystem.button.LargeButton>
+        app:layout_constraintStart_toStartOf="parent"></TextView>
 
-    <com.peonlee.core.ui.designsystem.button.LargeButton
+    <TextView
+        android:gravity="center"
         android:id="@+id/btn_un_use"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="@dimen/space_medium"
         android:layout_marginEnd="@dimen/space_x_large"
         android:background="@drawable/bg_white_radius_10dp"
@@ -103,5 +105,6 @@
         android:textColor="@color/brand30"
         app:layout_constraintBottom_toBottomOf="@+id/btn_use"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_use"></com.peonlee.core.ui.designsystem.button.LargeButton>
+        app:layout_constraintStart_toEndOf="@+id/btn_use"
+        app:layout_constraintTop_toTopOf="@+id/btn_use"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

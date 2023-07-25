@@ -5,4 +5,5 @@
     <string name="agree_withdrawal">위의 내용을 숙지했으며 탈퇴에 동의합니다.</string>
     <string name="use">계속 사용하기</string>
     <string name="un_use">회원 탈퇴하기</string>
+    <string name="fail_withdrawal">회원탈퇴에 실패했습니다.</string>
 </resources>
