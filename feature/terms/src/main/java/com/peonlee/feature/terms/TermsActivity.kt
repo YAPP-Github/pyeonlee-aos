@@ -1,21 +1,22 @@
 package com.peonlee.feature.terms
 
 import android.app.Activity
+import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import com.peonlee.core.ui.base.BaseActivity
+import com.peonlee.terms.R
 import com.peonlee.terms.databinding.ActivityTermsBinding
+import com.peonlee.termsdetail.TermsDetailActivity
 import com.peonlee.core.ui.R.color as Color
 import com.peonlee.core.ui.R.drawable as Drawable
+import com.peonlee.core.ui.R.string as CoreString
 
 class TermsActivity : BaseActivity<ActivityTermsBinding>() {
     override fun bindingFactory(): ActivityTermsBinding = ActivityTermsBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding) {
-        ivTermsClose.setOnClickListener {
-            setResult(Activity.RESULT_OK)
-            finish()
-        }
+        ivTermsClose.setOnClickListener { finish() }
 
         checkboxAllTerms.apply {
             setOnClickListener {
@@ -42,6 +43,14 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
             setResult(Activity.RESULT_OK)
             finish()
         }
+
+        ivAgreeService.setOnClickListener {
+             moveTermsDetailScreen(getString(R.string.terms_service), getString(CoreString.terms_url))
+        }
+
+        ivAgreePersonal.setOnClickListener {
+            moveTermsDetailScreen(getString(R.string.agree_personal), getString(CoreString.agree_personal_url))
+        }
     }
 
     private fun updateBackground(isUpdate: Boolean) {
@@ -53,10 +62,7 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
 
     private fun updateNextButton() {
         val isActive = binding.checkboxService.isChecked && binding.checkboxPersonal.isChecked
-        when (isActive) {
-            true -> updateState(true)
-            false -> updateState(false)
-        }
+        updateState(isActive)
     }
 
     private fun updateState(isActive: Boolean) {
@@ -69,5 +75,13 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
                 )
             )
         }
+    }
+
+    private fun moveTermsDetailScreen(title: String, url: String) {
+        val intent = Intent(this, TermsDetailActivity::class.java).apply {
+            putExtra("title", title)
+            putExtra("url", url)
+        }
+        startActivity(intent)
     }
 }
