@@ -8,6 +8,7 @@ import com.peonlee.explore.ExploreActivity
 import com.peonlee.feature.detail.ProductCommentsActivity
 import com.peonlee.feature.detail.ProductDetailActivity
 import com.peonlee.feature.detail.ProductExtra
+import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.review.edit.EditReviewActivity
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,8 +19,16 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
         ProductDetailActivity.startActivity(context, productId)
     }
 
-    override fun navigateToProductComments(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, totalCommentsCount: Int) {
-        ProductCommentsActivity.startActivity(context, ProductExtra(productId, imageUrl, productName, price), totalCommentsCount)
+    override fun navigateToProductComments(
+        context: Context,
+        productId: Int,
+        imageUrl: String,
+        productName: String,
+        price: Int,
+        totalCommentsCount: Int,
+        launcher: ActivityResultLauncher<Intent>
+    ) {
+        launcher.launch(ProductCommentsActivity.newIntent(context, ProductExtra(productId, imageUrl, productName, price), totalCommentsCount))
     }
 
     override fun navigateToEditReview(
@@ -34,7 +43,12 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
         launcher.launch(EditReviewActivity.newIntent(context, productId, imageUrl, productName, price, content))
     }
 
-    override fun navigateToExplore(context: Context) {
+    override fun navigateToSearch(context: Context) {
         ExploreActivity.startActivity(context)
+    }
+
+    override fun navigateToExplore(
+        productSearchConditionUiModel: ProductSearchConditionUiModel?
+    ) {
     }
 }

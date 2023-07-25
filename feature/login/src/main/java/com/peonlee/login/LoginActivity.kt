@@ -6,9 +6,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
@@ -47,21 +45,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private fun loginObserve() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.loginState.collect { loginState ->
-                    when (loginState) {
-                        is LoginState.Init -> Unit
-                        is LoginState.Success -> {
-                            loginViewModel.setToken(loginState.data.accessToken)
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            finish()
-                        }
-                        is LoginState.NotRegistered -> {
-                            val intent = Intent(this@LoginActivity, TermsActivity::class.java)
-                            agreeTermsLauncher.launch(intent)
-                        }
-                        is LoginState.Fail -> showToast(R.string.server_error)
+            loginViewModel.loginState.collect { loginState ->
+                when (loginState) {
+                    is LoginState.Init -> Unit
+                    is LoginState.Success -> {
+                        loginViewModel.setToken(loginState.data.accessToken)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
                     }
+
+                    is LoginState.NotRegistered -> {
+                        val intent = Intent(this@LoginActivity, TermsActivity::class.java)
+                        agreeTermsLauncher.launch(intent)
+                    }
+
+                    is LoginState.Fail -> showToast(R.string.server_error)
                 }
             }
         }
@@ -70,6 +68,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private fun googleLogin() {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestEmail()
             .build()
 
         val googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)

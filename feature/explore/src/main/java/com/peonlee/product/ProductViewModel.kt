@@ -97,7 +97,7 @@ class ProductViewModel @Inject constructor(
         )
     }
 
-    fun setKeyword(newKeyword: String) {
-        _productSearchCondition.value = _productSearchCondition.value.copy(keyword = newKeyword)
+    fun setProductSearchCondition(newProductSearchCondition: ProductSearchConditionUiModel) {
+        _productSearchCondition.value = newProductSearchCondition
     }
 }

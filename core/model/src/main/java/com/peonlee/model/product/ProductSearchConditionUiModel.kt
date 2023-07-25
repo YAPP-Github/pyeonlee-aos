@@ -5,7 +5,9 @@ import com.peonlee.model.type.EventType
 import com.peonlee.model.type.PriceFilter
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.StoreType
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ProductSearchConditionUiModel(
     val keyword: String = "", // 키워드
     val sortedBy: SortType = SortType.RECENT, // 정렬 기준
@@ -13,4 +15,4 @@ data class ProductSearchConditionUiModel(
     val stores: List<StoreType>? = null, // 상점 조건
     val events: List<EventType>? = null, // 행사 조건
     val categories: List<Category>? = null // 카테고리 조건
-)
+) : java.io.Serializable

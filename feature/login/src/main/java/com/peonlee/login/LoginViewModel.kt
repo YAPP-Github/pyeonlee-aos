@@ -1,5 +1,6 @@
 package com.peonlee.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.Result
@@ -9,9 +10,8 @@ import com.peonlee.data.model.login.AuthResult
 import com.peonlee.domain.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,8 +27,8 @@ class LoginViewModel @Inject constructor(
     var loginToken: String = ""
         private set
 
-    private val _loginState: MutableSharedFlow<LoginState> = MutableStateFlow(LoginState.Init)
-    val loginState = _loginState.asSharedFlow()
+    private val _loginState: MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Init)
+    val loginState = _loginState.asStateFlow()
 
     fun login(token: String, type: String) {
         loginType = type
@@ -58,8 +58,12 @@ class LoginViewModel @Inject constructor(
     private fun handleState(result: Result<AuthResult>) {
         viewModelScope.launch {
             when (result) {
-                is Result.Success -> _loginState.emit(LoginState.Success(result.data))
+                is Result.Success -> {
+                    Log.d("LoginState Success : ", result.data.toString())
+                    _loginState.emit(LoginState.Success(result.data))
+                }
                 is Result.Error -> {
+                    Log.d("LoginState Error : ", result.exception.message.toString())
                     when (result.exception.message?.contains("status") ?: false) { // TODO : 리팩토링 data layer에서 파싱
                         true -> _loginState.emit(LoginState.Fail)
                         false -> _loginState.emit(LoginState.NotRegistered)

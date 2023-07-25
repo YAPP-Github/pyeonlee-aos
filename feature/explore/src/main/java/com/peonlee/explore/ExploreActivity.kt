@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.peonlee.core.ui.base.BaseActivity
+import com.peonlee.core.ui.base.ProductSearchableViewModel
 import com.peonlee.core.ui.extensions.hideKeyboard
 import com.peonlee.core.ui.extensions.trim
 import com.peonlee.explore.databinding.ActivityExploreActivityBinding
@@ -14,18 +15,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
-    private val exploreViewModel: ExploreViewModel by viewModels()
+    private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
 
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding) {
+        println(exploreViewModel)
         attachProductFragment()
         etExploreBar.addTextChangedListener { input -> ivTextCleaer.isVisible = input?.isNotEmpty() ?: false }
         tvExploreCancel.setOnClickListener { finish() }
         ivTextCleaer.setOnClickListener { etExploreBar.setText("") }
         ivSearch.setOnClickListener {
             layoutSearchProduct.isVisible = true
-            exploreViewModel.setKeyword(etExploreBar.trim())
+            (exploreViewModel as? ExploreViewModel)?.setKeyword(etExploreBar.trim())
             etExploreBar.hideKeyboard()
         }
     }

@@ -17,8 +17,14 @@ import com.peonlee.home.databinding.ListItemRecentReviewBinding
 import com.peonlee.home.databinding.ListItemTitleBinding
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
+import com.peonlee.model.type.SortType
+import com.peonlee.model.type.StoreType
 
-class HomeAdapter(private val navigator: Navigator) : MultiTypeListAdapter<MainHomeListItem, MainHomeViewType>() {
+class HomeAdapter(
+    private val navigator: Navigator,
+    private val moveToConditionExplore: (SortType) -> Unit,
+    private val moveToStoreExplore: (StoreType) -> Unit
+) : MultiTypeListAdapter<MainHomeListItem, MainHomeViewType>() {
     override fun onCreateViewHolder(
         viewType: MainHomeViewType,
         parent: ViewGroup
@@ -29,11 +35,16 @@ class HomeAdapter(private val navigator: Navigator) : MultiTypeListAdapter<MainH
             MainHomeViewType.DIVIDER -> HomeDividerViewHolder(ListItemHomeDividerBinding.inflate(inflater, parent, false))
             MainHomeViewType.CONDITIONAL_PRODUCTS -> ConditionalProductsViewHolder(
                 ListItemConditionalProductsBinding.inflate(inflater, parent, false),
-                navigator
+                navigator,
+                moveToConditionExplore
             )
 
-            MainHomeViewType.RECENT_REVIEW -> RecentReviewViewHolder(ListItemRecentReviewBinding.inflate(inflater, parent, false))
-            MainHomeViewType.EVENT_BY_STORE -> EventByStoresViewHolder(ListItemEventStoresBinding.inflate(inflater, parent, false), navigator)
+            MainHomeViewType.RECENT_REVIEW -> RecentReviewViewHolder(navigator, ListItemRecentReviewBinding.inflate(inflater, parent, false))
+            MainHomeViewType.EVENT_BY_STORE -> EventByStoresViewHolder(
+                ListItemEventStoresBinding.inflate(inflater, parent, false),
+                navigator,
+                moveToStoreExplore
+            )
         }
     }
 }

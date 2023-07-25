@@ -37,27 +37,17 @@ class ProductDetailViewModel @Inject constructor(
     fun start(productId: Int) {
         viewModelScope.launch {
             val commentsResponse = async { commentRepository.getProductComments(productId) }
-            if (::productDetail.isInitialized.not()) {
-                val productDetailResponse = async { productRepository.getProductDetail(productId) }
-                productDetailResponse.await().handle({
-                    productDetail = it
-                    val itemList = mutableListOf<ProductDetailListItem>()
-                    itemList.addAll(it.mapToPresentation())
-                    commentsResponse.await().handle({ comments ->
-                        itemList.addAll(comments.mapToPresentation(it.commentCount))
-                    })
-                    _productDetailItemList.value = itemList
-                    _productRatingType.emit(it.productRatingType)
-                })
-            } else {
+            val productDetailResponse = async { productRepository.getProductDetail(productId) }
+            productDetailResponse.await().handle({
+                productDetail = it
                 val itemList = mutableListOf<ProductDetailListItem>()
-                itemList.addAll(productDetail.mapToPresentation())
+                itemList.addAll(it.mapToPresentation())
                 commentsResponse.await().handle({ comments ->
-                    itemList.addAll(comments.mapToPresentation(productDetail.commentCount))
+                    itemList.addAll(comments.mapToPresentation(it.commentCount))
                 })
                 _productDetailItemList.value = itemList
-                _productRatingType.emit(productDetail.productRatingType)
-            }
+                _productRatingType.emit(it.productRatingType)
+            })
         }
     }
 
@@ -132,7 +122,7 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             productRepository.cancelLikeProduct(productId).handle({
                 _productRatingType.emit(ProductRatingType.NONE)
-                updateScore(it)
+                start(productId)
             })
         }
     }
@@ -170,7 +160,10 @@ class ProductDetailViewModel @Inject constructor(
         val commentItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Review && it.id == id }
         newList[commentItemIndex] =
             with((newList[commentItemIndex] as ProductDetailListItem.Review)) {
-                copy(likeCount = likeCount + if (isLike.not()) 1 else -1, isLike = isLike.not())
+                copy(
+                    likeCount = likeCount + if (isLike.not()) 1 else -1,
+                    isLike = isLike.not()
+                )
             }
         _productDetailItemList.value = newList
     }
