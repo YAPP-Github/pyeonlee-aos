@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import com.peonlee.core.ui.Navigator
 import com.peonlee.explore.ExploreActivity
-import com.peonlee.explore.ExploreFragment
 import com.peonlee.feature.detail.ProductCommentsActivity
 import com.peonlee.feature.detail.ProductDetailActivity
 import com.peonlee.feature.detail.ProductExtra
@@ -20,8 +19,16 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
         ProductDetailActivity.startActivity(context, productId)
     }
 
-    override fun navigateToProductComments(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, totalCommentsCount: Int) {
-        ProductCommentsActivity.startActivity(context, ProductExtra(productId, imageUrl, productName, price), totalCommentsCount)
+    override fun navigateToProductComments(
+        context: Context,
+        productId: Int,
+        imageUrl: String,
+        productName: String,
+        price: Int,
+        totalCommentsCount: Int,
+        launcher: ActivityResultLauncher<Intent>
+    ) {
+        launcher.launch(ProductCommentsActivity.newIntent(context, ProductExtra(productId, imageUrl, productName, price), totalCommentsCount))
     }
 
     override fun navigateToEditReview(
