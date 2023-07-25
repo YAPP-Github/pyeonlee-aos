@@ -1,13 +1,18 @@
 package com.peonlee.home.adapter.viewholder.review
 
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
+import coil.load
 import com.peonlee.common.util.TimeUtil
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.designsystem.chip.MediumChip
 import com.peonlee.core.ui.extensions.getString
 import com.peonlee.core.ui.extensions.getStringWithArgs
 import com.peonlee.core.ui.viewholder.CommonViewHolder
+import com.peonlee.data.model.LikeType
 import com.peonlee.home.databinding.ListItemRecentReviewBinding
 import com.peonlee.home.model.review.RecentReviewUiModel
+import java.time.LocalDateTime
 import com.peonlee.core.ui.R as UiResource
 import com.peonlee.home.R as homeResource
 
@@ -15,33 +20,39 @@ import com.peonlee.home.R as homeResource
  * 최근 리뷰 View Holder
  */
 class RecentReviewViewHolder(
+    private val navigator: Navigator,
     private val binding: ListItemRecentReviewBinding
 ) : CommonViewHolder<RecentReviewUiModel>(binding) {
+    init {
+        binding.root.setOnClickListener {
+            getItem {
+                navigator.navigateToProductDetail(binding.root.context, it.productId)
+            }
+        }
+    }
+
     override fun onBindView(item: RecentReviewUiModel) =
         with(binding) {
+            ivProduct.load(item.imageUrl)
             // 상품 이름
-            tvProductName.text = item.product.name
+            tvProductName.text = item.productName
             // 리뷰
-            item.comment?.let { tvComment.text = it }
+            tvComment.text = item.content
             // 리뷰 작성자 & 작성 날짜
             tvUserNameAndDate.text = getStringWithArgs(
                 homeResource.string.item_recent_review_user_and_date,
                 item.userName,
                 TimeUtil.getDuration(
                     itemView.context,
-                    item.updateDate
+                    LocalDateTime.parse(item.updateDate)
                 )
             )
+            binding.chipRecommended.isInvisible = item.likeType == LikeType.NONE
             // 추천/비추천 chip
-            if (item.recommended != null) {
-                if (item.recommended) {
-                    setRecommendedChip(binding.chipRecommended)
-                } else {
-                    setNoneRecommendedChip(binding.chipRecommended)
-                }
-            } else {
-                // 평가(추천/비추천)이 null 인 경우에는 Chip 제거
-                binding.chipRecommended.isGone = true
+            when (item.likeType) {
+                LikeType.LIKE -> setRecommendedChip(binding.chipRecommended)
+                LikeType.DISLIKE -> setNoneRecommendedChip(binding.chipRecommended)
+                LikeType.NONE -> Unit
             }
         }
 }

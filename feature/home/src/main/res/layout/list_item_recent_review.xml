@@ -9,14 +9,27 @@
     android:background="@drawable/bg_white_outline_radius_10dp"
     android:padding="@dimen/item_recent_review_padding_large">
 
-    <ImageView
-        android:id="@+id/iv_product"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_product"
         android:layout_width="@dimen/item_recent_review_img_size"
         android:layout_height="@dimen/item_recent_review_img_size"
-        android:contentDescription="@string/item_product_recommended_description"
-        android:src="@drawable/ic_test_product"
+        android:theme="@style/Theme.MaterialComponents"
+        app:cardBackgroundColor="@color/bg0"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_productName" />
+        app:layout_constraintTop_toTopOf="@id/tv_productName"
+        app:strokeColor="@color/bg20"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/item_product_recommended_description"
+            tools:src="@drawable/ic_test_product" />
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
         android:id="@+id/tv_productName"
@@ -28,7 +41,7 @@
         android:maxLines="1"
         android:textColor="@color/bg80"
         app:layout_constraintBottom_toTopOf="@id/chip_recommended"
-        app:layout_constraintStart_toEndOf="@id/iv_product"
+        app:layout_constraintStart_toEndOf="@id/cv_product"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="주)2XL 베스킨라빈스" />
@@ -37,7 +50,7 @@
         android:id="@+id/chip_recommended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/iv_product"
+        app:layout_constraintBottom_toBottomOf="@id/cv_product"
         app:layout_constraintStart_toStartOf="@id/tv_productName"
         app:layout_constraintTop_toBottomOf="@id/tv_productName"
         tools:text="또 먹을거예요" />
@@ -50,8 +63,8 @@
         android:layout_marginTop="@dimen/item_recent_review_padding_large"
         android:textColor="@color/bg70"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/iv_product"
-        app:layout_constraintTop_toBottomOf="@id/iv_product"
+        app:layout_constraintStart_toStartOf="@id/cv_product"
+        app:layout_constraintTop_toBottomOf="@id/cv_product"
         tools:text="궁금해서 사먹어 봤있는 듯 저는 아마 길어저라 댓글 다음줄로 넘어가는거 테스트" />
 
     <TextView
@@ -62,7 +75,7 @@
         android:layout_marginTop="@dimen/item_recent_review_padding_medium"
         android:textColor="@color/bg40"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/iv_product"
+        app:layout_constraintStart_toStartOf="@id/cv_product"
         app:layout_constraintTop_toBottomOf="@id/tv_comment"
         tools:text="닉네임 · 1분 전" />
 </androidx.constraintlayout.widget.ConstraintLayout>
