@@ -2,12 +2,10 @@ package com.peonlee.explore
 
 import android.os.Bundle
 import android.view.ViewGroup
-import androidx.fragment.app.commit
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.explore.databinding.FragmentExploreBinding
 import com.peonlee.model.product.ProductSearchConditionUiModel
-import com.peonlee.product.ProductFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
