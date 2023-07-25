@@ -9,6 +9,5 @@ android {
 
 dependencies {
     implementation(project(":feature:termsdetail"))
-    implementation(project(":feature:login"))
     implementation(project(":core:data"))
 }

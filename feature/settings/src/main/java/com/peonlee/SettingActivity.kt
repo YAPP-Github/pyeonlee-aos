@@ -2,21 +2,24 @@ package com.peonlee
 
 import android.content.Intent
 import androidx.lifecycle.lifecycleScope
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.data.local.LocalDataSource
-import com.peonlee.login.LoginActivity
 import com.peonlee.settings.R
 import com.peonlee.core.ui.R.string as String
 import com.peonlee.settings.databinding.ActivitySettingBinding
 import com.peonlee.termsdetail.TermsDetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
-    @Inject
-    lateinit var dataStore: LocalDataSource
+    @Inject lateinit var dataStore: LocalDataSource
+    @Inject lateinit var navigator: Navigator
 
     override fun bindingFactory() = ActivitySettingBinding.inflate(layoutInflater)
+
     override fun initViews() = with(binding) {
         val termsList: List<SettingUiModel> = listOf(
             SettingUiModel(getString(R.string.terms_of_use_service), getString(String.terms_url)),
@@ -31,7 +34,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             submitList(termsList)
         }
         rvTermsList.adapter = settingAdapter
-        ivSettingClose.setOnClickListener { }
+        ivSettingClose.setOnClickListener { finish() }
     }
 
     private fun handleEvent(event: SettingUiModel) {
@@ -48,12 +51,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     }
 
     private fun logout() {
-        lifecycleScope.launch {
-            dataStore.setAccessToken("")
-        }
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        startActivity(intent)
+        lifecycleScope.launch { dataStore.setAccessToken("") }
+        navigator.navigateToLogin(this)
     }
 }

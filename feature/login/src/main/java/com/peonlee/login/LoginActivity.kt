@@ -1,6 +1,7 @@
 package com.peonlee.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -132,6 +133,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         when (activityResult.resultCode) {
             Activity.RESULT_OK -> loginViewModel.signUp()
             else -> Unit
+        }
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(
+                Intent(context, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            )
         }
     }
 }

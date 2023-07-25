@@ -8,6 +8,8 @@ import com.peonlee.explore.ExploreActivity
 import com.peonlee.feature.detail.ProductCommentsActivity
 import com.peonlee.feature.detail.ProductDetailActivity
 import com.peonlee.feature.detail.ProductExtra
+import com.peonlee.login.LoginActivity
+import com.peonlee.main.MainActivity
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.review.edit.EditReviewActivity
 import javax.inject.Inject
@@ -46,6 +48,11 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
     override fun navigateToSearch(context: Context) {
         ExploreActivity.startActivity(context)
     }
+
+    override fun navigateToLogin(context: Context) {
+        LoginActivity.startActivity(context)
+    }
+
 
     override fun navigateToExplore(
         productSearchConditionUiModel: ProductSearchConditionUiModel?
