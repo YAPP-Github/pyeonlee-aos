@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peonlee.data.handle
 import com.peonlee.data.model.Product
-import com.peonlee.data.model.home.HomeReviewResponse
+import com.peonlee.data.model.home.HomeComment
 import com.peonlee.domain.login.GetHomeProductUseCase
 import com.peonlee.home.model.divider.HomeDividerUiModel
 import com.peonlee.home.model.product.ConditionalProductsUiModel
@@ -79,7 +79,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun getRecentComment(comment: List<HomeReviewResponse>): List<MainHomeListItem> {
+    private fun getRecentComment(comment: List<HomeComment>): List<MainHomeListItem> {
         return listOf(
             HomeDividerUiModel(id = 8),
             TitleUiModel(id = 9, title = "최근 리뷰")

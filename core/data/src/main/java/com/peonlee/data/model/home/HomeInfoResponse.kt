@@ -16,5 +16,5 @@ data class HomeInfoResponse(
     @SerialName("promotionProductMap")
     val promotionProductMap: Map<String, List<Product>>, // 편의점 별 행사 상품
     @SerialName("recentProductCommentList")
-    val recentProductCommentList: List<HomeReviewResponse>
+    val recentProductCommentList: List<HomeComment>
 )
