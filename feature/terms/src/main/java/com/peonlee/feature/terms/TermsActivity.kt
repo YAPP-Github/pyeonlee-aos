@@ -45,7 +45,7 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
         }
 
         ivAgreeService.setOnClickListener {
-             moveTermsDetailScreen(getString(R.string.terms_service), getString(CoreString.terms_url))
+            moveTermsDetailScreen(getString(R.string.terms_service), getString(CoreString.terms_url))
         }
 
         ivAgreePersonal.setOnClickListener {

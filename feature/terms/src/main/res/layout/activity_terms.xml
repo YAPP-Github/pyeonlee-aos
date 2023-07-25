@@ -142,7 +142,6 @@
         app:layout_constraintTop_toTopOf="@+id/textView5"></ImageView>
 
     <TextView
-        android:enabled="false"
         android:id="@+id/tv_start"
         style="@style/Text.Body02"
         android:layout_width="0dp"
@@ -150,6 +149,7 @@
         android:layout_marginBottom="@dimen/button_margin"
         android:background="@drawable/bg_white_radius_10dp"
         android:backgroundTint="@color/brand50"
+        android:enabled="false"
         android:gravity="center"
         android:text="@string/start"
         android:textColor="@color/bg0"
