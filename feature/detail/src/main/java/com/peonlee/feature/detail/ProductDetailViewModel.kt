@@ -169,7 +169,9 @@ class ProductDetailViewModel @Inject constructor(
         val newList = _productDetailItemList.value.toMutableList()
         val commentItemIndex = newList.indexOfFirst { it is ProductDetailListItem.Review && it.id == id }
         newList[commentItemIndex] =
-            with((newList[commentItemIndex] as ProductDetailListItem.Review)) { copy(likeCount = likeCount + if (isLike.not()) 1 else -1, isLike = isLike.not()) }
+            with((newList[commentItemIndex] as ProductDetailListItem.Review)) {
+                copy(likeCount = likeCount + if (isLike.not()) 1 else -1, isLike = isLike.not())
+            }
         _productDetailItemList.value = newList
     }
 }

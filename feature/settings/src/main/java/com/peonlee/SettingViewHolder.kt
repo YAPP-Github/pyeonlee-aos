@@ -6,7 +6,7 @@ import com.peonlee.settings.databinding.ItemTermsBinding
 class SettingViewHolder(
     private val binding: ItemTermsBinding,
     private val onClickEvent: (SettingUiModel) -> Unit
-    ) : CommonViewHolder<SettingUiModel>(binding) {
+) : CommonViewHolder<SettingUiModel>(binding) {
     override fun onBindView(item: SettingUiModel) {
         with(binding) {
             tvTermsTitle.text = item.termTitle

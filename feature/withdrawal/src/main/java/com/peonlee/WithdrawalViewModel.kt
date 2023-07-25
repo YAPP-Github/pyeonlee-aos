@@ -24,7 +24,7 @@ class WithdrawalViewModel @Inject constructor(
 
     fun deleteUser() {
         viewModelScope.launch {
-            when(userUseCase.deleteUser(memberId)) {
+            when (userUseCase.deleteUser(memberId)) {
                 is Result.Success -> _withdrawalStateFlow.emit(WithdrawalUiState.Success)
                 is Result.Error -> _withdrawalStateFlow.emit(WithdrawalUiState.Fail)
             }

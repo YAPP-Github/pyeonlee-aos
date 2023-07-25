@@ -7,12 +7,12 @@ import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.data.local.LocalDataSource
 import com.peonlee.login.LoginActivity
-import com.peonlee.settings.R.string as String
 import com.peonlee.settings.databinding.FragmentSettingBinding
 import com.peonlee.termsdetail.TermsDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.peonlee.settings.R.string as String
 
 @AndroidEntryPoint
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
@@ -23,7 +23,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         return FragmentSettingBinding.inflate(layoutInflater, parent, false)
     }
 
-    override fun initViews() = with(binding){
+    override fun initViews() = with(binding) {
         val termsList: List<SettingUiModel> = listOf(
             SettingUiModel(getString(String.terms_of_use_service), "111"),
             SettingUiModel(getString(String.agree_personal), "11"),
@@ -38,11 +38,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         }
         rvTermsList.adapter = settingAdapter
 
-        ivSettingClose.setOnClickListener {  }
+        ivSettingClose.setOnClickListener { }
     }
 
     private fun handleEvent(event: SettingUiModel) {
-        when(event.url.isNotEmpty()) {
+        when (event.url.isNotEmpty()) {
             true -> {
                 val intent = Intent(requireContext(), TermsDetailActivity::class.java).apply {
                     putExtra("title", event.termTitle)

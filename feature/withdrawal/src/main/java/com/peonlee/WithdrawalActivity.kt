@@ -11,10 +11,10 @@ import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.login.LoginActivity
 import com.peonlee.withdrawal.R
-import com.peonlee.core.ui.R.color as Color
 import com.peonlee.withdrawal.databinding.ActivityWithdrawalBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import com.peonlee.core.ui.R.color as Color
 
 @AndroidEntryPoint
 class WithdrawalActivity : BaseActivity<ActivityWithdrawalBinding>() {
@@ -38,7 +38,7 @@ class WithdrawalActivity : BaseActivity<ActivityWithdrawalBinding>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 withdrawalViewModel.withdrawalStateFlow.collect { withdrawalUiState ->
-                    when(withdrawalUiState) {
+                    when (withdrawalUiState) {
                         is WithdrawalUiState.Init -> Unit
                         is WithdrawalUiState.Success -> startWithdrawal()
                         is WithdrawalUiState.Fail -> showToast(R.string.fail_withdrawal)
@@ -60,7 +60,7 @@ class WithdrawalActivity : BaseActivity<ActivityWithdrawalBinding>() {
     private fun setButtonState() {
         with(binding) {
             btnUnUse.isEnabled = checkboxAgree.isChecked
-            when(checkboxAgree.isChecked) {
+            when (checkboxAgree.isChecked) {
                 true -> btnUnUse.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@WithdrawalActivity, Color.brand100))
                 false -> btnUnUse.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@WithdrawalActivity, Color.brand50))
             }
