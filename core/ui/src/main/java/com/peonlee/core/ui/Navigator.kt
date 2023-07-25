@@ -8,7 +8,16 @@ import com.peonlee.model.product.ProductSearchConditionUiModel
 interface Navigator {
     fun navigateToProductDetail(context: Context, productId: Int)
 
-    fun navigateToProductComments(context: Context, productId: Int, imageUrl: String, productName: String, price: Int, totalCommentsCount: Int)
+    fun navigateToProductComments(
+        context: Context,
+        productId: Int,
+        imageUrl: String,
+        productName: String,
+        price: Int,
+        totalCommentsCount: Int,
+        launcher: ActivityResultLauncher<Intent>
+    )
+
     fun navigateToEditReview(
         context: Context,
         productId: Int,
