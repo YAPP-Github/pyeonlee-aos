@@ -11,4 +11,8 @@ class DefaultUserRepository @Inject constructor(
     override suspend fun getUserInfo(): Result<UserResponse> = setResult {
         userApi.getUserInfo()
     }
+
+    override suspend fun deleteUser(memberId: Int) = setResult {
+        userApi.deleteUser(memberId)
+    }
 }

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_withdrawal_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/close_margin"
+        android:layout_marginTop="@dimen/space_large"
+        android:background="@drawable/ic_chevron_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/withdrawal"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_withdrawal_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_withdrawal_close"></TextView>
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/Text.Subtitle01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/review_margin"
+        android:text="@string/delete_review_content"
+        app:layout_constraintStart_toStartOf="@+id/iv_withdrawal_close"
+        app:layout_constraintTop_toBottomOf="@+id/iv_withdrawal_close"></TextView>
+
+    <include
+        android:id="@+id/layout_review"
+        layout="@layout/layout_user_review"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/layout_review_height"
+        android:layout_marginTop="@dimen/review_margin"
+        android:layout_marginEnd="@dimen/close_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_withdrawal_close"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"></include>
+
+    <TextView
+        style="@style/Text.Body03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_large"
+        android:text="@string/withdrawal_content"
+        android:textColor="@color/bg50"
+        app:layout_constraintStart_toStartOf="@+id/layout_review"
+        app:layout_constraintTop_toBottomOf="@+id/layout_review"></TextView>
+
+    <CheckBox
+        android:id="@+id/checkbox_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/checkbox_margin"
+        android:layout_marginBottom="@dimen/space_x_large"
+        android:button="@drawable/peonlee_custom_checkbox"
+        android:paddingTop="@dimen/space_x_medium"
+        android:paddingRight="@dimen/space_x_medium"
+        android:paddingBottom="@dimen/space_x_medium"
+        app:layout_constraintBottom_toTopOf="@+id/btn_use"
+        app:layout_constraintStart_toStartOf="parent"></CheckBox>
+
+    <TextView
+        style="@style/Text.Body02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/agree_withdrawal"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_agree"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_agree"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_agree"></TextView>
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/btn_use"
+        style="@style/Text.Body02"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="@dimen/space_x_large"
+        android:layout_marginBottom="@dimen/button_margin"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:text="@string/use"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_un_use"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/btn_un_use"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_medium"
+        android:layout_marginEnd="@dimen/space_x_large"
+        android:background="@drawable/bg_white_radius_10dp"
+        android:backgroundTint="@color/brand50"
+        android:text="@string/un_use"
+        android:textColor="@color/brand30"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_use"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_use"
+        app:layout_constraintTop_toTopOf="@+id/btn_use"></TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>

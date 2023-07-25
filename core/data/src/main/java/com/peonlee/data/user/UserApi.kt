@@ -2,6 +2,7 @@ package com.peonlee.data.user
 
 import com.peonlee.data.model.user.UserResponse
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * 사용자 관련 API
@@ -12,4 +13,7 @@ interface UserApi {
      */
     @GET("v1/member/summary")
     suspend fun getUserInfo(): UserResponse
+
+    @POST("v1/member/delete")
+    suspend fun deleteUser(memberId: Int)
 }
