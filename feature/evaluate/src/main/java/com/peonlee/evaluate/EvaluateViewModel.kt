@@ -25,6 +25,8 @@ class EvaluateViewModel @Inject constructor(
     evaluateRepository: EvaluateRepository,
     private val evaluateProductUseCase: EvaluateProductUseCase
 ) : ViewModel() {
+    var isFromOnboard: Boolean = false
+        private set
 
     var evaluateCount: Int = 0
         private set
@@ -113,6 +115,10 @@ class EvaluateViewModel @Inject constructor(
 
     fun setLikeType(type: String) {
         likeType = type
+    }
+
+    fun setIsFromOnboard(isOnboard: Boolean) {
+        isFromOnboard = isOnboard
     }
 }
 

@@ -91,6 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_terms"></CheckBox>
 
     <TextView
+        android:id="@+id/textView4"
         style="@style/Text.Body06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,6 +99,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/checkbox_service"
         app:layout_constraintStart_toEndOf="@+id/checkbox_service"
         app:layout_constraintTop_toTopOf="@+id/checkbox_service"></TextView>
+
+    <ImageView
+        android:id="@+id/iv_agree_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_x_small"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/layout_terms"
+        app:layout_constraintTop_toTopOf="@+id/textView4"></ImageView>
 
     <CheckBox
         android:id="@+id/checkbox_personal"
@@ -111,6 +122,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkbox_service"></CheckBox>
 
     <TextView
+        android:id="@+id/textView5"
         style="@style/Text.Body06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -119,8 +131,17 @@
         app:layout_constraintStart_toEndOf="@+id/checkbox_personal"
         app:layout_constraintTop_toTopOf="@+id/checkbox_personal"></TextView>
 
+    <ImageView
+        android:id="@+id/iv_agree_personal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_x_small"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/iv_agree_service"
+        app:layout_constraintTop_toTopOf="@+id/textView5"></ImageView>
+
     <TextView
-        android:enabled="false"
         android:id="@+id/tv_start"
         style="@style/Text.Body02"
         android:layout_width="0dp"
@@ -128,6 +149,7 @@
         android:layout_marginBottom="@dimen/button_margin"
         android:background="@drawable/bg_white_radius_10dp"
         android:backgroundTint="@color/brand50"
+        android:enabled="false"
         android:gravity="center"
         android:text="@string/start"
         android:textColor="@color/bg0"

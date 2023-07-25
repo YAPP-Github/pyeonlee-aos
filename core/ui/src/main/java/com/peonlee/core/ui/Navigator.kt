@@ -33,6 +33,8 @@ interface Navigator {
      */
     fun navigateToSearch(context: Context)
 
+    fun navigateToLogin(context: Context)
+
     /**
      * 탐색 화면으로 이동
      * @param productSearchConditionUiModel 기본 탐색 조건

@@ -17,6 +17,12 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
+    var memberId = -1
+        private set
+    var reviewCount = 0
+        private set
+    var evaluateCount = 0
+        private set
 
     private val _user = MutableStateFlow(UserUiModel())
     val user: StateFlow<UserUiModel> = _user.asStateFlow()
@@ -25,6 +31,9 @@ class UserViewModel @Inject constructor(
         viewModelScope.launch {
             userRepository.getUserInfo().handle(
                 onSuccess = {
+                    memberId = it.memberId
+                    reviewCount = it.productCommentCount
+                    evaluateCount = it.productLikeCount
                     _user.value = it.toUiModel()
                 }
             )

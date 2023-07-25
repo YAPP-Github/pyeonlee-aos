@@ -1,6 +1,8 @@
 package com.peonlee.data.user
 
+import com.peonlee.data.model.user.DeleteRequest
 import com.peonlee.data.model.user.UserResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -15,5 +17,5 @@ interface UserApi {
     suspend fun getUserInfo(): UserResponse
 
     @POST("v1/member/delete")
-    suspend fun deleteUser(memberId: Int)
+    suspend fun deleteUser(@Body deleteRequest: DeleteRequest)
 }
