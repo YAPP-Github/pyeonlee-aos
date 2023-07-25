@@ -11,5 +11,5 @@ interface UserRepository {
      * 사용자 정보 요청
      */
     suspend fun getUserInfo(): Result<UserResponse>
-    suspend fun deleteUser(memberId: Int)
+    suspend fun deleteUser(memberId: Int): Result<Unit>
 }

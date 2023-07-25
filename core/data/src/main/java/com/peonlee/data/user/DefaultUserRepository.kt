@@ -12,7 +12,7 @@ class DefaultUserRepository @Inject constructor(
         userApi.getUserInfo()
     }
 
-    override suspend fun deleteUser(memberId: Int) {
+    override suspend fun deleteUser(memberId: Int) = setResult {
         userApi.deleteUser(memberId)
     }
 }
