@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintProperties.WRAP_CONTENT
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.databinding.ListItemProductBinding
 import com.peonlee.core.ui.viewholder.CommonViewHolder
@@ -16,6 +17,7 @@ import com.peonlee.home.databinding.PagerItemProductsByStoreBinding
 import com.peonlee.home.model.product.ProductsByStoreUiModel
 
 private const val GRID_COLUMN = 3
+private const val BOTTOM_MARGIN = 20
 private val productLayoutParams = ConstraintLayout.LayoutParams(
     MATCH_PARENT, // width
     WRAP_CONTENT // height
@@ -35,6 +37,7 @@ class ProductsByStoreViewHolder(
                     rowSpec = GridLayout.spec(index / GRID_COLUMN)
                     columnSpec = GridLayout.spec(index % GRID_COLUMN, 1f)
                     width = 0
+                    bottomMargin = BOTTOM_MARGIN.dpToPx(itemView.context)
                 }
                 /**
                  * addView를 하기 전에 해당 layout에 child view가 있는 경우
