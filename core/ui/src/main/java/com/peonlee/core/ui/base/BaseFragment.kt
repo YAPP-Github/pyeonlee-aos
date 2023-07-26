@@ -28,8 +28,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     abstract fun bindingFactory(parent: ViewGroup?): T
     open fun initViews() {}
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
-        super.onDestroyView()
     }
 }

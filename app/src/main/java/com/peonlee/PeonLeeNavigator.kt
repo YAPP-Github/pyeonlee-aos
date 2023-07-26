@@ -5,12 +5,12 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import com.peonlee.core.ui.Navigator
 import com.peonlee.explore.ExploreActivity
-import com.peonlee.explore.ExploreFragment
 import com.peonlee.feature.detail.ProductCommentsActivity
 import com.peonlee.feature.detail.ProductDetailActivity
 import com.peonlee.feature.detail.ProductExtra
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.review.edit.EditReviewActivity
+import com.peonlee.user.modify.ModifyUserNicknameActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -43,5 +43,9 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
     override fun navigateToExplore(
         productSearchConditionUiModel: ProductSearchConditionUiModel?
     ) {
+    }
+
+    override fun navigateToEditNickname(context: Context, nickname: String, userId: Int) {
+        context.startActivity(ModifyUserNicknameActivity.getIntent(context, nickname, userId))
     }
 }

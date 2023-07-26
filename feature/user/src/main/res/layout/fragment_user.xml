@@ -18,6 +18,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="꿈꾸는날다람쥐" />
 
+    <LinearLayout
+        android:id="@+id/btnEditNickname"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/tvNickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvNickname">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvEvaluateCount"
         style="@style/Text.Subtitle01"

@@ -21,7 +21,7 @@ class UserViewModel @Inject constructor(
     private val _user = MutableStateFlow(UserUiModel())
     val user: StateFlow<UserUiModel> = _user.asStateFlow()
 
-    init {
+    fun getUserInfo() {
         viewModelScope.launch {
             userRepository.getUserInfo().handle(
                 onSuccess = {
@@ -30,5 +30,4 @@ class UserViewModel @Inject constructor(
             )
         }
     }
-
 }
