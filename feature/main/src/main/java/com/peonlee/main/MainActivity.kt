@@ -1,5 +1,7 @@
 package com.peonlee.main
 
+import android.content.Context
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -8,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.base.ProductSearchableViewModel
 import com.peonlee.evaluate.EvaluateFragment
+import com.peonlee.explore.ExploreActivity
 import com.peonlee.explore.ExploreFragment
 import com.peonlee.home.HomeFragment
 import com.peonlee.main.databinding.ActivityMainBinding
@@ -63,5 +66,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onBackPressed() {
         finish()
         super.onBackPressed()
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(
+                Intent(context, MainActivity::class.java)
+            )
+        }
     }
 }

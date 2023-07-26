@@ -34,6 +34,7 @@ interface Navigator {
     fun navigateToSearch(context: Context)
 
     fun navigateToLogin(context: Context)
+    fun navigateToMain(context: Context)
 
     /**
      * 탐색 화면으로 이동

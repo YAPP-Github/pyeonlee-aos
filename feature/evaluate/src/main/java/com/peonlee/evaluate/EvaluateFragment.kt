@@ -1,5 +1,6 @@
 package com.peonlee.evaluate
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.ViewGroup
@@ -94,7 +95,7 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
      * 메인 화면으로 이동
      */
     private fun moveToNextPage() {
-        (requireActivity() as? Navigatable)?.moveToNextPage()
+        navigator.navigateToMain(requireActivity())
     }
 
     private fun observable() {
