@@ -4,6 +4,6 @@
     <application>
         <activity
             android:name=".edit.EditReviewActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

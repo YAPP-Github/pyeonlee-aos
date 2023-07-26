@@ -1,9 +1,11 @@
 package com.peonlee.user
 
+import android.content.Intent
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.peonlee.SettingActivity
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.user.databinding.FragmentUserBinding
@@ -53,6 +55,15 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                     tvEvaluateCount.text = getString(R.string.count, it.productLikeCount)
                 }
             }.launchIn(lifecycleScope)
+
+        binding.tvSettingName.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java).apply {
+                putExtra("reviewCount", userViewModel.reviewCount)
+                putExtra("evaluateCount", userViewModel.evaluateCount)
+                putExtra("memberId", userViewModel.memberId)
+            }
+            requireActivity().startActivity(intent)
+        }
     }
 
     companion object {

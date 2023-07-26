@@ -1,15 +1,13 @@
 package com.peonlee.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
@@ -116,7 +114,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                 }
             }
-        } else loginWithKakaoAccount()
+        } else {
+            loginWithKakaoAccount()
+        }
     }
 
     private fun loginWithKakaoAccount() {
@@ -133,6 +133,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         when (activityResult.resultCode) {
             Activity.RESULT_OK -> loginViewModel.signUp()
             else -> Unit
+        }
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(
+                Intent(context, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            )
         }
     }
 }

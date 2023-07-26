@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="close_margin">18dp</dimen>
+    <dimen name="review_margin">30dp</dimen>
+    <dimen name="checkbox_margin">30dp</dimen>
+    <dimen name="layout_review_height">106dp</dimen>
+    <dimen name="button_margin">24dp</dimen>
+</resources>

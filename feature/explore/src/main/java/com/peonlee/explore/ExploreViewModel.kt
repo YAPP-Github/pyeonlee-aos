@@ -3,10 +3,7 @@ package com.peonlee.explore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.peonlee.core.ui.base.ProductSearchableViewModel
-import com.peonlee.model.product.ProductSearchConditionUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel

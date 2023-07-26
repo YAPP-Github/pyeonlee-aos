@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,6 +25,8 @@ class EvaluateViewModel @Inject constructor(
     evaluateRepository: EvaluateRepository,
     private val evaluateProductUseCase: EvaluateProductUseCase
 ) : ViewModel() {
+    var isFromOnboard: Boolean = false
+        private set
 
     var evaluateCount: Int = 0
         private set
@@ -114,6 +115,10 @@ class EvaluateViewModel @Inject constructor(
 
     fun setLikeType(type: String) {
         likeType = type
+    }
+
+    fun setIsFromOnboard(isOnboard: Boolean) {
+        isFromOnboard = isOnboard
     }
 }
 

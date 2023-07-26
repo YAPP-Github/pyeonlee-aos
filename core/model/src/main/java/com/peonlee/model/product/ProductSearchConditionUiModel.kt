@@ -15,4 +15,4 @@ data class ProductSearchConditionUiModel(
     val stores: List<StoreType>? = null, // 상점 조건
     val events: List<EventType>? = null, // 행사 조건
     val categories: List<Category>? = null // 카테고리 조건
-): java.io.Serializable
+) : java.io.Serializable

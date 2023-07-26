@@ -1,0 +1,8 @@
+<resources>
+    <string name="settings">설정</string>
+    <string name="terms_of_use_service">서비스 이용약관</string>
+    <string name="agree_personal">개인정보 수집 및 이용 동의</string>
+    <string name="personal_policy">개인정보처리방침</string>
+    <string name="logout">로그아웃</string>
+    <string name="withdrawal"><u>회원탈퇴</u></string>
+</resources>

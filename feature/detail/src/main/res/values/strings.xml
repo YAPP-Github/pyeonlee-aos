@@ -18,4 +18,7 @@
     <string name="badge_text_my_review">내가 쓴 리뷰</string>
     <string name="edit_review">수정하기</string>
     <string name="delete_review">삭제하기</string>
+    <string name="delete_with_comment_notice">리뷰도 함께 삭제돼요</string>
+    <string name="delete_with_comment_desc">평가를 취소하면 작성한\n리뷰도 함께 삭제됩니다.</string>
+    <string name="confirm">확인</string>
 </resources>

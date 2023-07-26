@@ -39,7 +39,7 @@ class HomeAdapter(
                 moveToConditionExplore
             )
 
-            MainHomeViewType.RECENT_REVIEW -> RecentReviewViewHolder(ListItemRecentReviewBinding.inflate(inflater, parent, false))
+            MainHomeViewType.RECENT_REVIEW -> RecentReviewViewHolder(navigator, ListItemRecentReviewBinding.inflate(inflater, parent, false))
             MainHomeViewType.EVENT_BY_STORE -> EventByStoresViewHolder(
                 ListItemEventStoresBinding.inflate(inflater, parent, false),
                 navigator,

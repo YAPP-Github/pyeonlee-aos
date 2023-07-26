@@ -16,12 +16,15 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), 
         private const val EXTRA_PRODUCT = "extra_product"
         private const val EXTRA_TOTAL_COMMENTS_COUNT = "extra_total_comments_count"
 
+        fun newIntent(context: Context, productExtra: ProductExtra, totalCommentsCount: Int) =
+            Intent(context, ProductCommentsActivity::class.java).apply {
+                putExtra(EXTRA_PRODUCT, productExtra)
+                putExtra(EXTRA_TOTAL_COMMENTS_COUNT, totalCommentsCount)
+            }
+
         fun startActivity(context: Context, productExtra: ProductExtra, totalCommentsCount: Int) {
             context.startActivity(
-                Intent(context, ProductCommentsActivity::class.java).apply {
-                    putExtra(EXTRA_PRODUCT, productExtra)
-                    putExtra(EXTRA_TOTAL_COMMENTS_COUNT, totalCommentsCount)
-                }
+                newIntent(context, productExtra, totalCommentsCount)
             )
         }
     }
@@ -64,5 +67,6 @@ class ProductCommentsActivity : BaseActivity<ActivityProductCommentsBinding>(), 
 
     override fun onChanged() {
         adapter.refresh()
+        setResult(RESULT_OK)
     }
 }

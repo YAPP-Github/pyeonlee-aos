@@ -16,15 +16,11 @@ class ProductViewHolder(
     val binding: ListItemProductBinding,
     val navigator: Navigator
 ) : CommonViewHolder<ProductUiModel>(binding) {
-    init {
-        binding.root.setOnClickListener {
-            getItem {
-                navigator.navigateToProductDetail(binding.root.context, it.id)
-            }
-        }
-    }
 
     override fun onBindView(item: ProductUiModel) = with(binding) {
+        binding.root.setOnClickListener {
+            navigator.navigateToProductDetail(binding.root.context, item.id)
+        }
         root.layoutParams = layoutParams
         tvProductName.text = item.name
         ivProductImage.load(item.imageUrl)

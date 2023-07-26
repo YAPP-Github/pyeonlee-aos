@@ -59,7 +59,7 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>(), Comm
             },
             navigateToProductComments = {
                 with(viewModel.productDetail) {
-                    navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, commentCount)
+                    navigator.navigateToProductComments(this@ProductDetailActivity, productId, imageUrl, name, price, commentCount, editCommentLauncher)
                 }
             },
             showReviewManageDialog = {
@@ -89,11 +89,15 @@ class ProductDetailActivity : BaseActivity<ActivityProductDetailBinding>(), Comm
             viewModel.dislikeProduct(productId)
         }
         binding.btnCancel.setOnClickListener {
-            viewModel.cancelLikeProduct(productId)
+            if (viewModel.productDetail.ownComment != null) {
+                ConfirmDialogFragment().show(supportFragmentManager, "dialog")
+            } else {
+                viewModel.cancelLikeProduct(productId)
+            }
         }
         binding.btnReviewWrite.setOnClickListener {
             with(viewModel.productDetail) {
-                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, null, editCommentLauncher)
+                navigator.navigateToEditReview(this@ProductDetailActivity, productId, imageUrl, name, price, ownComment?.content, editCommentLauncher)
             }
         }
 

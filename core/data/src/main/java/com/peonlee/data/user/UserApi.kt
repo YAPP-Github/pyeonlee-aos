@@ -1,5 +1,6 @@
 package com.peonlee.data.user
 
+import com.peonlee.data.model.user.DeleteRequest
 import com.peonlee.data.model.user.ModifyUserNickname
 import com.peonlee.data.model.user.UserResponse
 import retrofit2.http.Body
@@ -15,6 +16,9 @@ interface UserApi {
      */
     @GET("v1/member/summary")
     suspend fun getUserInfo(): UserResponse
+
+    @POST("v1/member/delete")
+    suspend fun deleteUser(@Body deleteRequest: DeleteRequest)
 
     /**
      * 닉네임을 변경

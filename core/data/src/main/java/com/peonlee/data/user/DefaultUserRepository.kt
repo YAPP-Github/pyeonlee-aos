@@ -1,7 +1,7 @@
 package com.peonlee.data.user
 
 import com.peonlee.data.Result
-import com.peonlee.data.model.user.ModifyUserNickname
+import com.peonlee.data.model.user.DeleteRequest
 import com.peonlee.data.model.user.UserResponse
 import com.peonlee.data.setResult
 import javax.inject.Inject
@@ -13,7 +13,7 @@ class DefaultUserRepository @Inject constructor(
         userApi.getUserInfo()
     }
 
-    override suspend fun changeUserNickname(nickname: String): Result<Unit> = setResult {
-        userApi.changeUserNickname(ModifyUserNickname(nickname = nickname))
+    override suspend fun deleteUser(deleteRequest: DeleteRequest): Result<Unit> = setResult {
+        userApi.deleteUser(deleteRequest)
     }
 }
