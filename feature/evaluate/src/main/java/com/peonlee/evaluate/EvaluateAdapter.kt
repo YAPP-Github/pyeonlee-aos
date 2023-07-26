@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import com.peonlee.data.model.Product
 import com.peonlee.evaluate.databinding.ListItemEvaluateBinding
 
-class EvaluateAdapter : PagingDataAdapter<Product, EvaluateViewHolder>(EVALUATE_DIFF_CALLBACK) {
+class EvaluateAdapter(private val onClickEvent: (Int) -> Unit) : PagingDataAdapter<Product, EvaluateViewHolder>(EVALUATE_DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: EvaluateViewHolder, position: Int) {
         val item = getItem(position) ?: return
         holder.onBindView(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EvaluateViewHolder {
-        return EvaluateViewHolder(ListItemEvaluateBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return EvaluateViewHolder(ListItemEvaluateBinding.inflate(LayoutInflater.from(parent.context), parent, false), onClickEvent)
     }
 
     companion object {

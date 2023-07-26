@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.peonlee.common.ext.dpToPx
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.core.ui.base.Navigatable
 import com.peonlee.core.ui.extensions.showToast
@@ -23,14 +24,18 @@ import com.peonlee.evaluate.databinding.LayoutEvaluateSnackbarBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import com.peonlee.core.ui.R.color as Color
 import com.peonlee.core.ui.R.drawable as Drawable
 import com.peonlee.evaluate.R.string as EvaluateString
 
 @AndroidEntryPoint
 class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackListener {
+    @Inject lateinit var navigator: Navigator
     private val viewModel: EvaluateViewModel by viewModels()
-    private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
+    private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter() { productId ->
+        navigator.navigateToProductDetail(requireActivity(), productId)
+    }
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
     override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
@@ -44,16 +49,15 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     override fun initViews() = with(binding) {
         observable()
         setEvaluateCountSpannable()
-
-        val isFromOnboard = arguments?.getBoolean(FROM_ONBOARDING_FLAG) ?: false
+        viewModel.setIsFromOnboard(arguments?.getBoolean(FROM_ONBOARDING_FLAG) ?: false)
 
         layoutGuide.apply {
-            isVisible = isFromOnboard
+            isVisible = viewModel.isFromOnboard
             setOnClickListener { hideGuide() }
         }
 
         tvNext.apply {
-            isVisible = isFromOnboard
+            isVisible = viewModel.isFromOnboard
             setOnClickListener {
                 if (viewModel.evaluateCount >= EVALUATE_PRODUCT_COUNT) {
                     moveToNextPage()
@@ -144,7 +148,11 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
     private fun showSnackBar(): Snackbar {
         val snackBar = Snackbar.make(binding.layoutEvaluate, "", SNACKBAR_DURATION)
         val marginFromSides = SNACKBAR_SIDE.dpToPx(requireContext())
-        val marginFromBottom = SNACKBAR_BOTTOM.dpToPx(requireContext())
+        val marginFromBottom = if (viewModel.isFromOnboard) {
+            SNACKBAR_BOTTOM.dpToPx(requireContext())
+        } else {
+            (BOTTOM_NAVI_HEIGHT + SNACKBAR_BOTTOM).dpToPx(requireContext())
+        }
         val height = SNACKBAR_HEIGHT.dpToPx(requireContext())
 
         snackBar.view.apply {
@@ -212,6 +220,8 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         private const val SNACKBAR_HEIGHT = 50
         private const val SNACKBAR_SIDE = 20
         private const val SNACKBAR_BOTTOM = 16
+
+        private const val BOTTOM_NAVI_HEIGHT = 70
 
         private const val EVALUATE_TEXT_SIZE = 2
         private const val EVALUATE_PRODUCT_COUNT = 10

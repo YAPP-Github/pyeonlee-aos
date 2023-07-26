@@ -1,6 +1,9 @@
 package com.peonlee.data.user
 
+import com.peonlee.data.model.user.DeleteRequest
+import com.peonlee.data.model.user.ModifyUserNickname
 import com.peonlee.data.model.user.UserResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -15,5 +18,13 @@ interface UserApi {
     suspend fun getUserInfo(): UserResponse
 
     @POST("v1/member/delete")
-    suspend fun deleteUser(memberId: Int)
+    suspend fun deleteUser(@Body deleteRequest: DeleteRequest)
+
+    /**
+     * 닉네임을 변경
+     */
+    @POST("v1/member/nickname")
+    suspend fun changeUserNickname(
+        @Body modifyUserNickname: ModifyUserNickname
+    )
 }
