@@ -159,17 +159,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dividerSaveBox" />
 
-    <com.peonlee.core.ui.designsystem.chip.SmallChip
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:backgroundTint="@color/bg20"
-        android:text="준비중"
-        android:textColor="@color/bg40"
-        app:layout_constraintBottom_toBottomOf="@id/tvSettingName"
-        app:layout_constraintStart_toEndOf="@id/tvSettingName"
-        app:layout_constraintTop_toTopOf="@id/tvSettingName" />
-
     <ImageView
         android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
