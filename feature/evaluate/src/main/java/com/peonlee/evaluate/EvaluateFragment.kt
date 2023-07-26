@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NoOpNavigator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.peonlee.common.ext.dpToPx
+import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.core.ui.base.Navigatable
 import com.peonlee.core.ui.extensions.showToast
@@ -22,14 +24,18 @@ import com.peonlee.evaluate.databinding.LayoutEvaluateSnackbarBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import com.peonlee.core.ui.R.color as Color
 import com.peonlee.core.ui.R.drawable as Drawable
 import com.peonlee.evaluate.R.string as EvaluateString
 
 @AndroidEntryPoint
 class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackListener {
+    @Inject lateinit var navigator: Navigator
     private val viewModel: EvaluateViewModel by viewModels()
-    private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter()
+    private val evaluateAdapter: EvaluateAdapter = EvaluateAdapter() { productId ->
+        navigator.navigateToProductDetail(requireActivity(), productId)
+    }
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
     override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
