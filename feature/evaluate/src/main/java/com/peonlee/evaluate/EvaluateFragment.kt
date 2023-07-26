@@ -2,6 +2,7 @@ package com.peonlee.evaluate
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -36,9 +37,9 @@ class EvaluateFragment : BaseFragment<FragmentEvaluateBinding>(), SwipeCallbackL
         navigator.navigateToProductDetail(requireActivity(), productId)
     }
     private val undoSnackBar: Snackbar by lazy { showSnackBar() }
-    override fun bindingFactory(parent: ViewGroup?): FragmentEvaluateBinding {
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentEvaluateBinding {
         return FragmentEvaluateBinding.inflate(
-            layoutInflater,
+            inflater,
             parent,
             false
         )
