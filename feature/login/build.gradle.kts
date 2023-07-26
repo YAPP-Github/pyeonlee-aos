@@ -16,7 +16,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
-
+    implementation(project(":feature:onboard"))
     implementation(project(":feature:main"))
     implementation(project(":feature:terms"))
 

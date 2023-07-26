@@ -26,6 +26,9 @@ class LoginViewModel @Inject constructor(
     var loginToken: String = ""
         private set
 
+    var signUpFlag: Boolean = false
+        private set
+
     private val _loginState: MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Init)
     val loginState = _loginState.asStateFlow()
 
@@ -70,6 +73,9 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun setRequest(token: String, type: String): AuthRequest = AuthRequest(token, type)
+    fun setSignUpFlag() {
+        signUpFlag = true
+    }
 }
 
 sealed class LoginState {
