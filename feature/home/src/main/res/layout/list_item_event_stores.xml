@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/item_button_horizontal_margin"
-        android:layout_marginTop="@dimen/item_button_top_margin"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="@dimen/item_button_bottom_margin"
         android:backgroundTint="@color/bg10"
         app:layout_constraintBottom_toBottomOf="parent"

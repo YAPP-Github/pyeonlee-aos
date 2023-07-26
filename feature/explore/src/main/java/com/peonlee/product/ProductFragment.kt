@@ -98,7 +98,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
             adapter = productAdapter
             addItemDecoration(
                 ContentPaddingDecoration(
-                    PaddingValues(right = 4, bottom = 12, left = 4)
+                    PaddingValues(right = 4, bottom = 24, left = 4)
                 )
             )
         }
