@@ -2,4 +2,6 @@
 <resources>
     <!-- 마이페이지 화면 -->
     <string name="count">%d개</string>
+    <!-- 닉네임 변경 화면 -->
+    <string name="nickname_length">%d / 15자</string>
 </resources>

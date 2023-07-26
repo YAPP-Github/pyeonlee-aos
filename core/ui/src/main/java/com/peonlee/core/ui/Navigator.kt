@@ -40,4 +40,9 @@ interface Navigator {
      * @param productSearchConditionUiModel 기본 탐색 조건
      */
     fun navigateToExplore(productSearchConditionUiModel: ProductSearchConditionUiModel?)
+
+    /**
+     * 닉네임 변경 화면으로 이동
+     */
+    fun navigateToEditNickname(context: Context, nickname: String, userId: Int)
 }

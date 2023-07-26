@@ -13,4 +13,9 @@ interface UserRepository {
      */
     suspend fun getUserInfo(): Result<UserResponse>
     suspend fun deleteUser(deleteRequest: DeleteRequest): Result<Unit>
+
+    /**
+     * 사용자 닉네임 변경
+     */
+    suspend fun changeUserNickname(nickname: String): Result<Unit>
 }
