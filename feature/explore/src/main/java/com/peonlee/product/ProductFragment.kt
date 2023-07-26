@@ -1,5 +1,6 @@
 package com.peonlee.product
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -63,8 +64,8 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
         }
     }
 
-    override fun bindingFactory(parent: ViewGroup?): FragmentProductBinding {
-        return FragmentProductBinding.inflate(layoutInflater, parent, false)
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentProductBinding {
+        return FragmentProductBinding.inflate(inflater, parent, false)
     }
 
     override fun initViews() = with(binding) {

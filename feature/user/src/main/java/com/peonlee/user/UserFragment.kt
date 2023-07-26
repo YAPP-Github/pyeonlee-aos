@@ -1,5 +1,6 @@
 package com.peonlee.user
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -17,9 +18,9 @@ import kotlinx.coroutines.flow.onEach
 class UserFragment : BaseFragment<FragmentUserBinding>() {
     private val userViewModel: UserViewModel by viewModels()
 
-    override fun bindingFactory(parent: ViewGroup?): FragmentUserBinding {
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentUserBinding {
         return FragmentUserBinding.inflate(
-            layoutInflater,
+            inflater,
             parent,
             false
         )
