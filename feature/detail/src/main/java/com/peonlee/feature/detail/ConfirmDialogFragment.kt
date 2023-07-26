@@ -18,10 +18,7 @@ class ConfirmDialogFragment : DialogFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogCancelConfirmBinding.inflate(inflater, container, false)
         return binding.root
     }
