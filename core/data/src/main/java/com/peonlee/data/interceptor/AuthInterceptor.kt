@@ -17,8 +17,7 @@ class AuthInterceptor @Inject constructor(
         val authRequest = chain.request().newBuilder()
             .addHeader(
                 "X-AUTH-TOKEN",
-//                accessToken
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NzcwNDk1LCJleHAiOjE3MjEzOTI4OTV9.xKIWAW5GWjmETFHwTppWK2bvXKWHAsgwxBpKKsXbxmA"
+              accessToken
             )
             .build()
 

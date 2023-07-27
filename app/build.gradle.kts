@@ -3,6 +3,8 @@ plugins {
     id("peonlee.android.application.compose")
     id("peonlee.android.hilt")
     id("peonlee.android.sns.login.application")
+    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.google.service)
 }
 
 android {
@@ -29,4 +31,7 @@ dependencies {
     implementation(project(":core:data"))
 
     implementation(libs.androidx.core.splashscreen)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 }
