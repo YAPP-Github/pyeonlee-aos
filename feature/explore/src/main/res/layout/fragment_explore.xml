@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg0">
+    android:background="@color/bg0"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/layoutSearch"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="18dp"
         android:layout_marginVertical="12dp"
@@ -15,10 +16,7 @@
         android:backgroundTint="@color/bg10"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="12dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,11 +36,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/layoutProduct"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:name="com.peonlee.product.ProductFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutSearch" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

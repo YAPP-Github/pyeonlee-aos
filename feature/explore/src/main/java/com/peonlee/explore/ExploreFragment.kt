@@ -1,6 +1,7 @@
 package com.peonlee.explore
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
@@ -14,8 +15,8 @@ class ExploreFragment : BaseFragment<FragmentExploreBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    override fun bindingFactory(parent: ViewGroup?): FragmentExploreBinding {
-        return FragmentExploreBinding.inflate(layoutInflater, parent, false)
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentExploreBinding {
+        return FragmentExploreBinding.inflate(inflater, parent, false)
     }
 
     override fun initViews() {

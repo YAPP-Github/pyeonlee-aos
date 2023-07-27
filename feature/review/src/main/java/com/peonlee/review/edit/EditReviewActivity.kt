@@ -125,6 +125,7 @@ class EditReviewActivity : BaseActivity<ActivityEditReviewBinding>() {
             com.peonlee.core.ui.R.color.bg20
         }
         (binding.layoutEditReview.background as? GradientDrawable)?.apply {
+            mutate()
             setStroke(
                 1.dpToPx(this@EditReviewActivity),
                 getColor(backgroundTint)

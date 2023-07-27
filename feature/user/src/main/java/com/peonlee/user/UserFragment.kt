@@ -1,6 +1,7 @@
 package com.peonlee.user
 
 import android.content.Intent
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -29,9 +30,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         userViewModel.getUserInfo()
     }
 
-    override fun bindingFactory(parent: ViewGroup?): FragmentUserBinding {
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentUserBinding {
         return FragmentUserBinding.inflate(
-            layoutInflater,
+            inflater,
             parent,
             false
         )

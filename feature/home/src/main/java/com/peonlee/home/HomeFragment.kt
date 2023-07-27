@@ -1,5 +1,6 @@
 package com.peonlee.home
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -31,8 +32,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         )
     }
 
-    override fun bindingFactory(parent: ViewGroup?): FragmentHomeBinding {
-        return FragmentHomeBinding.inflate(layoutInflater)
+    override fun bindingFactory(inflater: LayoutInflater, parent: ViewGroup?): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, parent, false)
     }
 
     override fun initViews() {

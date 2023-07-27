@@ -14,6 +14,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.peonlee.board.OnboardActivity
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.feature.terms.TermsActivity
@@ -51,7 +52,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     is LoginState.Init -> Unit
                     is LoginState.Success -> {
                         loginViewModel.setToken(loginState.data.accessToken)
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        val clazz = if(loginViewModel.signUpFlag) OnboardActivity::class.java else MainActivity::class.java
+                        startActivity(Intent(this@LoginActivity, clazz))
                         finish()
                     }
 
@@ -131,7 +133,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private fun termsResult(activityResult: ActivityResult) {
         when (activityResult.resultCode) {
-            Activity.RESULT_OK -> loginViewModel.signUp()
+            Activity.RESULT_OK ->  {
+                loginViewModel.setSignUpFlag()
+                loginViewModel.signUp()
+            }
             else -> Unit
         }
     }
