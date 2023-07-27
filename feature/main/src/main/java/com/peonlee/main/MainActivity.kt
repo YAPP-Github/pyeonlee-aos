@@ -7,10 +7,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.base.ProductSearchableViewModel
-import com.peonlee.evaluate.EvaluateFragment
-import com.peonlee.explore.ExploreActivity
-import com.peonlee.explore.ExploreFragment
-import com.peonlee.home.HomeFragment
 import com.peonlee.main.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn

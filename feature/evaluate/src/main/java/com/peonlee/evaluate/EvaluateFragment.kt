@@ -1,6 +1,5 @@
 package com.peonlee.evaluate
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.peonlee.common.ext.dpToPx
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
-import com.peonlee.core.ui.base.Navigatable
 import com.peonlee.core.ui.extensions.showToast
 import com.peonlee.core.ui.util.spannable.setTextSpannable
 import com.peonlee.evaluate.databinding.FragmentEvaluateBinding
