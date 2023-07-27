@@ -21,7 +21,7 @@ class MainAdapter(
     override fun getItemCount(): Int = 4
     override fun createFragment(position: Int): Fragment {
         val classLoader = fragment.classLoader
-        return when(position) {
+        return when (position) {
             0 -> factory.instantiate(classLoader, HomeFragment::class.java.name)
             1 -> factory.instantiate(classLoader, EvaluateFragment::class.java.name)
             2 -> factory.instantiate(classLoader, ExploreFragment::class.java.name)
