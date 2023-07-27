@@ -104,7 +104,7 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             productRepository.likeProduct(productId).handle({
                 _productRatingType.emit(ProductRatingType.LIKE)
-                updateScore(it)
+                start(productId)
             })
         }
     }
@@ -113,7 +113,7 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             productRepository.dislikeProduct(productId).handle({
                 _productRatingType.emit(ProductRatingType.DISLIKE)
-                updateScore(it)
+                start(productId)
             })
         }
     }
