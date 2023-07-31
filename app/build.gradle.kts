@@ -11,7 +11,7 @@ android {
     namespace = "com.peonlee"
     defaultConfig {
         applicationId = "com.peonlee"
-        versionCode = 3
+        versionCode = 4
         versionName = "1.0.0"
     }
 }
