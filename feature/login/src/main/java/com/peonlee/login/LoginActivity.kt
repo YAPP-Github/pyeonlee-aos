@@ -125,7 +125,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             when {
                 error != null -> showToast(getString(R.string.login_failed))
-                token != null -> loginViewModel.login(token.accessToken, "KAKAO")
+                token != null -> token.idToken?.let { idToken -> loginViewModel.login(idToken, "KAKAO") }
             }
         }
         return UserApiClient.instance.loginWithKakaoAccount(this, callback = kakaoLoginCallback)
