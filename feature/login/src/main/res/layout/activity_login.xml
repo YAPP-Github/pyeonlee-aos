@@ -6,24 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/iv_google_login"
+    <TextView
+        android:id="@+id/tv_google_login"
+        style="@style/Text.Body01"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginBottom="@dimen/btn_bottom_margin"
-        android:background="@drawable/btn_google_login"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        android:gravity="center"
+        android:paddingStart="@dimen/space_x_large"
+        android:paddingEnd="44dp"
+        android:text="구글로 로그인"
+        app:drawableLeftCompat="@drawable/ic_google"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/iv_kakao_login"
-        app:layout_constraintStart_toStartOf="@+id/iv_kakao_login" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_kakao_login"
+        app:layout_constraintStart_toStartOf="@+id/tv_kakao_login" />
 
-    <ImageView
-        android:id="@+id/iv_kakao_login"
+    <TextView
+        android:id="@+id/tv_kakao_login"
+        style="@style/Text.Body01"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="@dimen/space_x_large"
         android:layout_marginBottom="@dimen/space_m_large"
-        android:background="@drawable/btn_kakao_login"
-        app:layout_constraintBottom_toTopOf="@+id/iv_google_login"
+        android:background="@drawable/bg_white_radius_10dp"
+        android:backgroundTint="#FEE233"
+        android:gravity="center"
+        android:paddingStart="@dimen/space_x_large"
+        android:paddingEnd="44dp"
+        android:text="카카오톡으로 로그인"
+        app:drawableLeftCompat="@drawable/ic_kakao"
+        app:layout_constraintBottom_toTopOf="@+id/tv_google_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

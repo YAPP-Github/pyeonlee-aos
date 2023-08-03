@@ -41,8 +41,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initViews() = with(binding) {
         loginObserve()
-        ivGoogleLogin.setOnClickListener { googleLogin() }
-        ivKakaoLogin.setOnClickListener { kakaoLogin() }
+        tvGoogleLogin.setOnClickListener { googleLogin() }
+        tvKakaoLogin.setOnClickListener { kakaoLogin() }
     }
 
     private fun loginObserve() {
