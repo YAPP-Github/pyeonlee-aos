@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/list_item_product_medium_margin"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
         android:textColor="@color/bg80"
         app:layout_constraintBottom_toTopOf="@id/tv_productPrice"
         app:layout_constraintEnd_toEndOf="parent"
