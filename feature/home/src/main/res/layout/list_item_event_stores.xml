@@ -22,7 +22,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager_products"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@id/btn_more_products"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
