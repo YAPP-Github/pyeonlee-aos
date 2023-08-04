@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.peonlee"
         versionCode = 6
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 }
 
