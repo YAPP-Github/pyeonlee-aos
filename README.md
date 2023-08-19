@@ -17,11 +17,11 @@
 ### 🛠 사용기술 & tool
 |내용|사용기술|
 |-----|--------------------------------|
-|tooll|Android Studio|
+|tool|Android Studio|
 |Language|Kotlin|
 |비동기|Coroutine & Flow|
 |Remote통신|Retrofit|
-|이미지|coil|
+|이미지|Coil|
 |의존성 주입|Hilt|
 |로그인|Google, Kakao|
 <br/>
