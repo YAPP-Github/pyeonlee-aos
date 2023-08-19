@@ -10,6 +10,18 @@
 |선임|팀원|팀원|
 <br/>
 
-#### 📌 편리 앱은 이런 기능을 제공해주고 있어요.
+### 📌 편리 앱은 이런 기능을 제공해주고 있어요.
 
 <img width="1104" alt="스크린샷 2023-08-19 오후 2 47 27" src="https://github.com/YAPP-Github/pyeonlee-aos/assets/22411296/1306fa64-3920-4e3f-83b8-54e587168164">
+
+### 🛠 사용기술 & tool
+|내용|사용기술|
+|-----|--------------------------------|
+|tooll|Android Studio|
+|Language|Kotlin|
+|비동기|Coroutine & Flow|
+|Remote통신|Retrofit|
+|이미지|coil|
+|의존성 주입|Hilt|
+|로그인|Google, Kakao|
+<br/>
