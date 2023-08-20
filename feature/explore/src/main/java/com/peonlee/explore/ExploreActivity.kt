@@ -19,7 +19,7 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
     private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
-    override fun initViews()  {
+    override fun initViews() {
         println(exploreViewModel)
         attachProductFragment()
     }

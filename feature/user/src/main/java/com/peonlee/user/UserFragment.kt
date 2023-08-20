@@ -73,6 +73,5 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         private const val EXTRA_REVIEW_COUNT = "reviewCount"
         private const val EXTRA_EVALUATE_COUNT = "evaluateCount"
         private const val EXTRA_MEMBER_ID = "memberId"
-
     }
 }

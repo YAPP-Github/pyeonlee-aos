@@ -16,6 +16,7 @@ import com.peonlee.core.ui.R.string as String
 @AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     @Inject lateinit var dataStore: LocalDataSource
+
     @Inject lateinit var navigator: Navigator
 
     override fun bindingFactory() = ActivitySettingBinding.inflate(layoutInflater)
