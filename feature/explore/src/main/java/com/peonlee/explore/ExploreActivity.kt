@@ -20,16 +20,22 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
     override fun initViews() = with(binding) {
-        println(exploreViewModel)
         attachProductFragment()
         etExploreBar.addTextChangedListener { input -> ivTextCleaer.isVisible = input?.isNotEmpty() ?: false }
+
         tvExploreCancel.setOnClickListener { finish() }
+
         ivTextCleaer.setOnClickListener { etExploreBar.setText("") }
+
         ivSearch.setOnClickListener {
             layoutSearchProduct.isVisible = true
             (exploreViewModel as? ExploreViewModel)?.setKeyword(etExploreBar.trim())
             etExploreBar.hideKeyboard()
         }
+
+
+
+
     }
 
     private fun attachProductFragment() {
