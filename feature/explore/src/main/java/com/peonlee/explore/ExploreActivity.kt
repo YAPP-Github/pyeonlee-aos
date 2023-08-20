@@ -2,6 +2,7 @@ package com.peonlee.explore
 
 import android.content.Context
 import android.content.Intent
+import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -16,32 +17,40 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
     private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
-
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
-    override fun initViews() = with(binding) {
+    override fun initViews()  {
+        println(exploreViewModel)
         attachProductFragment()
+    }
+
+    override fun bindViews() = with(binding) {
         etExploreBar.addTextChangedListener { input -> ivTextCleaer.isVisible = input?.isNotEmpty() ?: false }
-
         tvExploreCancel.setOnClickListener { finish() }
-
         ivTextCleaer.setOnClickListener { etExploreBar.setText("") }
-
-        ivSearch.setOnClickListener {
-            layoutSearchProduct.isVisible = true
-            (exploreViewModel as? ExploreViewModel)?.setKeyword(etExploreBar.trim())
-            etExploreBar.hideKeyboard()
+        ivSearch.setOnClickListener { searchResult() }
+        etExploreBar.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchResult()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
-
-
-
-
     }
 
     private fun attachProductFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.layout_search_product, ProductFragment.getInstance())
             .commit()
+    }
+
+    private fun searchResult() {
+        binding.apply {
+            layoutSearchProduct.isVisible = true
+            (exploreViewModel as? ExploreViewModel)?.setKeyword(etExploreBar.trim())
+            etExploreBar.clearFocus()
+            etExploreBar.hideKeyboard()
+        }
     }
 
     companion object {
