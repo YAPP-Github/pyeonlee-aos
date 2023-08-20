@@ -59,9 +59,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
         binding.tvSettingName.setOnClickListener {
             val intent = Intent(requireContext(), SettingActivity::class.java).apply {
-                putExtra("reviewCount", userViewModel.reviewCount)
-                putExtra("evaluateCount", userViewModel.evaluateCount)
-                putExtra("memberId", userViewModel.memberId)
+                putExtra(EXTRA_REVIEW_COUNT, userViewModel.reviewCount)
+                putExtra(EXTRA_EVALUATE_COUNT, userViewModel.evaluateCount)
+                putExtra(EXTRA_MEMBER_ID, userViewModel.memberId)
             }
             requireActivity().startActivity(intent)
         }
@@ -69,5 +69,10 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
     companion object {
         fun getInstance() = UserFragment()
+
+        private const val EXTRA_REVIEW_COUNT = "reviewCount"
+        private const val EXTRA_EVALUATE_COUNT = "evaluateCount"
+        private const val EXTRA_MEMBER_ID = "memberId"
+
     }
 }

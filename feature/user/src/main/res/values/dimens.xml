@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="edit_nickname_icon_size">28dp</dimen>
+    <dimen name="divider_margin_top">34dp</dimen>
+    <dimen name="user_space_large">18dp</dimen>
+</resources>

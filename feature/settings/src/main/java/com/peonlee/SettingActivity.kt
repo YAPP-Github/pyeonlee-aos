@@ -16,7 +16,6 @@ import com.peonlee.core.ui.R.string as String
 @AndroidEntryPoint
 class SettingActivity : BaseActivity<ActivitySettingBinding>() {
     @Inject lateinit var dataStore: LocalDataSource
-
     @Inject lateinit var navigator: Navigator
 
     override fun bindingFactory() = ActivitySettingBinding.inflate(layoutInflater)
@@ -43,8 +42,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         when (event.url.isNotEmpty()) {
             true -> {
                 val intent = Intent(this, TermsDetailActivity::class.java).apply {
-                    putExtra("title", event.termTitle)
-                    putExtra("url", event.url)
+                    putExtra(EXTRA_TITLE, event.termTitle)
+                    putExtra(EXTRA_URL, event.url)
                 }
                 startActivity(intent)
             }
@@ -59,10 +58,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
     private fun moveWithdrawalScreen() {
         val intent = Intent(this, WithdrawalActivity::class.java).apply {
-            putExtra("reviewCount", intent.getIntExtra("reviewCount", 0))
-            putExtra("evaluateCount", intent.getIntExtra("evaluateCount", 0))
-            putExtra("memberId", intent.getIntExtra("memberId", -1))
+            putExtra(EXTRA_REVIEW_COUNT, intent.getIntExtra("reviewCount", 0))
+            putExtra(EXTRA_EVALUATE_COUNT, intent.getIntExtra("evaluateCount", 0))
+            putExtra(EXTRA_MEMBER_ID, intent.getIntExtra("memberId", -1))
         }
         startActivity(intent)
+    }
+
+    companion object {
+        private const val EXTRA_TITLE = "title"
+        private const val EXTRA_URL = "url"
+
+        private const val EXTRA_REVIEW_COUNT = "reviewCount"
+        private const val EXTRA_EVALUATE_COUNT = "evaluateCount"
+        private const val EXTRA_MEMBER_ID = "memberId"
     }
 }

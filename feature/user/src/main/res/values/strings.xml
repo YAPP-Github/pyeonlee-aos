@@ -4,4 +4,5 @@
     <string name="count">%d개</string>
     <!-- 닉네임 변경 화면 -->
     <string name="nickname_length">%d / 15자</string>
+    <string name="settings">설정</string>
 </resources>
