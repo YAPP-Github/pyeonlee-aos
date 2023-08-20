@@ -15,23 +15,38 @@
             android:layout_width="48dp"
             android:layout_height="36dp"
             android:layout_gravity="start"
-            android:src="@drawable/ic_logo_brand_symbol_black"
-            android:layout_margin="18dp"/>
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_logo_brand_symbol_black" />
 
         <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="end"
-            android:src="@drawable/ic_search"
-            android:layout_margin="18dp"/>
+            android:layout_margin="18dp"
+            android:src="@drawable/ic_search" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/layoutShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_condition_shimmer" />
+            <include layout="@layout/layout_condition_shimmer" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>

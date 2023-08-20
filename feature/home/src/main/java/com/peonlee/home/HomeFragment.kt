@@ -2,6 +2,7 @@ package com.peonlee.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -37,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initViews() {
+        binding.layoutShimmer.startShimmer()
         binding.rvHome.adapter = homeAdapter
         binding.btnSearch.setOnClickListener {
             navigator.navigateToSearch(requireContext())
@@ -45,6 +47,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         homeViewModel.products.flowWithLifecycle(
             viewLifecycleOwner.lifecycle
         ).onEach {
+            println("*****************")
+            println(it)
+            if (it.isNotEmpty() && binding.layoutShimmer.isShimmerVisible) {
+                binding.layoutShimmer.stopShimmer()
+                binding.layoutShimmer.isGone = true
+            }
             homeAdapter.submitList(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
