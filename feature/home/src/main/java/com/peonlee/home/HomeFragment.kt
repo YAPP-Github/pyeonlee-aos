@@ -47,8 +47,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         homeViewModel.products.flowWithLifecycle(
             viewLifecycleOwner.lifecycle
         ).onEach {
-            println("*****************")
-            println(it)
             if (it.isNotEmpty() && binding.layoutShimmer.isShimmerVisible) {
                 binding.layoutShimmer.stopShimmer()
                 binding.layoutShimmer.isGone = true

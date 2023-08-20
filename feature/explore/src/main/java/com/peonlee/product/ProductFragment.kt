@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.Navigator
@@ -91,6 +93,14 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
                 setEmptyView(visible = productAdapter.itemCount == 0)
             } else {
                 setEmptyView(visible = false)
+            }
+
+            if (loadState.refresh is LoadState.Loading && binding.layoutProductsShimmer.isVisible) {
+                binding.layoutProductsShimmer.startShimmer()
+                binding.layoutProductsShimmer.isVisible = true
+            } else if (binding.layoutProductsShimmer.isShimmerVisible) {
+                binding.layoutProductsShimmer.startShimmer()
+                binding.layoutProductsShimmer.isGone = true
             }
         }
         rvProduct.apply {
