@@ -42,7 +42,11 @@ jobs:
         echo kakao_native_app_key=\""$KAKAO_API_KEY"\" > local.properties
         echo google_client_id=\""$GOOGLE_CLIENT_ID"\" >> local.properties
         echo base_url=\""$BASE_URL"\" >> local.properties
-      
+
+
+    - name: Set google-services.json
+      run: |
+        echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./app/google-services.json
       
     - name: Run ktlint
       run: ./gradlew ktlintCheck
