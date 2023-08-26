@@ -13,20 +13,18 @@
         android:layout_height="@dimen/explore_bar_height"
         android:layout_marginStart="@dimen/explore_bar_margin"
         android:layout_marginTop="@dimen/space_large"
-        android:background="@drawable/bg_white_radius_10dp"
+        android:background="@drawable/bg_non_ripple_radius_10dp"
         android:backgroundTint="@color/bg10"
         android:hint="@string/explore_text_hint"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
-        android:paddingLeft="@dimen/explore_text_left_padding"
+        android:paddingStart="@dimen/explore_text_left_padding"
         android:textColorHint="@color/bg40"
         app:layout_constraintEnd_toStartOf="@+id/tv_explore_cancel"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:hint="라면, 음료, 과자, 빵 등"
-        tools:text="우유" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_explore_cancel"
@@ -56,7 +54,7 @@
         android:id="@+id/iv_text_cleaer"
         android:layout_width="@dimen/explore_icon_size"
         android:layout_height="@dimen/explore_icon_size"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="@dimen/space_s_large"
         android:padding="@dimen/space_x_small"
         android:src="@drawable/ic_close_search"
         android:visibility="gone"
