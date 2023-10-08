@@ -6,6 +6,7 @@ import com.peonlee.data.handle
 import com.peonlee.data.model.Product
 import com.peonlee.data.model.home.HomeComment
 import com.peonlee.domain.login.GetHomeProductUseCase
+import com.peonlee.home.model.button.ButtonUiModel
 import com.peonlee.home.model.divider.HomeDividerUiModel
 import com.peonlee.home.model.event.EVENT_DUMMY
 import com.peonlee.home.model.event.EventUiModel
@@ -93,6 +94,9 @@ class HomeViewModel @Inject constructor(
         return listOf(
             HomeDividerUiModel(id = 10),
             TitleUiModel(id = 11, title = "진행중인 이벤트")
-        ) + EVENT_DUMMY
+        ) + EVENT_DUMMY +
+            ButtonUiModel(
+                id = 12, text = "더 많은 이벤트 보기"
+            )
     }
 }

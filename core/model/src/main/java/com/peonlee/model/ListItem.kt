@@ -15,5 +15,6 @@ enum class MainHomeViewType {
     CONDITIONAL_PRODUCTS, // 조건별 상품 리스트
     RECENT_REVIEW, // 최신 리뷰
     EVENT_BY_STORE,
-    EVENT // 이벤트
+    EVENT, // 이벤트
+    BUTTON
 }

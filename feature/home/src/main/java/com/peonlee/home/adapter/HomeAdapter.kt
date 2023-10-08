@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.viewholder.CommonViewHolder
+import com.peonlee.home.adapter.viewholder.button.ButtonViewHolder
 import com.peonlee.home.adapter.viewholder.divider.HomeDividerViewHolder
 import com.peonlee.home.adapter.viewholder.event.EventViewHolder
 import com.peonlee.home.adapter.viewholder.product.ConditionalProductsViewHolder
 import com.peonlee.home.adapter.viewholder.product.EventByStoresViewHolder
 import com.peonlee.home.adapter.viewholder.review.RecentReviewViewHolder
 import com.peonlee.home.adapter.viewholder.title.TitleViewHolder
+import com.peonlee.home.databinding.ListItemButtonBinding
 import com.peonlee.home.databinding.ListItemConditionalProductsBinding
 import com.peonlee.home.databinding.ListItemEventStoresBinding
 import com.peonlee.home.databinding.ListItemHomeDividerBinding
@@ -46,6 +48,10 @@ class HomeAdapter(
                 ListItemEventStoresBinding.inflate(inflater, parent, false),
                 navigator,
                 moveToStoreExplore
+            )
+            MainHomeViewType.BUTTON -> ButtonViewHolder(
+                ListItemButtonBinding.inflate(inflater, parent, false),
+                navigator
             )
 
             MainHomeViewType.EVENT -> EventViewHolder(
