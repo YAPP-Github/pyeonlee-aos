@@ -37,6 +37,7 @@ class HomeViewModel @Inject constructor(
                 onSuccess = { allInfo ->
                     _products.value = getConditionalProductsItem(1, SortType.RECENT, "주목할 신상", allInfo.newProductList) +
                         getConditionalProductsItem(3, SortType.POPULAR, "꾸준한 인기상품이에요", allInfo.popularProductList) +
+                        getEventListItem() +
                         getEventProductsItem(allInfo.promotionProductMap) +
                         getRecentComment(allInfo.recentProductCommentList)
                 }
@@ -84,5 +85,12 @@ class HomeViewModel @Inject constructor(
             HomeDividerUiModel(id = 8),
             TitleUiModel(id = 9, title = "최근 리뷰")
         ) + comment.map { it.toUiModel() }
+    }
+
+    private fun getEventListItem(): List<MainHomeListItem> {
+        return listOf(
+            HomeDividerUiModel(id = 10),
+            TitleUiModel(id = 11, title = "진행중인 이벤트")
+        )
     }
 }
