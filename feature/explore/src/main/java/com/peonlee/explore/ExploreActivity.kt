@@ -10,19 +10,22 @@ import com.peonlee.core.ui.base.BaseActivity
 import com.peonlee.core.ui.extensions.hideKeyboard
 import com.peonlee.core.ui.extensions.trim
 import com.peonlee.core.ui.viewmodel.ProductViewModel
+import com.peonlee.data.product.ProductRepository
 import com.peonlee.explore.databinding.ActivityExploreActivityBinding
 import com.peonlee.product.ProductFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
-    private val productViewModel: ProductViewModel by viewModels()
+    @Inject
+    lateinit var productRepository: ProductRepository
+    private val productViewModel: ProductViewModel by viewModels { ProductViewModel.ProductViewModelFactory(productRepository) }
 
-    //    private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
     override fun initViews() {
-//        println(exploreViewModel)
+        productViewModel
         attachProductFragment()
     }
 
