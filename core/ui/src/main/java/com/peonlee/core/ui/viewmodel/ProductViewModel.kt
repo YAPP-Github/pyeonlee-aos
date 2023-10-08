@@ -1,6 +1,7 @@
-package com.peonlee.product
+package com.peonlee.core.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -65,13 +66,37 @@ class ProductViewModel @Inject constructor(
     }
 
     // 정렬 타입 변경
-    fun setProductSortType(sortType: SortType) {
-        _productSearchCondition.value = _productSearchCondition.value.copy(sortedBy = sortType)
+    fun setProductSortType(sortType: SortType, isReset: Boolean = false) {
+        _productSearchCondition.value = if (isReset) _productSearchCondition.value.copy(
+            keyword = "",
+            sortedBy = sortType,
+            price = null,
+            stores = null,
+            events = null,
+            categories = null
+        ) else _productSearchCondition.value.copy(sortedBy = sortType)
     }
 
     // 가격 필터 선택
     fun setPriceFilter(priceFilter: PriceFilter?) {
         _productSearchCondition.value = _productSearchCondition.value.copy(price = priceFilter)
+    }
+
+    // 편의점 변경
+    fun setStoreType(storeType: StoreType, isReset: Boolean = false) {
+        _productSearchCondition.value = if (isReset) _productSearchCondition.value.copy(
+            keyword = "",
+            sortedBy = SortType.RECENT,
+            price = null,
+            stores = listOf(storeType),
+            events = null,
+            categories = null
+        ) else _productSearchCondition.value.copy(stores = listOf(storeType))
+    }
+
+    // 검색 키워드 변경
+    fun setKeyword(keyword: String) {
+        _productSearchCondition.value = _productSearchCondition.value.copy(keyword = keyword)
     }
 
     // 이벤트 선택
@@ -99,5 +124,16 @@ class ProductViewModel @Inject constructor(
 
     fun setProductSearchCondition(newProductSearchCondition: ProductSearchConditionUiModel) {
         _productSearchCondition.value = newProductSearchCondition
+    }
+
+    class ProductViewModelFactory(
+        private val repository: ProductRepository
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
+                return ProductViewModel(repository) as T
+            }
+            throw IllegalArgumentException("unKnown ViewModel class")
+        }
     }
 }

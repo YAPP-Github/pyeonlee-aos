@@ -7,18 +7,15 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.decoration.ContentPaddingDecoration
 import com.peonlee.core.ui.base.BaseBottomSheetFragment
 import com.peonlee.core.ui.base.BaseFragment
-import com.peonlee.core.ui.base.ProductSearchableViewModel
+import com.peonlee.core.ui.viewmodel.ProductViewModel
 import com.peonlee.model.product.ProductSearchConditionUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.toRangeString
@@ -34,7 +31,6 @@ import com.peonlee.product.ui.PriceFilterBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,8 +38,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     @Inject
     lateinit var navigator: Navigator
 
-    private val exploreViewModel: ProductSearchableViewModel by activityViewModels()
-    private val productViewModel: ProductViewModel by viewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
 
     private var currentBottomSheet: BaseBottomSheetFragment? = null
     private val priceFilter by lazy {
@@ -69,7 +64,7 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
     }
 
     override fun initViews() = with(binding) {
-        observeKeyword()
+//        observeKeyword()
 
         SortType.values().forEach {
             tabProductSort.addTab(
@@ -177,16 +172,15 @@ class ProductFragment : BaseFragment<FragmentProductBinding>() {
             ?.show(childFragmentManager, "Filter")
     }
 
-    private fun observeKeyword() {
-        println(exploreViewModel)
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                exploreViewModel.productSearchCondition.collect {
-                    productViewModel.setProductSearchCondition(it)
-                }
-            }
-        }
-    }
+//    private fun observeKeyword() {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                exploreViewModel.productSearchCondition.collect {
+//                    productViewModel.setProductSearchCondition(it)
+//                }
+//            }
+//        }
+//    }
 
     companion object {
         fun getInstance(): ProductFragment = ProductFragment()

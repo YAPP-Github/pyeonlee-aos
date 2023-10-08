@@ -7,20 +7,22 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.peonlee.core.ui.base.BaseActivity
-import com.peonlee.core.ui.base.ProductSearchableViewModel
 import com.peonlee.core.ui.extensions.hideKeyboard
 import com.peonlee.core.ui.extensions.trim
+import com.peonlee.core.ui.viewmodel.ProductViewModel
 import com.peonlee.explore.databinding.ActivityExploreActivityBinding
 import com.peonlee.product.ProductFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
-    private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
+    private val productViewModel: ProductViewModel by viewModels()
+
+    //    private val exploreViewModel: ProductSearchableViewModel by viewModels { ExploreViewModel.ExploreViewModelFactory() }
     override fun bindingFactory(): ActivityExploreActivityBinding = ActivityExploreActivityBinding.inflate(layoutInflater)
 
     override fun initViews() {
-        println(exploreViewModel)
+//        println(exploreViewModel)
         attachProductFragment()
     }
 
@@ -47,7 +49,7 @@ class ExploreActivity : BaseActivity<ActivityExploreActivityBinding>() {
     private fun searchResult() {
         binding.apply {
             layoutSearchProduct.isVisible = true
-            (exploreViewModel as? ExploreViewModel)?.setKeyword(etExploreBar.trim())
+            productViewModel.setKeyword(etExploreBar.trim())
             etExploreBar.clearFocus()
             etExploreBar.hideKeyboard()
         }
