@@ -6,4 +6,7 @@
     <string name="item_recent_review_user_and_date">%s · %s</string>
     <string name="item_recent_review_recommended">또 먹을거에요</string>
     <string name="item_recent_review_none_recommended">또 안사먹어요</string>
+    <!-- 이벤트 item -->
+    <string name="item_event_duration">%s ~ %s</string>
+    <string name="item_event_extra">D-%s</string>
 </resources>

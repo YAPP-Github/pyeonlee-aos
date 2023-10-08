@@ -6,6 +6,7 @@ import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.adapter.MultiTypeListAdapter
 import com.peonlee.core.ui.viewholder.CommonViewHolder
 import com.peonlee.home.adapter.viewholder.divider.HomeDividerViewHolder
+import com.peonlee.home.adapter.viewholder.event.EventViewHolder
 import com.peonlee.home.adapter.viewholder.product.ConditionalProductsViewHolder
 import com.peonlee.home.adapter.viewholder.product.EventByStoresViewHolder
 import com.peonlee.home.adapter.viewholder.review.RecentReviewViewHolder
@@ -13,6 +14,7 @@ import com.peonlee.home.adapter.viewholder.title.TitleViewHolder
 import com.peonlee.home.databinding.ListItemConditionalProductsBinding
 import com.peonlee.home.databinding.ListItemEventStoresBinding
 import com.peonlee.home.databinding.ListItemHomeDividerBinding
+import com.peonlee.home.databinding.ListItemHomeEventBinding
 import com.peonlee.home.databinding.ListItemRecentReviewBinding
 import com.peonlee.home.databinding.ListItemTitleBinding
 import com.peonlee.model.MainHomeListItem
@@ -44,6 +46,11 @@ class HomeAdapter(
                 ListItemEventStoresBinding.inflate(inflater, parent, false),
                 navigator,
                 moveToStoreExplore
+            )
+
+            MainHomeViewType.EVENT -> EventViewHolder(
+                ListItemHomeEventBinding.inflate(inflater, parent, false),
+                navigator
             )
         }
     }

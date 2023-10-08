@@ -17,6 +17,13 @@ class SmallChip(
     styleable = R.styleable.SmallChip
 ) {
 
+    override var text: String = ""
+        get() = super.text
+        set(value) {
+            binding.tvSmallChipTitle.text = value
+            field = value
+        }
+
     init {
         applyAttributes(attributeSet)
     }
