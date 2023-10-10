@@ -7,6 +7,5 @@ class StorageActivity : BaseActivity<ActivityStorageBinding>() {
     override fun bindingFactory() = ActivityStorageBinding.inflate(layoutInflater)
 
     override fun initViews() {
-
     }
 }
