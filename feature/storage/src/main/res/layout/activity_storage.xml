@@ -7,7 +7,7 @@
     tools:context=".StorageActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_storage"
         style="@style/Text.Body02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="보관함"></TextView>
 
+    <ImageView
+        android:id="@+id/iv_chevron_left"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_chevron_left"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_storage"
+        app:layout_constraintTop_toTopOf="@+id/tv_storage"
+        tools:layout_editor_absoluteX="7dp"></ImageView>
+
     <include
         android:id="@+id/include_user_review"
         layout="@layout/layout_user_review"
@@ -25,7 +34,7 @@
         android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"></include>
+        app:layout_constraintTop_toBottomOf="@+id/tv_storage"></include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_storage_list"
