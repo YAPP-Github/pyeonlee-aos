@@ -21,10 +21,11 @@
         android:id="@+id/iv_chevron_left"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginStart="18dp"
         android:background="@drawable/ic_chevron_left"
         app:layout_constraintBottom_toBottomOf="@+id/tv_storage"
-        app:layout_constraintTop_toTopOf="@+id/tv_storage"
-        tools:layout_editor_absoluteX="7dp"></ImageView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_storage"></ImageView>
 
     <include
         android:id="@+id/include_user_review"
