@@ -45,4 +45,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include_user_review"></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/layout_storage_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/Text.Subtitle01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_text"
+            app:layout_constraintVertical_chainStyle="packed"></TextView>
+
+        <TextView
+            style="@style/Text.Body03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/space_s_large"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/space_x_small"
+            android:text="@string/empty_description"
+            android:textColor="@color/bg50"></TextView>
+
+        <TextView
+            android:id="@+id/tv_move_evaluate"
+            android:layout_width="154dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_white_outline_radius_10dp"
+            android:gravity="center"
+            android:text="@string/action_evaluate"></TextView>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
