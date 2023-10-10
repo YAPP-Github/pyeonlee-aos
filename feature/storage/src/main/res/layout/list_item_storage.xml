@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="144dp">
+
+    <ImageView
+        android:id="@+id/iv_storage_product"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="@dimen/space_s_large"
+        android:background="@drawable/bg_white_outline_radius_10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_test_product"></ImageView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_storage_thumbs_bg"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_storage_product"
+        app:layout_constraintEnd_toEndOf="@+id/iv_storage_product"
+        app:layout_constraintStart_toStartOf="@+id/iv_storage_product"
+        app:layout_constraintTop_toBottomOf="@+id/iv_storage_product"
+        tools:backgroundTint="@color/brand40">
+
+        <ImageView
+            android:id="@+id/iv_storage_thumbs"
+            android:layout_width="@dimen/space_s_large"
+            android:layout_height="@dimen/space_s_large"
+            android:layout_gravity="center"
+            tools:background="@drawable/ic_thumbs_up"
+            tools:backgroundTint="@color/brand40"></ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/iv_storage_more"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/ic_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_storage_product"></ImageView>
+
+    <TextView
+        android:id="@+id/iv_storage_title"
+        style="@style/Text.Body01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_x_medium"
+        android:layout_marginEnd="@dimen/space_x_medium"
+        app:layout_constraintBottom_toTopOf="@+id/iv_storage_price"
+        app:layout_constraintEnd_toStartOf="@+id/iv_storage_more"
+        app:layout_constraintStart_toEndOf="@+id/iv_storage_product"
+        app:layout_constraintTop_toTopOf="@+id/iv_storage_product"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="코카)코카제로레몬캔355ml"></TextView>
+
+    <TextView
+        android:id="@+id/iv_storage_price"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_storage_product"
+        app:layout_constraintStart_toStartOf="@+id/iv_storage_title"
+        app:layout_constraintTop_toBottomOf="@+id/iv_storage_title"
+        tools:text="2,000원"></TextView>
+
+    <TextView
+        android:id="@+id/tv_storage_review_content"
+        style="@style/Text.Body03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x_medium"
+        app:layout_constraintStart_toStartOf="@+id/iv_storage_price"
+        app:layout_constraintTop_toBottomOf="@+id/iv_storage_price"
+        tools:text="완전 존맛이에요. 가성비 최고입니다! 완전 존\n맛이에요. 가성비 최고입니다!"></TextView>
+
+    <TextView
+        android:id="@+id/tv_storage_latest_time"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x_small"
+        android:textColor="@color/bg40"
+        app:layout_constraintStart_toStartOf="@+id/tv_storage_review_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_storage_review_content"
+        tools:text="10분 전"></TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>
