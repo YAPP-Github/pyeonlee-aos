@@ -1,4 +1,4 @@
-package com.peonlee.home.model.event
+package com.peonlee.model.event
 
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType

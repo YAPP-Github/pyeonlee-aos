@@ -8,8 +8,8 @@ import com.peonlee.data.model.home.HomeComment
 import com.peonlee.domain.login.GetHomeProductUseCase
 import com.peonlee.home.model.button.ButtonUiModel
 import com.peonlee.home.model.divider.HomeDividerUiModel
-import com.peonlee.home.model.event.EVENT_DUMMY
-import com.peonlee.home.model.event.EventUiModel
+import com.peonlee.model.event.EVENT_DUMMY
+import com.peonlee.model.event.EventUiModel
 import com.peonlee.home.model.product.ConditionalProductsUiModel
 import com.peonlee.home.model.product.EventByStoresUiModel
 import com.peonlee.home.model.product.ProductsByStoreUiModel

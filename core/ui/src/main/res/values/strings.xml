@@ -16,4 +16,8 @@
     <string name="terms_url">https://onyx-spark-280.notion.site/992d48153a664d40934b4e42c2326aa8?pvs=4</string>
     <string name="personal_url">https://onyx-spark-280.notion.site/4b2640012e2e430db4abada4f9663540?pvs=4</string>
     <string name="agree_personal_url">https://onyx-spark-280.notion.site/04b8feec536849ecbf0edf21dde68435?pvs=4</string>
+
+    <!-- 이벤트 item -->
+    <string name="item_event_duration">%s ~ %s</string>
+    <string name="item_event_extra">D-%s</string>
 </resources>
