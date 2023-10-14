@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(project(":core:model"))
+    implementation(libs.androidx.paging3)
 }
