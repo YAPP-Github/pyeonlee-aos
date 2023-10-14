@@ -16,3 +16,5 @@ private val moneyFormat = DecimalFormat("#,###")
 fun Int.toFormattedMoney(): String {
     return "${moneyFormat.format(this)}원"
 }
+
+fun Int.padStart(zero: Int = 2) = toString().padStart(zero, '0')
