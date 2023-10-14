@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="보관함"></TextView>
+        tools:text="보관함" />
 
     <ImageView
         android:id="@+id/iv_chevron_left"
@@ -25,7 +25,7 @@
         android:background="@drawable/ic_chevron_left"
         app:layout_constraintBottom_toBottomOf="@+id/tv_storage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_storage"></ImageView>
+        app:layout_constraintTop_toTopOf="@+id/tv_storage" />
 
     <include
         android:id="@+id/include_user_review"
@@ -35,7 +35,7 @@
         android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_storage"></include>
+        app:layout_constraintTop_toBottomOf="@+id/tv_storage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_storage_list"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_user_review"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/include_user_review" />
 
     <LinearLayout
         android:id="@+id/layout_storage_empty"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
-            app:layout_constraintVertical_chainStyle="packed"></TextView>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             style="@style/Text.Body03"
@@ -74,7 +74,7 @@
             android:gravity="center"
             android:lineSpacingExtra="@dimen/space_x_small"
             android:text="@string/empty_description"
-            android:textColor="@color/bg50"></TextView>
+            android:textColor="@color/bg50" />
 
         <TextView
             android:id="@+id/tv_move_evaluate"
@@ -83,7 +83,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/bg_white_outline_radius_10dp"
             android:gravity="center"
-            android:text="@string/action_evaluate"></TextView>
+            android:text="@string/action_evaluate" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
