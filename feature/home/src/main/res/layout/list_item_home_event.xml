@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="18dp"
+    android:paddingVertical="12dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layoutEventImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgEvent"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imgStore"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_store_seveneleven"
+        app:layout_constraintBottom_toBottomOf="@id/txtExtra"
+        app:layout_constraintStart_toEndOf="@id/layoutEventImage"
+        app:layout_constraintTop_toTopOf="@id/txtExtra"
+        tools:src="@drawable/ic_store_cu" />
+
+    <TextView
+        android:id="@+id/txtStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtExtra"
+        app:layout_constraintStart_toEndOf="@id/imgStore"
+        app:layout_constraintTop_toTopOf="@id/txtExtra" />
+
+    <com.peonlee.core.ui.designsystem.chip.SmallChip
+        android:id="@+id/txtExtra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/txtEvent"
+        app:layout_constraintStart_toEndOf="@id/txtStore"
+        app:layout_constraintTop_toTopOf="@id/layoutEventImage"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/txtEvent"
+        style="@style/Text.Subtitle03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/bg80"
+        app:layout_constraintBottom_toTopOf="@id/txtDuration"
+        app:layout_constraintStart_toStartOf="@id/imgStore"
+        app:layout_constraintTop_toBottomOf="@id/txtExtra" />
+
+    <TextView
+        android:id="@+id/txtDuration"
+        style="@style/Text.Body06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg40"
+        app:layout_constraintBottom_toBottomOf="@id/layoutEventImage"
+        app:layout_constraintStart_toStartOf="@id/imgStore"
+        app:layout_constraintTop_toBottomOf="@id/txtEvent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
