@@ -11,6 +11,7 @@ import com.peonlee.core.ui.base.BaseFragment
 import com.peonlee.core.ui.base.ProductSearchableViewModel
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
+import com.peonlee.home.model.button.ButtonType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -28,7 +29,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         HomeAdapter(
             navigator = navigator,
             moveToConditionExplore = productSearchableViewModel::changeSortType,
-            moveToStoreExplore = productSearchableViewModel::changeStoreType
+            moveToStoreExplore = productSearchableViewModel::changeStoreType,
+            onClickButton = {
+                when (it) {
+                    ButtonType.EVENT -> context?.let { navigator.navigateToEvent(it) }
+                }
+            }
         )
     }
 

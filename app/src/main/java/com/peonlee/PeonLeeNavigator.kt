@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import com.peonlee.core.ui.Navigator
+import com.peonlee.event.EventActivity
 import com.peonlee.explore.ExploreActivity
 import com.peonlee.feature.detail.ProductCommentsActivity
 import com.peonlee.feature.detail.ProductDetailActivity
@@ -65,5 +66,9 @@ class PeonLeeNavigator @Inject constructor() : Navigator {
 
     override fun navigateToEditNickname(context: Context, nickname: String, userId: Int) {
         context.startActivity(ModifyUserNicknameActivity.getIntent(context, nickname, userId))
+    }
+
+    override fun navigateToEvent(context: Context) {
+        EventActivity.start(context)
     }
 }

@@ -6,10 +6,9 @@ import com.peonlee.data.handle
 import com.peonlee.data.model.Product
 import com.peonlee.data.model.home.HomeComment
 import com.peonlee.domain.login.GetHomeProductUseCase
+import com.peonlee.home.model.button.ButtonType
 import com.peonlee.home.model.button.ButtonUiModel
 import com.peonlee.home.model.divider.HomeDividerUiModel
-import com.peonlee.model.event.EVENT_DUMMY
-import com.peonlee.model.event.EventUiModel
 import com.peonlee.home.model.product.ConditionalProductsUiModel
 import com.peonlee.home.model.product.EventByStoresUiModel
 import com.peonlee.home.model.product.ProductsByStoreUiModel
@@ -17,6 +16,7 @@ import com.peonlee.home.model.review.toUiModel
 import com.peonlee.home.model.title.TitleUiModel
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
+import com.peonlee.model.event.EVENT_DUMMY
 import com.peonlee.model.product.toProductUiModel
 import com.peonlee.model.type.SortType
 import com.peonlee.model.type.StoreType
@@ -96,7 +96,7 @@ class HomeViewModel @Inject constructor(
             TitleUiModel(id = 11, title = "진행중인 이벤트")
         ) + EVENT_DUMMY +
             ButtonUiModel(
-                id = 12, text = "더 많은 이벤트 보기"
+                id = 12, text = "더 많은 이벤트 보기", buttonType = ButtonType.EVENT
             )
     }
 }

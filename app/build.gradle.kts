@@ -27,6 +27,7 @@ dependencies {
     implementation(project(":feature:evaluate"))
     implementation(project(":feature:user"))
     implementation(project(":core:model"))
+    implementation(project((":feature:event")))
 
     implementation(project(":core:data"))
 

@@ -46,4 +46,9 @@ interface Navigator {
      * 닉네임 변경 화면으로 이동
      */
     fun navigateToEditNickname(context: Context, nickname: String, userId: Int)
+
+    /**
+     * 이벤트 화면으로 이동
+     */
+    fun navigateToEvent(context: Context)
 }

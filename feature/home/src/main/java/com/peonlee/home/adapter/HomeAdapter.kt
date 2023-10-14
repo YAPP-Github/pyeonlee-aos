@@ -19,6 +19,7 @@ import com.peonlee.home.databinding.ListItemEventStoresBinding
 import com.peonlee.home.databinding.ListItemHomeDividerBinding
 import com.peonlee.home.databinding.ListItemRecentReviewBinding
 import com.peonlee.home.databinding.ListItemTitleBinding
+import com.peonlee.home.model.button.ButtonType
 import com.peonlee.model.MainHomeListItem
 import com.peonlee.model.MainHomeViewType
 import com.peonlee.model.type.SortType
@@ -27,7 +28,8 @@ import com.peonlee.model.type.StoreType
 class HomeAdapter(
     private val navigator: Navigator,
     private val moveToConditionExplore: (SortType) -> Unit,
-    private val moveToStoreExplore: (StoreType) -> Unit
+    private val moveToStoreExplore: (StoreType) -> Unit,
+    private val onClickButton: (ButtonType) -> Unit
 ) : MultiTypeListAdapter<MainHomeListItem, MainHomeViewType>() {
     override fun onCreateViewHolder(
         viewType: MainHomeViewType,
@@ -52,7 +54,7 @@ class HomeAdapter(
 
             MainHomeViewType.BUTTON -> ButtonViewHolder(
                 ListItemButtonBinding.inflate(inflater, parent, false),
-                navigator
+                onClickButton
             )
 
             MainHomeViewType.EVENT -> EventViewHolder(
