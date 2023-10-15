@@ -8,7 +8,8 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.peonlee.core.ui.Navigator
 import com.peonlee.core.ui.base.BaseFragment
-import com.peonlee.core.ui.base.ProductSearchableViewModel
+import com.peonlee.core.ui.base.PageActivity
+import com.peonlee.core.ui.viewmodel.ProductViewModel
 import com.peonlee.home.adapter.HomeAdapter
 import com.peonlee.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,15 +21,20 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var navigator: Navigator
-
+    private val productSearchableViewModel: ProductViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by viewModels()
-    private val productSearchableViewModel: ProductSearchableViewModel by activityViewModels()
 
     private val homeAdapter by lazy {
         HomeAdapter(
             navigator = navigator,
-            moveToConditionExplore = productSearchableViewModel::changeSortType,
-            moveToStoreExplore = productSearchableViewModel::changeStoreType
+            moveToConditionExplore = {
+                (requireActivity() as? PageActivity)?.moveToEvaluatePage()
+                productSearchableViewModel.setProductSortType(it, true)
+            },
+            moveToStoreExplore = {
+                (requireActivity() as? PageActivity)?.moveToEvaluatePage()
+                productSearchableViewModel.setStoreType(it, true)
+            }
         )
     }
 
@@ -38,6 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initViews() {
         binding.rvHome.adapter = homeAdapter
+//        productSearchableViewModel
         binding.btnSearch.setOnClickListener {
             navigator.navigateToSearch(requireContext())
         }

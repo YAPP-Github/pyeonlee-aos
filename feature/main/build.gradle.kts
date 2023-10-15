@@ -14,6 +14,8 @@ dependencies {
     implementation(project(":feature:evaluate"))
     implementation(project(":core:model"))
 
+    implementation(project(":core:data"))
+
     implementation(libs.google.material)
     implementation(libs.bundles.fragment)
 }
