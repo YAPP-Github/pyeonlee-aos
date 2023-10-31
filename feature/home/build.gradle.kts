@@ -14,4 +14,6 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.google.material)
     implementation(libs.androidx.recyclerview)
+
+    implementation(libs.facebook.shimmer)
 }

@@ -40,6 +40,7 @@ playServicesAuth = "20.5.0"
 retrofit = "2.9.0"
 serializationConverter = "1.0.0"
 serializationJson = "1.5.1"
+shimmer = "0.5.0"
 splashScreen = "1.0.0-alpha01"
 viewModel = "2.3.1"
 viewPager2 = "1.0.0"
@@ -133,6 +134,9 @@ viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx"
 livedata-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "viewModel" }
 
 flexbox-layout = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flowboxLayout" }
+
+# facebook
+facebook-shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

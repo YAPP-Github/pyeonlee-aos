@@ -35,8 +35,33 @@
         android:clipToPadding="false"
         android:orientation="horizontal"
         android:paddingStart="18dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/layoutProductsShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutFilter">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_products_shimmer"/>
+
+            <include layout="@layout/layout_products_shimmer" />
+
+            <include layout="@layout/layout_products_shimmer" />
+
+            <include layout="@layout/layout_products_shimmer" />
+
+            <include layout="@layout/layout_products_shimmer" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProduct"
@@ -55,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="텅"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvEmptyProductDescription"

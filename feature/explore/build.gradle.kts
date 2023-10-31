@@ -20,4 +20,5 @@ dependencies {
     implementation(libs.androidx.paging3)
 
     implementation(libs.flexbox.layout)
+    implementation(libs.facebook.shimmer)
 }
